@@ -51,7 +51,7 @@ jobs:
             probe-report.json
             drifts.json
           if-no-files-found: ignore
-      - name: File issues on drift (label: upstream-drift) and fail the run
+      - name: "File issues on drift (label upstream-drift) and fail the run"
         if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
