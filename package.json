@@ -1,0 +1,17 @@
+{
+  "name": "aibox-registry",
+  "version": "2026.11.09.1",
+  "private": true,
+  "description": "AiBOX.im SSOT registry: app profiles, locales, schemas, liveness probe CI",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "check-locales": "node scripts/check-locales.mjs",
+    "probe": "node scripts/probe.mjs",
+    "test": "node scripts/validate.mjs && node scripts/check-locales.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

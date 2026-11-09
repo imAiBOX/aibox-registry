@@ -1,0 +1,701 @@
+{
+  "id": "openclaw",
+  "name": "OpenClaw",
+  "version": "2026.11.2",
+  "description": {
+    "zh-CN": "多渠道 AI 网关，把大模型接到你的聊天软件（Telegram/WhatsApp 等），支持 Anthropic/OpenAI/Google/OpenRouter/Claude 订阅/Ollama 六种接入。",
+    "en": "Multi-channel AI gateway that connects LLMs to your messengers (Telegram/WhatsApp, etc.), with six provider paths: Anthropic / OpenAI / Google / OpenRouter / Claude subscription / Ollama."
+  },
+  "updatedAt": "2026-11-09T09:45:51Z",
+  "upstream": {
+    "npm": {
+      "name": "openclaw",
+      "version": "2026.11.2"
+    },
+    "github": [
+      {
+        "repo": "openclaw/openclaw",
+        "tag": "v2026.11.2"
+      },
+      {
+        "repo": "openclaw/openclaw-windows-node",
+        "tag": "v2026.11.1"
+      },
+      {
+        "repo": "git-for-windows/git",
+        "tag": "v2.56.0.windows.4"
+      }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": ">=26.12.1",
+      "supported": ">=24.22.1 <25"
+    },
+    "disallowed": [
+      "22.x",
+      "23.x",
+      "25.x"
+    ],
+    "note": "Node 22/23/25 以及 24.22.1 之前 / 26.12.1 之前的版本被 OpenClaw 官方明确不支持（2026-10 eMudhra 事件后版本政策）。SCAN 阶段遇到 disallowed 版本必须提示「需要另装新版本，不会动你现有的」。"
+  },
+  "packages": [
+    {
+      "id": "node-win-x64",
+      "name": "Node.js v26.13.0 (Windows x64 MSI)",
+      "kind": "runtime",
+      "version": "v26.13.0",
+      "platforms": [
+        "windows"
+      ],
+      "arch": "x64",
+      "sha256": "0e5ee99c7cbf922887f04af268e3665990748945336a44956f47cc0df695b6df",
+      "sizeBytes": 36564992,
+      "hashSource": "https://nodejs.org/dist/v26.13.0/SHASUMS256.txt（本地已实测：direct 与 mirror 全量下载比对，均与 SHASUMS 一致）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-x64.msi",
+          "region": "global",
+          "operator": "Node.js Foundation",
+          "note": "官方源（5.9.4 矩阵 Node GLOBAL 主）"
+        },
+        {
+          "type": "mirror",
+          "url": "https://npmmirror.com/mirrors/node/v26.13.0/node-v26.13.0-x64.msi",
+          "region": "cn",
+          "operator": "alibaba",
+          "note": "阿里 npmmirror 镜像（5.9.4 矩阵 Node CN 主）"
+        }
+      ],
+      "install": {
+        "type": "msi-silent",
+        "args": [
+          "/qn",
+          "/norestart"
+        ],
+        "probe": {
+          "cmd": "node --version",
+          "expect": "^v26\\."
+        }
+      }
+    },
+    {
+      "id": "node-win-arm64",
+      "name": "Node.js v26.13.0 (Windows ARM64 MSI)",
+      "kind": "runtime",
+      "version": "v26.13.0",
+      "platforms": [
+        "windows"
+      ],
+      "arch": "arm64",
+      "sha256": "a9d7e34eaeeadd4ecbd9f0795f49f9d2c2625e63fc4e2f77709f039497f57033",
+      "sizeBytes": 32624640,
+      "hashSource": "https://nodejs.org/dist/v26.13.0/SHASUMS256.txt",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-arm64.msi",
+          "region": "global",
+          "operator": "Node.js Foundation",
+          "note": "官方源"
+        },
+        {
+          "type": "mirror",
+          "url": "https://npmmirror.com/mirrors/node/v26.13.0/node-v26.13.0-arm64.msi",
+          "region": "cn",
+          "operator": "alibaba",
+          "note": "阿里 npmmirror 镜像"
+        }
+      ],
+      "install": {
+        "type": "msi-silent",
+        "args": [
+          "/qn",
+          "/norestart"
+        ],
+        "probe": {
+          "cmd": "node --version",
+          "expect": "^v26\\."
+        }
+      }
+    },
+    {
+      "id": "node-macos",
+      "name": "Node.js v26.13.0 (macOS PKG)",
+      "kind": "runtime",
+      "version": "v26.13.0",
+      "platforms": [
+        "macos"
+      ],
+      "arch": "universal",
+      "sha256": "445b202997c959dddbd54ad8c82956371b495b03c73d56044a6f82dfb3249c46",
+      "sizeBytes": 105205394,
+      "hashSource": "https://nodejs.org/dist/v26.13.0/SHASUMS256.txt",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://nodejs.org/dist/v26.13.0/node-v26.13.0.pkg",
+          "region": "global",
+          "operator": "Node.js Foundation",
+          "note": "官方源（macOS 通用 pkg）"
+        },
+        {
+          "type": "mirror",
+          "url": "https://npmmirror.com/mirrors/node/v26.13.0/node-v26.13.0.pkg",
+          "region": "cn",
+          "operator": "alibaba",
+          "note": "阿里 npmmirror 镜像"
+        }
+      ],
+      "install": {
+        "type": "pkg",
+        "args": [
+          "-target",
+          "CurrentUserHomeDirectory"
+        ],
+        "notes": " 占位参数（免管理员装到用户目录）； macOS 实机取证后细化。",
+        "probe": {
+          "cmd": "node --version",
+          "expect": "^v26\\."
+        }
+      }
+    },
+    {
+      "id": "openclaw-cli",
+      "name": "OpenClaw CLI (npm package)",
+      "kind": "app",
+      "version": "2026.11.2",
+      "platforms": [
+        "windows",
+        "macos"
+      ],
+      "arch": "any",
+      "sha256": "7881887b88d81e5fdff361b7aac59b6a736308e1815a175b9ccd9cdca1bb5e48",
+      "sizeBytes": 112983809,
+      "hashSource": "本地实测：分别从 registry.npmjs.org 与 registry.npmmirror.com 全量下载 tarball 计算 sha256，两源一致且 sha1 匹配 npm dist.shasum (4185b164…)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.2.tgz",
+          "region": "global",
+          "operator": "npm",
+          "note": "npm 官方 registry（5.9.4 矩阵 openclaw CLI GLOBAL 主）"
+        },
+        {
+          "type": "mirror",
+          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.2.tgz",
+          "region": "cn",
+          "operator": "alibaba",
+          "note": "阿里 npmmirror（5.9.4 矩阵 CN 主；EXECUTE 经 packageManagerOverrides 注入 --registry，不改用户 npmrc）"
+        }
+      ],
+      "install": {
+        "type": "npm-prefix",
+        "args": [
+          "install",
+          "-g",
+          "openclaw@2026.11.2"
+        ],
+        "notes": "CN 序时 EXECUTE 自动追加 --registry=https://registry.npmmirror.com 与本地 prefix（~/.aibox/prefix），退出即还原，不污染用户全局 npmrc。",
+        "probe": {
+          "cmd": "openclaw --version",
+          "expect": "2026\\.11\\.2"
+        }
+      }
+    },
+    {
+      "id": "openclaw-hub-win-x64",
+      "name": "OpenClaw Windows Hub (x64)",
+      "kind": "app",
+      "version": "v2026.11.1",
+      "platforms": [
+        "windows"
+      ],
+      "arch": "x64",
+      "sha256": "372b2adb72673d2b969e05766ccfca3e1b5783b0cb4018b43e3a0161e463d062",
+      "sizeBytes": 140845808,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-x64.exe",
+          "region": "global",
+          "operator": "openclaw",
+          "note": "GitHub Releases 直连（5.9.4 矩阵 NSIS/Hub GLOBAL 主）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-x64.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关（S3：内容经哈希校验，可整体关闭；2026-11-09 实测 200/同大小）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-x64.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关（2026-11-09 实测 200/同大小）"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/S"
+        ],
+        "notes": "TODO 实测：Companion Setup 静默参数（疑似 Tauri/NSIS 默认 /S）与安装路径尚未在 Windows 实机取证；无需管理员、已签名（附录A）。上游 openclaw/openclaw 2026-11 实测无 Windows NSIS 资产，Windows 主线=Windows Hub。",
+        "probe": {
+          "cmd": "openclaw --version",
+          "expect": "2026\\.11"
+        }
+      }
+    },
+    {
+      "id": "openclaw-hub-win-arm64",
+      "name": "OpenClaw Windows Hub (ARM64)",
+      "kind": "app",
+      "version": "v2026.11.1",
+      "platforms": [
+        "windows"
+      ],
+      "arch": "arm64",
+      "sha256": "4324e29d953645652b7125175c8a82c0ebc10babddc189936e499cb2c694d6e5",
+      "sizeBytes": 127260824,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-arm64.exe",
+          "region": "global",
+          "operator": "openclaw",
+          "note": "GitHub Releases 直连"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-arm64.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-arm64.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/S"
+        ],
+        "notes": "TODO 实测（同 x64）。",
+        "probe": {
+          "cmd": "openclaw --version",
+          "expect": "2026\\.11"
+        }
+      }
+    },
+    {
+      "id": "git-win-x64",
+      "name": "Git for Windows 2.56.0.4 (x64)",
+      "kind": "dependency",
+      "version": "2.56.0.4",
+      "platforms": [
+        "windows"
+      ],
+      "arch": "x64",
+      "sha256": "4961a4a8cc778d8b6e00a5819e5fe4d078b754555aff7aedc2d77a5d74c2de80",
+      "sizeBytes": 66850032,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-64-bit.exe",
+          "region": "global",
+          "operator": "git-for-windows",
+          "note": "GitHub Releases 直连（5.9.4 矩阵 Git GLOBAL 主）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-64-bit.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关（CN 备选；winget 为 PLAN 层降级项）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-64-bit.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/VERYSILENT",
+          "/NORESTART",
+          "/NOCANCEL"
+        ],
+        "notes": "Git for Windows 官方 Inno Setup 静默参数（/VERYSILENT 系官方文档参数）。",
+        "probe": {
+          "cmd": "git --version",
+          "expect": "^git version 2\\.56"
+        }
+      }
+    },
+    {
+      "id": "git-win-arm64",
+      "name": "Git for Windows 2.56.0.4 (ARM64)",
+      "kind": "dependency",
+      "version": "2.56.0.4",
+      "platforms": [
+        "windows"
+      ],
+      "arch": "arm64",
+      "sha256": "e7dcc4adbb0eb373064598cd18bc75e60128707d816ead51cd9bd98e356f0075",
+      "sizeBytes": 64406136,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-arm64.exe",
+          "region": "global",
+          "operator": "git-for-windows",
+          "note": "GitHub Releases 直连"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-arm64.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-arm64.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/VERYSILENT",
+          "/NORESTART",
+          "/NOCANCEL"
+        ],
+        "probe": {
+          "cmd": "git --version",
+          "expect": "^git version 2\\.56"
+        }
+      }
+    },
+    {
+      "id": "openclaw-mac-x64",
+      "name": "OpenClaw macOS dmg (x86_64)",
+      "kind": "app",
+      "version": "v2026.11.2",
+      "platforms": [
+        "macos"
+      ],
+      "arch": "x64",
+      "sha256": "b647c6da41b73eeb08d156e858534207927e579646c4bcf61bad83c4610e4ce0",
+      "sizeBytes": 265478532,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.2/OpenClaw-2026.11.2-x86_64.dmg",
+          "region": "global",
+          "operator": "openclaw",
+          "note": "GitHub Releases 直连。TODO：macOS CN 序 proxy 通道与 Gatekeeper 引导取证后补。"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "hdiutil",
+          "attach",
+          "-nobrowse"
+        ],
+        "notes": "TODO 实机取证：dmg 挂载 + 拖拽 Applications + Gatekeeper 引导。",
+        "probe": {
+          "cmd": "openclaw --version",
+          "expect": "2026\\.11"
+        }
+      }
+    },
+    {
+      "id": "openclaw-mac-arm64",
+      "name": "OpenClaw macOS dmg (ARM64)",
+      "kind": "app",
+      "version": "v2026.11.2",
+      "platforms": [
+        "macos"
+      ],
+      "arch": "arm64",
+      "sha256": "afe357177eb5a2fe67edcf9de89d2ff34cfe65b103e258dc230e61a76731bc53",
+      "sizeBytes": 247344041,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.2/OpenClaw-2026.11.2-arm64.dmg",
+          "region": "global",
+          "operator": "openclaw",
+          "note": "GitHub Releases 直连。TODO：macOS CN 序 proxy 通道取证后补。"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "hdiutil",
+          "attach",
+          "-nobrowse"
+        ],
+        "notes": "TODO 实机取证（同 x64）。",
+        "probe": {
+          "cmd": "openclaw --version",
+          "expect": "2026\\.11"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {
+    "npm": {
+      "cn": "https://registry.npmmirror.com"
+    }
+  },
+  "routes": {
+    "global": [
+      "nsis-hub"
+    ],
+    "cn": [
+      "npm-prefix"
+    ]
+  },
+  "routePlans": {
+    "nsis-hub": {
+      "label": "Official Windows Hub (GLOBAL route, 5.9.5)",
+      "steps": [
+        "openclaw-hub-win-x64",
+        "openclaw-cli"
+      ],
+      "note": "GLOBAL 序首选：GitHub 直连快。ARM64 用 openclaw-hub-win-arm64 替换同名步骤；git-win-* 按需（skills 克隆）作为可选依赖。两路线 probe/verify 完全一致（5.9.5）。"
+    },
+    "npm-prefix": {
+      "label": "CN npm-prefix route (全链国内 CDN, 5.9.5)",
+      "steps": [
+        "node-win-x64",
+        "openclaw-cli"
+      ],
+      "note": "CN 序首选：Node 从 npmmirror 装本地前缀（~/.aibox/prefix）+ openclaw CLI 经 --registry=npmmirror 安装，避开 GitHub 大文件。ARM64 用 node-win-arm64；macOS 用 node-macos 替换 node 步骤。"
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "jsdelivr",
+      "raw",
+      "github-api"
+    ],
+    "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据，PROXY/CUSTOM 前缀永不代理哈希（S2/S4）。jsDelivr/raw 首次 push 后生效。",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-09T09:45:51Z",
+        "note": "2026-11-09 实测 HEAD 200：Hub/Git 资产同大小（140845808 / 66850032）"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-09T09:45:51Z",
+        "note": "2026-11-09 实测 HEAD 200：Hub/Git 资产同大小"
+      }
+    ],
+    "retiredCandidates": "2026-11-09 同批测试未通过、未入库：mirror.ghproxy.com / github.moeyy.xyz / gh.llkk.cc / hub.gitmirror.com / ghproxy.cc / gitdl.cn / gh.api.99988866.xyz / cf.ghproxy.cc / ghp.ci；另 ghproxy.net 实测 200 但 TTFB 3~12s 在探活 10s 超时下不稳（2 次超时），降为观察项暂不入库——复测稳定 <10s 后可再入库。来源不同地区结论可能不同。"
+  },
+  "modelProviders": {
+    "openrouter": {
+      "label": "OpenRouter（推荐，一个 key 通吃所有模型；联盟位请明示返佣）",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/.config/openclaw/openclaw.json5",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "聪明均衡，日常首选",
+          "priceHint": "中等"
+        },
+        {
+          "id": "openai/gpt-5",
+          "name": "GPT-5",
+          "note": "复杂任务更强",
+          "priceHint": "偏高"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "便宜快速",
+          "priceHint": "低"
+        }
+      ],
+      "notes": "TODO C4：模型清单与单价在 CONFIG 上线前按 OpenRouter 实价复核。"
+    },
+    "anthropic": {
+      "label": "Anthropic 官方 API（Claude）",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/.config/openclaw/openclaw.json5",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "性价比均衡",
+          "priceHint": "中等"
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "note": "快而便宜",
+          "priceHint": "低"
+        }
+      ]
+    },
+    "openai": {
+      "label": "OpenAI 官方 API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/.config/openclaw/openclaw.json5",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "默认推荐",
+          "priceHint": "中等"
+        },
+        {
+          "id": "gpt-5-mini",
+          "name": "GPT-5 mini",
+          "note": "省预算",
+          "priceHint": "低"
+        }
+      ]
+    },
+    "google": {
+      "label": "Google AI Studio",
+      "authType": "api-key",
+      "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
+      "configTarget": "~/.config/openclaw/openclaw.json5",
+      "getKeyUrl": "https://aistudio.google.com/apikey",
+      "recommendedModels": [
+        {
+          "id": "gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "便宜快速",
+          "priceHint": "低"
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "name": "Gemini 2.5 Pro",
+          "note": "更聪明",
+          "priceHint": "中等"
+        }
+      ]
+    },
+    "claude-oauth": {
+      "label": "Claude 订阅复用（OAuth 登录，zero-key 路线）",
+      "authType": "oauth",
+      "configTarget": "~/.config/openclaw/openclaw.json5",
+      "getKeyUrl": "https://claude.ai/",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "订阅额度内使用",
+          "priceHint": "已含订阅"
+        }
+      ],
+      "notes": "keyFormat 不适用（OAuth token 由 openclaw 自管）；C3 屏改为「登录」按钮而非粘贴 key。"
+    },
+    "ollama": {
+      "label": "本地 Ollama（完全免费离线，需 8GB+ 内存）",
+      "authType": "local",
+      "configTarget": "~/.config/openclaw/openclaw.json5",
+      "getKeyUrl": "https://ollama.com/download",
+      "recommendedModels": [
+        {
+          "id": "qwen2.5:7b",
+          "name": "Qwen2.5 7B",
+          "note": "中文好，8GB 内存可跑",
+          "priceHint": "免费"
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "note": "低配机入门",
+          "priceHint": "免费"
+        }
+      ],
+      "notes": "本地 baseUrl http://127.0.0.1:11434；无 key（authType=local），C3 屏提示模型下载耗时。"
+    }
+  },
+  "deepLinks": {
+    "console": "http://127.0.0.1:18789/",
+    "docs": "https://github.com/openclaw/openclaw#readme",
+    "tutorial": "https://aibox.im/apps/openclaw/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "openclaw --version",
+        "expect": "2026\\."
+      },
+      "notes": "检查更新 = 本地 probe 版本 vs 探活 CI 记录的上游 latest（同一数据源）；升级=重跑依赖 DAG（对应路线 routePlans）。"
+    },
+    "uninstall": {
+      "steps": [
+        "停止网关与托盘（openclaw gateway stop / 关闭 Windows Hub）",
+        "卸载 Windows Hub（或 npm 路线执行 npm uninstall -g openclaw）",
+        "按 residualPaths 清单删除残留（干净卸载）"
+      ],
+      "residualPaths": [
+        "~/.config/openclaw",
+        "~/.aibox/apps/openclaw/data",
+        "~/.aibox/prefix",
+        "~/.aibox/backup"
+      ],
+      "notes": "NSIS 静默卸载参数待 实机取证（TODO）；~/.aibox/backup 属于通用备份目录，卸载时保留。"
+    },
+    "dataPaths": [
+      "~/.config/openclaw/openclaw.json5",
+      "~/.aibox/apps/openclaw/data"
+    ],
+    "risk": {
+      "onUninstall": "配置与对话历史将被删除，建议先备份",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

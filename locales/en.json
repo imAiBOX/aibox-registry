@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "name": "AiBOX Installer",
+    "packVersion": "2026.11.09.1",
+    "locale": "en",
+    "fallback": "en",
+    "note": "Baseline language pack. CI guarantees every key here exists in zh-CN and any future pack."
+  },
+  "screens": {
+    "idle": {
+      "title": "What do you want to install?",
+      "ctaInstall": "Install an app",
+      "ctaManage": "Manage installed apps"
+    },
+    "scan": {
+      "title": "Checking your computer",
+      "checking": "Looking at what's already installed…",
+      "allGood": "Everything looks good.",
+      "issueFound": "We found something to fix first — we'll handle it."
+    },
+    "plan": {
+      "title": "Here's the plan",
+      "routeGlobal": "Official download route",
+      "routeCn": "China-optimized route (faster locally)"
+    },
+    "confirm": {
+      "title": "Ready to install",
+      "confirmBtn": "Install now",
+      "noAdmin": "No administrator rights needed."
+    },
+    "execute": {
+      "title": "Installing…",
+      "retry": "Retry",
+      "switchChannel": "Switching to the next download source…"
+    },
+    "config": {
+      "title": "Connect your AI key",
+      "pasteKey": "Paste your API key",
+      "keyHint": "The key stays on your PC — never in our logs."
+    },
+    "verify": {
+      "title": "Verifying it really works",
+      "pass": "Installed. It really works.",
+      "fail": "Almost there — verification failed, let's fix it."
+    },
+    "done": {
+      "title": "All done",
+      "next": "Next steps",
+      "share": "Share"
+    },
+    "manage": {
+      "title": "Manage apps",
+      "checkUpdate": "Check for updates",
+      "upgrade": "Upgrade",
+      "uninstall": "Uninstall",
+      "reinstall": "Reinstall",
+      "backupWarn": "Your data lives here — we back it up before touching anything."
+    }
+  }
+}

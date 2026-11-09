@@ -1,0 +1,341 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aibox.im/schemas/app.schema.json",
+  "title": "aibox-registry app profile",
+  "description": "Per-application profile. Enforces validation invariants V1-V4: V1 any package exposing channel URLs must carry a package-level sha256 (channel-invariant, S1); V2 every package install must declare a probe (V2); V3 every configTarget / data path must live under the user home, never a system directory; V4 hash acquisition only via declared registrySources + GitHub API (structural here: netConfig.registrySources must declare >= 2 cross-checkable sources).",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "description",
+    "updatedAt",
+    "upstream",
+    "runtime",
+    "packages",
+    "packageManagerOverrides",
+    "routes",
+    "routePlans",
+    "netConfig",
+    "modelProviders",
+    "deepLinks",
+    "maintenance",
+    "locales",
+    "guides"
+  ],
+  "definitions": {
+    "userPath": {
+      "type": "string",
+      "description": "V3: must be a path under the user home directory (~). System directories (etc/, usr/, bin/, Windows/, Program Files/…) and '..' traversal are rejected.",
+      "allOf": [
+        { "pattern": "^~[/\\\\]" },
+        { "not": { "pattern": "\\.\\." } },
+        { "not": { "pattern": "^~[/\\\\](etc|usr|bin|Windows|Program Files|ProgramData)" } }
+      ]
+    },
+    "probe": {
+      "type": "object",
+      "description": "V2: probe must exist — an install task that cannot verify its version is a failed task.",
+      "required": ["cmd", "expect"],
+      "properties": {
+        "cmd": { "type": "string", "minLength": 1 },
+        "expect": { "type": "string", "minLength": 1, "description": "JavaScript regular expression; must compile (checked by scripts/validate.mjs)." }
+      }
+    },
+    "channel": {
+      "type": "object",
+      "required": ["type", "url", "region"],
+      "properties": {
+        "type": { "type": "string", "enum": ["direct", "mirror", "proxy", "custom"] },
+        "url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "region": { "type": "string", "enum": ["global", "cn"] },
+        "operator": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
+    "package": {
+      "type": "object",
+      "required": ["id", "name", "kind", "version", "platforms", "sha256", "sizeBytes", "channels", "install"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "enum": ["runtime", "app", "dependency"] },
+        "version": { "type": "string", "minLength": 1 },
+        "platforms": { "type": "array", "minItems": 1, "items": { "type": "string", "enum": ["windows", "macos"] } },
+        "arch": { "type": "string", "enum": ["x64", "arm64", "universal", "any"] },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "V1: package-level (channel-invariant, S1) — every channel of this package shares this hash."
+        },
+        "sizeBytes": { "type": "integer", "minimum": 1 },
+        "hashSource": { "type": "string", "description": "Provenance of sha256 (where it was measured)." },
+        "channels": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/channel" } },
+        "install": {
+          "type": "object",
+          "required": ["type", "args", "probe"],
+          "properties": {
+            "type": { "type": "string", "enum": ["nsis-silent", "npm-prefix", "script", "msi-silent", "pkg"] },
+            "args": { "type": "array", "items": { "type": "string" } },
+            "probe": { "$ref": "#/definitions/probe" },
+            "notes": { "type": "string" }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "channels": { "minItems": 1 } }, "required": ["channels"] },
+          "then": { "required": ["sha256", "sizeBytes"] },
+          "description": "V1: a package exposing any channel URL must carry sha256 (+sizeBytes for the CI <5MB re-download rule). No hashless URLs may merge."
+        }
+      ]
+    },
+    "modelProvider": {
+      "type": "object",
+      "required": ["label", "authType", "configTarget"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "authType": { "type": "string", "enum": ["api-key", "oauth", "local"] },
+        "keyFormat": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Key regex for real-time paste validation (C3). Required when authType=api-key; must compile as a JS RegExp."
+        },
+        "configTarget": { "$ref": "#/definitions/userPath" },
+        "getKeyUrl": { "type": "string", "format": "uri" },
+        "recommendedModels": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "name": { "type": "string", "minLength": 1 },
+              "note": { "type": "string" },
+              "priceHint": { "type": "string" }
+            }
+          }
+        },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "authType": { "const": "api-key" } }, "required": ["authType"] },
+          "then": { "required": ["keyFormat"] }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1, "description": "Registry-recorded upstream version (drift-checked daily by CI)." },
+    "description": {
+      "type": "object",
+      "required": ["zh-CN", "en"],
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "upstream": {
+      "type": "object",
+      "required": ["npm", "github"],
+      "properties": {
+        "npm": {
+          "type": "object",
+          "required": ["name", "version"],
+          "properties": {
+            "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+            "version": { "type": "string", "minLength": 1 }
+          }
+        },
+        "github": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["repo", "tag"],
+            "properties": {
+              "repo": { "type": "string", "pattern": "^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$" },
+              "tag": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["node", "disallowed"],
+      "properties": {
+        "node": {
+          "type": "object",
+          "required": ["recommended", "supported"],
+          "properties": {
+            "recommended": { "type": "string", "minLength": 1 },
+            "supported": { "type": "string", "minLength": 1 }
+          }
+        },
+        "disallowed": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "note": { "type": "string" }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/package" }
+    },
+    "packageManagerOverrides": {
+      "type": "object",
+      "properties": {
+        "npm": {
+          "type": "object",
+          "properties": {
+            "cn": { "type": "string", "pattern": "^https://registry\\.npmmirror\\.com/?$" }
+          }
+        }
+      },
+      "description": "EXECUTE injects --registry for the CN order at command generation time; never rewrites the user's global npmrc (zero-pollution)."
+    },
+    "routes": {
+      "type": "object",
+      "required": ["global", "cn"],
+      "properties": {
+        "global": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "cn": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      },
+      "description": "Channel-aware route declaration (5.9.5): PLAN takes routes[currentOrder][0] that is feasible; array order = fallback order. Each entry must exist in routePlans (checked by scripts/validate.mjs)."
+    },
+    "routePlans": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["steps"],
+        "properties": {
+          "label": { "type": "string" },
+          "steps": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "note": { "type": "string" }
+        }
+      },
+      "description": "Route id → ordered package-id steps (cross-checked against packages[] by scripts/validate.mjs)."
+    },
+    "netConfig": {
+      "type": "object",
+      "required": ["registrySources", "proxyGateways"],
+      "properties": {
+        "registrySources": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["jsdelivr", "raw", "github-api"] },
+          "description": "V4: registry metadata via declared sources only; cross-check any two. PROXY/CUSTOM prefixes must never appear here."
+        },
+        "registrySourcesNote": { "type": "string" },
+        "proxyGateways": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["prefix", "status", "checkedAt"],
+            "properties": {
+              "prefix": { "type": "string", "pattern": "^https://[^\\s]+/$" },
+              "status": { "type": "string", "enum": ["active", "degraded", "retired"] },
+              "checkedAt": { "type": "string", "format": "date-time" },
+              "note": { "type": "string" }
+            }
+          },
+          "description": "S3: default third-party acceleration list (GitHub Release assets only), hot-updatable via registry; probe CI HEADs them daily."
+        },
+        "retiredCandidates": { "type": "string" }
+      }
+    },
+    "modelProviders": {
+      "type": "object",
+      "required": ["openrouter", "anthropic", "openai", "google", "claude-oauth", "ollama"],
+      "properties": {
+        "openrouter": { "$ref": "#/definitions/modelProvider" },
+        "anthropic": { "$ref": "#/definitions/modelProvider" },
+        "openai": { "$ref": "#/definitions/modelProvider" },
+        "google": { "$ref": "#/definitions/modelProvider" },
+        "claude-oauth": { "$ref": "#/definitions/modelProvider" },
+        "ollama": { "$ref": "#/definitions/modelProvider" }
+      },
+      "additionalProperties": { "$ref": "#/definitions/modelProvider" },
+      "description": "Six CONFIG paths (5.4), fully data-driven: adding a provider = a registry PR, no installer release."
+    },
+    "deepLinks": {
+      "type": "object",
+      "required": ["console", "docs", "tutorial"],
+      "properties": {
+        "console": { "type": "string", "format": "uri" },
+        "docs": { "type": "string", "format": "uri" },
+        "tutorial": { "type": "string", "format": "uri" },
+        "feedback": { "type": "string", "format": "uri" }
+      }
+    },
+    "maintenance": {
+      "type": "object",
+      "description": "maintenance schema.",
+      "required": ["upgrade", "uninstall", "dataPaths", "risk"],
+      "properties": {
+        "upgrade": {
+          "type": "object",
+          "required": ["type", "probe"],
+          "properties": {
+            "type": { "type": "string", "enum": ["rerun-dag", "self-update-cmd"] },
+            "probe": { "$ref": "#/definitions/probe" },
+            "notes": { "type": "string" }
+          }
+        },
+        "uninstall": {
+          "type": "object",
+          "required": ["steps", "residualPaths", "notes"],
+          "properties": {
+            "steps": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+            "residualPaths": { "type": "array", "items": { "$ref": "#/definitions/userPath" } },
+            "notes": { "type": "string" }
+          }
+        },
+        "dataPaths": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/userPath" }
+        },
+        "risk": {
+          "type": "object",
+          "required": ["onUninstall", "backupFirst"],
+          "properties": {
+            "onUninstall": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Plain-language text stating exactly what the user loses (hard rule: must be human, must name the data)."
+            },
+            "backupFirst": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "locales": {
+      "type": "object",
+      "description": "Language packs live in registry locales/*.json — adding a language is a PR, zero installer release; CI enforces en-baseline key parity.",
+      "required": ["base", "fallback", "packs"],
+      "properties": {
+        "base": { "type": "string", "const": "en" },
+        "fallback": { "type": "string", "const": "en" },
+        "packs": {
+          "type": "object",
+          "required": ["en"],
+          "propertyNames": { "type": "string", "pattern": "^[a-zA-Z-]+$" },
+          "additionalProperties": { "type": "string", "pattern": "^locales/[a-zA-Z-]+\\.json$" }
+        }
+      }
+    },
+    "guides": {
+      "type": "object",
+      "required": ["en", "zh-CN"],
+      "propertyNames": { "type": "string", "pattern": "^[a-zA-Z-]+$" },
+      "additionalProperties": { "type": "string", "pattern": "^guides/[a-zA-Z0-9-]+\\.md$" }
+    }
+  }
+}
