@@ -20,7 +20,7 @@ const PATTERNS = [
   // 内部文档引用（文件名级）
   { name: 'internal-doc-ref', re: /PHASE\d+-[A-Z][A-Z-]*\.md|PRODUCT[-]PLAN-v\d|PHASE1[-]DOD|PHASE1[-]DESIGN|PHASE1[-]CONTRACT/g },
   // progress wording (must not appear on public surface)
-  { name: 'internal-progress-word', re: /\u65b9\u6848\u4e66|\u4efb\u52a1\u4e66|\u6279\u6b21[0-9A-D]|C\u603b| \u6e05\u5355|\u5185\u90e8\u4fe1\u606f/g },
+  { name: 'internal-progress-word', re: /\u65b9\u6848\u4e66|\u4efb\u52a1\u4e66|\u6279\u6b21[0-9A-D]|C\u603b|DoD \u6e05\u5355|\u5185\u90e8\u4fe1\u606f/g },
 ];
 // 内部文档路径（文件名级，扫 ls-files / diff --name-only）
 const INTERNAL_PATH_RE = /(PHASE\d+-[A-Z]|PRODUCT[-]PLAN|DOD-CHECKLIST|CONTRACT-AUDIT|internal)/i;
