@@ -26,7 +26,7 @@
 index.json                    # 应用索引（官网 /apps 目录数据源）
 apps/<id>/app.json            # 应用主档案：版本 + 依赖 DAG + 通道 + 配置 + 维护
 apps/<id>/guides/{zh-cn,en}.md # 安装引导（DONE 页与官网同源复用）
-locales/{en,zh-CN}.json       # 安装器 UI 语言包
+locales/{en,zh-CN}.json       # 安装器 UI 语言包（en=基线）
 schemas/{index,app}.schema.json # JSON Schema（draft-07，CI 强制）
 scripts/                      # validate / check-locales / probe
 .github/workflows/ci.yml      # 校验 + 每日探活
@@ -62,7 +62,7 @@ scripts/                      # validate / check-locales / probe
 
 1. `apps/<new-id>/app.json`：对着 `schemas/app.schema.json` 填——核心是
    `packages[]`（每包 sha256/sizeBytes 实测取证 + channels）、`routes`/`routePlans`、
-   `modelProviders`、`locales`。
+   `modelProviders`（CONFIG 六路径数据驱动）、`maintenance`、`locales`。
 2. `index.json` 的 `apps[]` 加一条（`id` 必须等于目录名）。
 3. `apps/<new-id>/guides/{zh-cn,en}.md` 写 3-5 步引导。
 4. 本地 `npm install && npm test`，开 PR——CI 会跑 schema/locales 校验与探活。
@@ -77,8 +77,8 @@ scripts/                      # validate / check-locales / probe
 
 ## TODO
 
-- `icons/openclaw.png` 占位。
-- Windows Hub 静默安装参数。
-- macOS dmg 安装脚本与 Gatekeeper 引导待 取证；macOS CN 序 proxy 通道届时补。
+- `icons/openclaw.png` 占位（VI 图标待补）。
+- Windows Hub 静默安装参数（`/S`）与安装路径待 Windows 实机取证。
+- macOS dmg 安装脚本与 Gatekeeper 引导待实机取证；macOS CN 序 proxy 通道届时补。
 - 上游 `openclaw/openclaw` 2026-11 未发布 Windows NSIS 资产，Windows 主线=Windows Hub（见 `routePlans` note）。
 - `recommendedModels` 单价/清单在 CONFIG 上线前复核。

@@ -154,7 +154,7 @@
           "-target",
           "CurrentUserHomeDirectory"
         ],
-        "notes": " 占位参数（免管理员装到用户目录）； macOS 实机取证后细化。",
+        "notes": "占位参数（免管理员装到用户目录）；macOS 实机取证后细化。",
         "probe": {
           "cmd": "node --version",
           "expect": "^v26\\."
@@ -423,7 +423,7 @@
           "attach",
           "-nobrowse"
         ],
-        "notes": "TODO 实机取证：dmg 挂载 + 拖拽 Applications + Gatekeeper 引导。",
+        "notes": "TODO 实机取证：dmg 挂载 + 拖拽 Applications + Gatekeeper 引导（占位）。",
         "probe": {
           "cmd": "openclaw --version",
           "expect": "2026\\.11"
@@ -547,7 +547,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "TODO C4：模型清单与单价在 CONFIG 上线前按 OpenRouter 实价复核。"
+      "notes": "TODO：模型清单与单价在 CONFIG 上线前按 OpenRouter 实价复核。"
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
@@ -675,7 +675,7 @@
         "~/.aibox/prefix",
         "~/.aibox/backup"
       ],
-      "notes": "NSIS 静默卸载参数待 实机取证（TODO）；~/.aibox/backup 属于通用备份目录，卸载时保留。"
+      "notes": "NSIS 静默卸载参数待实机取证（TODO）；~/.aibox/backup 属于通用备份目录，卸载时保留。"
     },
     "dataPaths": [
       "~/.config/openclaw/openclaw.json5",

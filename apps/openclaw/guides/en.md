@@ -1,6 +1,6 @@
-# OpenClaw install guide 
+# OpenClaw install guide (short)
 
-> The full pictorial tutorial lands in (the aibox.im /apps/openclaw/ page
+> The full pictorial tutorial lives on the aibox.im /apps/openclaw/ page
 > is generated from this repo).
 > Tagline: **"Installed until it works."**
 

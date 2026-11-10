@@ -29,6 +29,22 @@ jobs:
       - name: Locale key parity (en baseline vs zh-CN and any future pack)
         run: node scripts/check-locales.mjs
 
+  sanitization:
+    name: Sanitization scan (full history)
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Scan full history for internal references
+        run: node scripts/prepush-scan.mjs --history
+
   dispatch-site:
     name: Trigger aibox-site rebuild
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
