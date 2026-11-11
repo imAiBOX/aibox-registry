@@ -1,6 +1,6 @@
 {
   "name": "aibox-registry",
-  "version": "2026.11.09.1",
+  "version": "2026.11.11.1",
   "private": true,
   "description": "AiBOX.im SSOT registry: app profiles, locales, schemas, liveness probe CI",
   "type": "module",

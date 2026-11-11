@@ -1,0 +1,197 @@
+{
+  "id": "ollama",
+  "name": "Ollama",
+  "version": "0.40.16",
+  "description": {
+    "zh-CN": "本地大模型运行器：一条命令下载并运行上千个开源模型（Llama、Qwen、Gemma 等），完全离线免费，聊天/编程工具都能直连它。",
+    "en": "Local LLM runner: download and run thousands of open models (Llama, Qwen, Gemma…) with one command — fully offline and free; any chat or coding tool can connect to it."
+  },
+  "updatedAt": "2026-11-11T11:45:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "ollama/ollama", "tag": "v0.40.16" }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (bundled runtime)",
+      "supported": "not required (bundled runtime)"
+    },
+    "disallowed": [],
+    "note": "自带运行时的打包桌面应用（Go 单文件 + Electron 界面），无需系统 Node；SCAN 不设 Node 版本门槛。"
+  },
+  "packages": [
+    {
+      "id": "ollama-win-x64",
+      "name": "Ollama Windows Installer (x64)",
+      "kind": "app",
+      "version": "0.40.16",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "84db4f756ddc9e091142a85cdc0f7ae5db68bc9b3e075f114388b326f8ed912d",
+      "sizeBytes": 1857663944,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/ollama/ollama/releases/download/v0.40.16/OllamaSetup.exe",
+          "region": "global",
+          "operator": "ollama",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/ollama/ollama/releases/download/v0.40.16/OllamaSetup.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关（网关清单热更，每日探活复核）。注：ghfast.top 对 ollama/ollama 仓库全部资产实测 403（2026-11-11），本应用通道未走 ghfast。"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/VERYSILENT", "/SILENT", "/NORESTART", "/SUPPRESSMSGBOXES"],
+        "notes": "Inno Setup 安装器（官方 install.ps1 实测参数 /VERYSILENT /NORESTART /SUPPRESSMSGBOXES + Find-InnoSetupInstall + 注册表 UninstallString）；显式带官方 /SILENT 以满足执行层静默标记检测、避免追加 NSIS /S。默认安装目录 %LOCALAPPDATA%\\Programs\\Ollama（install.ps1 实证）。TODO Windows 实机验证。",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe\" --version",
+          "expect": "version is (\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "ollama-mac",
+      "name": "Ollama macOS dmg (Universal)",
+      "kind": "app",
+      "version": "0.40.16",
+      "platforms": ["macos"],
+      "arch": "any",
+      "sha256": "b48d74a2d8c6a0592c816a4f85643d8d8608ad592abafbe95c04128a73c398c6",
+      "sizeBytes": 229996388,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/ollama/ollama/releases/download/v0.40.16/Ollama.dmg",
+          "region": "global",
+          "operator": "ollama",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/ollama/ollama/releases/download/v0.40.16/Ollama.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关（网关清单热更，每日探活复核）。注：ghfast.top 对 ollama/ollama 仓库全部资产实测 403（2026-11-11），本应用通道未走 ghfast。"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Ollama.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg 挂载 + 拷贝 .app + 卸载（hdiutil 惯例，destName=URL 末段）。单一 dmg 覆盖 Intel/Apple Silicon（上游 scripts/build_darwin.sh lipo universal 二进制）→ arch=any。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
+        "probe": {
+          "cmd": "/Applications/Ollama.app/Contents/MacOS/ollama --version",
+          "expect": "version is (\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "官方直连安装（GitHub Releases）",
+      "steps": ["ollama-win-x64", "ollama-mac"],
+      "note": "单安装器路线：Windows 走 OllamaSetup.exe（Inno 静默），macOS 走 dmg 挂载拷贝；步骤含双平台包，按机型过滤。"
+    },
+    "proxy-install": {
+      "label": "国内加速安装（gh-proxy 网关通道）",
+      "steps": ["ollama-win-x64", "ollama-mac"],
+      "note": "与 direct-install 同包；下载层按区域优先 proxy 通道（S3 网关），失败自动降级直连。ghfast.top 对 ollama/ollama 资产实测 403 → 本应用仅走 gh-proxy。Windows ARM64 上游仅提供便携 zip（无安装器）→ arm64 机型 plan 为空，TODO 上游提供。"
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据（S2/S4）。",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-11T21:45:00Z",
+        "note": "社区 GitHub 加速网关（网关本身对 cherry-studio/jan/openclaw 资产实测 200）；但对 ollama/ollama 仓库资产实测 403（2026-11-11）→ 本应用通道未使用 ghfast。"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-11T21:45:00Z",
+        "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小：OllamaSetup.exe 1857663944、Ollama.dmg 229996388）"
+      }
+    ]
+  },
+  "modelProviders": {
+    "ollama": {
+      "label": "本地 Ollama 模型（免费离线，无需 Key）",
+      "authType": "local",
+      "configTarget": "~/.config/ollama/ollama.json5",
+      "getKeyUrl": "https://ollama.com/download",
+      "recommendedModels": [
+        { "id": "qwen2.5:7b", "name": "Qwen2.5 7B", "note": "中文好，8GB 内存可跑", "priceHint": "免费" },
+        { "id": "llama3.2:3b", "name": "Llama 3.2 3B", "note": "低配机入门", "priceHint": "免费" }
+      ],
+      "notes": "Ollama 本体无 key 配置（本地运行器，模型经 ollama pull 管理）；configTarget 为 AiBOX CONFIG 写入位（与 config.rs 缺省回退 ~/.config/<appId>/<appId>.json5 一致），TODO 实机取证。"
+    }
+  },
+  "deepLinks": {
+    "console": "http://127.0.0.1:11434/",
+    "docs": "https://github.com/ollama/ollama#readme",
+    "tutorial": "https://docs.ollama.com/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe\" --version",
+        "expect": "version is (\\d+\\.\\d+\\.\\d+)"
+      },
+      "notes": "检查更新 = 本地 probe 版本 vs 探活 CI 记录的上游 latest（同一数据源）；升级 = 按路线重跑下载与静默安装（覆盖安装）。"
+    },
+    "uninstall": {
+      "steps": [
+        "Windows：设置 → 应用 → Ollama → 卸载（Inno 卸载器；官方 install.ps1 通过注册表 UninstallString 调用）",
+        "macOS：退出 Ollama 后把 Ollama.app 移到废纸篓（或 rm -rf /Applications/Ollama.app）",
+        "按 dataPaths 删除模型与数据（模型文件可能很大，建议先备份）"
+      ],
+      "residualPaths": [
+        "~/AppData/Local/Ollama",
+        "~/Library/Application Support/Ollama"
+      ],
+      "notes": "模型目录随版本变化（~/.ollama 或 dataPaths 内），删除前逐项确认——TODO 实机取证；macOS 卸载 app 不自动删数据。"
+    },
+    "dataPaths": [
+      "~/AppData/Local/Ollama",
+      "~/Library/Application Support/Ollama"
+    ],
+    "risk": {
+      "onUninstall": "本地模型与聊天数据将被删除，建议先备份 / Your local models and chat data will be deleted — back up first.",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

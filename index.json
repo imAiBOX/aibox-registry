@@ -1,7 +1,7 @@
 {
-  "registryVersion": "2026.11.09.1",
-  "generatedAt": "2026-11-09T09:45:51Z",
-  "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09 (see README).",
+  "registryVersion": "2026.11.11.1",
+  "generatedAt": "2026-11-11T21:45:00Z",
+  "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/2026-11-11 (see README).",
   "apps": [
     {
       "id": "openclaw",
@@ -16,6 +16,66 @@
       "popularity": 5,
       "platforms": ["windows", "macos"],
       "status": "stable"
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "category": "utility",
+      "tagline": {
+        "zh-CN": "本地跑开源大模型：一条命令下载即用，离线免费",
+        "en": "Run open-source LLMs locally — one command to download, fully offline and free"
+      },
+      "icon": "icons/ollama.png",
+      "difficulty": 1,
+      "popularity": 5,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-11T21:45:00Z"
+    },
+    {
+      "id": "cherry-studio",
+      "name": "Cherry Studio",
+      "category": "productivity",
+      "tagline": {
+        "zh-CN": "颜值在线的桌面 AI 工作台，一个客户端连多家模型",
+        "en": "A polished desktop AI workspace that connects to many model providers"
+      },
+      "icon": "icons/cherry-studio.png",
+      "difficulty": 1,
+      "popularity": 4,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-11T21:45:00Z"
+    },
+    {
+      "id": "chatbox",
+      "name": "Chatbox",
+      "category": "productivity",
+      "tagline": {
+        "zh-CN": "轻量跨平台 AI 聊天客户端，对话数据存自己电脑",
+        "en": "Lightweight cross-platform AI chat client — conversations stay on your machine"
+      },
+      "icon": "icons/chatbox.png",
+      "difficulty": 1,
+      "popularity": 3,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-11T21:45:00Z"
+    },
+    {
+      "id": "jan",
+      "name": "Jan",
+      "category": "utility",
+      "tagline": {
+        "zh-CN": "离线优先的本地 AI 工作台，数据留在自己电脑",
+        "en": "Offline-first local AI workspace that keeps your data on your own computer"
+      },
+      "icon": "icons/jan.png",
+      "difficulty": 2,
+      "popularity": 3,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-11T21:45:00Z"
     }
   ]
 }

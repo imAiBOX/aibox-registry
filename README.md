@@ -1,84 +1,93 @@
 # aibox-registry
 
-**AiBOX.im（智能盒子）的唯一事实源（SSOT）**——公有仓库，任何人都可审计。
-安装器与官网读这里的数据，本仓库没有任何后端/数据库。
+**English | [简体中文](README.zh-CN.md)**
 
-口号：**装到能用为止 / Installed until it works.**
+**Single source of truth (SSOT) for AiBOX.im** — a public repository anyone can audit.
+The installer and the website both read data from here; this repo has no backend or database.
 
-## 在数据流三层中的位置
+Slogan: **Installed until it works.**
+
+## Its place in the three-layer data flow
 
 ```
-[GitHub aibox-registry]  ← 唯一 SSOT：apps/*.json、locales/*.json、netConfig、maintenance
-      │  push → Actions（schema 校验 + 探活）；每日 04:00 UTC 探活 cron
+[GitHub aibox-registry]  ← the only SSOT: apps/*.json, locales/*.json, netConfig, maintenance
+      │  push → Actions (schema validation + liveness probe); daily probe cron at 04:00 UTC
       ▼
-[aibox.im 官网]  构建时拉 registry → 静态页（目录/教程/下载）
+[aibox.im website]       build-time pull of the registry → static pages (directory/tutorials/downloads)
       ▲
-[AiBOX 安装器]  主通道多源直读 GitHub（jsDelivr / raw / GitHub API 交叉校验）
-                副通道 aibox.im/meta/*.json（公告、目录快照、latest 版本）
+[AiBOX installer]        primary channel reads GitHub directly with cross-checks
+                         (jsDelivr / raw / GitHub API)
+                         secondary channel reads aibox.im/meta/*.json (announcements, directory snapshot,
+                         latest versions)
 ```
 
-- 官网重建链：本仓 push → site 仓 `repository_dispatch` → CF Pages 构建。
-- 加语言 = 往 `locales/` 加一个文件 + PR，**零发版**。
+- Website rebuild chain: push to this repo → `repository_dispatch` to the aibox-site repo → CF Pages build.
+- Adding a language = add one file under `locales/` + a PR, **zero releases**.
 
-## 目录结构
+## Repository layout
 
 ```
-index.json                    # 应用索引（官网 /apps 目录数据源）
-apps/<id>/app.json            # 应用主档案：版本 + 依赖 DAG + 通道 + 配置 + 维护
-apps/<id>/guides/{zh-cn,en}.md # 安装引导（DONE 页与官网同源复用）
-locales/{en,zh-CN}.json       # 安装器 UI 语言包（en=基线）
-schemas/{index,app}.schema.json # JSON Schema（draft-07，CI 强制）
-scripts/                      # validate / check-locales / probe
-.github/workflows/ci.yml      # 校验 + 每日探活
+index.json                     # app index (data source for the website /apps directory)
+apps/<id>/app.json             # per-app profile: version + dependency DAG + channels + config + maintenance
+apps/<id>/guides/{zh-cn,en}.md # install guides (DONE page and website share this source)
+locales/{en,zh-CN}.json        # installer UI language packs (en is the baseline)
+schemas/{index,app}.schema.json# JSON Schema (draft-07, enforced in CI)
+scripts/                       # validate / check-locales / probe / prepush-scan
+.github/workflows/ci.yml       # validation + daily probe
 ```
 
-## Schema 与不变式（校验链）
+## Schema and invariants (validation chain)
 
-`schemas/app.schema.json` 强制：
+`schemas/app.schema.json` enforces:
 
-| 不变式 | 内容 |
+| Invariant | Meaning |
 |---|---|
-| **V1** | 每个有 `channels[].url` 的包**必带**包级 `sha256`（+`sizeBytes`）——所有通道共用同一哈希，无哈希的 URL 禁止合入 |
-| **V2** | 每个包 `install.probe` 必须存在（装完必须能探出版本；`probe.expect` 必须是可编译正则） |
-| **V3** | `configTarget` / `dataPaths` / `residualPaths` 必须是用户目录 `~/…` 路径，禁止系统目录与 `..` |
-| **V4** | `netConfig.registrySources` ≥2 个声明源（jsDelivr/raw/GitHub API 交叉校验），哈希获取永不走 PROXY |
+| **V1** | every package exposing `channels[].url` must carry a package-level `sha256` (plus `sizeBytes`) — all channels of a package share one hash; hashless URLs may not merge |
+| **V2** | every package's `install.probe` must exist (an install task that cannot verify its version is a failed task; `probe.expect` must compile as a regular expression) |
+| **V3** | `configTarget` / `dataPaths` / `residualPaths` must be user-home (`~/…`) paths — no system directories, no `..` traversal |
+| **V4** | `netConfig.registrySources` declares ≥2 cross-checkable sources (jsDelivr / raw / GitHub API); hashes are never fetched through PROXY prefixes |
 
-另有脚本级交叉校验（`scripts/validate.mjs`）：`routes` ↔ `routePlans` ↔ `packages` 引用一致、
-引用的 `locales/*.json` 与 `guides/*.md` 文件存在；`scripts/check-locales.mjs` 强制
-**zh-CN 不得缺 en 基线的任何 key**。
+Additional cross-checks in `scripts/validate.mjs`: `routes` ↔ `routePlans` ↔ `packages` references are consistent,
+referenced `locales/*.json` and `guides/*.md` files exist; `scripts/check-locales.mjs` guarantees
+**zh-CN never misses any key of the en baseline**.
 
-## 每日探活 CI（push + cron 0 4 * * *）
+## Daily liveness probe (push + cron `0 4 * * *`)
 
-1. 逐包逐通道 `HEAD`（单次超时 10s，失败最多 3 次重试——抗网络抖动，防误开 Issue）；
-2. `sizeBytes < 5MB` 的包重新下载比对 `sha256`（S1 全通道零豁免）；
-3. GitHub `releases/latest` 与 npm `dist-tags/latest` 对比 `upstream` 记录版本；
-4. `netConfig.proxyGateways` 全部网关 HEAD（S3 可热更下架）；
-5. **任何不一致 → 自动开 Issue（label `upstream-drift`）+ 红灯**；同标题已有开放 Issue 不重复开。
+1. HEAD every channel of every package (10s timeout per attempt, up to 3 retries — absorbs network flakiness so no issues are opened by mistake);
+2. packages smaller than 5MB are re-downloaded and their `sha256` re-compared (V1: no channel is exempt);
+3. GitHub `releases/latest` and npm `dist-tags/latest` are compared against the recorded `upstream` versions;
+4. every `netConfig.proxyGateways` prefix is HEAD-ed (the S3 hot-updatable gateway list);
+5. **any mismatch → an automatic Issue (label `upstream-drift`) + a red run**; an existing open issue with the same title is not re-opened.
 
-探活产物 `probe-report.json` / `drifts.json` 作为 workflow artifact 留证。
-版本落后处置：CI 检测到上游新 tag → PR 更新 app.json（新 SHA256）→ 人工 review → ≤12h 全网生效。
+Probe artifacts `probe-report.json` / `drifts.json` are kept as workflow artifacts.
+Handling a version lag: CI detects a new upstream tag → PR updating app.json (new SHA256) → human review → effective across site + installer within ≤12h.
 
-## 如何新增一个应用
+## How to add an app
 
-1. `apps/<new-id>/app.json`：对着 `schemas/app.schema.json` 填——核心是
-   `packages[]`（每包 sha256/sizeBytes 实测取证 + channels）、`routes`/`routePlans`、
-   `modelProviders`（CONFIG 六路径数据驱动）、`maintenance`、`locales`。
-2. `index.json` 的 `apps[]` 加一条（`id` 必须等于目录名）。
-3. `apps/<new-id>/guides/{zh-cn,en}.md` 写 3-5 步引导。
-4. 本地 `npm install && npm test`，开 PR——CI 会跑 schema/locales 校验与探活。
-5. 合并即生效（官网与安装器热读，无需发版）。
+1. `apps/<new-id>/app.json`: fill it against `schemas/app.schema.json` — the core is
+   `packages[]` (per-package sha256/sizeBytes measured from the upstream + channels), `routes`/`routePlans`,
+   `modelProviders` (data-driven config paths), `maintenance`, `locales`.
+2. Add one entry to `index.json` `apps[]` (`id` must equal the directory name).
+3. Write a 3-5 step `apps/<new-id>/guides/{zh-cn,en}.md`.
+4. Locally run `npm install && npm test`, open a PR — CI runs schema/locale validation and the probe.
+5. Merge = live (website and installer hot-read this repo, no release needed).
 
-## 数据真实性基线（2026-11-09 实测）
+## Data baseline (live-verified)
 
-- npm `openclaw@2026.11.2`：tarball sha256 分别从 **npmjs 与 npmmirror 全量下载**计算，两源一致且 sha1 = `dist.shasum`。
-- Node.js `v26.13.0`（推荐线）：sha256 取自官方 `SHASUMS256.txt`，并**实下载 direct+mirror 两源**比对一致。
-- GitHub 资产（Windows Hub `v2026.11.1`、Git for Windows `v2.56.0.windows.4`、macOS dmg `v2026.11.2`）：sha256 取自 **GitHub API release 资产 `digest` 字段**，全部通道 HEAD 200 且 Content-Length 与 `sizeBytes` 一致。
-- 网关基线：`ghfast.top` / `gh-proxy.com` / `ghproxy.net` 实测 200（同大小）；同批其余 9 个候选实测失败，记录在 `netConfig.retiredCandidates`，复测通过再入库。
+- npm `openclaw@2026.11.3`: tarball sha256 computed from **full downloads on both npmjs and npmmirror** (two sources identical, sha1 = `dist.shasum`).
+- Node.js `v26.13.0` (recommended line): sha256 from the official `SHASUMS256.txt`, additionally **re-downloaded from direct + mirror** and compared.
+- GitHub release assets: sha256 taken from the **GitHub API release asset `digest` field**; all channels HEAD 200 with Content-Length equal to `sizeBytes`.
+  (2026-11-11 batch: Ollama v0.40.16, Cherry Studio v2.2.0, Jan v0.8.8 — GitHub assets; Chatbox v1.24.3 ships on the vendor CDN since v1.21, so its three assets were **fully downloaded and hashed locally**, cross-checked against the official `latest.yml` sizes.)
+- Gateway baseline: `ghfast.top` / `gh-proxy.com` measured 200 (same size); failed candidates are recorded in `netConfig.retiredCandidates` and only re-admitted after a retest.
+  Note: `ghfast.top` answered 403 for every `ollama/ollama` asset (measured 2026-11-11) — the Ollama profile therefore ships only the `gh-proxy` channel.
 
 ## TODO
 
-- `icons/openclaw.png` 占位（VI 图标待补）。
-- Windows Hub 静默安装参数（`/S`）与安装路径待 Windows 实机取证。
-- macOS dmg 安装脚本与 Gatekeeper 引导待实机取证；macOS CN 序 proxy 通道届时补。
-- 上游 `openclaw/openclaw` 2026-11 未发布 Windows NSIS 资产，Windows 主线=Windows Hub（见 `routePlans` note）。
-- `recommendedModels` 单价/清单在 CONFIG 上线前复核。
+- `icons/openclaw.png` is a placeholder (final logo pending).
+- Windows silent-install parameters and install paths pending real-machine verification (per-app notes carry `TODO` markers).
+- macOS dmg install scripts, Gatekeeper guidance, and CN proxy channels for macOS pending real-machine verification.
+- Upstream `openclaw/openclaw` has not published a Windows NSIS asset — the Windows mainline is the Windows Hub (see `routePlans` notes).
+- `recommendedModels` lists and pricing to be re-checked before the CONFIG screens go live.
+
+---
+Feedback: https://github.com/imAiBOX/aibox-registry/issues

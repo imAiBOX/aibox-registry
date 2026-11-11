@@ -1,0 +1,292 @@
+{
+  "id": "jan",
+  "name": "Jan",
+  "version": "0.8.8",
+  "description": {
+    "zh-CN": "离线优先的本地 AI 工作台：在自己电脑上运行开源模型，聊天、文档与助手数据全部留在本地，不联网也能用。",
+    "en": "Offline-first local AI workspace: run open-source models on your own computer; chats, docs and assistants stay local, working even without the internet."
+  },
+  "updatedAt": "2026-11-11T21:45:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "janhq/jan", "tag": "v0.8.8" }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (bundled runtime)",
+      "supported": "not required (bundled runtime)"
+    },
+    "disallowed": [],
+    "note": "自带运行时的 Tauri（Rust + WebView）打包桌面应用，无需系统 Node；SCAN 不设 Node 版本门槛。"
+  },
+  "packages": [
+    {
+      "id": "jan-win-x64",
+      "name": "Jan Windows Installer (x64)",
+      "kind": "app",
+      "version": "0.8.8",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "08aca371733b76200e44e95d677cdd15e96609f86f919de57b97a5358ca21e9b",
+      "sizeBytes": 571697752,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_x64-setup.exe",
+          "region": "global",
+          "operator": "janhq",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_x64-setup.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_x64-setup.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "Tauri NSIS 安装器（tauri.conf.json bundle.windows 无自定义项 → NSIS 默认 /S）；安装模式默认 CurrentUser，装到 %LOCALAPPDATA%\\Jan（tauri-bundler installer.nsi MULTIUSER_INSTALLMODE 实证），主程序 Jan-Desktop.exe（mainBinaryName 实证）。TODO Windows 实机验证静默参数与路径。",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Jan\\Jan-Desktop.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "jan-win-arm64",
+      "name": "Jan Windows Installer (ARM64)",
+      "kind": "app",
+      "version": "0.8.8",
+      "platforms": ["windows"],
+      "arch": "arm64",
+      "sha256": "4df9072f7bc93907c2ae04448120a897a54c0e349cf482adbaecd2f98694c392",
+      "sizeBytes": 335580368,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_arm64-setup.exe",
+          "region": "global",
+          "operator": "janhq",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_arm64-setup.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_arm64-setup.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "同 x64（Tauri NSIS 默认 CurrentUser + /S）。TODO Windows 实机验证。",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Jan\\Jan-Desktop.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "jan-mac",
+      "name": "Jan macOS dmg (Universal)",
+      "kind": "app",
+      "version": "0.8.8",
+      "platforms": ["macos"],
+      "arch": "any",
+      "sha256": "7467b2c06ab1d2e0812b36ca73aebcbe8377c2d89207edaba266a2a0e39f404b",
+      "sizeBytes": 115908917,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_universal.dmg",
+          "region": "global",
+          "operator": "janhq",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）。资产名即 universal → arch=any（matchesMachine 不认 universal）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_universal.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/janhq/jan/releases/download/v0.8.8/Jan_0.8.8_universal.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Jan_0.8.8_universal.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg 挂载 + 拷贝 Jan.app + 卸载（hdiutil 惯例，destName=URL 末段）。单一 universal dmg 覆盖 Intel/Apple Silicon → arch=any。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
+        "probe": {
+          "cmd": "/Applications/Jan.app/Contents/MacOS/Jan-Desktop --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "官方直连安装（GitHub Releases）",
+      "steps": ["jan-win-x64", "jan-mac"],
+      "note": "安装器路线：Windows 走 Tauri NSIS 静默安装，macOS 走 universal dmg 挂载拷贝；步骤含双平台包，按机型过滤，win arm64 机型自动换成 jan-win-arm64。"
+    },
+    "proxy-install": {
+      "label": "国内加速安装（ghfast/gh-proxy 通道）",
+      "steps": ["jan-win-x64", "jan-mac"],
+      "note": "与 direct-install 同包；下载层按区域优先 proxy 通道（S3 网关），失败自动降级直连。"
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据。",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-11T21:45:00Z",
+        "note": "社区 GitHub 加速网关（2026-11-11 本应用资产实测 200/同大小）"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-11T21:45:00Z",
+        "note": "社区 GitHub 加速网关（2026-11-11 本应用资产实测 200/同大小）"
+      }
+    ]
+  },
+  "modelProviders": {
+    "openrouter": {
+      "label": "OpenRouter（推荐，一个 key 通吃所有模型）",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "聪明均衡，日常首选", "priceHint": "中等" },
+        { "id": "openai/gpt-5", "name": "GPT-5", "note": "复杂任务更强", "priceHint": "偏高" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" }
+      ],
+      "notes": "configTarget 为 AiBOX CONFIG 写入位：上游 core/src/browser/settings.ts 实证设置存于 <jan_data>/settings.json，jan_data=%APPDATA%\\Jan，macOS 对应 ~/Library/Application Support/Jan/settings.json；TODO 实机校正。"
+    },
+    "anthropic": {
+      "label": "Anthropic 官方 API（Claude）",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "性价比均衡", "priceHint": "中等" },
+        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "快而便宜", "priceHint": "低" }
+      ],
+      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+    },
+    "openai": {
+      "label": "OpenAI 官方 API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "默认推荐", "priceHint": "中等" },
+        { "id": "gpt-5-mini", "name": "GPT-5 mini", "note": "省预算", "priceHint": "低" }
+      ],
+      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+    },
+    "google": {
+      "label": "Google AI Studio",
+      "authType": "api-key",
+      "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
+      "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "getKeyUrl": "https://aistudio.google.com/apikey",
+      "recommendedModels": [
+        { "id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" },
+        { "id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro", "note": "更聪明", "priceHint": "中等" }
+      ],
+      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+    }
+  },
+  "deepLinks": {
+    "console": "http://localhost:1337/",
+    "docs": "https://github.com/janhq/jan#readme",
+    "tutorial": "https://jan.ai/docs"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%LOCALAPPDATA%\\Jan\\Jan-Desktop.exe\" --version",
+        "expect": "(\\d+\\.\\d+\\.\\d+)"
+      },
+      "notes": "检查更新 = 本地 probe 版本 vs 探活 CI 记录的上游 latest（同一数据源）；升级 = 按路线重跑下载与静默安装（覆盖安装）。本地 API 在 localhost:1337（README 实证）。"
+    },
+    "uninstall": {
+      "steps": [
+        "Windows：设置 → 应用 → Jan → 卸载（NSIS 卸载器）",
+        "macOS：退出 Jan 后把 Jan.app 移到废纸篓（或 rm -rf /Applications/Jan.app）",
+        "按 dataPaths 删除设置、模型与对话数据（模型文件可能很大，建议先备份）"
+      ],
+      "residualPaths": [
+        "~/AppData/Roaming/Jan",
+        "~/Library/Application Support/Jan"
+      ],
+      "notes": "模型与会话存放在 jan_data 内（%APPDATA%\\Jan / ~/Library/Application Support/Jan），删除前逐项确认；macOS 卸载 app 不自动删数据。"
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/Jan",
+      "~/Library/Application Support/Jan"
+    ],
+    "risk": {
+      "onUninstall": "本地模型、对话与设置将被删除，建议先备份 / Your local models, conversations and settings will be deleted — back up first.",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

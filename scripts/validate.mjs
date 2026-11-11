@@ -18,14 +18,21 @@ const fail = (msg) => errors.push(msg);
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
+// schemas carry a $id — compile each file once and reuse (multiple apps would
+// otherwise re-register the same $id and throw)
+const validators = new Map();
 
 function load(p) {
   return JSON.parse(fs.readFileSync(path.join(root, p), 'utf8'));
 }
 
 function validateAgainst(schemaFile, data, label) {
-  const schema = load(schemaFile);
-  const validate = ajv.compile(schema);
+  let validate = validators.get(schemaFile);
+  if (!validate) {
+    const schema = load(schemaFile);
+    validate = ajv.compile(schema);
+    validators.set(schemaFile, validate);
+  }
   if (!validate(data)) {
     for (const e of validate.errors) {
       fail(`${label}: schema ${e.instancePath || '<root>'} ${e.message}` +

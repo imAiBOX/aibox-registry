@@ -1,0 +1,339 @@
+{
+  "id": "cherry-studio",
+  "name": "Cherry Studio",
+  "version": "2.2.0",
+  "description": {
+    "zh-CN": "颜值与功能兼顾的桌面 AI 工作台：一个客户端同时连接 OpenAI、Anthropic、谷歌、OpenRouter 等多家模型，聊天、编程助手、翻译开箱即用。",
+    "en": "Polished desktop AI workspace that connects to many model providers at once (OpenAI, Anthropic, Google, OpenRouter) — chat, coding help and translation out of the box."
+  },
+  "updatedAt": "2026-11-11T21:45:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "CherryHQ/cherry-studio", "tag": "v2.2.0" }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (bundled runtime)",
+      "supported": "not required (bundled runtime)"
+    },
+    "disallowed": [],
+    "note": "自带运行时的 Electron 打包桌面应用，无需系统 Node；SCAN 不设 Node 版本门槛。"
+  },
+  "packages": [
+    {
+      "id": "cherry-win-x64",
+      "name": "Cherry Studio Windows Installer (x64)",
+      "kind": "app",
+      "version": "2.2.0",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "51eb2fc733742b101605ccca85abaf518c2572078f3c3cac491f812f9b372a97",
+      "sizeBytes": 307780272,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-win-x64-setup.exe",
+          "region": "global",
+          "operator": "cherryhq",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-win-x64-setup.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-win-x64-setup.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "electron-builder NSIS 辅助安装模式（electron-builder.yml 实证 oneClick:false、executableName \"Cherry Studio\"），默认安装到 %LOCALAPPDATA%\\Programs\\Cherry Studio。/S 为 electron-builder NSIS 官方静默参数。TODO Windows 实机验证静默参数与安装路径。",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\Cherry Studio\\Cherry Studio.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "cherry-win-arm64",
+      "name": "Cherry Studio Windows Installer (ARM64)",
+      "kind": "app",
+      "version": "2.2.0",
+      "platforms": ["windows"],
+      "arch": "arm64",
+      "sha256": "24b27c16724656b31eb3381ca9ae9df40d93155ea69af933748d5986a60fc929",
+      "sizeBytes": 286598680,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-win-arm64-setup.exe",
+          "region": "global",
+          "operator": "cherryhq",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-win-arm64-setup.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-win-arm64-setup.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "同 x64（electron-builder NSIS oneClick:false）。TODO Windows 实机验证。",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\Cherry Studio\\Cherry Studio.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "cherry-mac-x64",
+      "name": "Cherry Studio macOS dmg (Intel)",
+      "kind": "app",
+      "version": "2.2.0",
+      "platforms": ["macos"],
+      "arch": "x64",
+      "sha256": "252473b9fafe84e5500d74fc4af454dd15d79439d35246edc9a18729f463d7bc",
+      "sizeBytes": 323424557,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-mac-x64.dmg",
+          "region": "global",
+          "operator": "cherryhq",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-mac-x64.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-mac-x64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Cherry-Studio-2.2.0-mac-x64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
+        "probe": {
+          "cmd": "/Applications/Cherry Studio.app/Contents/MacOS/Cherry Studio --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "cherry-mac-arm64",
+      "name": "Cherry Studio macOS dmg (Apple Silicon)",
+      "kind": "app",
+      "version": "2.2.0",
+      "platforms": ["macos"],
+      "arch": "arm64",
+      "sha256": "69d4565c5ea568dc902175ddc38be7afec68c59612241567f343e3bb37b25d0f",
+      "sizeBytes": 299517049,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-mac-arm64.dmg",
+          "region": "global",
+          "operator": "cherryhq",
+          "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-mac-arm64.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.0/Cherry-Studio-2.2.0-mac-arm64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "社区 GitHub 加速网关"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Cherry-Studio-2.2.0-mac-arm64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证。",
+        "probe": {
+          "cmd": "/Applications/Cherry Studio.app/Contents/MacOS/Cherry Studio --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "官方直连安装（GitHub Releases）",
+      "steps": ["cherry-win-x64", "cherry-mac-x64"],
+      "note": "安装器路线：Windows 走 NSIS 静默安装，macOS 走 dmg 挂载拷贝；步骤含双平台包，按机型过滤，arm64 机型自动换成 -arm64 变体。"
+    },
+    "proxy-install": {
+      "label": "国内加速安装（ghfast/gh-proxy 通道）",
+      "steps": ["cherry-win-x64", "cherry-mac-x64"],
+      "note": "与 direct-install 同包；下载层按区域优先 proxy 通道（S3 网关），失败自动降级直连。"
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据。",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-11T21:45:00Z",
+        "note": "社区 GitHub 加速网关（2026-11-11 本应用资产实测 200/同大小）"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-11T21:45:00Z",
+        "note": "社区 GitHub 加速网关（2026-11-11 本应用资产实测 200/同大小）"
+      }
+    ]
+  },
+  "modelProviders": {
+    "openrouter": {
+      "label": "OpenRouter（推荐，一个 key 通吃所有模型）",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/AppData/Roaming/CherryStudio/config.json",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "聪明均衡，日常首选", "priceHint": "中等" },
+        { "id": "openai/gpt-5", "name": "GPT-5", "note": "复杂任务更强", "priceHint": "偏高" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" }
+      ],
+      "notes": "configTarget 为 AiBOX CONFIG 写入位，按 Electron userData 默认路径推断（CherryStudio 目录），macOS 对应 ~/Library/Application Support/CherryStudio/config.json；TODO 实机取证。"
+    },
+    "anthropic": {
+      "label": "Anthropic 官方 API（Claude）",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Roaming/CherryStudio/config.json",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "性价比均衡", "priceHint": "中等" },
+        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "快而便宜", "priceHint": "低" }
+      ],
+      "notes": "configTarget 同 openrouter（TODO 实机取证）。"
+    },
+    "openai": {
+      "label": "OpenAI 官方 API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Roaming/CherryStudio/config.json",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "默认推荐", "priceHint": "中等" },
+        { "id": "gpt-5-mini", "name": "GPT-5 mini", "note": "省预算", "priceHint": "低" }
+      ],
+      "notes": "configTarget 同 openrouter（TODO 实机取证）。"
+    },
+    "google": {
+      "label": "Google AI Studio",
+      "authType": "api-key",
+      "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
+      "configTarget": "~/AppData/Roaming/CherryStudio/config.json",
+      "getKeyUrl": "https://aistudio.google.com/apikey",
+      "recommendedModels": [
+        { "id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" },
+        { "id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro", "note": "更聪明", "priceHint": "中等" }
+      ],
+      "notes": "configTarget 同 openrouter（TODO 实机取证）。上游另支持本地 Ollama 与 LM Studio（无 key，authType=local 位留待后续数据驱动补充）。"
+    }
+  },
+  "deepLinks": {
+    "console": "https://cherry-ai.com/",
+    "docs": "https://github.com/CherryHQ/cherry-studio#readme",
+    "tutorial": "https://cherry-ai.com/docs"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%LOCALAPPDATA%\\Programs\\Cherry Studio\\Cherry Studio.exe\" --version",
+        "expect": "(\\d+\\.\\d+\\.\\d+)"
+      },
+      "notes": "检查更新 = 本地 probe 版本 vs 探活 CI 记录的上游 latest（同一数据源）；升级 = 按路线重跑下载与静默安装（覆盖安装）。"
+    },
+    "uninstall": {
+      "steps": [
+        "Windows：设置 → 应用 → Cherry Studio → 卸载（NSIS 卸载器）",
+        "macOS：退出 Cherry Studio 后把 Cherry Studio.app 移到废纸篓（或 rm -rf \"/Applications/Cherry Studio.app\"）",
+        "按 dataPaths 删除配置与聊天数据（建议先导出/备份）"
+      ],
+      "residualPaths": [
+        "~/AppData/Roaming/CherryStudio",
+        "~/Library/Application Support/CherryStudio"
+      ],
+      "notes": "macOS 卸载 app 不自动删数据；便携版（portable.exe）数据在可执行文件同目录，TODO 实机取证。"
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/CherryStudio",
+      "~/Library/Application Support/CherryStudio"
+    ],
+    "risk": {
+      "onUninstall": "聊天记录、智能体与模型配置将被删除，建议先备份 / Your chats, agents and model settings will be deleted — back up first.",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

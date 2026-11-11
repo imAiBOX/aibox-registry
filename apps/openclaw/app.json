@@ -1,21 +1,21 @@
 {
   "id": "openclaw",
   "name": "OpenClaw",
-  "version": "2026.11.2",
+  "version": "2026.11.3",
   "description": {
     "zh-CN": "多渠道 AI 网关，把大模型接到你的聊天软件（Telegram/WhatsApp 等），支持 Anthropic/OpenAI/Google/OpenRouter/Claude 订阅/Ollama 六种接入。",
     "en": "Multi-channel AI gateway that connects LLMs to your messengers (Telegram/WhatsApp, etc.), with six provider paths: Anthropic / OpenAI / Google / OpenRouter / Claude subscription / Ollama."
   },
-  "updatedAt": "2026-11-09T09:45:51Z",
+  "updatedAt": "2026-11-11T21:45:00Z",
   "upstream": {
     "npm": {
       "name": "openclaw",
-      "version": "2026.11.2"
+      "version": "2026.11.3"
     },
     "github": [
       {
         "repo": "openclaw/openclaw",
-        "tag": "v2026.11.2"
+        "tag": "v2026.11.3"
       },
       {
         "repo": "openclaw/openclaw-windows-node",
@@ -23,7 +23,7 @@
       },
       {
         "repo": "git-for-windows/git",
-        "tag": "v2.56.0.windows.4"
+        "tag": "v2.56.1.windows.1"
       }
     ]
   },
@@ -165,26 +165,26 @@
       "id": "openclaw-cli",
       "name": "OpenClaw CLI (npm package)",
       "kind": "app",
-      "version": "2026.11.2",
+      "version": "2026.11.3",
       "platforms": [
         "windows",
         "macos"
       ],
       "arch": "any",
-      "sha256": "7881887b88d81e5fdff361b7aac59b6a736308e1815a175b9ccd9cdca1bb5e48",
-      "sizeBytes": 112983809,
-      "hashSource": "本地实测：分别从 registry.npmjs.org 与 registry.npmmirror.com 全量下载 tarball 计算 sha256，两源一致且 sha1 匹配 npm dist.shasum (4185b164…)",
+      "sha256": "dae4c4f7549561db2fe5ac43af7ba0c9491f876380f070f7ffb87bf9721a10df",
+      "sizeBytes": 113171358,
+      "hashSource": "本地实测（2026-11-11）：分别从 registry.npmjs.org 与 registry.npmmirror.com 全量下载 tarball 计算 sha256，两源一致且 sha1 匹配 npm dist.shasum (d7db24ae…)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.2.tgz",
+          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.3.tgz",
           "region": "global",
           "operator": "npm",
           "note": "npm 官方 registry（5.9.4 矩阵 openclaw CLI GLOBAL 主）"
         },
         {
           "type": "mirror",
-          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.2.tgz",
+          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.3.tgz",
           "region": "cn",
           "operator": "alibaba",
           "note": "阿里 npmmirror（5.9.4 矩阵 CN 主；EXECUTE 经 packageManagerOverrides 注入 --registry，不改用户 npmrc）"
@@ -195,12 +195,12 @@
         "args": [
           "install",
           "-g",
-          "openclaw@2026.11.2"
+          "openclaw@2026.11.3"
         ],
         "notes": "CN 序时 EXECUTE 自动追加 --registry=https://registry.npmmirror.com 与本地 prefix（~/.aibox/prefix），退出即还原，不污染用户全局 npmrc。",
         "probe": {
           "cmd": "openclaw --version",
-          "expect": "2026\\.11\\.2"
+          "expect": "2026\\.11\\.3"
         }
       }
     },
@@ -300,34 +300,34 @@
     },
     {
       "id": "git-win-x64",
-      "name": "Git for Windows 2.56.0.4 (x64)",
+      "name": "Git for Windows 2.56.1 (x64)",
       "kind": "dependency",
-      "version": "2.56.0.4",
+      "version": "2.56.1",
       "platforms": [
         "windows"
       ],
       "arch": "x64",
-      "sha256": "4961a4a8cc778d8b6e00a5819e5fe4d078b754555aff7aedc2d77a5d74c2de80",
-      "sizeBytes": 66850032,
-      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "sha256": "c330c72e10b408cc39994bfefdb63542b0d93d21699325c3e0bd874af8a5a559",
+      "sizeBytes": 66870448,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-64-bit.exe",
+          "url": "https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/Git-2.56.1-64-bit.exe",
           "region": "global",
           "operator": "git-for-windows",
           "note": "GitHub Releases 直连（5.9.4 矩阵 Git GLOBAL 主）"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-64-bit.exe",
+          "url": "https://ghfast.top/https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/Git-2.56.1-64-bit.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关（CN 备选；winget 为 PLAN 层降级项）"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-64-bit.exe",
+          "url": "https://gh-proxy.com/https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/Git-2.56.1-64-bit.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关"
@@ -349,34 +349,34 @@
     },
     {
       "id": "git-win-arm64",
-      "name": "Git for Windows 2.56.0.4 (ARM64)",
+      "name": "Git for Windows 2.56.1 (ARM64)",
       "kind": "dependency",
-      "version": "2.56.0.4",
+      "version": "2.56.1",
       "platforms": [
         "windows"
       ],
       "arch": "arm64",
-      "sha256": "e7dcc4adbb0eb373064598cd18bc75e60128707d816ead51cd9bd98e356f0075",
-      "sizeBytes": 64406136,
-      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "sha256": "6fe770b534a459d1158011e6ec0cd8390a3bcf44e542bee9e9a650310e111234",
+      "sizeBytes": 64405736,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-arm64.exe",
+          "url": "https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/Git-2.56.1-arm64.exe",
           "region": "global",
           "operator": "git-for-windows",
           "note": "GitHub Releases 直连"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-arm64.exe",
+          "url": "https://ghfast.top/https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/Git-2.56.1-arm64.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.4/Git-2.56.0.4-arm64.exe",
+          "url": "https://gh-proxy.com/https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/Git-2.56.1-arm64.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关"
@@ -399,18 +399,18 @@
       "id": "openclaw-mac-x64",
       "name": "OpenClaw macOS dmg (x86_64)",
       "kind": "app",
-      "version": "v2026.11.2",
+      "version": "v2026.11.3",
       "platforms": [
         "macos"
       ],
       "arch": "x64",
-      "sha256": "b647c6da41b73eeb08d156e858534207927e579646c4bcf61bad83c4610e4ce0",
-      "sizeBytes": 265478532,
-      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "sha256": "98be9927baab3dd743f3d2b6df7dfe0c5703ba8086e7883977e6248d8f876b20",
+      "sizeBytes": 265981588,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.2/OpenClaw-2026.11.2-x86_64.dmg",
+          "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.3/OpenClaw-2026.11.3-x86_64.dmg",
           "region": "global",
           "operator": "openclaw",
           "note": "GitHub Releases 直连。TODO：macOS CN 序 proxy 通道与 Gatekeeper 引导取证后补。"
@@ -434,18 +434,18 @@
       "id": "openclaw-mac-arm64",
       "name": "OpenClaw macOS dmg (ARM64)",
       "kind": "app",
-      "version": "v2026.11.2",
+      "version": "v2026.11.3",
       "platforms": [
         "macos"
       ],
       "arch": "arm64",
-      "sha256": "afe357177eb5a2fe67edcf9de89d2ff34cfe65b103e258dc230e61a76731bc53",
-      "sizeBytes": 247344041,
-      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "sha256": "e11a234e9d0f2ee018f20e53e17d03b1cb14639b3a6b4d5a449e1d332dd62fac",
+      "sizeBytes": 248119056,
+      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.2/OpenClaw-2026.11.2-arm64.dmg",
+          "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.3/OpenClaw-2026.11.3-arm64.dmg",
           "region": "global",
           "operator": "openclaw",
           "note": "GitHub Releases 直连。TODO：macOS CN 序 proxy 通道取证后补。"

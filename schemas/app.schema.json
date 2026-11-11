@@ -140,7 +140,7 @@
     "updatedAt": { "type": "string", "format": "date-time" },
     "upstream": {
       "type": "object",
-      "required": ["npm", "github"],
+      "required": ["github"],
       "properties": {
         "npm": {
           "type": "object",
@@ -252,7 +252,7 @@
     },
     "modelProviders": {
       "type": "object",
-      "required": ["openrouter", "anthropic", "openai", "google", "claude-oauth", "ollama"],
+      "minProperties": 1,
       "properties": {
         "openrouter": { "$ref": "#/definitions/modelProvider" },
         "anthropic": { "$ref": "#/definitions/modelProvider" },
