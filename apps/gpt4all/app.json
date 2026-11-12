@@ -1,0 +1,280 @@
+{
+  "id": "gpt4all",
+  "name": "GPT4All",
+  "version": "3.10.0",
+  "description": {
+    "zh-CN": "Nomic 出品的本地大模型桌面客户端：完全离线跑开源模型，聊天、建知识库（LocalDocs）都不用联网，也不需要显卡（有显卡更快）。",
+    "en": "Desktop app from Nomic that runs open models fully offline — chat and build LocalDocs knowledge bases without any API calls; works on CPU, faster with a GPU."
+  },
+  "updatedAt": "2026-11-12T14:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "nomic-ai/gpt4all", "tag": "v3.10.0" }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (bundled Qt runtime)",
+      "supported": "not required (bundled Qt runtime)"
+    },
+    "disallowed": [],
+    "note": "Self-contained Qt desktop app (no system Node/Python). Requirements from official sources: Windows builds need Intel Core i3 2nd Gen / AMD Bulldozer or better (ARM build supports Snapdragon/SQ1/SQ2), installer controller enforces macOS 12.6+ / Ubuntu 22.04+ (installer_control.qs, measured from source); docs list macOS 12.6+."
+  },
+  "packages": [
+    {
+      "id": "gpt4all-win-x64",
+      "name": "GPT4All Windows installer (x64)",
+      "kind": "app",
+      "version": "3.10.0",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "e284f2d72cf0026dc49c3dce8b5f1a19c088737b36e37bc8e0d48b668926ef52",
+      "sizeBytes": 744456856,
+      "hashSource": "GitHub release asset ships no digest field — full local download and sha256 measured (2026-11-12)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-v3.10.0.exe",
+          "region": "global",
+          "operator": "nomic-ai",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-v3.10.0.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-v3.10.0.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "& \"$env:USERPROFILE\\.aibox\\cache\\downloads\\gpt4all-installer-win64-v3.10.0.exe\" --silent"
+        ],
+        "notes": "Qt Installer Framework silent mode (`--silent`, official Qt IFW CLI). Default target directory is @HomeDir@\\gpt4all = %USERPROFILE%\\gpt4all (cpack_config.cmake, measured from source) — per-user, no admin needed; binary lands in %USERPROFILE%\\gpt4all\\bin\\chat.exe. TODO real-machine verification of --silent behavior and elevation prompt.",
+        "probe": {
+          "cmd": "\"%USERPROFILE%\\gpt4all\\bin\\chat.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "gpt4all-win-arm64",
+      "name": "GPT4All Windows installer (ARM64)",
+      "kind": "app",
+      "version": "3.10.0",
+      "platforms": ["windows"],
+      "arch": "arm64",
+      "sha256": "2b5a0486f12bbac232352e393b60b98ff94d924ffee66365fc71071aec42b9be",
+      "sizeBytes": 318116056,
+      "hashSource": "GitHub release asset ships no digest field — full local download and sha256 measured (2026-11-12)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-arm-v3.10.0.exe",
+          "region": "global",
+          "operator": "nomic-ai",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-arm-v3.10.0.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-win64-arm-v3.10.0.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "& \"$env:USERPROFILE\\.aibox\\cache\\downloads\\gpt4all-installer-win64-arm-v3.10.0.exe\" --silent"
+        ],
+        "notes": "Same Qt IFW silent mode and per-user default target as x64. Supports Qualcomm Snapdragon / Microsoft SQ1/SQ2 (README). TODO real-machine verification.",
+        "probe": {
+          "cmd": "\"%USERPROFILE%\\gpt4all\\bin\\chat.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "gpt4all-mac",
+      "name": "GPT4All macOS dmg",
+      "kind": "app",
+      "version": "3.10.0",
+      "platforms": ["macos"],
+      "arch": "universal",
+      "sha256": "d0d98ab465de516af6d50fc013abbf9a8967274f2d171bbf69198873ce255b5f",
+      "sizeBytes": 319600812,
+      "hashSource": "GitHub release asset ships no digest field — full local download and sha256 measured (2026-11-12)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-macos-v3.10.0.dmg",
+          "region": "global",
+          "operator": "nomic-ai",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-macos-v3.10.0.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/nomic-ai/gpt4all/releases/download/v3.10.0/gpt4all-installer-macos-v3.10.0.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/gpt4all-installer-macos-v3.10.0.dmg\"; A=$(find \"$M\" -maxdepth 2 -name '*.app' -type d | head -1); \"$A\"/Contents/MacOS/* --silent; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg contains the Qt IFW installer app; running its binary with --silent performs the non-interactive install. Source evidence (cmake cpack_config + component qs): target = /Applications/gpt4all (bin/gpt4all.app) plus symlink /Applications/GPT4All.app. TODO macOS real-machine verification (actual bundle name inside the dmg, Gatekeeper, --silent acceptance).",
+        "probe": {
+          "cmd": "/Applications/GPT4All.app/Contents/MacOS/gpt4all --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official direct install (GitHub Releases)",
+      "steps": ["gpt4all-win-x64", "gpt4all-mac"],
+      "note": "Installer route: Windows runs the Qt IFW installer in silent mode into %USERPROFILE%\\gpt4all (per-user, no admin), macOS mounts the dmg and runs the bundled installer; steps contain both platform packages and are filtered by machine arch (arm64 machines pick the -arm variant)."
+    },
+    "proxy-install": {
+      "label": "CN accelerated install (ghfast/gh-proxy channels)",
+      "steps": ["gpt4all-win-x64", "gpt4all-mac"],
+      "note": "Same packages; the download layer prefers proxy channels in CN and falls back to direct automatically."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's assets (2026-11-12)"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's assets (2026-11-12)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "local": {
+      "label": "Local models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/.config/gpt4all/gpt4all.json5",
+      "recommendedModels": [
+        { "id": "llama-3.1-8b-instruct", "name": "Llama 3.1 8B Instruct", "note": "Official quickstart recommendation", "priceHint": "free" },
+        { "id": "deepseek-r1-distill", "name": "DeepSeek R1 Distill", "note": "Reasoning distillations supported since 3.10", "priceHint": "free" }
+      ],
+      "notes": "GPT4All's core path is local inference — download models in the app (Chats → Load Default Model / Models page). configTarget is AiBOX's CONFIG write location (default ~/.config/<appId>/<appId>.json5), not a GPT4All-native file; the app itself keeps settings in its user data dir (%LOCALAPPDATA%\\nomic.ai\\GPT4All, official docs), macOS: ~/Library/Application Support/nomic.ai/GPT4All. TODO real-machine confirmation."
+    },
+    "openai": {
+      "label": "Remote models — OpenAI / Groq / Mistral (v3.10+)",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/.config/gpt4all/gpt4all.json5",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5-mini", "name": "GPT-5 mini", "note": "Cheap remote default", "priceHint": "low" }
+      ],
+      "notes": "Release notes for v3.10.0 add a dedicated remote-provider tab (Groq, OpenAI, Mistral) in the Add Model page — keys are entered in the app UI (settings persistence lives in the app's user data dir / OS settings store, not a plain file AiBOX can write). configTarget is the AiBOX CONFIG write location for this app id; TODO real-machine confirmation of where GPT4All persists keys."
+    }
+  },
+  "deepLinks": {
+    "console": "https://gpt4all.io",
+    "docs": "https://docs.gpt4all.io",
+    "tutorial": "https://docs.gpt4all.io/gpt4all_desktop/quickstart.html"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%USERPROFILE%\\gpt4all\\bin\\chat.exe\" --version",
+        "expect": "(\\d+\\.\\d+\\.\\d+)"
+      },
+      "notes": "Check = local --version against the tag the daily probe records; upgrade = run the newer official installer over the existing install (same target directory), models and chats persist."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows: run the Qt IFW maintenance/uninstall tool inside %USERPROFILE%\\gpt4all (exact file name TODO real-machine confirmation), or delete the %USERPROFILE%\\gpt4all folder and the Start menu / desktop shortcuts",
+        "macOS: run the installer's maintenance tool or delete /Applications/gpt4all and the /Applications/GPT4All.app symlink",
+        "Optional: delete the data directory (see residualPaths) to remove models, chats and LocalDocs collections"
+      ],
+      "residualPaths": [
+        "~/gpt4all",
+        "~/AppData/Local/nomic.ai/GPT4All",
+        "~/Library/Application Support/nomic.ai/GPT4All"
+      ],
+      "notes": "Default install is per-user (@HomeDir@\\gpt4all), so no admin rights are needed to remove it; downloaded models can be several GB — keep them if you plan to reinstall."
+    },
+    "dataPaths": [
+      "~/gpt4all",
+      "~/AppData/Local/nomic.ai/GPT4All",
+      "~/Library/Application Support/nomic.ai/GPT4All"
+    ],
+    "risk": {
+      "onUninstall": "Downloaded models (often many GB), chat history and LocalDocs collections are stored in the data directory and are deleted with it — move them aside or back up before wiping. / 已下载的模型（常常好几个 GB）、聊天记录与 LocalDocs 知识库都存在数据目录里，清理即删除——请先挪走或备份。",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

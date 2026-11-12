@@ -1,0 +1,217 @@
+{
+  "id": "llamafile",
+  "name": "llamafile",
+  "version": "0.10.6",
+  "description": {
+    "zh-CN": "Mozilla 出品的单文件 LLM 运行器：一个可执行文件直接跑本地大模型，零安装、免配置；配一个 GGUF 权重文件就是一个完整离线聊天服务。",
+    "en": "Single-file LLM runner from Mozilla — one executable runs local models with zero installation; pair it with a GGUF weights file and you have a full offline chat server."
+  },
+  "updatedAt": "2026-11-12T14:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "mozilla-ai/llamafile", "tag": "0.10.6" }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (self-contained executable)",
+      "supported": "not required (self-contained executable)"
+    },
+    "disallowed": [],
+    "note": "One self-contained executable (llama.cpp + Cosmopolitan Libc), no installation. Requirements from official docs (docs.mozilla.ai/llamafile/reference/support): Windows 10+ AMD64 only (x86 CPU needs AVX), macOS 12+ / kernel 23.1 (GPU backend only on Apple Silicon), ARM64 CPUs need ARMv8a. Windows limits executables to 4GB, so use the runner with an external GGUF for large models."
+  },
+  "packages": [
+    {
+      "id": "llamafile-win",
+      "name": "llamafile single-file runner",
+      "kind": "app",
+      "version": "0.10.6",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "d579f61dcd3a306f518e6d90e599d77793ed5f09543023d09c96ad35fcfa63f0",
+      "sizeBytes": 368094430,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/mozilla-ai/llamafile/releases/download/0.10.6/llamafile-0.10.6",
+          "region": "global",
+          "operator": "mozilla-ai",
+          "note": "GitHub Releases direct (daily CI HEAD). Single asset shared by all platforms."
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/mozilla-ai/llamafile/releases/download/0.10.6/llamafile-0.10.6",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/mozilla-ai/llamafile/releases/download/0.10.6/llamafile-0.10.6",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "$d=\"$env:LOCALAPPDATA\\Programs\\Llamafile\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Copy-Item \"$env:USERPROFILE\\.aibox\\cache\\downloads\\llamafile-0.10.6\" \"$d\\llamafile.exe\" -Force"
+        ],
+        "notes": "Copies the hash-verified runner into the user's own directory and renames it to llamafile.exe (Windows requires the .exe extension, official README) — no installer, no admin. Use it with any external GGUF: .\\llamafile.exe -m model.gguf. TODO real-machine verification.",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\Llamafile\\llamafile.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "llamafile-mac",
+      "name": "llamafile single-file runner",
+      "kind": "app",
+      "version": "0.10.6",
+      "platforms": ["macos"],
+      "arch": "universal",
+      "sha256": "d579f61dcd3a306f518e6d90e599d77793ed5f09543023d09c96ad35fcfa63f0",
+      "sizeBytes": 368094430,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/mozilla-ai/llamafile/releases/download/0.10.6/llamafile-0.10.6",
+          "region": "global",
+          "operator": "mozilla-ai",
+          "note": "GitHub Releases direct (daily CI HEAD). Same asset as Windows — one file serves every supported OS/CPU (official docs)."
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/mozilla-ai/llamafile/releases/download/0.10.6/llamafile-0.10.6",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/mozilla-ai/llamafile/releases/download/0.10.6/llamafile-0.10.6",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; mkdir -p /Applications/Llamafile; cp \"$HOME/.aibox/cache/downloads/llamafile-0.10.6\" /Applications/Llamafile/llamafile; chmod +x /Applications/Llamafile/llamafile"
+        ],
+        "notes": "Copies the hash-verified runner into /Applications/Llamafile and chmod +x (official README: grant execute permission once). No installer, no admin. Run with external weights: /Applications/Llamafile/llamafile -m model.gguf. TODO real-machine verification (Gatekeeper/quarantine on first run).",
+        "probe": {
+          "cmd": "/Applications/Llamafile/llamafile --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official direct install (GitHub release asset)",
+      "steps": ["llamafile-win", "llamafile-mac"],
+      "note": "Downloads the single-file runner and places it in a user directory (Windows) or /Applications/Llamafile (macOS); steps contain both platform packages and are filtered by machine arch."
+    },
+    "proxy-install": {
+      "label": "CN accelerated install (ghfast/gh-proxy channels)",
+      "steps": ["llamafile-win", "llamafile-mac"],
+      "note": "Same packages; the download layer prefers proxy channels in CN and falls back to direct automatically."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's asset (2026-11-12)"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's asset (2026-11-12)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "local": {
+      "label": "Local GGUF models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/.config/llamafile/llamafile.json5",
+      "recommendedModels": [
+        { "id": "Qwen3.5-0.8B-Q8_0", "name": "Qwen3.5 0.8B (official quickstart llamafile)", "note": "Smallest official pre-built, runs out of the box", "priceHint": "free" },
+        { "id": "gpt-oss-20b-Q5_K_S", "name": "GPT-OSS 20B (external GGUF)", "note": "Strong chat via -m, needs ~16GB RAM", "priceHint": "free" }
+      ],
+      "notes": "llamafile itself has no key configuration — models come either as pre-built .llamafile files (download & run) or as external GGUF via -m (official quickstart). configTarget is AiBOX's CONFIG write location (default ~/.config/<appId>/<appId>.json5), not a llamafile-native file; TODO real-machine confirmation."
+    }
+  },
+  "deepLinks": {
+    "console": "http://localhost:8080/",
+    "docs": "https://docs.mozilla.ai/llamafile",
+    "tutorial": "https://docs.mozilla.ai/llamafile/getting-started/quickstart"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "/Applications/Llamafile/llamafile --version",
+        "expect": "(\\d+\\.\\d+\\.\\d+)"
+      },
+      "notes": "Check = local --version against the tag the daily probe records; upgrade = re-run the install route (it overwrites the single file in place)."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows: delete %LOCALAPPDATA%\\Programs\\Llamafile (contains llamafile.exe)",
+        "macOS: delete /Applications/Llamafile",
+        "Optional: remove ~/.llamafile (GPU backend libraries cached there) and any .llamafile/GGUF model files you downloaded — these are yours to keep if you want to reinstall later"
+      ],
+      "residualPaths": [
+        "~/.llamafile",
+        "~/AppData/Local/Programs/Llamafile"
+      ],
+      "notes": "Models are usually stored wherever you downloaded them (outside these paths); check ~/.llamafile — versioned GPU libraries live there (official docs). No system services, no background daemons."
+    },
+    "dataPaths": [
+      "~/.llamafile",
+      "~/AppData/Local/Programs/Llamafile"
+    ],
+    "risk": {
+      "onUninstall": "The runner and any model files you kept in its folders are deleted, and cached GPU libraries under ~/.llamafile are removed — move your .llamafile/GGUF models somewhere safe first. / 运行器与放在其目录里的模型文件会被删除，~/.llamafile 下的 GPU 库缓存也会清掉——请先把 .llamafile/GGUF 模型挪到安全位置。",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

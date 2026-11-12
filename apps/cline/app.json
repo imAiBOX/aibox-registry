@@ -1,0 +1,251 @@
+{
+  "id": "cline",
+  "name": "Cline",
+  "version": "4.1.26",
+  "description": {
+    "zh-CN": "开源的 IDE 编码代理：在 VS Code 里改文件、跑命令、开浏览器，每一步都要你点头；支持自带 Key、Cline 云端模型或本地开源模型。",
+    "en": "Open-source coding agent for your IDE — edits files, runs commands and browses the web in VS Code, with human approval at every step; bring your own API key, use Cline's cloud models, or point it at local open-weight models."
+  },
+  "updatedAt": "2026-11-12T14:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "cline/cline", "tag": "v4.1.26" }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": "not required (runs inside VS Code's extension host)",
+      "supported": "not required (runs inside VS Code's extension host)"
+    },
+    "disallowed": [],
+    "note": "Hard prerequisite: Visual Studio Code >= 1.101.0 (vsix engines field, measured from the shipped extension/package.json). The AiBOX route calls the `code` CLI — on macOS run VS Code's \"Shell Command: Install 'code' command in PATH\" once; if VS Code is missing, use the manual Marketplace route instead (zero admin). Cursor/Windsurf/VSCodium install the same extension from Open VSX (official docs)."
+  },
+  "packages": [
+    {
+      "id": "cline-win",
+      "name": "Cline VS Code extension (VSIX)",
+      "kind": "app",
+      "version": "4.1.26",
+      "platforms": ["windows"],
+      "arch": "any",
+      "sha256": "d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d",
+      "sizeBytes": 13908315,
+      "hashSource": "GitHub API releases/latest asset digest + local full download sha256 (identical, 2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "region": "global",
+          "operator": "cline",
+          "note": "GitHub Releases direct (daily CI HEAD). Official release asset published with each version."
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "code --install-extension \"$env:USERPROFILE\\.aibox\\cache\\downloads\\cline-4.1.26.vsix\" --force"
+        ],
+        "notes": "Installs the hash-verified VSIX through VS Code's own CLI (`code --install-extension`), the same mechanism the Marketplace uses — per-user, zero admin. Prerequisites: VS Code installed and `code` on PATH (Windows default). TODO real-machine verification.",
+        "probe": {
+          "cmd": "code --list-extensions --show-versions",
+          "expect": "saoudrizwan\\.claude-dev@\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "cline-mac",
+      "name": "Cline VS Code extension (VSIX)",
+      "kind": "app",
+      "version": "4.1.26",
+      "platforms": ["macos"],
+      "arch": "any",
+      "sha256": "d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d",
+      "sizeBytes": 13908315,
+      "hashSource": "GitHub API releases/latest asset digest + local full download sha256 (identical, 2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "region": "global",
+          "operator": "cline",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/cline-4.1.26.vsix\" --force"
+        ],
+        "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin. TODO real-machine verification.",
+        "probe": {
+          "cmd": "code --list-extensions --show-versions",
+          "expect": "saoudrizwan\\.claude-dev@\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official direct install (GitHub release VSIX)",
+      "steps": ["cline-win", "cline-mac"],
+      "note": "Downloads the official VSIX and installs it with `code --install-extension`; steps contain both platform packages and are filtered by machine arch."
+    },
+    "proxy-install": {
+      "label": "CN accelerated install (ghfast/gh-proxy channels)",
+      "steps": ["cline-win", "cline-mac"],
+      "note": "Same packages; the download layer prefers proxy channels in CN and falls back to direct automatically."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's VSIX asset (2026-11-12)"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's VSIX asset (2026-11-12)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "anthropic": {
+      "label": "Anthropic official API (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced everyday default", "priceHint": "medium" },
+        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "Fast and cheap for small edits", "priceHint": "low" }
+      ],
+      "notes": "Keys are stored by Cline inside VS Code's SecretStorage (encrypted, extension-owned) and are pasted in the Cline sidebar — AiBOX cannot write them to disk. configTarget points at the extension's globalStorage directory (official VS Code convention; macOS: ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev); exact file layout TODO real-machine verification."
+    },
+    "openai": {
+      "label": "OpenAI official API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong on complex tasks", "priceHint": "medium" }
+      ],
+      "notes": "Same storage model as anthropic (SecretStorage, UI entry only)."
+    },
+    "openrouter": {
+      "label": "OpenRouter (one key, every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+      ],
+      "notes": "Same storage model as anthropic (SecretStorage, UI entry only)."
+    },
+    "ollama": {
+      "label": "Local Ollama models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
+      "recommendedModels": [
+        { "id": "qwen2.5-coder:7b", "name": "Qwen2.5 Coder 7B", "note": "Good free coding model, 8GB RAM", "priceHint": "free" },
+        { "id": "llama3.2:3b", "name": "Llama 3.2 3B", "note": "Low-spec starter", "priceHint": "free" }
+      ],
+      "notes": "Cline can point at a local Ollama endpoint (official docs list Ollama among supported backends); no key involved. Endpoint is configured in the Cline sidebar."
+    }
+  },
+  "deepLinks": {
+    "console": "https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev",
+    "docs": "https://docs.cline.bot",
+    "tutorial": "https://docs.cline.bot/getting-started/installing-cline"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "code --list-extensions --show-versions",
+        "expect": "saoudrizwan\\.claude-dev@\\d+\\.\\d+\\.\\d+"
+      },
+      "notes": "Check = local `code --list-extensions --show-versions` against the tag the daily probe records; upgrade = re-run the install route with the newer VSIX (`--force` overwrites), or just click Update in the Extensions panel."
+    },
+    "uninstall": {
+      "steps": [
+        "VS Code → Extensions (Ctrl/Cmd+Shift+X) → Cline → Uninstall, or run `code --uninstall-extension saoudrizwan.claude-dev`",
+        "Delete only the extension's own folder under ~/.vscode/extensions (name starts with saoudrizwan.claude-dev-) — other extensions live there too",
+        "API keys live in VS Code's credential store and are released when the extension is removed"
+      ],
+      "residualPaths": [
+        "~/.vscode/extensions",
+        "~/.vscode-oss/extensions"
+      ],
+      "notes": "Only the saoudrizwan.claude-dev-* subdirectory belongs to Cline; never delete the whole extensions directory. VSCodium uses ~/.vscode-oss. Project-side files (.clinerules, .cline/) are inside your repositories and untouched."
+    },
+    "dataPaths": [
+      "~/.vscode/extensions",
+      "~/.vscode-oss/extensions"
+    ],
+    "risk": {
+      "onUninstall": "Task history, checkpoints and extension settings stored under the Cline extension folder are deleted, and API keys held in VS Code's credential store are released — export/backup anything you need first. / 删除会连同 Cline 的任务历史、检查点与扩展设置一并清除，VS Code 凭据库中的 Key 也会失效——请先备份需要的内容。",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

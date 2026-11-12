@@ -1,6 +1,6 @@
 {
-  "registryVersion": "2026.11.12.1",
-  "generatedAt": "2026-11-12T12:30:00Z",
+  "registryVersion": "2026.11.12.2",
+  "generatedAt": "2026-11-12T14:30:00Z",
   "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12 (see README).",
   "apps": [
     {
@@ -136,6 +136,66 @@
       "platforms": ["windows", "macos"],
       "status": "stable",
       "updatedAt": "2026-11-12T12:30:00Z"
+    },
+    {
+      "id": "cline",
+      "name": "Cline",
+      "category": "coding",
+      "tagline": {
+        "zh-CN": "VS Code 里的开源编码代理：改文件、跑命令，每一步你点头",
+        "en": "Open-source coding agent inside VS Code — edits files and runs commands, with your approval at every step"
+      },
+      "icon": "icons/cline.png",
+      "difficulty": 2,
+      "popularity": 4,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-12T14:30:00Z"
+    },
+    {
+      "id": "llamafile",
+      "name": "llamafile",
+      "category": "local-llm",
+      "tagline": {
+        "zh-CN": "单文件跑大模型：一个可执行文件零安装，离线免费",
+        "en": "Run an LLM from a single file — zero install, fully offline and free"
+      },
+      "icon": "icons/llamafile.png",
+      "difficulty": 2,
+      "popularity": 3,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-12T14:30:00Z"
+    },
+    {
+      "id": "anything-llm",
+      "name": "AnythingLLM",
+      "category": "knowledge",
+      "tagline": {
+        "zh-CN": "把文档变成私人知识库：拖入文件自动向量化，问答带出处",
+        "en": "Turn documents into a private knowledge base — answers cite their sources"
+      },
+      "icon": "icons/anything-llm.png",
+      "difficulty": 1,
+      "popularity": 4,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-12T14:30:00Z"
+    },
+    {
+      "id": "gpt4all",
+      "name": "GPT4All",
+      "category": "local-llm",
+      "tagline": {
+        "zh-CN": "完全离线的本地大模型客户端：聊天、建知识库都不联网",
+        "en": "Fully offline local LLM desktop app — chat and knowledge bases without any network"
+      },
+      "icon": "icons/gpt4all.png",
+      "difficulty": 1,
+      "popularity": 4,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-12T14:30:00Z"
     }
   ]
 }

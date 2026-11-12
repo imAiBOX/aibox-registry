@@ -1,0 +1,335 @@
+{
+  "id": "anything-llm",
+  "name": "AnythingLLM",
+  "version": "1.19.0",
+  "description": {
+    "zh-CN": "把任意文档变成私人知识库的桌面 AI 工作台：本地拖入文件自动向量化，聊天引用原文出处；内置本地模型引擎，也能接 OpenAI/Claude/开源模型的 Key。",
+    "en": "Desktop AI workspace that turns any documents into a private knowledge base — drop files in, they are vectorized automatically and answers cite their sources; ships with a built-in local model engine and can also use OpenAI/Claude/open-model API keys."
+  },
+  "updatedAt": "2026-11-12T14:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "Mintplex-Labs/anything-llm", "tag": "v1.19.0" }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (bundled runtime)",
+      "supported": "not required (bundled runtime)"
+    },
+    "disallowed": [],
+    "note": "Self-contained Electron desktop app (bundled runtime, no system Node). Windows 10+ x64/ARM64 (official docs target Windows Home/Pro, \"Current User\" install only — all-users installs are unsupported); macOS installers for Apple Silicon and Intel. During install it downloads the built-in LLM engine / GPU support files from the vendor CDN, so outbound network is needed."
+  },
+  "packages": [
+    {
+      "id": "anyllm-win-x64",
+      "name": "AnythingLLM Desktop Windows installer (x64)",
+      "kind": "app",
+      "version": "1.19.0",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "743d10ddf920087b46cd614cafd2e0e31550089405436f00cbd827c43ca4c90a",
+      "sizeBytes": 403299096,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.exe",
+          "region": "global",
+          "operator": "Mintplex-Labs",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "Official silent mode (docs.anythingllm.com installation-desktop/windows, available v1.16.1+): `AnythingLLMDesktop.exe /S` — always installs for the current user into %LOCALAPPDATA%\\Programs\\AnythingLLM (the only supported location), skips the ~2GB Meeting Assistant model. Add /DOWNLOAD_MODEL=yes only if you want that model. Engine/GPU support files are still fetched from the vendor CDN during install. TODO real-machine verification.",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\AnythingLLM\\AnythingLLMDesktop.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "anyllm-win-arm64",
+      "name": "AnythingLLM Desktop Windows installer (ARM64)",
+      "kind": "app",
+      "version": "1.19.0",
+      "platforms": ["windows"],
+      "arch": "arm64",
+      "sha256": "77130550a5dc647e54b05ee756c8e8dc94b6b13b01c698ac0979e97b32da0c0a",
+      "sizeBytes": 501534408,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop-Arm64.exe",
+          "region": "global",
+          "operator": "Mintplex-Labs",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop-Arm64.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop-Arm64.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "Same official silent mode as x64 (`/S`, current user, %LOCALAPPDATA%\\Programs\\AnythingLLM). TODO real-machine verification.",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\AnythingLLM\\AnythingLLMDesktop.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "anyllm-mac-arm64",
+      "name": "AnythingLLM macOS dmg (Apple Silicon)",
+      "kind": "app",
+      "version": "1.19.0",
+      "platforms": ["macos"],
+      "arch": "arm64",
+      "sha256": "0498b5d929aa7776a30f453d2a3a16fe172a9d63e149e67d224d2630c88e7dd5",
+      "sizeBytes": 584275091,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop-Silicon.dmg",
+          "region": "global",
+          "operator": "Mintplex-Labs",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop-Silicon.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop-Silicon.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/AnythingLLMDesktop-Silicon.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg mount + copy AnythingLLM.app into /Applications + detach (official docs: drag the AnythingLLM logo into Applications; brew: install --cask anythingllm). TODO macOS real-machine verification (Gatekeeper/quarantine, mount cleanup).",
+        "probe": {
+          "cmd": "/Applications/AnythingLLM.app/Contents/MacOS/AnythingLLM --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "anyllm-mac-x64",
+      "name": "AnythingLLM macOS dmg (Intel)",
+      "kind": "app",
+      "version": "1.19.0",
+      "platforms": ["macos"],
+      "arch": "x64",
+      "sha256": "7f6ec04b07559178cd749d9ef6cb3ef04e960b676e155c42d3dcb12fa13451b4",
+      "sizeBytes": 550006618,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.dmg",
+          "region": "global",
+          "operator": "Mintplex-Labs",
+          "note": "GitHub Releases direct (daily CI HEAD)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/Mintplex-Labs/anything-llm/releases/download/v1.19.0/AnythingLLMDesktop.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/AnythingLLMDesktop.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "Same dmg mount + copy as arm64. TODO macOS real-machine verification.",
+        "probe": {
+          "cmd": "/Applications/AnythingLLM.app/Contents/MacOS/AnythingLLM --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official direct install (GitHub Releases)",
+      "steps": ["anyllm-win-x64", "anyllm-mac-arm64"],
+      "note": "Installer route: Windows runs the official NSIS silent mode (/S, current user), macOS mounts the dmg and copies AnythingLLM.app; steps contain both platform packages and are filtered by machine arch (arm64 machines pick the -Arm64/-Silicon variants)."
+    },
+    "proxy-install": {
+      "label": "CN accelerated install (ghfast/gh-proxy channels)",
+      "steps": ["anyllm-win-x64", "anyllm-mac-arm64"],
+      "note": "Same packages; the download layer prefers proxy channels in CN and falls back to direct automatically."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's Windows x64 asset (2026-11-12)"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's Windows x64 asset (2026-11-12)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "openrouter": {
+      "label": "OpenRouter (one key, every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+      ],
+      "notes": "Keys are entered in the app UI (Settings → AI Providers) and persisted by AnythingLLM into its SQLite store under the official data directory (docs installation-desktop/storage) — AiBOX cannot inject them directly. configTarget points at that store (macOS: ~/Library/Application Support/anythingllm-desktop/anythingllm.db)."
+    },
+    "anthropic": {
+      "label": "Anthropic official API (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced default", "priceHint": "medium" }
+      ],
+      "notes": "Same storage model as openrouter (app UI entry, SQLite store)."
+    },
+    "openai": {
+      "label": "OpenAI official API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong default", "priceHint": "medium" }
+      ],
+      "notes": "Same storage model as openrouter (app UI entry, SQLite store)."
+    },
+    "ollama": {
+      "label": "Local models — built-in engine or Ollama (free, offline)",
+      "authType": "local",
+      "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "recommendedModels": [
+        { "id": "built-in-llama", "name": "Built-in local engine (Lemonade / llama.cpp)", "note": "Zero setup, downloaded during install", "priceHint": "free" },
+        { "id": "qwen2.5:7b", "name": "Qwen2.5 7B via Ollama", "note": "Good Chinese, 8GB RAM", "priceHint": "free" }
+      ],
+      "notes": "Desktop includes a built-in local LLM engine (Lemonade + llama.cpp; GPU support files pulled from the vendor CDN during install) and can also connect to an external Ollama instance (official docs; auto-detected). No key required."
+    }
+  },
+  "deepLinks": {
+    "console": "https://anythingllm.com",
+    "docs": "https://docs.anythingllm.com",
+    "tutorial": "https://docs.anythingllm.com/installation-desktop/overview"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%LOCALAPPDATA%\\Programs\\AnythingLLM\\AnythingLLMDesktop.exe\" --version",
+        "expect": "(\\d+\\.\\d+\\.\\d+)"
+      },
+      "notes": "Check = local --version vs the tag the daily probe records; upgrade = download the newer official installer and run it over the existing one (in-app update banner also offers the download), storage and workspaces persist."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows (official silent flags): run \"Uninstall AnythingLLM.exe /S\" from %LOCALAPPDATA%\\Programs\\AnythingLLM — keeps all data; add /DELETE_DATA=yes only if you want to wipe everything",
+        "macOS: quit the app and drag AnythingLLM.app to the Trash (or `brew uninstall --cask anythingllm`; add --zap to also delete app data)",
+        "To fully reset, delete the data directory (see residualPaths) — this removes workspaces, documents and chat history"
+      ],
+      "residualPaths": [
+        "~/AppData/Roaming/anythingllm-desktop",
+        "~/AppData/Local/Programs/AnythingLLM",
+        "~/Library/Application Support/anythingllm-desktop"
+      ],
+      "notes": "Uninstalling the app does NOT delete the data directory by default (official uninstall docs); /DELETE_DATA=yes or manual deletion of %APPDATA%\\anythingllm-desktop is irreversible."
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/anythingllm-desktop",
+      "~/Library/Application Support/anythingllm-desktop"
+    ],
+    "risk": {
+      "onUninstall": "All workspaces, uploaded/parsed documents, the vector database, chat history and downloaded local models live in the data directory and are deleted with it — `/DELETE_DATA=yes` does this permanently. Back that folder up first. / 所有工作区、已上传文档、向量库、聊天记录与本地下载模型都在数据目录里，删除即永久丢失——请先备份该文件夹。",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}
