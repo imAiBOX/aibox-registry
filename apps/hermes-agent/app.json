@@ -64,8 +64,8 @@
       "version": "0.23.1",
       "platforms": ["macos"],
       "arch": "any",
-      "sha256": "abf338605dae6dd28d101673ac6aed7995c955745db46d47676bc591a7957209",
-      "sizeBytes": 66864,
+      "sha256": "50348fcc95e934d2f92b493b40fa2a4f22d58237184ef88ed69ad395531f1ad4",
+      "sizeBytes": 67104,
       "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.sh full download sha256 measured locally (2026-11-12)",
       "channels": [
         {
