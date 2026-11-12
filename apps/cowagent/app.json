@@ -1,0 +1,288 @@
+{
+  "id": "cowagent",
+  "name": "CowAgent",
+  "version": "2.2.2",
+  "description": {
+    "zh-CN": "中文圈开源个人 AI 助手与 Agent 底座（前 chatgpt-on-wechat）：桌面客户端开箱即用，网页控制台一站式聊天、连接微信/Telegram/Discord 等渠道、一键安装技能；模型随便换（OpenAI、Claude、Gemini、DeepSeek、通义……）。",
+    "en": "Open-source personal AI assistant and agent harness from the Chinese dev community (formerly chatgpt-on-wechat): a ready-to-run desktop client plus a one-stop web console for chatting, connecting channels (WeChat, Telegram, Discord…) and one-click skills; swap models freely (OpenAI, Claude, Gemini, DeepSeek, Qwen…)."
+  },
+  "updatedAt": "2026-11-12T12:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "zhayujie/CowAgent", "tag": "2.2.2" }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (bundled runtime)",
+      "supported": "not required (bundled runtime)"
+    },
+    "disallowed": [],
+    "note": "Desktop client: Electron shell + PyInstaller Python backend bundled inside the app — no system Python/Node for the GUI route. The alternative one-line service installer (manual route in the guide) needs Python 3.7+ and installs into a folder of your choice."
+  },
+  "packages": [
+    {
+      "id": "cowagent-win-x64",
+      "name": "CowAgent Windows installer (x64)",
+      "kind": "app",
+      "version": "2.2.2",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "d856cdc10cf172cc84603754d26de8bbae6c374fdec16eeb9a4a945cc0bf408d",
+      "sizeBytes": 189761792,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-Setup-2.2.2-x64.exe",
+          "region": "global",
+          "operator": "zhayujie",
+          "note": "Official GitHub Releases installer (daily probe HEAD + Content-Length). A separate CowAgent-Setup-2.2.2-win7-x64.exe exists for Windows 7 and is intentionally not routed."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-Setup-2.2.2-x64.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 189761792 identical)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-Setup-2.2.2-x64.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 189761792 identical)"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "electron-builder NSIS (desktop/electron-builder.js: oneClick false, perMachine false, artifactName CowAgent-Setup-*) → standard NSIS silent flag /S; default install dir %LOCALAPPDATA%\\Programs\\CowAgent (per-user, no admin; directory is changeable in the interactive installer). Signed build. TODO real-machine verification of /S behavior and exact install path.",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\CowAgent\\CowAgent.exe\" --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "cowagent-mac-arm64",
+      "name": "CowAgent macOS dmg (Apple Silicon)",
+      "kind": "app",
+      "version": "2.2.2",
+      "platforms": ["macos"],
+      "arch": "arm64",
+      "sha256": "c3af5a167b18fe132cbd5f59919dba6c43120a353b10572fd1c8fc0aa95a75cf",
+      "sizeBytes": 228228555,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-arm64.dmg",
+          "region": "global",
+          "operator": "zhayujie",
+          "note": "Official per-arch dmg (daily probe HEAD + Content-Length)."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-arm64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 228228555 identical)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-arm64.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 228228555 identical)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/CowAgent-2.2.2-arm64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg mount + copy .app + unmount (same convention as other desktop apps). If /Applications is not writable for the current (non-admin) account, fall back to ~/Applications — manual route in the guide. Upstream builds are notarized Electron dmgs. TODO macOS real-machine verification (Gatekeeper/quarantine, mount cleanup).",
+        "probe": {
+          "cmd": "/Applications/CowAgent.app/Contents/MacOS/CowAgent --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "cowagent-mac-x64",
+      "name": "CowAgent macOS dmg (Intel)",
+      "kind": "app",
+      "version": "2.2.2",
+      "platforms": ["macos"],
+      "arch": "x64",
+      "sha256": "12aa29e2ab35524f17c95f8cf50b8e7ef1c164ac86998ab62f34535e8eecb902",
+      "sizeBytes": 239855555,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-x64.dmg",
+          "region": "global",
+          "operator": "zhayujie",
+          "note": "Official per-arch dmg (daily probe HEAD + Content-Length)."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-x64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 239855555 identical)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-x64.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 239855555 identical)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/CowAgent-2.2.2-x64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "Intel build of the same release; identical dmg flow. Use ~/Applications manually if /Applications is not writable. TODO macOS real-machine verification.",
+        "probe": {
+          "cmd": "/Applications/CowAgent.app/Contents/MacOS/CowAgent --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official desktop installers (GitHub Releases)",
+      "steps": ["cowagent-win-x64", "cowagent-mac-arm64", "cowagent-mac-x64"],
+      "note": "Three platform packages; PLAN filters steps by machine (Windows x64 / macOS Apple Silicon / macOS Intel). The one-line server installer is documented as the manual route in the guide."
+    },
+    "proxy-install": {
+      "label": "China-accelerated install (gh-proxy / ghfast channels)",
+      "steps": ["cowagent-win-x64", "cowagent-mac-arm64", "cowagent-mac-x64"],
+      "note": "Same packages; in the CN region the download layer prefers accelerator channels and falls back to direct automatically (both gateways measured 200 / identical size on 2026-11-12)."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata (S2/S4).",
+    "proxyGateways": [
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T12:30:00Z",
+        "note": "2026-11-12 measured 200 with identical size on all three CowAgent release assets; used as this app's CN channel."
+      },
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T12:30:00Z",
+        "note": "2026-11-12 measured 200 with identical size on all three CowAgent release assets; used as this app's CN channel."
+      }
+    ]
+  },
+  "modelProviders": {
+    "openai": {
+      "label": "OpenAI",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Roaming/CowAgent/config.json",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-6.1-terra", "name": "GPT-6.1 Terra", "note": "OpenAI flagship per the official model table (chat + vision + tools)", "priceHint": "higher" },
+        { "id": "gpt-6.1-sol", "name": "GPT-6.1 Sol", "note": "Lighter OpenAI option", "priceHint": "medium" }
+      ],
+      "notes": "Configured in the web console (Settings → Models) — no manual file editing. configTarget is the desktop client's Electron userData path (inferred; TODO real-machine confirmation). The one-line service route keeps config.json in its install folder instead."
+    },
+    "anthropic": {
+      "label": "Anthropic (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Roaming/CowAgent/config.json",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-opus-5-5", "name": "Claude Opus 5.5", "note": "Top Claude tier per the official model table", "priceHint": "higher" },
+        { "id": "claude-sonnet-5-5", "name": "Claude Sonnet 5.5", "note": "Balanced Claude tier", "priceHint": "medium" }
+      ],
+      "notes": "Same console-configured path as openai; model ids follow the official provider table in the README."
+    },
+    "google": {
+      "label": "Google (Gemini)",
+      "authType": "api-key",
+      "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
+      "configTarget": "~/AppData/Roaming/CowAgent/config.json",
+      "getKeyUrl": "https://aistudio.google.com/apikey",
+      "recommendedModels": [
+        { "id": "gemini-4-argon", "name": "Gemini 4 Argon", "note": "Google flagship per the official model table", "priceHint": "medium" }
+      ],
+      "notes": "Same console-configured path; vision and chat routes can be split per feature in the console."
+    },
+    "custom": {
+      "label": "Custom / local OpenAI-compatible endpoint",
+      "authType": "local",
+      "configTarget": "~/AppData/Roaming/CowAgent/config.json",
+      "notes": "The official model table lists a Custom row for local models and third-party proxies (Ollama, vLLM…); pick it in the console and point it at your endpoint — no key needed for open local servers."
+    }
+  },
+  "deepLinks": {
+    "console": "http://localhost:9899/",
+    "docs": "https://github.com/zhayujie/CowAgent#readme",
+    "tutorial": "https://docs.cowagent.ai/guide/quick-start"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%LOCALAPPDATA%\\Programs\\CowAgent\\CowAgent.exe\" --version",
+        "expect": "\\d+\\.\\d+\\.\\d+"
+      },
+      "notes": "Check = local probe vs the upstream latest tag the daily probe records (releases/latest, measured by CI); upgrade = re-run the installer (NSIS overwrite install / dmg replace) or use the in-app update prompt. The one-line service route upgrades with `cow update`."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows: Settings → Apps → CowAgent → Uninstall (NSIS uninstaller, per-user)",
+        "macOS: quit CowAgent and move CowAgent.app to the Trash",
+        "Back up then remove the app data folder if you want a clean slate (chat records, model keys, skills live there)"
+      ],
+      "residualPaths": [
+        "~/AppData/Roaming/CowAgent",
+        "~/Library/Application Support/CowAgent"
+      ],
+      "notes": "Uninstalling the app does not delete user data by design — dataPaths above are removed manually after backup; the one-line service route additionally lives in its install folder (config.json + logs) which is deleted by removing that folder."
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/CowAgent",
+      "~/Library/Application Support/CowAgent"
+    ],
+    "risk": {
+      "onUninstall": "聊天记录、模型 API Key、已装技能等应用数据在系统应用数据目录里，卸载程序不会删它们，但手动清掉就找不回来了——请先备份 / Chat history, model API keys and installed skills live in the app data folder; the uninstaller keeps them, but deleting the folder loses them for good — back up first.",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

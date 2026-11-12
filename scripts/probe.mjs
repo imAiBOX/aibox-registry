@@ -210,7 +210,12 @@ for (const { dir, app } of apps) {
 let gatewayTarget = null;
 for (const { app } of apps) {
   for (const pkg of app.packages || []) {
-    const direct = (pkg.channels || []).find((c) => c.type === 'direct' && c.url.includes('github.com'));
+    // GitHub source archives redirect to codeload and answer HEAD without a
+    // Content-Length header — they can never prove gateway liveness, so
+    // prefer asset/release URLs when picking the shared probe target.
+    const direct = (pkg.channels || []).find(
+      (c) => c.type === 'direct' && c.url.includes('github.com') && !c.url.includes('/archive/')
+    );
     if (direct) { gatewayTarget = direct.url; break; }
   }
   if (gatewayTarget) break;

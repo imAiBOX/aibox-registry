@@ -68,7 +68,7 @@ Handling a version lag: CI detects a new upstream tag → PR updating app.json (
    `packages[]` (per-package sha256/sizeBytes measured from the upstream + channels), `routes`/`routePlans`,
    `modelProviders` (data-driven config paths), `maintenance`, `locales`.
 2. Add one entry to `index.json` `apps[]` (`id` must equal the directory name).
-3. Write a 3-5 step `apps/<new-id>/guides/{zh-cn,en}.md`.
+3. Write a full tutorial-level `apps/<new-id>/guides/{zh-cn,en}.md` (prepare / install / configure / verify / FAQ, in both languages).
 4. Locally run `npm install && npm test`, open a PR — CI runs schema/locale validation and the probe.
 5. Merge = live (website and installer hot-read this repo, no release needed).
 
@@ -78,6 +78,7 @@ Handling a version lag: CI detects a new upstream tag → PR updating app.json (
 - Node.js `v26.13.0` (recommended line): sha256 from the official `SHASUMS256.txt`, additionally **re-downloaded from direct + mirror** and compared.
 - GitHub release assets: sha256 taken from the **GitHub API release asset `digest` field**; all channels HEAD 200 with Content-Length equal to `sizeBytes`.
   (2026-11-11 batch: Ollama v0.40.16, Cherry Studio v2.2.0, Jan v0.8.8 — GitHub assets; Chatbox v1.24.3 ships on the vendor CDN since v1.21, so its three assets were **fully downloaded and hashed locally**, cross-checked against the official `latest.yml` sizes.)
+- 2026-11-12 additions: AiDog `v0.5.87` (tag source archive — full-download sha256 on direct + gh-proxy channels), Hermes Agent `v0.23.1` (official installer scripts, hashed on both endpoints), nanobot `v0.4.1` and CowAgent `2.2.2` (GitHub asset `digest` field; both gateways measured 200 / identical size on their assets).
 - Gateway baseline: `ghfast.top` / `gh-proxy.com` measured 200 (same size); failed candidates are recorded in `netConfig.retiredCandidates` and only re-admitted after a retest.
   Note: `ghfast.top` answered 403 for every `ollama/ollama` asset (measured 2026-11-11) — the Ollama profile therefore ships only the `gh-proxy` channel.
 

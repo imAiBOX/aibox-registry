@@ -28,7 +28,8 @@
           "name": { "type": "string", "minLength": 1 },
           "category": {
             "type": "string",
-            "enum": ["agent", "devtool", "productivity", "media", "utility", "other"]
+            "enum": ["agent", "chat", "local-llm", "coding", "devtool", "knowledge", "media", "automation", "productivity", "utility", "other"],
+            "description": "Taxonomy sized for 50-100 apps. agent — autonomous AI assistants/agents that run tasks for you; chat — desktop chat clients that converse with one or more LLMs; local-llm — local model runtimes and inference servers; coding — coding assistants and code-generation tools; devtool — developer tooling and build/infra utilities; knowledge — knowledge-base and RAG tools; media — image, audio and video creation; automation — workflow and task automation; productivity — office and personal-productivity suites; utility — general-purpose system and everyday utilities; other — fallback when nothing else fits."
           },
           "tagline": {
             "type": "object",

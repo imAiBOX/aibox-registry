@@ -1,0 +1,331 @@
+{
+  "id": "nanobot",
+  "name": "nanobot",
+  "version": "0.4.1",
+  "description": {
+    "zh-CN": "超轻量的开源个人 Agent（HKUDS）：浏览器 WebUI、终端 TUI、聊天渠道三种方式干活，会读写文件、记偏好、跑定时任务；Python 实现，配置与聊天记录都存在你自己电脑的 ~/.nanobot。",
+    "en": "Ultra-lightweight open-source personal agent (HKUDS): works from a browser WebUI, a terminal TUI or chat channels — reads and writes files, remembers preferences, runs scheduled tasks; pure Python, config and history stay in ~/.nanobot on your machine."
+  },
+  "updatedAt": "2026-11-12T12:30:00Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "HKUDS/nanobot",
+        "tag": "v0.4.1"
+      }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": "not required (Python project)",
+      "supported": "not required (Python project)"
+    },
+    "disallowed": [],
+    "note": "Python 3.11+ required (docs: \"You need Python 3.11 or newer\"). No system Node needed for daily use. Install target is a dedicated virtualenv at ~/.nanobot/venv — user-directory only, zero admin, mirrors the official installer's layout."
+  },
+  "packages": [
+    {
+      "id": "nanobot-win-x64",
+      "name": "nanobot Windows wheel (x64)",
+      "kind": "app",
+      "version": "0.4.1",
+      "platforms": [
+        "windows"
+      ],
+      "arch": "x64",
+      "sha256": "3b64980205d4ec688957f94861f5bd1fef9cda10830b68b4ad00c1b69272dd3e",
+      "sizeBytes": 63251352,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured); wheel is the platform build published for v0.4.1 (WebUI + native TUI bundled)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-win_amd64.whl",
+          "region": "global",
+          "operator": "HKUDS",
+          "note": "Official release asset (same bytes as the PyPI nanobot-ai wheel). Daily probe HEADs it and compares Content-Length."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-win_amd64.whl",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 63251352 identical)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-win_amd64.whl",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 63251352 identical)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "$v=\"$env:USERPROFILE\\.nanobot\\venv\"; if (!(Test-Path $v)) { py -3 -m venv $v }; & \"$v\\Scripts\\python\" -m pip install -q --upgrade pip; & \"$v\\Scripts\\python\" -m pip install -q \"$env:USERPROFILE\\.aibox\\cache\\downloads\\nanobot_ai-0.4.1-py3-none-win_amd64.whl\""
+        ],
+        "notes": "Mirrors the official installer's layout: dedicated virtualenv at ~/.nanobot/venv, installed from the hash-verified release wheel — no admin, no system pip (avoids PEP 668 issues). Prerequisite: Python 3.11+ (`py -3`) installed manually first; if absent, use the official one-liner route from the guide. Dependencies resolve from PyPI (pip); on CN networks a pip mirror can be set manually. TODO real-machine verification.",
+        "probe": {
+          "cmd": "\"%USERPROFILE%\\.nanobot\\venv\\Scripts\\nanobot.exe\" --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "nanobot-mac-arm64",
+      "name": "nanobot macOS wheel (Apple Silicon)",
+      "kind": "app",
+      "version": "0.4.1",
+      "platforms": [
+        "macos"
+      ],
+      "arch": "arm64",
+      "sha256": "62c74a28467f6516099af8aa02f2b110356ee4deff78da36955cfefc1fd3b678",
+      "sizeBytes": 44161781,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured); macosx_13_0_arm64 build of nanobot-ai 0.4.1",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-macosx_13_0_arm64.whl",
+          "region": "global",
+          "operator": "HKUDS",
+          "note": "Official release asset for Apple Silicon (macOS 13+). Daily probe HEADs it and compares Content-Length."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-macosx_13_0_arm64.whl",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 44161781 identical)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-macosx_13_0_arm64.whl",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 44161781 identical)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/nanobot_ai-0.4.1-py3-none-macosx_13_0_arm64.whl\""
+        ],
+        "notes": "Same layout as the official installer (~/.nanobot/venv) but installed from the hash-verified release wheel — user directory only, zero admin. Prerequisite: Python 3.11+ (`python3`) on the machine; otherwise use the official one-liner from the guide. TODO real-machine verification.",
+        "probe": {
+          "cmd": "~/.nanobot/venv/bin/nanobot --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "nanobot-mac-x64",
+      "name": "nanobot macOS wheel (Intel)",
+      "kind": "app",
+      "version": "0.4.1",
+      "platforms": [
+        "macos"
+      ],
+      "arch": "x64",
+      "sha256": "db7661aeae646a17374c5be1a422ec4eb4e5b802cabd1a229b3129dba5189267",
+      "sizeBytes": 46765483,
+      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured); macosx_13_0_x86_64 build of nanobot-ai 0.4.1",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-macosx_13_0_x86_64.whl",
+          "region": "global",
+          "operator": "HKUDS",
+          "note": "Official release asset for Intel Macs (macOS 13+). Daily probe HEADs it and compares Content-Length."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-macosx_13_0_x86_64.whl",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 46765483 identical)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/HKUDS/nanobot/releases/download/v0.4.1/nanobot_ai-0.4.1-py3-none-macosx_13_0_x86_64.whl",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub accelerator (2026-11-12 measured 200, size 46765483 identical)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/nanobot_ai-0.4.1-py3-none-macosx_13_0_x86_64.whl\""
+        ],
+        "notes": "Intel build of the same release; identical flow to the arm64 package (venv at ~/.nanobot/venv, hash-verified wheel, zero admin). TODO real-machine verification.",
+        "probe": {
+          "cmd": "~/.nanobot/venv/bin/nanobot --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official wheel install (GitHub release, direct)",
+      "steps": [
+        "nanobot-win-x64",
+        "nanobot-mac-arm64",
+        "nanobot-mac-x64"
+      ],
+      "note": "Three platform packages; PLAN filters steps by machine (Windows x64 / macOS arm64 / macOS Intel)."
+    },
+    "proxy-install": {
+      "label": "China-accelerated wheel install (gh-proxy / ghfast channels)",
+      "steps": [
+        "nanobot-win-x64",
+        "nanobot-mac-arm64",
+        "nanobot-mac-x64"
+      ],
+      "note": "Same packages; in the CN region the download layer prefers the accelerator channels and falls back to direct automatically (both gateways measured 200 / identical size on 2026-11-12)."
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata (S2/S4).",
+    "proxyGateways": [
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T12:30:00Z",
+        "note": "2026-11-12 measured 200 with identical size on all three nanobot wheel assets; used as this app's CN channel."
+      },
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T12:30:00Z",
+        "note": "2026-11-12 measured 200 with identical size on all three nanobot wheel assets; used as this app's CN channel."
+      }
+    ]
+  },
+  "modelProviders": {
+    "openai": {
+      "label": "OpenAI",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/.nanobot/config.json",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "note": "Flagship general model",
+          "priceHint": "higher"
+        }
+      ],
+      "notes": "Configure in WebUI Settings → Models (writes ~/.nanobot/config.json, docs/configuration.md). Any OpenAI-compatible endpoint works via the custom provider."
+    },
+    "anthropic": {
+      "label": "Anthropic (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/.nanobot/config.json",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Strong at agentic tool use",
+          "priceHint": "medium"
+        }
+      ],
+      "notes": "nanobot reads ANTHROPIC_API_KEY or stores the preset in ~/.nanobot/config.json (docs reference ANTHROPIC_API_KEY for deployments)."
+    },
+    "ollama": {
+      "label": "Local Ollama models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/.nanobot/config.json",
+      "getKeyUrl": "https://ollama.com/download",
+      "recommendedModels": [
+        {
+          "id": "qwen2.5:7b",
+          "name": "Qwen2.5 7B",
+          "note": "Good Chinese output, runs on 8 GB RAM",
+          "priceHint": "free"
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "note": "Entry level for low-spec machines",
+          "priceHint": "free"
+        }
+      ],
+      "notes": "Docs ship a dedicated Ollama provider recipe (docs/providers.md#ollama) plus any OpenAI-compatible local server (vLLM etc.)."
+    }
+  },
+  "deepLinks": {
+    "console": "http://127.0.0.1:8765/",
+    "docs": "https://github.com/HKUDS/nanobot/blob/main/docs/README.md",
+    "tutorial": "https://nanobot.wiki/docs/latest/getting-started/nanobot-overview"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%USERPROFILE%\\.nanobot\\venv\\Scripts\\nanobot.exe\" --version",
+        "expect": "\\d+\\.\\d+\\.\\d+"
+      },
+      "notes": "Check = local probe vs the upstream latest tag the daily probe records; upgrade = re-run the same install flow (pip installs the newer wheel into the same venv), matching the project's \"upgrade through your original installation method\" rule — stop the gateway first and back up ~/.nanobot."
+    },
+    "uninstall": {
+      "steps": [
+        "Stop the gateway (`gateway stop` or Ctrl+C in the launcher terminal)",
+        "Delete the install + data directory ~/.nanobot (venv, config.json, session history)",
+        "Optional: clear the pip download cache if you need the disk space"
+      ],
+      "residualPaths": [
+        "~/AppData/Local/pip/cache",
+        "~/.cache/pip",
+        "~/Library/Caches/pip"
+      ],
+      "notes": "Everything the product owns lives under ~/.nanobot; only generic pip caches can remain outside it."
+    },
+    "dataPaths": [
+      "~/.nanobot"
+    ],
+    "risk": {
+      "onUninstall": "~/.nanobot 里有你的模型 Key（config.json）、聊天记录（SQLite 会话历史）和工作区数据，删除后全部丢失——请先备份 / Your API keys (config.json), chat history (SQLite sessions) and workspace data live in ~/.nanobot — deleting it removes them all; back up first.",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

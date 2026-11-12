@@ -1,7 +1,7 @@
 {
-  "registryVersion": "2026.11.11.1",
-  "generatedAt": "2026-11-11T21:45:00Z",
-  "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/2026-11-11 (see README).",
+  "registryVersion": "2026.11.12.1",
+  "generatedAt": "2026-11-12T12:30:00Z",
+  "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12 (see README).",
   "apps": [
     {
       "id": "openclaw",
@@ -20,7 +20,7 @@
     {
       "id": "ollama",
       "name": "Ollama",
-      "category": "utility",
+      "category": "local-llm",
       "tagline": {
         "zh-CN": "本地跑开源大模型：一条命令下载即用，离线免费",
         "en": "Run open-source LLMs locally — one command to download, fully offline and free"
@@ -35,7 +35,7 @@
     {
       "id": "cherry-studio",
       "name": "Cherry Studio",
-      "category": "productivity",
+      "category": "chat",
       "tagline": {
         "zh-CN": "颜值在线的桌面 AI 工作台，一个客户端连多家模型",
         "en": "A polished desktop AI workspace that connects to many model providers"
@@ -50,7 +50,7 @@
     {
       "id": "chatbox",
       "name": "Chatbox",
-      "category": "productivity",
+      "category": "chat",
       "tagline": {
         "zh-CN": "轻量跨平台 AI 聊天客户端，对话数据存自己电脑",
         "en": "Lightweight cross-platform AI chat client — conversations stay on your machine"
@@ -65,7 +65,7 @@
     {
       "id": "jan",
       "name": "Jan",
-      "category": "utility",
+      "category": "chat",
       "tagline": {
         "zh-CN": "离线优先的本地 AI 工作台，数据留在自己电脑",
         "en": "Offline-first local AI workspace that keeps your data on your own computer"
@@ -76,6 +76,66 @@
       "platforms": ["windows", "macos"],
       "status": "stable",
       "updatedAt": "2026-11-11T21:45:00Z"
+    },
+    {
+      "id": "aidog",
+      "name": "AiDog",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "本地运行的个人 AI 伙伴：接 Telegram、飞书、钉钉，网页控制台自己管",
+        "en": "Self-hosted personal AI companion — talks to you on Telegram, Feishu and DingTalk, managed from a local web console"
+      },
+      "icon": "icons/aidog.png",
+      "difficulty": 4,
+      "popularity": 1,
+      "platforms": ["windows", "macos"],
+      "status": "experimental",
+      "updatedAt": "2026-11-12T12:30:00Z"
+    },
+    {
+      "id": "hermes-agent",
+      "name": "Hermes Agent",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "Nous Research 出品的开源个人 Agent：一条命令装好，终端里越用越懂你",
+        "en": "Open-source personal agent from Nous Research — one-command install, grows with you in your terminal"
+      },
+      "icon": "icons/hermes-agent.png",
+      "difficulty": 3,
+      "popularity": 5,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-12T12:30:00Z"
+    },
+    {
+      "id": "nanobot",
+      "name": "nanobot",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "超轻量个人 Agent：浏览器、终端、聊天应用里都能干活，数据存本地",
+        "en": "Ultra-lightweight personal agent that works in your browser, terminal or chat app — your data stays local"
+      },
+      "icon": "icons/nanobot.png",
+      "difficulty": 2,
+      "popularity": 4,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-12T12:30:00Z"
+    },
+    {
+      "id": "cowagent",
+      "name": "CowAgent",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "中文圈个人 AI 助手：网页控制台一站式聊天、连渠道、装技能",
+        "en": "Personal AI assistant with a one-stop web console — chat, connect channels and install skills"
+      },
+      "icon": "icons/cowagent.png",
+      "difficulty": 2,
+      "popularity": 4,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-12T12:30:00Z"
     }
   ]
 }

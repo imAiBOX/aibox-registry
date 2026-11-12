@@ -1,0 +1,215 @@
+{
+  "id": "hermes-agent",
+  "name": "Hermes Agent",
+  "version": "0.23.1",
+  "description": {
+    "zh-CN": "Nous Research 出品的开源个人 Agent：一条命令装好，终端里聊天、连 Telegram/Discord 等消息渠道、装技能、跑定时任务；自带 Python/Node 工具链，装在你自己的用户目录，不用管理员权限。",
+    "en": "Open-source personal agent from Nous Research — one-command install, chat in the terminal or wire it to Telegram/Discord and other channels, skills and scheduled tasks; bundles its own Python/Node toolchain into your user directory, no admin rights."
+  },
+  "updatedAt": "2026-11-12T12:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "NousResearch/hermes-agent", "tag": "v0.23.1" }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": "not required (the installer bootstraps its own toolchain)",
+      "supported": "not required (the installer bootstraps its own toolchain)"
+    },
+    "disallowed": [],
+    "note": "The official installers provision Python 3.14, Node.js, npm, pnpm, ripgrep and FFmpeg into the Hermes home (~/.hermes on Linux/macOS/WSL2, %LOCALAPPDATA%\\hermes on native Windows) — no admin rights needed. Windows note: antivirus may flag the bundled uv.exe (Astral's uv) as a false positive; whitelist the bin folder if that happens (upstream documents it)."
+  },
+  "packages": [
+    {
+      "id": "hermes-win",
+      "name": "Hermes official Windows installer (install.ps1)",
+      "kind": "app",
+      "version": "0.23.1",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "44bb5b021498c0bba95f77ac30b6c4676f3ffb7aa92ea48c731cd0940e941cdc",
+      "sizeBytes": 91987,
+      "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.ps1 full download sha256 measured locally (2026-11-12)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://hermes-agent.nousresearch.com/install.ps1",
+          "region": "global",
+          "operator": "Nous Research",
+          "note": "The exact script the official PowerShell one-liner downloads (iex (irm …)). Daily probe re-downloads and re-hashes (package < 5 MB) — a hash drift means upstream changed the installer script and this profile must be re-verified."
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "Invoke-Expression (Get-Content -Raw \"$env:USERPROFILE\\.aibox\\cache\\downloads\\install.ps1\")"
+        ],
+        "notes": "Runs the hash-verified official installer exactly like `iex (irm https://hermes-agent.nousresearch.com/install.ps1)` (stdin/iex semantics preserved), landing in %LOCALAPPDATA%\\hermes with bundled Python/Node toolchain — zero admin. Interactive prompts may appear (setup wizard offers `hermes setup --portal` afterwards). TODO real-machine verification.",
+        "probe": {
+          "cmd": "hermes --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "hermes-mac",
+      "name": "Hermes official Unix installer (install.sh)",
+      "kind": "app",
+      "version": "0.23.1",
+      "platforms": ["macos"],
+      "arch": "any",
+      "sha256": "abf338605dae6dd28d101673ac6aed7995c955745db46d47676bc591a7957209",
+      "sizeBytes": 66864,
+      "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.sh full download sha256 measured locally (2026-11-12)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://hermes-agent.nousresearch.com/install.sh",
+          "region": "global",
+          "operator": "Nous Research",
+          "note": "The exact script the official `curl -fsSL … | bash` one-liner downloads. Daily probe re-downloads and re-hashes (package < 5 MB); a hash drift = upstream edited the installer → re-verify and bump."
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; cat \"$HOME/.aibox/cache/downloads/install.sh\" | bash"
+        ],
+        "notes": "Feeds the hash-verified official installer into bash exactly like `curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash`; installs into ~/.hermes (bundled toolchain, no admin). Interactive prompts possible. TODO real-machine verification.",
+        "probe": {
+          "cmd": "hermes --version",
+          "expect": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["direct-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official installer script (single route, both platforms)",
+      "steps": ["hermes-win", "hermes-mac"],
+      "note": "Hermes publishes no GitHub release assets (releases/latest v0.23.1 has 0 assets, measured 2026-11-12) — distribution is the official installer script, so there is no GitHub URL for the gateway list to accelerate. CN region uses the same direct route to hermes-agent.nousresearch.com (CN reachability TODO field measurement)."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata (S2/S4).",
+    "proxyGateways": [
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T12:30:00Z",
+        "note": "Repo-wide gateway list (S3); probed daily against a GitHub release-asset URL. This app's channels are non-GitHub and do not route through it."
+      },
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T12:30:00Z",
+        "note": "Repo-wide gateway list (S3); probed daily against a GitHub release-asset URL. This app's channels are non-GitHub and do not route through it."
+      }
+    ]
+  },
+  "modelProviders": {
+    "openrouter": {
+      "label": "OpenRouter (one key for every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/.hermes/config.yaml",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced, everyday default", "priceHint": "medium" },
+        { "id": "openai/gpt-5", "name": "GPT-5", "note": "Stronger on complex tasks", "priceHint": "higher" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+      ],
+      "notes": "Hermes allows OpenRouter as an allowlisted secret (README migration notes); set keys via `hermes model` / `hermes config set` — values persist to HERMES_HOME/config.yaml (~/.hermes/config.yaml on Unix, %LOCALAPPDATA%\\hermes\\config.yaml on native Windows). Model list/price TODO re-check before CONFIG screens."
+    },
+    "openai": {
+      "label": "OpenAI",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/.hermes/config.yaml",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5", "name": "GPT-5", "note": "Flagship general model", "priceHint": "higher" }
+      ],
+      "notes": "OpenAI is an allowlisted Hermes secret (README); pick the model with `hermes model openai:<model>`."
+    },
+    "anthropic": {
+      "label": "Anthropic (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/.hermes/config.yaml",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Hermes default family, strong at agentic work", "priceHint": "medium" }
+      ],
+      "notes": "Anthropic is an allowlisted Hermes secret (README)."
+    },
+    "nous-portal": {
+      "label": "Nous Portal (one subscription: models + tools, OAuth)",
+      "authType": "oauth",
+      "configTarget": "~/.hermes/config.yaml",
+      "getKeyUrl": "https://portal.nousresearch.com",
+      "notes": "`hermes setup --portal` logs in via OAuth, sets Nous as provider and enables the Tool Gateway (web search, image gen, TTS, cloud browser) — no separate keys to collect (README). Inspect anytime with `hermes portal info`."
+    }
+  },
+  "deepLinks": {
+    "console": "http://127.0.0.1:9119/",
+    "docs": "https://hermes-agent.nousresearch.com/docs/",
+    "tutorial": "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "hermes --version",
+        "expect": "\\d+\\.\\d+\\.\\d+"
+      },
+      "notes": "Check = local probe vs the upstream latest tag the daily probe records; upgrade = run `hermes update` (self-update command) or re-run the AiBOX install (official installer is idempotent)."
+    },
+    "uninstall": {
+      "steps": [
+        "Run the official `hermes uninstall` command (subcommand ships with the CLI)",
+        "If anything remains, delete the Hermes home: ~/.hermes (Unix/macOS/WSL2) or %LOCALAPPDATA%\\hermes (native Windows)",
+        "Remove the Hermes entry from your shell PATH/rc files if the installer added one"
+      ],
+      "residualPaths": [
+        "~/.hermes",
+        "~/AppData/Local/hermes"
+      ],
+      "notes": "Config, sessions, skills and cached toolchain all live under the Hermes home directory; removing it completes the uninstall."
+    },
+    "dataPaths": [
+      "~/.hermes",
+      "~/AppData/Local/hermes"
+    ],
+    "risk": {
+      "onUninstall": "配置文件里的 API key、聊天会话记录、已安装技能都会随 ~/.hermes 一起删除——请先备份 config.yaml 和 sessions / Your API keys in config.yaml, chat sessions and installed skills are deleted together with ~/.hermes — back up config.yaml and sessions first.",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}
