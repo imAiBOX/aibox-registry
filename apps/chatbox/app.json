@@ -1,7 +1,7 @@
 {
   "id": "chatbox",
   "name": "Chatbox",
-  "version": "1.24.3",
+  "version": "1.24.4",
   "description": {
     "zh-CN": "轻量跨平台 AI 聊天客户端：界面简单、上手即用，支持多家模型随时切换，对话数据保存在自己电脑。",
     "en": "Lightweight cross-platform AI chat client: simple UI, bring your own key, switch between providers freely — conversations stay on your machine."
@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-11T21:45:00Z",
   "upstream": {
     "github": [
-      { "repo": "chatboxai/chatbox", "tag": "v1.24.3" }
+      {
+        "repo": "chatboxai/chatbox",
+        "tag": "v1.24.4"
+      }
     ]
   },
   "runtime": {
@@ -27,15 +30,17 @@
       "name": "Chatbox Windows Installer (x64)",
       "kind": "app",
       "version": "1.24.3",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "x64",
-      "sha256": "13ad2f01e549188a9aa6a1534716d009614db992ab4890c22a6cd7afb25ccdda",
-      "sizeBytes": 241094752,
+      "sha256": "7d67a0df61c9daf5d3aed57434fcd7d6b0bb98856ec69d16cd3c07bafef24187",
+      "sizeBytes": 241083488,
       "hashSource": "本地全量下载实测 sha256（2026-11-11 三资产复核一致）；sizeBytes 与上游官方 latest.yml 一致。上游自 v1.21 起不再发布 GitHub release 资产，改用官方 CDN download.chatboxai.app（GitHub API 无 digest 可取）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://download.chatboxai.app/releases/Chatbox-1.24.3-Setup.exe",
+          "url": "https://download.chatboxai.app/releases/Chatbox-1.24.4-Setup.exe",
           "region": "global",
           "operator": "chatboxai",
           "note": "官方 CDN 直连（探活 CI 每日 HEAD）。本应用资产不在 GitHub，社区加速网关（ghfast/gh-proxy 仅代理 github.com）不适用 → 无 proxy 通道"
@@ -43,7 +48,9 @@
       ],
       "install": {
         "type": "nsis-silent",
-        "args": ["/S"],
+        "args": [
+          "/S"
+        ],
         "notes": "electron-builder NSIS 辅助安装模式（electron-builder.yml 实证 oneClick:false、productName=Chatbox），默认安装到 %LOCALAPPDATA%\\Programs\\Chatbox。/S 为 electron-builder NSIS 官方静默参数。TODO Windows 实机验证静默参数与安装路径。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\Chatbox\\Chatbox.exe\" --version",
@@ -56,15 +63,17 @@
       "name": "Chatbox macOS dmg (Apple Silicon)",
       "kind": "app",
       "version": "1.24.3",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "arm64",
-      "sha256": "978116711a43b7bac97fcecfdf0cb85855d7a85b9e3eb844db86663eceb7b402",
-      "sizeBytes": 157974491,
+      "sha256": "09a48e314ec4d2988219db3e128a58fe6b32cd2da24a779f8068d98874a04d78",
+      "sizeBytes": 157996502,
       "hashSource": "本地全量下载实测 sha256（2026-11-11 三资产复核一致）；sizeBytes 与官方 CDN HEAD Content-Length 一致（上游无 GitHub 资产，无 API digest）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://download.chatboxai.app/releases/Chatbox-1.24.3-arm64.dmg",
+          "url": "https://download.chatboxai.app/releases/Chatbox-1.24.4-arm64.dmg",
           "region": "global",
           "operator": "chatboxai",
           "note": "官方 CDN 直连（探活 CI 每日 HEAD）；无 proxy 通道（资产不在 GitHub）"
@@ -89,15 +98,17 @@
       "name": "Chatbox macOS dmg (Intel)",
       "kind": "app",
       "version": "1.24.3",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "x64",
-      "sha256": "0185d1dc550a9eeaac5f2b45e64764c93cff5b62e05ffd80a4c8d69b45365d44",
-      "sizeBytes": 165209304,
+      "sha256": "c2bc74141321e783394f2a1db9ca0984f93a90b42bf58659a3f76b29c9ad144f",
+      "sizeBytes": 165182243,
       "hashSource": "本地全量下载实测 sha256（2026-11-11 三资产复核一致）；sizeBytes 与官方 CDN HEAD Content-Length 一致（上游无 GitHub 资产，无 API digest）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://download.chatboxai.app/releases/Chatbox-1.24.3.dmg",
+          "url": "https://download.chatboxai.app/releases/Chatbox-1.24.4.dmg",
           "region": "global",
           "operator": "chatboxai",
           "note": "官方 CDN 直连（探活 CI 每日 HEAD）；无 proxy 通道（资产不在 GitHub）"
@@ -120,18 +131,29 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["direct-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "direct-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "官方 CDN 直连安装",
-      "steps": ["chatbox-win-x64", "chatbox-mac-x64"],
+      "steps": [
+        "chatbox-win-x64",
+        "chatbox-mac-x64"
+      ],
       "note": "安装器路线：Windows 走 NSIS 静默安装（仅 x64 资产），macOS 走 dmg 挂载拷贝（x64/arm64 各一份，按机型过滤，arm64 机型自动换成 -arm64 变体）。上游无 Windows ARM64 资产 → WoA 机型 plan 为空，TODO 上游提供；本应用资产不在 GitHub，国内同样走官方 CDN 直连（网关不代理非 GitHub 源）。"
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + 上游官方 latest.yml/HEAD（本应用无 GitHub 资产）。",
     "proxyGateways": [
       {
@@ -156,9 +178,24 @@
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
-        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "聪明均衡，日常首选", "priceHint": "中等" },
-        { "id": "openai/gpt-5", "name": "GPT-5", "note": "复杂任务更强", "priceHint": "偏高" },
-        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" }
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "聪明均衡，日常首选",
+          "priceHint": "中等"
+        },
+        {
+          "id": "openai/gpt-5",
+          "name": "GPT-5",
+          "note": "复杂任务更强",
+          "priceHint": "偏高"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "便宜快速",
+          "priceHint": "低"
+        }
       ],
       "notes": "configTarget 为 AiBOX CONFIG 写入位：上游源码 src/main/store-node.ts 实证配置存于 userData/config.json，目录名按 electron-builder productName=Chatbox 推断，macOS 对应 ~/Library/Application Support/Chatbox/config.json；TODO 实机校正。"
     },
@@ -169,8 +206,18 @@
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
-        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "性价比均衡", "priceHint": "中等" },
-        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "快而便宜", "priceHint": "低" }
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "性价比均衡",
+          "priceHint": "中等"
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "note": "快而便宜",
+          "priceHint": "低"
+        }
       ],
       "notes": "configTarget 同 openrouter（TODO 实机校正）。"
     },
@@ -181,8 +228,18 @@
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
-        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "默认推荐", "priceHint": "中等" },
-        { "id": "gpt-5-mini", "name": "GPT-5 mini", "note": "省预算", "priceHint": "低" }
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "默认推荐",
+          "priceHint": "中等"
+        },
+        {
+          "id": "gpt-5-mini",
+          "name": "GPT-5 mini",
+          "note": "省预算",
+          "priceHint": "低"
+        }
       ],
       "notes": "configTarget 同 openrouter（TODO 实机校正）。"
     },
@@ -193,8 +250,18 @@
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
-        { "id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" },
-        { "id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro", "note": "更聪明", "priceHint": "中等" }
+        {
+          "id": "gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "便宜快速",
+          "priceHint": "低"
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "name": "Gemini 2.5 Pro",
+          "note": "更聪明",
+          "priceHint": "中等"
+        }
       ],
       "notes": "configTarget 同 openrouter（TODO 实机校正）。上游另支持本地 Ollama（无 key，authType=local 位留待后续数据驱动补充）。"
     }
