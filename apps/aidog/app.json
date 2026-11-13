@@ -1,7 +1,7 @@
 {
   "id": "aidog",
   "name": "AiDog",
-  "version": "0.5.87",
+  "version": "0.5.88",
   "description": {
     "zh-CN": "本地运行的私人具身 AI：一个命令装好，通过 Telegram、飞书、钉钉、网页控制台和你聊天，自带技能、定时任务与自我进化记忆，密钥只留在你自己电脑上。",
     "en": "A self-hosted personal embodied AI: one-command install, talks to you over Telegram, Feishu, DingTalk and a loopback web console, with skills, scheduling and self-evolution memory — credentials never leave your machine."
@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-12T12:30:00Z",
   "upstream": {
     "github": [
-      { "repo": "AiDog-im/AiDog", "tag": "v0.5.87" }
+      {
+        "repo": "AiDog-im/AiDog",
+        "tag": "v0.5.88"
+      }
     ]
   },
   "runtime": {
@@ -26,22 +29,24 @@
       "name": "AiDog source archive (Windows via WSL2)",
       "kind": "app",
       "version": "0.5.87",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "any",
-      "sha256": "de9df970c46a60098eeb34eacef4bdbf2ba67ad8ffd7f29d73f728f9c410ebed",
-      "sizeBytes": 3695753,
+      "sha256": "d02d3bb4893c96e965b1b958b51a9810c302bcb6336396c91f8766c4f4d684f2",
+      "sizeBytes": 3699849,
       "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-12); gh-proxy channel re-downloaded and matched",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.87.tar.gz",
+          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.88.tar.gz",
           "region": "global",
           "operator": "GitHub",
           "note": "Version-pinned tag source archive (docs: git is optional, archives can run). Daily probe re-downloads and re-hashes (package < 5 MB)."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.87.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.88.tar.gz",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, same size 3695753, sha256 identical to direct). ghfast.top answers HEAD without Content-Length for archive URLs → not used here."
@@ -67,22 +72,24 @@
       "name": "AiDog source archive (macOS)",
       "kind": "app",
       "version": "0.5.87",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "any",
-      "sha256": "de9df970c46a60098eeb34eacef4bdbf2ba67ad8ffd7f29d73f728f9c410ebed",
-      "sizeBytes": 3695753,
+      "sha256": "d02d3bb4893c96e965b1b958b51a9810c302bcb6336396c91f8766c4f4d684f2",
+      "sizeBytes": 3699849,
       "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-12)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.87.tar.gz",
+          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.88.tar.gz",
           "region": "global",
           "operator": "GitHub",
           "note": "Version-pinned tag source archive (same artifact as the Windows package; shared package-level hash)."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.87.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.88.tar.gz",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, same size and sha256 as direct)."
@@ -105,23 +112,37 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["proxy-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "Official source install (GitHub tag archive + deploy/install.sh)",
-      "steps": ["aidog-win", "aidog-mac"],
+      "steps": [
+        "aidog-win",
+        "aidog-mac"
+      ],
       "note": "Both platform steps share one version-pinned source archive; steps are filtered by machine. Windows runs inside WSL2."
     },
     "proxy-install": {
       "label": "China-accelerated install (gh-proxy channel)",
-      "steps": ["aidog-win", "aidog-mac"],
+      "steps": [
+        "aidog-win",
+        "aidog-mac"
+      ],
       "note": "Same package, download layer prefers the gh-proxy channel in the CN region and falls back to direct automatically."
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata (S2/S4).",
     "proxyGateways": [
       {
@@ -145,7 +166,12 @@
       "configTarget": "~/aidog/web/settings.json",
       "getKeyUrl": "https://aidog.im",
       "recommendedModels": [
-        { "id": "mimo-v2.6-flash", "name": "MiMo v2.6 Flash", "note": "Shipped default model of the local gateway (zero-config)", "priceHint": "free (local gateway)" }
+        {
+          "id": "mimo-v2.6-flash",
+          "name": "MiMo v2.6 Flash",
+          "note": "Shipped default model of the local gateway (zero-config)",
+          "priceHint": "free (local gateway)"
+        }
       ],
       "notes": "Settings live in web/settings.json inside the checkout (mycore.base_url + mycore.model); default endpoint http://127.0.0.1:3460/v1 with model mimo-v2.6-flash. Any OpenAI-compatible provider works; MODEL_API_KEY in secrets.env is optional and only needed when the endpoint requires a key (docs/installation.md). Configured via `aidog setup` or the console — file path assumes the documented ~/aidog install dir; TODO real-machine confirmation."
     }
