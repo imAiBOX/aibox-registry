@@ -10,7 +10,11 @@
 //
 // Outputs (cwd):
 //   probe-report.json  — full evidence for every check
-//   drifts.json        — [{title, body}] items for `gh issue create --label upstream-drift`
+//   drifts.json        — [{driftClass, kind, title, body, ...}] items consumed by
+//                        the workflow: driftClass 'A' (new upstream version) is
+//                        turned into a PR by scripts/auto-bump.mjs; 'B'
+//                        (content/liveness/gateway problems) is filed as an
+//                        issue (label upstream-drift)
 // Exit code is always 0 on completed runs; the workflow turns drifts into issues + red run.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,9 +31,12 @@ const now = () => new Date().toISOString();
 const report = { startedAt: now(), checks: [], errors: [] };
 const drifts = [];
 
-function addDrift(kind, title, body) {
-  drifts.push({ kind, title: `[upstream-drift] ${title}`, body });
+function addDrift(kind, title, body, extra = {}) {
+  drifts.push({ kind, ...extra, title: `[upstream-drift] ${title}`, body });
 }
+// A-class = upstream shipped a new version (auto-bump opens a PR);
+// B-class = same-version content/liveness problem (stays an issue, never auto-fixed)
+const B = (app) => ({ driftClass: 'B', ...(app ? { app } : {}) });
 
 async function timedFetch(url, opts = {}) {
   const ctrl = new AbortController();
@@ -114,14 +121,16 @@ for (const { dir, app } of apps) {
               `${dir}: sha256 mismatch ${pkg.id} (${ch.type})`,
               `Channel \`${ch.url}\` returned content whose sha256 does not match the registry record.\n\n` +
               `- expected: \`${pkg.sha256}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n\n` +
-              `Hash provenance: ${pkg.hashSource || 'n/a'}\nChecked at: ${check.checkedAt}`);
+              `Hash provenance: ${pkg.hashSource || 'n/a'}\nChecked at: ${check.checkedAt}`,
+              B(dir));
           }
         } else if (h.contentLength && Number(h.contentLength) !== pkg.sizeBytes) {
           check.status = 'SIZE_MISMATCH';
           addDrift('integrity',
             `${dir}: size mismatch ${pkg.id} (${ch.type})`,
             `Channel \`${ch.url}\` Content-Length ${h.contentLength} != recorded sizeBytes ${pkg.sizeBytes}.\n` +
-            `Checked at: ${check.checkedAt}`);
+            `Checked at: ${check.checkedAt}`,
+            B(dir));
         }
       } catch (e) {
         check.status = e.status ? `HTTP_${e.status}` : 'UNREACHABLE';
@@ -130,7 +139,8 @@ for (const { dir, app } of apps) {
           `${dir}: channel down — ${pkg.id} (${ch.type})`,
           `HEAD failed after ${RETRIES} retries.\n\n- package: \`${pkg.id}\`\n- channel: \`${ch.type}\`\n` +
           `- url: ${ch.url}\n- error: \`${check.error}\`\n- recorded sha256: \`${pkg.sha256}\`\n\n` +
-          `Checked at: ${check.checkedAt}\nIf this endpoint is permanently gone, update app.json (or retire the channel) in a PR.`);
+          `Checked at: ${check.checkedAt}\nIf this endpoint is permanently gone, update app.json (or retire the channel) in a PR.`,
+          B(dir));
       }
       report.checks.push(check);
       process.stdout.write('.');
@@ -153,7 +163,8 @@ for (const { dir, app } of apps) {
         } else {
           check.status = `HTTP_${res.status}`;
           addDrift('version', `${dir}: GitHub releases/latest unreachable — ${ref.repo}`,
-            `GET ${url} → ${res.status} after retries.\nChecked at: ${check.checkedAt}`);
+            `GET ${url} → ${res.status} after retries.\nChecked at: ${check.checkedAt}`,
+            B(dir));
         }
       } else {
         const data = await res.json();
@@ -161,9 +172,12 @@ for (const { dir, app } of apps) {
         check.status = data.tag_name === ref.tag ? 'ok' : 'DRIFT';
         if (data.tag_name !== ref.tag) {
           addDrift('version', `${dir}: upstream ${ref.repo} released ${data.tag_name} (registry has ${ref.tag})`,
-            `New upstream release detected.\n\n- repo: \`${ref.repo}\`\n- registry tag: \`${ref.tag}\`\n` +
+            `New upstream release detected — auto-bump measures the new artifacts and opens a PR for review.\n\n` +
+            `- repo: \`${ref.repo}\`\n- registry tag: \`${ref.tag}\`\n` +
             `- upstream latest: \`${data.tag_name}\`\n- published: ${data.published_at}\n\n` +
-            `Next step: PR updating app.json (version/packages sha256 & sizeBytes/channels/upstream), review, merge — effective ≤12h across site + installer.\nChecked at: ${check.checkedAt}`);
+            `If no bump PR appears, update app.json manually (version / channels sha256 & sizeBytes / upstream tag), review, merge — effective ≤12h across site + installer.\nChecked at: ${check.checkedAt}`,
+            { driftClass: 'A', app: dir, source: 'github', repo: ref.repo,
+              currentTag: ref.tag, latestTag: data.tag_name, publishedAt: data.published_at });
         }
       }
     } catch (e) {
@@ -187,15 +201,19 @@ for (const { dir, app } of apps) {
     if (!res.ok) {
       check.status = `HTTP_${res.status}`;
       addDrift('version', `${dir}: npm registry latest unreachable — ${ref.name}`,
-        `GET ${url} → ${res.status} after retries.\nChecked at: ${check.checkedAt}`);
+        `GET ${url} → ${res.status} after retries.\nChecked at: ${check.checkedAt}`,
+        B(dir));
     } else {
       const data = await res.json();
       check.actual = data.version;
       check.status = data.version === ref.version ? 'ok' : 'DRIFT';
       if (data.version !== ref.version) {
         addDrift('version', `${dir}: npm ${ref.name} ${data.version} published (registry has ${ref.version})`,
-          `New npm version detected.\n\n- package: \`${ref.name}\`\n- registry: \`${ref.version}\`\n- npm latest: \`${data.version}\`\n\n` +
-          `Next step: PR updating app.json (upstream.npm.version + openclaw-cli package version/sha256/channels/install/probe), merge ≤12h.\nChecked at: ${check.checkedAt}`);
+          `New npm version detected — auto-bump measures the new tarball and opens a PR for review.\n\n` +
+          `- package: \`${ref.name}\`\n- registry: \`${ref.version}\`\n- npm latest: \`${data.version}\`\n\n` +
+          `If no bump PR appears, update app.json manually (upstream.npm.version + affected package version/sha256/channels/install args), review, merge.\nChecked at: ${check.checkedAt}`,
+          { driftClass: 'A', app: dir, source: 'npm', package: ref.name,
+            currentTag: ref.version, latestTag: data.version });
       }
     }
   } catch (e) {
@@ -220,7 +238,7 @@ for (const { app } of apps) {
   }
   if (gatewayTarget) break;
 }
-for (const { app } of apps) {
+for (const { dir, app } of apps) {
   for (const gw of app.netConfig?.proxyGateways || []) {
     const check = { type: 'proxy-gateway', prefix: gw.prefix, target: gatewayTarget, checkedAt: now() };
     try {
@@ -229,7 +247,8 @@ for (const { app } of apps) {
       check.status = h.status === 200 && h.contentLength ? 'active' : 'degraded';
       if (check.status !== 'active') {
         addDrift('gateway', `netConfig gateway ${gw.prefix} returned HTTP ${h.status}`,
-          `Gateway \`${gw.prefix}\` answered ${h.status} without a content length for\n${gw.prefix}${gatewayTarget}\nChecked at: ${check.checkedAt}`);
+          `Gateway \`${gw.prefix}\` answered ${h.status} without a content length for\n${gw.prefix}${gatewayTarget}\nChecked at: ${check.checkedAt}`,
+          B(dir));
       }
     } catch (e) {
       check.status = 'unreachable';
@@ -237,7 +256,8 @@ for (const { app } of apps) {
       addDrift('gateway', `netConfig gateway down — ${gw.prefix}`,
         `HEAD failed after ${RETRIES} retries.\n\n- prefix: \`${gw.prefix}\`\n- probe url: ${gw.prefix}${gatewayTarget}\n` +
         `- error: \`${check.error}\`\n- recorded status: ${gw.status} (checkedAt ${gw.checkedAt})\n\n` +
-        `Checked at: ${check.checkedAt}\nIf permanently dead: PR setting status=retired (S3 hot-updatable list).`);
+        `Checked at: ${check.checkedAt}\nIf permanently dead: PR setting status=retired (S3 hot-updatable list).`,
+        B(dir));
     }
     report.checks.push(check);
     process.stdout.write('.');

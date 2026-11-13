@@ -32,8 +32,8 @@ apps/<id>/app.json             # per-app profile: version + dependency DAG + cha
 apps/<id>/guides/{zh-cn,en}.md # install guides (DONE page and website share this source)
 locales/{en,zh-CN}.json        # installer UI language packs (en is the baseline)
 schemas/{index,app}.schema.json# JSON Schema (draft-07, enforced in CI)
-scripts/                       # validate / check-locales / probe / prepush-scan
-.github/workflows/ci.yml       # validation + daily probe
+scripts/                       # validate / check-locales / probe / auto-bump / prepush-scan
+.github/workflows/ci.yml       # validation + daily probe + auto-bump PRs
 ```
 
 ## Schema and invariants (validation chain)
@@ -57,10 +57,28 @@ referenced `locales/*.json` and `guides/*.md` files exist; `scripts/check-locale
 2. packages smaller than 5MB are re-downloaded and their `sha256` re-compared (V1: no channel is exempt);
 3. GitHub `releases/latest` and npm `dist-tags/latest` are compared against the recorded `upstream` versions;
 4. every `netConfig.proxyGateways` prefix is HEAD-ed (the S3 hot-updatable gateway list);
-5. **any mismatch → an automatic Issue (label `upstream-drift`) + a red run**; an existing open issue with the same title is not re-opened.
+5. **every drift is classified, then handled automatically:**
+   - **A — new upstream version** (release tag or npm `latest` moved): `scripts/auto-bump.mjs`
+     measures the new artifacts — GitHub release assets take the API asset `digest` + size (zero
+     download); vendor CDN files, source archives, npm tarballs and install scripts are fully
+     downloaded and `sha256`-computed — then rewrites **only version-related fields** of
+     `apps/<id>/app.json` (`version`, `upstream` tag, channel URLs, `sha256`/`sizeBytes`/`hashSource`,
+     install args), runs `scripts/validate.mjs` and re-HEADs every channel (**0 failures required**),
+     pushes branch `chore/upstream-<app>-<version>` and opens a PR whose body carries the old→new
+     evidence table (hashes, sizes, download sources, measured UTC) for human review. Idempotent:
+     if a bump PR is already open for the app, the run skips it instead of opening a duplicate. The
+     run stays red until the PR merges, and no issue is filed for A-class drift (the PR is the
+     reminder). If the automatic bump cannot complete, the drift falls back to the issue flow.
+   - **B — same-version problem** (sha256/size mismatch, dead channel, dead gateway): filed as an
+     Issue (label `upstream-drift`) + red run, unchanged from before. **B-class data is never edited
+     automatically** — content changing while the version stays put is a possible tampering signal
+     and always needs a human.
 
-Probe artifacts `probe-report.json` / `drifts.json` are kept as workflow artifacts.
-Handling a version lag: CI detects a new upstream tag → PR updating app.json (new SHA256) → human review → effective across site + installer within ≤12h.
+Probe artifacts `probe-report.json` / `drifts.json` / `auto-bumps.json` are kept as workflow artifacts.
+The probe job runs with `contents: write` + `pull-requests: write` so same-repo bump PRs can be opened
+with the default `GITHUB_TOKEN` (no PAT). Note: PRs created by `GITHUB_TOKEN` do not trigger further
+workflow runs — CI validates the bump on merge to `main`. Effective across site + installer within ≤12h
+of the merge.
 
 ## How to add an app
 

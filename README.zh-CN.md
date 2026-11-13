@@ -30,8 +30,8 @@ apps/<id>/app.json            # 应用主档案：版本 + 依赖 DAG + 通道 +
 apps/<id>/guides/{zh-cn,en}.md # 安装引导（DONE 页与官网同源复用）
 locales/{en,zh-CN}.json       # 安装器 UI 语言包（en=基线）
 schemas/{index,app}.schema.json # JSON Schema（draft-07，CI 强制）
-scripts/                      # validate / check-locales / probe / prepush-scan
-.github/workflows/ci.yml      # 校验 + 每日探活
+scripts/                      # validate / check-locales / probe / auto-bump / prepush-scan
+.github/workflows/ci.yml      # 校验 + 每日探活 + 自动升级 PR
 ```
 
 ## Schema 与不变式（校验链）
@@ -55,10 +55,21 @@ scripts/                      # validate / check-locales / probe / prepush-scan
 2. `sizeBytes < 5MB` 的包重新下载比对 `sha256`（V1 全通道零豁免）；
 3. GitHub `releases/latest` 与 npm `dist-tags/latest` 对比 `upstream` 记录版本；
 4. `netConfig.proxyGateways` 全部网关 HEAD（S3 可热更下架）；
-5. **任何不一致 → 自动开 Issue（label `upstream-drift`）+ 红灯**；同标题已有开放 Issue 不重复开。
+5. **每个 drift 先分类，再自动处置：**
+   - **A 类 · 上游新版本**（release tag 或 npm `latest` 变了）：`scripts/auto-bump.mjs` 实测新产物——
+     GitHub release 资产取 API `digest`+size（零下载）；厂商 CDN / 源码归档 / npm tarball / 安装脚本
+     全量下载算 `sha256`——然后**只改版本相关字段**（`version`、`upstream` tag、通道 URL、
+     `sha256`/`sizeBytes`/`hashSource`、安装参数），跑 `scripts/validate.mjs` + 全通道 HEAD 复核
+     （**必须 0 fail**），推分支 `chore/upstream-<app>-<version>` 并开 PR（body 含旧→新实测证据表、
+     下载源、实测 UTC），**人工 review 合并**。幂等：同应用已有开放升级 PR 则跳过，不重复开；
+     PR 合并前 run 一直红灯，且 A 类不再开 Issue（PR 即提醒）；自动升级失败时回退为开 Issue。
+   - **B 类 · 同版本内容不符**（sha256/size 不符、通道挂了、网关挂了）：照旧开 Issue
+     （label `upstream-drift`）+ 红灯。**B 类数据绝不自动修改**——版本没变内容却变了 = 疑似投毒，
+     必须人工处置。
 
-探活产物 `probe-report.json` / `drifts.json` 作为 workflow artifact 留证。
-版本落后处置：CI 检测到上游新 tag → PR 更新 app.json（新 SHA256）→ 人工 review → ≤12h 全网生效。
+探活产物 `probe-report.json` / `drifts.json` / `auto-bumps.json` 作为 workflow artifact 留证。
+probe job 需要 `contents: write` + `pull-requests: write`（同仓默认 `GITHUB_TOKEN` 开 PR，不用 PAT）；
+`GITHUB_TOKEN` 开的 PR 不会再触发 workflow，CI 在合入 `main` 时校验。合并后 ≤12h 全网生效。
 
 ## 如何新增一个应用
 

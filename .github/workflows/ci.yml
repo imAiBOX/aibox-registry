@@ -28,6 +28,8 @@ jobs:
         run: node scripts/validate.mjs
       - name: Locale key parity (en baseline vs zh-CN and any future pack)
         run: node scripts/check-locales.mjs
+      - name: Unit tests (auto-bump helpers)
+        run: node --test
 
   sanitization:
     name: Sanitization scan (full history)
@@ -70,6 +72,12 @@ jobs:
     name: Upstream liveness probe
     if: github.event_name == 'push' || github.event_name == 'schedule'
     runs-on: ubuntu-latest
+    # auto-bump pushes chore/upstream-* branches and opens same-repo PRs with
+    # the default GITHUB_TOKEN (no PAT); issues: write keeps the fallback flow
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -79,6 +87,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/probe.mjs
+      - name: Open bump PRs for new upstream versions (A-class drifts)
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/auto-bump.mjs
       - name: Upload probe report
         if: always()
         uses: actions/upload-artifact@v4
@@ -87,6 +100,7 @@ jobs:
           path: |
             probe-report.json
             drifts.json
+            auto-bumps.json
           if-no-files-found: ignore
       - name: "File issues on drift (label upstream-drift) and fail the run"
         if: always()
@@ -94,32 +108,34 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          if [ ! -s drifts.json ]; then
-            echo "no drifts.json — nothing to do"
-            exit 0
+          drift_count=0
+          if [ -s drifts.json ]; then drift_count=$(jq length drifts.json); fi
+          bump_count=0
+          if [ -s auto-bumps.json ]; then bump_count=$(jq length auto-bumps.json); fi
+          echo "drift items: $drift_count, bump PRs: $bump_count"
+          if [ "$drift_count" -gt 0 ]; then
+            gh label create upstream-drift \
+              --color E5484D \
+              --description "Daily probe detected upstream/mirror drift" \
+              --force || true
+            gh issue list --state open --label upstream-drift --limit 200 --json title > open-issues.json || echo '[]' > open-issues.json
+            tmp=$(mktemp)
+            while IFS= read -r item; do
+              title=$(jq -r '.title' <<<"$item")
+              jq -r '.body' <<<"$item" > "$tmp"
+              exists=$(jq -r --arg t "$title" 'any(.[]; .title == $t)' open-issues.json)
+              if [ "$exists" = "true" ]; then
+                echo "already open, skip: $title"
+                continue
+              fi
+              echo "filing: $title"
+              gh issue create --title "$title" --body-file "$tmp" --label upstream-drift \
+                || gh issue create --title "$title" --body-file "$tmp" \
+                || echo "issue create failed (continuing)"
+            done < <(jq -c '.[]' drifts.json)
           fi
-          drift_count=$(jq length drifts.json)
-          echo "drift items: $drift_count"
-          if [ "$drift_count" -eq 0 ]; then
-            exit 0
+          # stay red while anything drifts or a bump PR awaits review
+          if [ "$drift_count" -gt 0 ] || [ "$bump_count" -gt 0 ]; then
+            exit 1
           fi
-          gh label create upstream-drift \
-            --color E5484D \
-            --description "Daily probe detected upstream/mirror drift" \
-            --force || true
-          gh issue list --state open --label upstream-drift --limit 200 --json title > open-issues.json || echo '[]' > open-issues.json
-          tmp=$(mktemp)
-          while IFS= read -r item; do
-            title=$(jq -r '.title' <<<"$item")
-            jq -r '.body' <<<"$item" > "$tmp"
-            exists=$(jq -r --arg t "$title" 'any(.[]; .title == $t)' open-issues.json)
-            if [ "$exists" = "true" ]; then
-              echo "already open, skip: $title"
-              continue
-            fi
-            echo "filing: $title"
-            gh issue create --title "$title" --body-file "$tmp" --label upstream-drift \
-              || gh issue create --title "$title" --body-file "$tmp" \
-              || echo "issue create failed (continuing)"
-          done < <(jq -c '.[]' drifts.json)
-          exit 1
+          exit 0
