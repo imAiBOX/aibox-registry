@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "name": "AiBOX 安裝器",
+    "packVersion": "2026.11.09.1",
+    "locale": "zh-TW",
+    "fallback": "en",
+    "note": "繁體中文語言包。CI 校驗：en 基線有的 key 這裡必須都有。"
+  },
+  "screens": {
+    "idle": {
+      "title": "你想安裝什麼？",
+      "ctaInstall": "安裝應用",
+      "ctaManage": "管理已裝應用"
+    },
+    "scan": {
+      "title": "正在體檢你的電腦",
+      "checking": "看看本機已裝了什麼…",
+      "allGood": "一切正常。",
+      "issueFound": "發現需要先處理的問題——我們來搞定。"
+    },
+    "plan": {
+      "title": "安裝計畫",
+      "routeGlobal": "官方下載路線",
+      "routeCn": "國內加速路線（本地更快）"
+    },
+    "confirm": {
+      "title": "準備開始安裝",
+      "confirmBtn": "立即安裝",
+      "noAdmin": "全程不需要管理員權限。"
+    },
+    "execute": {
+      "title": "正在安裝…",
+      "retry": "重試",
+      "switchChannel": "正在切換到下一個下載來源…"
+    },
+    "config": {
+      "title": "連線你的大模型",
+      "pasteKey": "貼上你的 API Key",
+      "keyHint": "Key 只留在你電腦裡——絕不進我們的日誌。"
+    },
+    "verify": {
+      "title": "驗證它真的能用",
+      "pass": "裝好了。它真的能用。",
+      "fail": "就差一步——驗證沒通過，我們來修。"
+    },
+    "done": {
+      "title": "全部完成",
+      "next": "下一步",
+      "share": "分享"
+    },
+    "manage": {
+      "title": "應用管理",
+      "checkUpdate": "檢查更新",
+      "upgrade": "升級",
+      "uninstall": "解除安裝",
+      "reinstall": "重灌",
+      "backupWarn": "你的資料在這裡——動手前我們先備份。"
+    }
+  }
+}
