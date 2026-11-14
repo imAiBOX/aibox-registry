@@ -83,6 +83,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+      # auto-bump shells out to validate.mjs (ajv) when it measures an
+      # A-class drift — without deps here every bump attempt dies on ajv.
+      - name: Install dev deps
+        run: npm ci
       - name: Probe channels / versions / gateways (HEAD 10s, sha256 for <5MB, releases/latest)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
