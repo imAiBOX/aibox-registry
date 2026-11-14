@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-12T12:30:00Z",
   "upstream": {
     "github": [
-      { "repo": "NousResearch/hermes-agent", "tag": "v0.23.1" }
+      {
+        "repo": "NousResearch/hermes-agent",
+        "tag": "v0.23.1"
+      }
     ]
   },
   "runtime": {
@@ -26,10 +29,12 @@
       "name": "Hermes official Windows installer (install.ps1)",
       "kind": "app",
       "version": "0.23.1",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "x64",
-      "sha256": "44bb5b021498c0bba95f77ac30b6c4676f3ffb7aa92ea48c731cd0940e941cdc",
-      "sizeBytes": 91987,
+      "sha256": "31dd1373eae71908cac5326d4ffd8adc85d131ff509916df30b2836e4e231b0f",
+      "sizeBytes": 94627,
       "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.ps1 full download sha256 measured locally (2026-11-12)",
       "channels": [
         {
@@ -62,10 +67,12 @@
       "name": "Hermes official Unix installer (install.sh)",
       "kind": "app",
       "version": "0.23.1",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "any",
-      "sha256": "50348fcc95e934d2f92b493b40fa2a4f22d58237184ef88ed69ad395531f1ad4",
-      "sizeBytes": 67104,
+      "sha256": "c73dad4dcf7c9ecadb98578e28cc763d23d7be3fa1b513545319038795493214",
+      "sizeBytes": 68015,
       "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.sh full download sha256 measured locally (2026-11-12)",
       "channels": [
         {
@@ -93,18 +100,29 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["direct-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "direct-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "Official installer script (single route, both platforms)",
-      "steps": ["hermes-win", "hermes-mac"],
+      "steps": [
+        "hermes-win",
+        "hermes-mac"
+      ],
       "note": "Hermes publishes no GitHub release assets (releases/latest v0.23.1 has 0 assets, measured 2026-11-12) — distribution is the official installer script, so there is no GitHub URL for the gateway list to accelerate. CN region uses the same direct route to hermes-agent.nousresearch.com (CN reachability TODO field measurement)."
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata (S2/S4).",
     "proxyGateways": [
       {
@@ -129,9 +147,24 @@
       "configTarget": "~/.hermes/config.yaml",
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
-        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced, everyday default", "priceHint": "medium" },
-        { "id": "openai/gpt-5", "name": "GPT-5", "note": "Stronger on complex tasks", "priceHint": "higher" },
-        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Smart and balanced, everyday default",
+          "priceHint": "medium"
+        },
+        {
+          "id": "openai/gpt-5",
+          "name": "GPT-5",
+          "note": "Stronger on complex tasks",
+          "priceHint": "higher"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "Cheap and fast",
+          "priceHint": "low"
+        }
       ],
       "notes": "Hermes allows OpenRouter as an allowlisted secret (README migration notes); set keys via `hermes model` / `hermes config set` — values persist to HERMES_HOME/config.yaml (~/.hermes/config.yaml on Unix, %LOCALAPPDATA%\\hermes\\config.yaml on native Windows). Model list/price TODO re-check before CONFIG screens."
     },
@@ -142,7 +175,12 @@
       "configTarget": "~/.hermes/config.yaml",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
-        { "id": "gpt-5", "name": "GPT-5", "note": "Flagship general model", "priceHint": "higher" }
+        {
+          "id": "gpt-5",
+          "name": "GPT-5",
+          "note": "Flagship general model",
+          "priceHint": "higher"
+        }
       ],
       "notes": "OpenAI is an allowlisted Hermes secret (README); pick the model with `hermes model openai:<model>`."
     },
@@ -153,7 +191,12 @@
       "configTarget": "~/.hermes/config.yaml",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
-        { "id": "claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Hermes default family, strong at agentic work", "priceHint": "medium" }
+        {
+          "id": "claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Hermes default family, strong at agentic work",
+          "priceHint": "medium"
+        }
       ],
       "notes": "Anthropic is an allowlisted Hermes secret (README)."
     },

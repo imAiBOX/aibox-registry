@@ -58,7 +58,7 @@
           "wsl",
           "bash",
           "-lc",
-          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/v0.5.87.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.87/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/v0.5.88.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.88/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Windows route = WSL2 (official reference platform). The script locates the AiBOX-cached source archive from inside WSL, unpacks it to ~/aidog (official Quick Start path) and runs the official one-command installer `deploy/install.sh` (provision + boot + verify, idempotent). Prerequisites inside WSL: Python 3.10+, tmux (manual, admin), a free port 19167. Re-running merges the new version over an existing checkout. TODO real-machine verification (cmd.exe→wslpath quoting, first-boot UX).",
         "probe": {
@@ -100,7 +100,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/v0.5.87.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.87/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/v0.5.88.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.88/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Unpack the cached, hash-verified source archive to ~/aidog and run the official installer (provision + boot + verify; idempotent, safe to re-run). Needs Python 3.10+ and tmux (brew install tmux) — installed manually beforehand, AiBOX never escalates. Upstream marks macOS expected-but-untested → whole macOS path is TODO real-machine verification.",
         "probe": {

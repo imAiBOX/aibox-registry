@@ -1,7 +1,7 @@
 {
   "id": "cherry-studio",
   "name": "Cherry Studio",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": {
     "zh-CN": "颜值与功能兼顾的桌面 AI 工作台：一个客户端同时连接 OpenAI、Anthropic、谷歌、OpenRouter 等多家模型，聊天、编程助手、翻译开箱即用。",
     "en": "Polished desktop AI workspace that connects to many model providers at once (OpenAI, Anthropic, Google, OpenRouter) — chat, coding help and translation out of the box."
@@ -11,7 +11,7 @@
     "github": [
       {
         "repo": "CherryHQ/cherry-studio",
-        "tag": "v2.2.1"
+        "tag": "v2.2.2"
       }
     ]
   },
@@ -34,27 +34,27 @@
         "windows"
       ],
       "arch": "x64",
-      "sha256": "365db7bbb4be5117ee6869f718fa92c8d9d0fd8f4918ed3e5e9c92f1da638601",
-      "sizeBytes": 308192096,
+      "sha256": "58d7ce69dd7767094c81430c487c35dd604a5103e9803696cc4ac03e9b6642ff",
+      "sizeBytes": 308296824,
       "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-win-x64-setup.exe",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-win-x64-setup.exe",
           "region": "global",
           "operator": "cherryhq",
           "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-win-x64-setup.exe",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-win-x64-setup.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-win-x64-setup.exe",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-win-x64-setup.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
@@ -81,27 +81,27 @@
         "windows"
       ],
       "arch": "arm64",
-      "sha256": "82a86d26ad329aa8837b333c3d06ff5d3469f98f7e8e2263fc3d3957a6df332d",
-      "sizeBytes": 287012272,
+      "sha256": "ce45d49ba70b262bc2712362b94d08de003359e33594f7ef39d480108790e464",
+      "sizeBytes": 287098168,
       "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-win-arm64-setup.exe",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-win-arm64-setup.exe",
           "region": "global",
           "operator": "cherryhq",
           "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-win-arm64-setup.exe",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-win-arm64-setup.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-win-arm64-setup.exe",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-win-arm64-setup.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关"
@@ -128,27 +128,27 @@
         "macos"
       ],
       "arch": "x64",
-      "sha256": "d23309bf2db73a95aa9725e99543c1bdb5be7ade1cc9e340c3ddc00bc74babe8",
-      "sizeBytes": 323860121,
+      "sha256": "cfc96697326e2abaaf3627bf5487cda62a8162fa55d7c4161fecea7ef75fe06a",
+      "sizeBytes": 324084196,
       "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-mac-x64.dmg",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-mac-x64.dmg",
           "region": "global",
           "operator": "cherryhq",
           "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-mac-x64.dmg",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-mac-x64.dmg",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-mac-x64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-mac-x64.dmg",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关"
@@ -177,27 +177,27 @@
         "macos"
       ],
       "arch": "arm64",
-      "sha256": "6d74babc2114ec2de10074dfc03dcebe6fc5c90c5d5dba4ebcf5b0d7b7a4df5a",
-      "sizeBytes": 299882732,
+      "sha256": "5de08748e4a62023e5b942722fc84623e5c466d51b403a3429a0f29dc31270cd",
+      "sizeBytes": 300083451,
       "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-11 实测）",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-mac-arm64.dmg",
+          "url": "https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-mac-arm64.dmg",
           "region": "global",
           "operator": "cherryhq",
           "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-mac-arm64.dmg",
+          "url": "https://ghfast.top/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-mac-arm64.dmg",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关（2026-11-11 实测 200/同大小）"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.1/Cherry-Studio-2.2.1-mac-arm64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/CherryHQ/cherry-studio/releases/download/v2.2.2/Cherry-Studio-2.2.2-mac-arm64.dmg",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关"

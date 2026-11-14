@@ -307,7 +307,7 @@ test('applyTextPatch: no-op returns the original bytes; scalar edits are minimal
   after.upstream.github[0].tag = 'v0.24.0';
   const patched = applyTextPatch(orig, before, after);
   assert.equal(JSON.parse(patched).version, '0.24.0');
-  assert.ok(patched.includes('{ "repo": "NousResearch/hermes-agent", "tag": "v0.24.0" }'));
+  assert.ok(patched.includes('"tag": "v0.24.0"'));
   // prose fields that mention the old version are not touched (version-related fields only)
   assert.ok(patched.includes('releases/latest v0.23.1 has 0 assets'));
   assert.equal(patched.length, orig.length); // same-length value splice, no reflow
