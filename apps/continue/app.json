@@ -1,0 +1,252 @@
+{
+  "id": "continue",
+  "name": "Continue",
+  "version": "2.1.0",
+  "description": {
+    "zh-CN": "开源 AI 编程副驾：在 VS Code / JetBrains 的侧边栏里对话改代码、补全与多文件编辑；配置是一个存放在本机的 YAML 文件，自带 Key 或接本地模型都行。",
+    "en": "Open-source AI coding assistant for VS Code / JetBrains — chat-driven edits, autocomplete and multi-file changes in the sidebar; configuration is a local YAML file, bring your own key or point it at local models."
+  },
+  "updatedAt": "2026-11-14T08:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "continuedev/continue", "tag": "v2.0.0-vscode" }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": "not required (runs inside VS Code's extension host)",
+      "supported": "not required (runs inside VS Code's extension host)"
+    },
+    "disallowed": [],
+    "note": "Hard prerequisite: Visual Studio Code >= 1.70.0 (vsix engines field measured from the shipped Open VSX package.json). The AiBOX route calls the `code` CLI — on macOS run VS Code's \"Shell Command: Install 'code' command in PATH\" once; if VS Code is missing, use the manual Marketplace route instead (zero admin). Cursor/Windsurf/VSCodium install the same extension from Open VSX (official docs). Note: the upstream repository is read-only and Continue shipped its final 2.0.0 release line (official README, measured 2026-11-14) — the extension remains fully functional."
+  },
+  "packages": [
+    {
+      "id": "continue-win",
+      "name": "Continue VS Code extension (VSIX, win32-x64)",
+      "kind": "app",
+      "version": "2.1.0",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "0aa7844bcd6b042517e1bd5d77d26a14c2d68914d832fbfc6a0d49d921ac8f88",
+      "sizeBytes": 74469477,
+      "hashSource": "Open VSX download fully hashed locally; Content-Length on the download URL matches (2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://open-vsx.org/api/Continue/continue/win32-x64/2.1.0/file/Continue.continue-2.1.0@win32-x64.vsix",
+          "region": "global",
+          "operator": "open-vsx.org",
+          "note": "Official Open VSX registry download (2026-11-14 measured 200 / Content-Length = sizeBytes). Continue ships no GitHub release assets, so the community GitHub gateways do not apply to this app."
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "code --install-extension \"$env:USERPROFILE\\.aibox\\cache\\downloads\\Continue.continue-2.1.0@win32-x64.vsix\" --force"
+        ],
+        "notes": "Installs the hash-verified VSIX through VS Code's own CLI (`code --install-extension`), the same mechanism the Marketplace uses — per-user, zero admin. Prerequisites: VS Code installed and `code` on PATH (Windows default). TODO real-machine verification.",
+        "probe": {
+          "cmd": "code --list-extensions --show-versions",
+          "expect": "Continue\\.continue@\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "continue-mac-arm64",
+      "name": "Continue VS Code extension (VSIX, darwin-arm64)",
+      "kind": "app",
+      "version": "2.1.0",
+      "platforms": ["macos"],
+      "arch": "arm64",
+      "sha256": "739d26de25aa7f66a11d3eb85b8bbd16c48d8bd8a628cc477e686659a700ef1d",
+      "sizeBytes": 77895110,
+      "hashSource": "Open VSX download fully hashed locally; Content-Length on the download URL matches (2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://open-vsx.org/api/Continue/continue/darwin-arm64/2.1.0/file/Continue.continue-2.1.0@darwin-arm64.vsix",
+          "region": "global",
+          "operator": "open-vsx.org",
+          "note": "Official Open VSX registry download (2026-11-14 measured 200 / Content-Length = sizeBytes)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/Continue.continue-2.1.0@darwin-arm64.vsix\" --force"
+        ],
+        "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin. TODO real-machine verification.",
+        "probe": {
+          "cmd": "code --list-extensions --show-versions",
+          "expect": "Continue\\.continue@\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "continue-mac-x64",
+      "name": "Continue VS Code extension (VSIX, darwin-x64)",
+      "kind": "app",
+      "version": "2.1.0",
+      "platforms": ["macos"],
+      "arch": "x64",
+      "sha256": "1663c19546ff568f25a7c032347f6b3699dc052f2a046c9b4c4809d207d08b5c",
+      "sizeBytes": 113239087,
+      "hashSource": "Open VSX download fully hashed locally (second pass after a truncated first download); Content-Length on the download URL matches (2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://open-vsx.org/api/Continue/continue/darwin-x64/2.1.0/file/Continue.continue-2.1.0@darwin-x64.vsix",
+          "region": "global",
+          "operator": "open-vsx.org",
+          "note": "Official Open VSX registry download (2026-11-14 measured 200 / Content-Length = sizeBytes)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/Continue.continue-2.1.0@darwin-x64.vsix\" --force"
+        ],
+        "notes": "Same hash-verified VSIX via VS Code CLI (Intel Macs). macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once. Zero admin. TODO real-machine verification.",
+        "probe": {
+          "cmd": "code --list-extensions --show-versions",
+          "expect": "Continue\\.continue@\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["direct-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official Open VSX install (hash-verified VSIX via the VS Code CLI)",
+      "steps": ["continue-win", "continue-mac-arm64", "continue-mac-x64"],
+      "note": "Downloads the platform VSIX from Open VSX and installs it with `code --install-extension`; steps contain all platform packages and are filtered by machine arch. Open VSX is a Fastly-fronted CDN reachable from CN directly — no GitHub gateway applies (this app ships no GitHub assets), so the CN order uses the same plan."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata — this app ships no GitHub assets, so its VSIX hash came from a full Open VSX download measured on 2026-11-14.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      }
+    ]
+  },
+  "modelProviders": {
+    "anthropic": {
+      "label": "Anthropic official API (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/.continue/config.yaml",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced everyday default", "priceHint": "medium" },
+        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "Fast and cheap for small edits", "priceHint": "low" }
+      ],
+      "notes": "Continue keeps all configuration in ~/.continue/config.yaml (macOS/Linux) or %USERPROFILE%\\.continue\\config.yaml (Windows) — official docs, measured 2026-11-14. Continue's own best practice is to reference API keys through environment variables instead of hardcoding them in the YAML; AiBOX never writes keys to disk."
+    },
+    "openai": {
+      "label": "OpenAI official API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/.continue/config.yaml",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong on complex tasks", "priceHint": "medium" }
+      ],
+      "notes": "Same config file as anthropic (local config.yaml, env-var reference recommended)."
+    },
+    "openrouter": {
+      "label": "OpenRouter (one key, every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/.continue/config.yaml",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+      ],
+      "notes": "Same config file as anthropic."
+    },
+    "ollama": {
+      "label": "Local Ollama models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/.continue/config.yaml",
+      "recommendedModels": [
+        { "id": "qwen2.5-coder:7b", "name": "Qwen2.5 Coder 7B", "note": "Good free coding model, 8GB RAM", "priceHint": "free" },
+        { "id": "llama3.2:3b", "name": "Llama 3.2 3B", "note": "Low-spec starter", "priceHint": "free" }
+      ],
+      "notes": "Continue officially documents Ollama as a local backend (docs.continue.dev guides, measured 2026-11-14); the endpoint is added in config.yaml or the config dropdown. No key involved."
+    }
+  },
+  "deepLinks": {
+    "console": "https://marketplace.visualstudio.com/items?itemName=Continue.continue",
+    "docs": "https://docs.continue.dev",
+    "tutorial": "https://docs.continue.dev/ide-extensions/install"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "code --list-extensions --show-versions",
+        "expect": "Continue\\.continue@\\d+\\.\\d+\\.\\d+"
+      },
+      "notes": "Check = local `code --list-extensions --show-versions` against the version the daily probe records; upgrade = re-run the install route with the newer VSIX (`--force` overwrites), or click Update in the Extensions panel."
+    },
+    "uninstall": {
+      "steps": [
+        "VS Code → Extensions (Ctrl/Cmd+Shift+X) → Continue → Uninstall, or run `code --uninstall-extension Continue.continue`",
+        "Delete only Continue's own folder under ~/.vscode/extensions (name starts with Continue.continue-) — other extensions live there too",
+        "Optionally keep or delete ~/.continue/config.yaml — it holds your model configuration, not secrets (keys are referenced from environment variables)"
+      ],
+      "residualPaths": [
+        "~/.vscode/extensions",
+        "~/.vscode-oss/extensions"
+      ],
+      "notes": "Only the Continue.continue-* subdirectory belongs to Continue; never delete the whole extensions directory. VSCodium uses ~/.vscode-oss. Project-side files (.continue/) inside your repositories are untouched."
+    },
+    "risk": {
+      "onUninstall": "Your local Continue configuration (~/.continue/config.yaml, including custom rules, model choices and prompts) is deleted — export it first if you want to keep it; API keys live in environment variables and are not touched. / 删除会连同本机的 Continue 配置（~/.continue/config.yaml，含自定义规则、模型选择与提示词）一并清除——请先导出备份；API Key 存在环境变量中，不受影响。",
+      "backupFirst": true
+    },
+    "dataPaths": [
+      "~/.continue",
+      "~/.vscode/extensions",
+      "~/.vscode-oss/extensions"
+    ]
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

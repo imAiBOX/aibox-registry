@@ -1,7 +1,7 @@
 {
-  "registryVersion": "2026.11.12.2",
-  "generatedAt": "2026-11-12T14:30:00Z",
-  "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12 (see README).",
+  "registryVersion": "2026.11.14.1",
+  "generatedAt": "2026-11-14T08:30:00Z",
+  "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12/14 (see README).",
   "apps": [
     {
       "id": "openclaw",
@@ -196,6 +196,66 @@
       "platforms": ["windows", "macos"],
       "status": "stable",
       "updatedAt": "2026-11-12T14:30:00Z"
+    },
+    {
+      "id": "continue",
+      "name": "Continue",
+      "category": "coding",
+      "tagline": {
+        "zh-CN": "VS Code 里的开源 AI 编程副驾：对话改代码，配置全存本地",
+        "en": "Open-source AI coding assistant in VS Code — chat-driven edits, config stays local"
+      },
+      "icon": "icons/continue.png",
+      "difficulty": 2,
+      "popularity": 4,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-14T08:30:00Z"
+    },
+    {
+      "id": "aider",
+      "name": "Aider",
+      "category": "coding",
+      "tagline": {
+        "zh-CN": "终端 AI 结对编程：一句话在 git 仓库里改代码",
+        "en": "AI pair programming in your terminal — one prompt, edits straight into your git repo"
+      },
+      "icon": "icons/aider.png",
+      "difficulty": 3,
+      "popularity": 5,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-14T08:30:00Z"
+    },
+    {
+      "id": "lobechat",
+      "name": "LobeHub",
+      "category": "chat",
+      "tagline": {
+        "zh-CN": "开源 AI 聊天工作台：多 Agent、多模型，桌面原生",
+        "en": "Open-source AI chat workspace — many agents, many models, native desktop app"
+      },
+      "icon": "icons/lobechat.png",
+      "difficulty": 1,
+      "popularity": 5,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-14T08:30:00Z"
+    },
+    {
+      "id": "comfyui",
+      "name": "ComfyUI",
+      "category": "media",
+      "tagline": {
+        "zh-CN": "节点式 AI 图像视频创作：便携版开箱即用",
+        "en": "Node-based AI image & video creation — portable build, ready out of the box"
+      },
+      "icon": "icons/comfyui.png",
+      "difficulty": 5,
+      "popularity": 5,
+      "platforms": ["windows", "macos"],
+      "status": "stable",
+      "updatedAt": "2026-11-14T08:30:00Z"
     }
   ]
 }

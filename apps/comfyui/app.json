@@ -1,0 +1,214 @@
+{
+  "id": "comfyui",
+  "name": "ComfyUI",
+  "version": "0.45.0",
+  "description": {
+    "zh-CN": "节点式 AI 图像 / 视频生成工作流：Windows 官方便携版解压即用（自带 Python 与 PyTorch），macOS 源码装进用户目录；海量官方工作流模板与模型随手可用。",
+    "en": "Node-based AI image / video generation workflows: the official Windows portable build runs after extraction (bundled Python + PyTorch), macOS installs from source into your home directory; a huge library of official workflow templates and models is ready to use."
+  },
+  "updatedAt": "2026-11-14T08:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "Comfy-Org/ComfyUI", "tag": "v0.45.0" }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": "not required (Python app; the Windows portable ships its own interpreter)",
+      "supported": "not required (Python app; the Windows portable ships its own interpreter)"
+    },
+    "disallowed": [],
+    "note": "Windows route = official portable7z (README measured 2026-11-14): bundles Python 3.13 + PyTorch CUDA 13.0, works on NVIDIA 20-series-and-up GPUs or CPU only, extracts with 7-Zip or Explorer on recent Windows (the script uses the built-in `tar`). ~2 GB download, several GB extracted — models add many more GB. macOS route = manual install from source: needs Python 3.10–3.13 (README: 3.13 very well supported) and pulls PyTorch + deps (~1–2 GB) into a venv under ~/ComfyUI. Other GPU vendors (AMD/Intel/Apple) use the manual install; AiBOX never escalates privileges."
+  },
+  "packages": [
+    {
+      "id": "comfyui-win",
+      "name": "ComfyUI Windows portable (NVIDIA / CPU, 7z)",
+      "kind": "app",
+      "version": "0.45.0",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "60c12e8c7af778047ad0413722dd3dc0f6ca773a41cbf5cb229ee9bc92c44a6f",
+      "sizeBytes": 2071479423,
+      "hashSource": "GitHub API release asset digest (zero-download; gh-proxy channel HEAD 200 with Content-Length = sizeBytes, 2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/Comfy-Org/ComfyUI/releases/download/v0.45.0/ComfyUI_windows_portable_nvidia.7z",
+          "region": "global",
+          "operator": "comfyorg",
+          "note": "GitHub Releases direct (daily CI HEAD; 2026-11-14 measured 302 → 200 / Content-Length = sizeBytes). ghfast.top answered 403 for every Comfy-Org asset (measured 2026-11-14, same behavior as the Ollama profile) — only the gh-proxy channel is shipped."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/Comfy-Org/ComfyUI/releases/download/v0.45.0/ComfyUI_windows_portable_nvidia.7z",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "New-Item -ItemType Directory -Force -Path \"$env:LOCALAPPDATA\\Programs\" | Out-Null; tar -xf \"$env:USERPROFILE\\.aibox\\cache\\downloads\\ComfyUI_windows_portable_nvidia.7z\" -C \"$env:LOCALAPPDATA\\Programs\""
+        ],
+        "notes": "Extracts the hash-verified official portable into %LOCALAPPDATA%\\Programs\\ComfyUI_windows_portable (per-user, zero admin, no Python install needed — the portable ships python_embeded). Uses Windows' built-in `tar`, which reads 7z on recent Windows (README: extract with 7-Zip or Explorer on recent Windows); if `tar` fails, install 7-Zip and extract manually. First run: double-click run_nvidia_gpu.bat (or run_cpu.bat under ComfyUI\\advanced for CPU-only). ~2 GB download. TODO real-machine verification.",
+        "probe": {
+          "cmd": "type \"%LOCALAPPDATA%\\Programs\\ComfyUI_windows_portable\\ComfyUI\\comfyui_version.py\"",
+          "expect": "__version__\\s*=\\s*['\"]?\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "comfyui-mac",
+      "name": "ComfyUI source archive (macOS, venv install)",
+      "kind": "app",
+      "version": "0.45.0",
+      "platforms": ["macos"],
+      "arch": "any",
+      "sha256": "408670ede5da641b30a2b3f1e39e5b84d75c12357e75695416a6e6cc5bcbc4bb",
+      "sizeBytes": 12934320,
+      "hashSource": "Tag source archive fully downloaded and hashed locally; gh-proxy channel HEAD 200 (2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/Comfy-Org/ComfyUI/archive/refs/tags/v0.45.0.tar.gz",
+          "region": "global",
+          "operator": "comfyorg",
+          "note": "GitHub tag source archive (2026-11-14 measured: full download sha256 recorded; codeload answers HEAD without Content-Length, so the size check is digest-based). ghfast.top answered 403 for Comfy-Org archives (measured 2026-11-14) — only the gh-proxy channel is shipped."
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/Comfy-Org/ComfyUI/archive/refs/tags/v0.45.0.tar.gz",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/v0.45.0.tar.gz\" -C \"$S\"; rm -rf \"$HOME/ComfyUI\"; mv \"$S/ComfyUI-0.45.0\" \"$HOME/ComfyUI\"; rmdir \"$S\"; cd \"$HOME/ComfyUI\"; python3 -m venv .venv; .venv/bin/pip install -r requirements.txt"
+        ],
+        "notes": "Unpacks the hash-verified source archive to ~/ComfyUI (official manual-install layout), creates a venv inside it and installs requirements — everything under the user home, zero admin. Prerequisites: Python 3.10–3.13 (`python3 --version`) and several GB of disk; the dependency pull includes PyTorch (~1–2 GB, PyPI default index — CN: PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple). First run: `cd ~/ComfyUI && .venv/bin/python main.py` → http://127.0.0.1:8188 (port measured in main.py). TODO real-machine verification.",
+        "probe": {
+          "cmd": "cat ~/ComfyUI/comfyui_version.py",
+          "expect": "__version__\\s*=\\s*['\"]?\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official direct install (portable 7z / source archive)",
+      "steps": ["comfyui-win", "comfyui-mac"],
+      "note": "Windows: extract the official portable with the built-in tar (no admin, no Python install). macOS: unpack the tag archive into ~/ComfyUI and install requirements into a local venv. Steps contain both platform packages and are filtered by machine arch."
+    },
+    "proxy-install": {
+      "label": "CN accelerated install (gh-proxy channel)",
+      "steps": ["comfyui-win", "comfyui-mac"],
+      "note": "Same packages; the download layer prefers the gh-proxy channel in CN and falls back to direct automatically (ghfast.top does not serve Comfy-Org assets — measured 403 on 2026-11-14)."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata (asset digest field for the portable, full local download for the source archive).",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels do not use ghfast (measured 403 for every Comfy-Org asset on 2026-11-14 — re-admit only after a retest)."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Measured 200 / same size against this app's portable 7z asset (2026-11-14)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "local": {
+      "label": "Local models (downloaded checkpoints, free, offline)",
+      "authType": "local",
+      "configTarget": "~/ComfyUI",
+      "recommendedModels": [
+        { "id": "sdxl", "name": "SDXL", "note": "General-purpose image model (README model list)", "priceHint": "free" },
+        { "id": "flux.1", "name": "Flux.1", "note": "High-quality image model (README model list)", "priceHint": "free" },
+        { "id": "wan2.1", "name": "Wan 2.1", "note": "Video generation (README model list)", "priceHint": "free" }
+      ],
+      "notes": "ComfyUI's native mode: model checkpoints drop into ~/ComfyUI/models/<type> on macOS or ComfyUI_windows_portable\\ComfyUI\\models\\ on Windows (README, measured 2026-11-14); no key, fully local. extra_model_paths.yaml lets you point at model folders you already have."
+    },
+    "google": {
+      "label": "Google partner nodes (cloud image generation)",
+      "authType": "api-key",
+      "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
+      "configTarget": "~/ComfyUI",
+      "getKeyUrl": "https://aistudio.google.com/apikey",
+      "recommendedModels": [
+        { "id": "gemini-image", "name": "Gemini image (Nano Banana)", "note": "Closed-source partner node (README partner list)", "priceHint": "paid" }
+      ],
+      "notes": "ComfyUI ships official API nodes (comfy_api_nodes/nodes_gemini.py measured in the v0.45.0 tree) for closed-source partner models such as Nano Banana; the key is pasted into the API node inside the workflow, not written by AiBOX. configTarget points at the install directory where workflows and settings live."
+    }
+  },
+  "deepLinks": {
+    "console": "https://www.comfy.org/download",
+    "docs": "https://docs.comfy.org",
+    "tutorial": "https://docs.comfy.org/tutorials"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "type \"%LOCALAPPDATA%\\Programs\\ComfyUI_windows_portable\\ComfyUI\\comfyui_version.py\"",
+        "expect": "__version__\\s*=\\s*['\"]?\\d+\\.\\d+\\.\\d+"
+      },
+      "notes": "Windows: extract the newer portable over the old folder (keep the models folder — it lives inside ComfyUI\\models). macOS: re-run the install route with the newer tag archive (re-extract + `.venv/bin/pip install -r requirements.txt`), or `git pull` if you cloned. Check = read comfyui_version.py against the version the daily probe records; macOS probe: `cat ~/ComfyUI/comfyui_version.py`."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows: delete %LOCALAPPDATA%\\Programs\\ComfyUI_windows_portable (portable — no installer entry, no admin needed)",
+        "macOS: delete ~/ComfyUI (venv and source live together)",
+        "Back up first: downloaded checkpoints/workflows live inside the install folder and can be tens of GB"
+      ],
+      "residualPaths": [
+        "~/ComfyUI",
+        "~/AppData/Local/Programs/ComfyUI_windows_portable"
+      ],
+      "notes": "Everything is under the user home; nothing outside those two folders belongs to ComfyUI. If you keep models elsewhere (extra_model_paths.yaml), they are never touched."
+    },
+    "risk": {
+      "onUninstall": "Deletes the install folder including downloaded models, workflows and custom nodes — these can be tens of GB and are not re-downloadable one-click; export/backup them first. / 会删除安装目录内的模型、工作流与自定义节点——动辄几十 GB 且无法一键找回，请先备份。",
+      "backupFirst": true
+    },
+    "dataPaths": [
+      "~/ComfyUI",
+      "~/AppData/Local/Programs/ComfyUI_windows_portable"
+    ]
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

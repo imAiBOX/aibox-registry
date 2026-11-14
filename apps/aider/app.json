@@ -1,0 +1,234 @@
+{
+  "id": "aider",
+  "name": "Aider",
+  "version": "0.86.2",
+  "description": {
+    "zh-CN": "终端里的 AI 结对编程助手：在你的 git 仓库里直接对话改文件、自动提交，支持几乎所有主流云端模型和本地 Ollama；全局配置写在 ~/.aider.conf.yml。",
+    "en": "AI pair programmer in your terminal — chats with you and edits files straight inside your git repo (auto-commits as it works); works with every major cloud model or local Ollama, global config lives in ~/.aider.conf.yml."
+  },
+  "updatedAt": "2026-11-14T08:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "Aider-AI/aider", "tag": "v0.86.0" }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": "not required (Python CLI)",
+      "supported": "not required (Python CLI)"
+    },
+    "disallowed": [],
+    "note": "Hard prerequisite: Python 3.10–3.12 (PyPI requires_python \">=3.10,<3.13\" measured 2026-11-14). Windows: a real `python` on PATH (python.org per-user install — zero admin; the Microsoft Store stub does not count). macOS: `python3` (CLT ships 3.9 on older systems — install python.org 3.12 if `python3 --version` is too old). Install is `pip install --user`, fully inside the user profile, no admin. Release channel note: aider publishes to PyPI (0.86.2 measured there); its GitHub Releases latest tag is v0.86.0, so the daily probe tracks the GitHub tag while the package version tracks PyPI."
+  },
+  "packages": [
+    {
+      "id": "aider-win",
+      "name": "aider-chat wheel (PyPI, user-level pip)",
+      "kind": "app",
+      "version": "0.86.2",
+      "platforms": ["windows"],
+      "arch": "any",
+      "sha256": "64f6a0c66c9f4633ad9f479bca3e64ebcba02b9da03c6b604b74a44736b2416e",
+      "sizeBytes": 377009,
+      "hashSource": "PyPI JSON API digest, wheel fully downloaded and hashed locally; TUNA mirror served byte-identical content (2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://files.pythonhosted.org/packages/75/f7/e20749d9a510673e7adf910b005e3efe4ceaf9c194f1dd40d6931a3f34b9/aider_chat-0.86.2-py3-none-any.whl",
+          "region": "global",
+          "operator": "pypi",
+          "note": "Official PyPI file host (2026-11-14 measured 200 / sha256 verified on full download)"
+        },
+        {
+          "type": "mirror",
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/packages/75/f7/e20749d9a510673e7adf910b005e3efe4ceaf9c194f1dd40d6931a3f34b9/aider_chat-0.86.2-py3-none-any.whl",
+          "region": "cn",
+          "operator": "mirrors.tuna.tsinghua.edu.cn",
+          "note": "Tsinghua TUNA PyPI mirror (2026-11-14 measured 200 / Content-Length = sizeBytes / full download byte-identical to PyPI)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "python -m pip install --user \"$env:USERPROFILE\\.aibox\\cache\\downloads\\aider_chat-0.86.2-py3-none-any.whl\""
+        ],
+        "notes": "Installs the hash-verified wheel into the per-user site-packages (`--user`, zero admin). Dependencies (litellm, etc.) are resolved from PyPI at install time — in CN, prefix with `PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple` if the default index is slow. The `aider` console script lands in the user Scripts directory; if it is not on PATH, run `python -m aider`. TODO real-machine verification.",
+        "probe": {
+          "cmd": "python -m pip show aider-chat",
+          "expect": "Name:\\s*aider-chat\\s+Version:\\s*\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    {
+      "id": "aider-mac",
+      "name": "aider-chat wheel (PyPI, user-level pip)",
+      "kind": "app",
+      "version": "0.86.2",
+      "platforms": ["macos"],
+      "arch": "any",
+      "sha256": "64f6a0c66c9f4633ad9f479bca3e64ebcba02b9da03c6b604b74a44736b2416e",
+      "sizeBytes": 377009,
+      "hashSource": "PyPI JSON API digest, wheel fully downloaded and hashed locally; TUNA mirror served byte-identical content (2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://files.pythonhosted.org/packages/75/f7/e20749d9a510673e7adf910b005e3efe4ceaf9c194f1dd40d6931a3f34b9/aider_chat-0.86.2-py3-none-any.whl",
+          "region": "global",
+          "operator": "pypi",
+          "note": "Official PyPI file host (2026-11-14 measured 200 / sha256 verified on full download)"
+        },
+        {
+          "type": "mirror",
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/packages/75/f7/e20749d9a510673e7adf910b005e3efe4ceaf9c194f1dd40d6931a3f34b9/aider_chat-0.86.2-py3-none-any.whl",
+          "region": "cn",
+          "operator": "mirrors.tuna.tsinghua.edu.cn",
+          "note": "Tsinghua TUNA PyPI mirror (2026-11-14 measured 200 / Content-Length = sizeBytes / full download byte-identical to PyPI)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; python3 -m pip install --user \"$HOME/.aibox/cache/downloads/aider_chat-0.86.2-py3-none-any.whl\""
+        ],
+        "notes": "Same hash-verified wheel via `pip3 --user` (zero admin; lands in ~/Library/Python/<ver>/lib/python/site-packages). Requires Python 3.10–3.12 (`python3 --version`); deps resolve from PyPI (TUNA: export PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple). If `aider` is not on PATH, run `python3 -m aider`. TODO macOS real-machine verification.",
+        "probe": {
+          "cmd": "python3 -m pip show aider-chat",
+          "expect": "Name:\\s*aider-chat\\s+Version:\\s*\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["mirror-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official PyPI install (hash-verified wheel, user-level pip)",
+      "steps": ["aider-win", "aider-mac"],
+      "note": "Downloads the official PyPI wheel and installs it with `pip install --user`; steps contain both platform packages and are filtered by machine arch. Dependency resolution uses the default PyPI index."
+    },
+    "mirror-install": {
+      "label": "CN accelerated install (TUNA PyPI mirror channel)",
+      "steps": ["aider-win", "aider-mac"],
+      "note": "Same packages; the download layer prefers the Tsinghua TUNA mirror channel in CN and falls back to direct automatically. The install step itself can additionally export PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple for fast dependency resolution."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); this app ships no GitHub assets — the wheel hash came from the PyPI JSON API digest plus a full local download, cross-checked byte-identical against the TUNA mirror (2026-11-14).",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on files.pythonhosted.org / TUNA and do not route through it."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on files.pythonhosted.org / TUNA and do not route through it."
+      }
+    ]
+  },
+  "modelProviders": {
+    "openai": {
+      "label": "OpenAI official API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/.aider.conf.yml",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong default for edits", "priceHint": "medium" }
+      ],
+      "notes": "Aider reads OPENAI_API_KEY from the environment (official \"Connecting to LLMs\" docs, measured 2026-11-14); options can also be set in ~/.aider.conf.yml (searched in git root, cwd or home — official config docs). AiBOX never writes keys to disk."
+    },
+    "anthropic": {
+      "label": "Anthropic official API (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/.aider.conf.yml",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced everyday default", "priceHint": "medium" }
+      ],
+      "notes": "ANTHROPIC_API_KEY via environment variable; same config file as openai."
+    },
+    "openrouter": {
+      "label": "OpenRouter (one key, every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/.aider.conf.yml",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+      ],
+      "notes": "OPENROUTER_API_KEY via environment variable; aider documents OpenRouter among its supported LLMs."
+    },
+    "ollama": {
+      "label": "Local Ollama models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/.aider.conf.yml",
+      "recommendedModels": [
+        { "id": "qwen2.5-coder:7b", "name": "Qwen2.5 Coder 7B", "note": "Good free coding model, 8GB RAM", "priceHint": "free" },
+        { "id": "deepseek-r1:7b", "name": "DeepSeek R1 7B", "note": "Local reasoning model", "priceHint": "free" }
+      ],
+      "notes": "Aider officially documents Ollama as a local backend (Connecting to LLMs → Ollama); point --model at ollama/<name> or set it in ~/.aider.conf.yml. No key involved."
+    }
+  },
+  "deepLinks": {
+    "console": "https://aider.chat",
+    "docs": "https://aider.chat/docs/usage",
+    "tutorial": "https://aider.chat/docs/config"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "self-update-cmd",
+      "probe": {
+        "cmd": "python -m pip show aider-chat",
+        "expect": "Name:\\s*aider-chat\\s+Version:\\s*\\d+\\.\\d+\\.\\d+"
+      },
+      "notes": "Upgrade = `python -m pip install --upgrade --user aider-chat` (Windows: `python`), or re-run the AiBOX install route with the newer wheel. Check = `python -m pip show aider-chat` against the version the daily probe records. macOS uses `python3`."
+    },
+    "uninstall": {
+      "steps": [
+        "Uninstall the package: `python -m pip uninstall -y aider-chat` (macOS: `python3 -m pip ...`)",
+        "Delete the global config if you created one: ~/.aider.conf.yml",
+        "Optional: remove history/log files inside your repositories — .aider.input.history, .aider.chat.history.md (they live in the project, not the home directory, so AiBOX never touches them)"
+      ],
+      "residualPaths": [
+        "~/.aider.conf.yml"
+      ],
+      "notes": "pip --user only removes what it installed; virtualenvs created by other tools are unaffected. If you installed aider yourself into a venv, uninstall inside that venv instead."
+    },
+    "risk": {
+      "onUninstall": "The tool and its global config (~/.aider.conf.yml) are removed — if you pasted API keys or model settings there, export them first; chat history files inside your repositories are not touched by AiBOX. / 会删除 aider 程序本体与全局配置 ~/.aider.conf.yml——如果里面写了 API Key 或模型设置请先导出；各仓库里的对话历史文件 AiBOX 不会动。",
+      "backupFirst": true
+    },
+    "dataPaths": [
+      "~/.aider.conf.yml"
+    ]
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}

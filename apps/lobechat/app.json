@@ -1,0 +1,301 @@
+{
+  "id": "lobechat",
+  "name": "LobeHub",
+  "version": "2.3.3",
+  "description": {
+    "zh-CN": "开源 AI 聊天工作台的官方桌面版：一个客户端接入 OpenAI / Anthropic / Google / OpenRouter 等多家模型和本地 Ollama，多 Agent、记忆、MCP 连接器都在本地应用里，凭据加密存储。",
+    "en": "Official desktop app of the open-source AI chat workspace — one client for OpenAI / Anthropic / Google / OpenRouter and local Ollama, with multi-agent chats, memory and MCP connectors; credentials are stored encrypted on your machine."
+  },
+  "updatedAt": "2026-11-14T08:30:00Z",
+  "upstream": {
+    "github": [
+      { "repo": "lobehub/lobehub", "tag": "v2.3.3" }
+    ]
+  },
+  "runtime": {
+    "node": {
+      "recommended": "not required (Electron app with bundled runtime)",
+      "supported": "not required (Electron app with bundled runtime)"
+    },
+    "disallowed": [],
+    "note": "Self-contained Electron desktop app (desktop README, measured 2026-11-14): no system Node, no Docker — unlike the self-hosted web edition, the desktop installer is per-user and needs no admin. Built-in auto-update; macOS builds are notarized. The desktop app talks to LobeHub's services for sign-in/sync — cloud models and sync still need a network connection (official docs)."
+  },
+  "packages": [
+    {
+      "id": "lobechat-win-x64",
+      "name": "LobeHub desktop installer (Windows x64, NSIS)",
+      "kind": "app",
+      "version": "2.3.3",
+      "platforms": ["windows"],
+      "arch": "x64",
+      "sha256": "5d50dbd64e1282b99bfea3ee0b82b3ba4bdeb72a65d3a2b25b27fb9ee5744d1a",
+      "sizeBytes": 155803609,
+      "hashSource": "GitHub API release asset digest (zero-download; all channels HEAD 200 with Content-Length = sizeBytes, 2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-setup.exe",
+          "region": "global",
+          "operator": "lobehub",
+          "note": "GitHub Releases direct (daily CI HEAD; 2026-11-14 measured 200 / Content-Length = sizeBytes)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-setup.exe",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-setup.exe",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "nsis-silent",
+        "args": ["/S"],
+        "notes": "electron-builder assisted NSIS (oneClick:false measured in apps/desktop/electron-builder.mjs) — `/S` is electron-builder's official silent flag; default per-user install dir %LOCALAPPDATA%\\Programs\\LobeHub, no admin. TODO real-machine verification of the silent flag and install path.",
+        "probe": {
+          "cmd": "\"%LOCALAPPDATA%\\Programs\\LobeHub\\LobeHub.exe\" --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "lobechat-mac-arm64",
+      "name": "LobeHub desktop (macOS Apple Silicon, DMG)",
+      "kind": "app",
+      "version": "2.3.3",
+      "platforms": ["macos"],
+      "arch": "arm64",
+      "sha256": "4593844ec3be3ea1b91ddde01b5f7dc5b60c826e7b082116fb95bfbb6b3ff8ac",
+      "sizeBytes": 167790684,
+      "hashSource": "GitHub API release asset digest (zero-download; gh-proxy channel HEAD 200 with Content-Length = sizeBytes, 2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-arm64.dmg",
+          "region": "global",
+          "operator": "lobehub",
+          "note": "GitHub Releases direct (daily CI HEAD; asset digest from the GitHub API)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-arm64.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-arm64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/LobeHub-2.3.3-arm64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "dmg mount + copy LobeHub.app + detach (hdiutil convention, destName = URL basename; same shape as Chatbox/Jan). Signed & notarized build (desktop README). TODO macOS real-machine verification (Gatekeeper/quarantine, mount cleanup).",
+        "probe": {
+          "cmd": "/Applications/LobeHub.app/Contents/MacOS/LobeHub --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    },
+    {
+      "id": "lobechat-mac-x64",
+      "name": "LobeHub desktop (macOS Intel, DMG)",
+      "kind": "app",
+      "version": "2.3.3",
+      "platforms": ["macos"],
+      "arch": "x64",
+      "sha256": "809107fc6c320d8060982e9405af8c493fae62eacb3c3a71525a7a6db7272337",
+      "sizeBytes": 172836136,
+      "hashSource": "GitHub API release asset digest (zero-download; ghfast.top and gh-proxy.com channels HEAD 200 with Content-Length = sizeBytes, 2026-11-14 measured)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-x64.dmg",
+          "region": "global",
+          "operator": "lobehub",
+          "note": "GitHub Releases direct (daily CI HEAD; asset digest from the GitHub API)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-x64.dmg",
+          "region": "cn",
+          "operator": "ghfast.top",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.3/LobeHub-2.3.3-x64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy.com",
+          "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
+        }
+      ],
+      "install": {
+        "type": "script",
+        "args": [
+          "sh",
+          "-c",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/LobeHub-2.3.3-x64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "Same dmg flow as arm64 (Intel Macs). TODO macOS real-machine verification.",
+        "probe": {
+          "cmd": "/Applications/LobeHub.app/Contents/MacOS/LobeHub --version",
+          "expect": "(\\d+\\.\\d+\\.\\d+)"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": ["direct-install"],
+    "cn": ["proxy-install"]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Official direct install (GitHub release installer)",
+      "steps": ["lobechat-win-x64", "lobechat-mac-arm64", "lobechat-mac-x64"],
+      "note": "Downloads the official installer/dmg and installs per-user (NSIS /S on Windows, hdiutil + /Applications on macOS); steps contain all platform packages and are filtered by machine arch."
+    },
+    "proxy-install": {
+      "label": "CN accelerated install (ghfast/gh-proxy channels)",
+      "steps": ["lobechat-win-x64", "lobechat-mac-arm64", "lobechat-mac-x64"],
+      "note": "Same packages; the download layer prefers proxy channels in CN and falls back to direct automatically."
+    }
+  },
+  "netConfig": {
+    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata (asset digest field).",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Measured 200 / same size against this app's setup.exe and both DMG assets (2026-11-14)"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Measured 200 / same size against this app's setup.exe and both DMG assets (2026-11-14)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "openai": {
+      "label": "OpenAI official API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Roaming/LobeHub",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong on complex tasks", "priceHint": "medium" }
+      ],
+      "notes": "Keys are entered in the app: Settings → AI Providers → OpenAI (official docs, measured 2026-11-14) and stored encrypted by the desktop app (\"encrypted token storage\", desktop README). configTarget is the Electron per-user data directory named after productName (electron-builder.mjs comment); on macOS it is ~/Library/Application Support/LobeHub. AiBOX never writes keys to disk."
+    },
+    "anthropic": {
+      "label": "Anthropic official API (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Roaming/LobeHub",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced everyday default", "priceHint": "medium" }
+      ],
+      "notes": "Same provider page and encrypted storage as openai."
+    },
+    "google": {
+      "label": "Google Gemini",
+      "authType": "api-key",
+      "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
+      "configTarget": "~/AppData/Roaming/LobeHub",
+      "getKeyUrl": "https://aistudio.google.com/apikey",
+      "recommendedModels": [
+        { "id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+      ],
+      "notes": "Same provider page and encrypted storage as openai."
+    },
+    "openrouter": {
+      "label": "OpenRouter (one key, every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/AppData/Roaming/LobeHub",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
+        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+      ],
+      "notes": "Same provider page and encrypted storage as openai."
+    },
+    "ollama": {
+      "label": "Local Ollama models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/AppData/Roaming/LobeHub",
+      "recommendedModels": [
+        { "id": "qwen2.5-coder:7b", "name": "Qwen2.5 Coder 7B", "note": "Good free model, 8GB RAM", "priceHint": "free" },
+        { "id": "llama3.2:3b", "name": "Llama 3.2 3B", "note": "Low-spec starter", "priceHint": "free" }
+      ],
+      "notes": "LobeHub documents Ollama (and LM Studio / vLLM) as local inference backends; enter the local endpoint on the same Providers page. No key involved."
+    }
+  },
+  "deepLinks": {
+    "console": "https://app.lobehub.com",
+    "docs": "https://lobehub.com/docs/usage/getting-started/get-lobehub",
+    "tutorial": "https://lobehub.com/docs/usage/providers"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "\"%LOCALAPPDATA%\\Programs\\LobeHub\\LobeHub.exe\" --version",
+        "expect": "(\\d+\\.\\d+\\.\\d+)"
+      },
+      "notes": "The desktop app auto-updates (built-in updater, desktop README); check = `LobeHub.exe --version` against the version the daily probe records; upgrade on demand = re-run the install route with the newer release (NSIS /S and dmg flows overwrite) or use the in-app updater. macOS probe uses /Applications/LobeHub.app/Contents/MacOS/LobeHub --version."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows: Settings → Apps → LobeHub → Uninstall (or run the bundled uninstaller under %LOCALAPPDATA%\\Programs\\LobeHub)",
+        "macOS: quit LobeHub and drag LobeHub.app from /Applications to the Trash",
+        "Optionally delete the per-user data directory (local conversations and stored sessions) — sign-in content synced to your account stays there"
+      ],
+      "residualPaths": [
+        "~/AppData/Local/Programs/LobeHub",
+        "~/Library/Application Support/LobeHub"
+      ],
+      "notes": "NSIS installs per-user under %LOCALAPPDATA%\\Programs\\LobeHub (electron-builder default, oneClick:false assisted installer); the Electron data directory is %APPDATA%\\LobeHub on Windows and ~/Library/Application Support/LobeHub on macOS."
+    },
+    "risk": {
+      "onUninstall": "Local-only conversations, drafts and the stored login session are deleted with the data directory — content that exists only on this device does not sync automatically, so export or back it up first. / 会删除本地对话、草稿与已保存的登录会话——只存在这台设备上的内容不会自动同步到云端，请先导出备份。",
+      "backupFirst": true
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/LobeHub",
+      "~/Library/Application Support/LobeHub"
+    ]
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}
