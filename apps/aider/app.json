@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-14T08:30:00Z",
   "upstream": {
     "github": [
-      { "repo": "Aider-AI/aider", "tag": "v0.86.0" }
+      {
+        "repo": "Aider-AI/aider",
+        "tag": "v0.86.0"
+      }
     ]
   },
   "runtime": {
@@ -26,11 +29,13 @@
       "name": "aider-chat wheel (PyPI, user-level pip)",
       "kind": "app",
       "version": "0.86.2",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "any",
       "sha256": "64f6a0c66c9f4633ad9f479bca3e64ebcba02b9da03c6b604b74a44736b2416e",
       "sizeBytes": 377009,
-      "hashSource": "PyPI JSON API digest, wheel fully downloaded and hashed locally; TUNA mirror served byte-identical content (2026-11-14 measured)",
+      "hashSource": "PyPI JSON API digest; wheel fully downloaded and hashed locally (2026-11-14 measured)",
       "channels": [
         {
           "type": "direct",
@@ -38,13 +43,6 @@
           "region": "global",
           "operator": "pypi",
           "note": "Official PyPI file host (2026-11-14 measured 200 / sha256 verified on full download)"
-        },
-        {
-          "type": "mirror",
-          "url": "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/packages/75/f7/e20749d9a510673e7adf910b005e3efe4ceaf9c194f1dd40d6931a3f34b9/aider_chat-0.86.2-py3-none-any.whl",
-          "region": "cn",
-          "operator": "mirrors.tuna.tsinghua.edu.cn",
-          "note": "Tsinghua TUNA PyPI mirror (2026-11-14 measured 200 / Content-Length = sizeBytes / full download byte-identical to PyPI)"
         }
       ],
       "install": {
@@ -69,11 +67,13 @@
       "name": "aider-chat wheel (PyPI, user-level pip)",
       "kind": "app",
       "version": "0.86.2",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "any",
       "sha256": "64f6a0c66c9f4633ad9f479bca3e64ebcba02b9da03c6b604b74a44736b2416e",
       "sizeBytes": 377009,
-      "hashSource": "PyPI JSON API digest, wheel fully downloaded and hashed locally; TUNA mirror served byte-identical content (2026-11-14 measured)",
+      "hashSource": "PyPI JSON API digest; wheel fully downloaded and hashed locally (2026-11-14 measured)",
       "channels": [
         {
           "type": "direct",
@@ -81,13 +81,6 @@
           "region": "global",
           "operator": "pypi",
           "note": "Official PyPI file host (2026-11-14 measured 200 / sha256 verified on full download)"
-        },
-        {
-          "type": "mirror",
-          "url": "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/packages/75/f7/e20749d9a510673e7adf910b005e3efe4ceaf9c194f1dd40d6931a3f34b9/aider_chat-0.86.2-py3-none-any.whl",
-          "region": "cn",
-          "operator": "mirrors.tuna.tsinghua.edu.cn",
-          "note": "Tsinghua TUNA PyPI mirror (2026-11-14 measured 200 / Content-Length = sizeBytes / full download byte-identical to PyPI)"
         }
       ],
       "install": {
@@ -107,24 +100,30 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["mirror-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "direct-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "Official PyPI install (hash-verified wheel, user-level pip)",
-      "steps": ["aider-win", "aider-mac"],
-      "note": "Downloads the official PyPI wheel and installs it with `pip install --user`; steps contain both platform packages and are filtered by machine arch. Dependency resolution uses the default PyPI index."
-    },
-    "mirror-install": {
-      "label": "CN accelerated install (TUNA PyPI mirror channel)",
-      "steps": ["aider-win", "aider-mac"],
-      "note": "Same packages; the download layer prefers the Tsinghua TUNA mirror channel in CN and falls back to direct automatically. The install step itself can additionally export PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple for fast dependency resolution."
+      "steps": [
+        "aider-win",
+        "aider-mac"
+      ],
+      "note": "Downloads the official PyPI wheel and installs it with `pip install --user`; steps contain both platform packages and are filtered by machine arch. No CN gateway applies (PyPI asset, not GitHub) — CN users get fast dependency resolution by exporting PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple at install time."
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
-    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); this app ships no GitHub assets — the wheel hash came from the PyPI JSON API digest plus a full local download, cross-checked byte-identical against the TUNA mirror (2026-11-14).",
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); this app ships no GitHub assets — the wheel hash came from the PyPI JSON API digest plus a full local download (2026-11-14).",
     "proxyGateways": [
       {
         "prefix": "https://ghfast.top/",
@@ -148,7 +147,12 @@
       "configTarget": "~/.aider.conf.yml",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
-        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong default for edits", "priceHint": "medium" }
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "Strong default for edits",
+          "priceHint": "medium"
+        }
       ],
       "notes": "Aider reads OPENAI_API_KEY from the environment (official \"Connecting to LLMs\" docs, measured 2026-11-14); options can also be set in ~/.aider.conf.yml (searched in git root, cwd or home — official config docs). AiBOX never writes keys to disk."
     },
@@ -159,7 +163,12 @@
       "configTarget": "~/.aider.conf.yml",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
-        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced everyday default", "priceHint": "medium" }
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "Balanced everyday default",
+          "priceHint": "medium"
+        }
       ],
       "notes": "ANTHROPIC_API_KEY via environment variable; same config file as openai."
     },
@@ -170,8 +179,18 @@
       "configTarget": "~/.aider.conf.yml",
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
-        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
-        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Smart and balanced",
+          "priceHint": "medium"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "Cheap and fast",
+          "priceHint": "low"
+        }
       ],
       "notes": "OPENROUTER_API_KEY via environment variable; aider documents OpenRouter among its supported LLMs."
     },
@@ -180,8 +199,18 @@
       "authType": "local",
       "configTarget": "~/.aider.conf.yml",
       "recommendedModels": [
-        { "id": "qwen2.5-coder:7b", "name": "Qwen2.5 Coder 7B", "note": "Good free coding model, 8GB RAM", "priceHint": "free" },
-        { "id": "deepseek-r1:7b", "name": "DeepSeek R1 7B", "note": "Local reasoning model", "priceHint": "free" }
+        {
+          "id": "qwen2.5-coder:7b",
+          "name": "Qwen2.5 Coder 7B",
+          "note": "Good free coding model, 8GB RAM",
+          "priceHint": "free"
+        },
+        {
+          "id": "deepseek-r1:7b",
+          "name": "DeepSeek R1 7B",
+          "note": "Local reasoning model",
+          "priceHint": "free"
+        }
       ],
       "notes": "Aider officially documents Ollama as a local backend (Connecting to LLMs → Ollama); point --model at ollama/<name> or set it in ~/.aider.conf.yml. No key involved."
     }

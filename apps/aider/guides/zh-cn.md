@@ -22,8 +22,7 @@
 ### 路线 A：用 AiBOX 安装（推荐）
 
 1. 打开 AiBOX → 应用目录 → **Aider** → 点「安装」
-2. AiBOX 从 PyPI 下载官方 `aider-chat` wheel（带 sha256 校验，国内自动走 TUNA 镜像），
-   执行 `pip install --user`——**全程无需管理员**
+2. AiBOX 从 PyPI 下载官方 `aider-chat` wheel（带 sha256 校验），执行 `pip install --user`——**全程无需管理员**
 3. 下面"验证"一节能打印版本号即装好
 
 ### 路线 B：手动安装（官方渠道）

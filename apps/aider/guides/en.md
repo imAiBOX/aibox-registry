@@ -22,7 +22,7 @@ One line: **Aider (50k+ stars on GitHub) is an AI pair programmer that lives in 
 ### Route A: install with AiBOX (recommended)
 
 1. Open AiBOX → app directory → **Aider** → **Install**
-2. AiBOX downloads the official `aider-chat` wheel from PyPI (sha256-verified; CN traffic auto-uses the TUNA mirror) and runs `pip install --user` — **zero admin rights**
+2. AiBOX downloads the official `aider-chat` wheel from PyPI (sha256-verified) and runs `pip install --user` — **zero admin rights**
 3. Verification command below printing your version means it's installed
 
 ### Route B: manual install (official channels)
