@@ -33,8 +33,8 @@
         "windows"
       ],
       "arch": "x64",
-      "sha256": "31dd1373eae71908cac5326d4ffd8adc85d131ff509916df30b2836e4e231b0f",
-      "sizeBytes": 94627,
+      "sha256": "9bd2c1402427414a2ac9a3c3f33c66d78073ba81bb2d15634c13a52e9615d2d7",
+      "sizeBytes": 94623,
       "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.ps1 full download sha256 measured locally (2026-11-12)",
       "channels": [
         {
