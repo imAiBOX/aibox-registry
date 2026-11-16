@@ -19,11 +19,11 @@
       },
       {
         "repo": "openclaw/openclaw-windows-node",
-        "tag": "v2026.11.4"
+        "tag": "v2026.11.1"
       },
       {
         "repo": "git-for-windows/git",
-        "tag": "v2026.11.4"
+        "tag": "v2.56.1.windows.1"
       }
     ]
   },
@@ -184,7 +184,7 @@
         },
         {
           "type": "mirror",
-          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.3.tgz",
+          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.4.tgz",
           "region": "cn",
           "operator": "alibaba",
           "note": "阿里 npmmirror（5.9.4 矩阵 CN 主；EXECUTE 经 packageManagerOverrides 注入 --registry，不改用户 npmrc）"
