@@ -309,23 +309,6 @@
       "updatedAt": "2026-11-14T08:30:00Z"
     },
     {
-      "id": "roo-code",
-      "name": "Roo Code",
-      "category": "coding",
-      "tagline": {
-        "zh-CN": "VSCode 里的 AI 编码助手扩展（Cline 系）",
-        "en": "AI coding assistant extension for VSCode (Cline family)"
-      },
-      "icon": "icons/roo-code.png",
-      "difficulty": 1,
-      "popularity": 3,
-      "platforms": [
-        "windows",
-        "macos"
-      ],
-      "status": "stable"
-    },
-    {
       "id": "sillytavern",
       "name": "SillyTavern",
       "category": "chat",
