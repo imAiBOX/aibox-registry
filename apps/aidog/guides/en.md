@@ -45,7 +45,7 @@ aidog setup                        # guided wizard: fills only the missing slots
 `aidog setup` only prompts for slots that are still empty (hidden input, values are never echoed):
 
 1. `WEB_TOKEN`: a console write token — any long random string you invent
-2. Model endpoint: in the console **Settings** or the wizard, set an OpenAI-compatible `base_url` + model (default is the local gateway `http://127.0.0.1:3460/v1`, model `mimo-v2.6-flash`; fill `MODEL_API_KEY` only if your provider needs a key)
+2. Model endpoint: in the console **Settings** or the wizard, set an OpenAI-compatible `base_url` + model (default is the local gateway `http://127.0.0.1:3460/v1`, model `mimo-v2.6-flash`; fill `MODEL_API_KEY` only if your provider needs a key). Example: OpenRouter — create a key at https://openrouter.ai/keys (starts with `sk-or-v1-`), set base_url to `https://openrouter.ai/api/v1`.
 3. Telegram (optional): a token from @BotFather + your numeric user id (allowlist — strangers are rejected)
 
 ## Verification: what "success" looks like

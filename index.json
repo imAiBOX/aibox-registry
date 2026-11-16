@@ -107,8 +107,8 @@
         "windows",
         "macos"
       ],
-      "status": "experimental",
-      "updatedAt": "2026-11-17T05:25:00Z"
+      "status": "stable",
+      "updatedAt": "2026-11-16T21:29:10Z"
     },
     {
       "id": "hermes-agent",

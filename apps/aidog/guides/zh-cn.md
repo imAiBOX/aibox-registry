@@ -45,7 +45,7 @@ aidog setup                        # 引导式向导：逐项补齐缺的配置
 `aidog setup` 会只询问还没填的项（密钥隐藏输入、从不回显）：
 
 1. `WEB_TOKEN`：控制台写操作口令——自己编一串长随机字符串
-2. 模型端点：控制台「Settings」或向导里填 OpenAI 兼容 `base_url` + 模型名（默认本地网关 `http://127.0.0.1:3460/v1`，模型 `mimo-v2.6-flash`；有 Key 的服务商才需要填 `MODEL_API_KEY`）
+2. 模型端点：控制台「Settings」或向导里填 OpenAI 兼容 `base_url` + 模型名（默认本地网关 `http://127.0.0.1:3460/v1`，模型 `mimo-v2.6-flash`；有 Key 的服务商才需要填 `MODEL_API_KEY`。例如 OpenRouter：去 https://openrouter.ai/keys 创建 key（`sk-or-v1-` 开头），base_url 填 `https://openrouter.ai/api/v1` 即可接入全部模型）
 3. Telegram（可选）：@BotFather 拿 token + 你的数字 ID（白名单，非白名单一律拒绝）
 
 ## 验证：怎样算成功

@@ -6,7 +6,7 @@
     "zh-CN": "本地运行的私人具身 AI：一个命令装好，通过 Telegram、飞书、钉钉、网页控制台和你聊天，自带技能、定时任务与自我进化记忆，密钥只留在你自己电脑上。",
     "en": "A self-hosted personal embodied AI: one-command install, talks to you over Telegram, Feishu, DingTalk and a loopback web console, with skills, scheduling and self-evolution memory — credentials never leave your machine."
   },
-  "updatedAt": "2026-11-17T05:25:00Z",
+  "updatedAt": "2026-11-16T21:29:10Z",
   "upstream": {
     "github": [
       {
@@ -160,20 +160,55 @@
     ]
   },
   "modelProviders": {
-    "openai-compatible": {
-      "label": "Any OpenAI-compatible endpoint (default: local gateway, no key needed)",
-      "authType": "local",
+    "openrouter": {
+      "label": "OpenRouter（推荐：一个 key 通吃所有模型；支持 OpenAI 兼容协议）",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/aidog/web/settings.json",
-      "getKeyUrl": "https://aidog.im",
+      "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
-          "id": "mimo-v2.6-flash",
-          "name": "MiMo v2.6 Flash",
-          "note": "Shipped default model of the local gateway (zero-config)",
-          "priceHint": "free (local gateway)"
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "balanced",
+          "priceHint": "mid"
+        },
+        {
+          "id": "deepseek/deepseek-chat",
+          "name": "DeepSeek Chat",
+          "note": "cheap & capable",
+          "priceHint": "low"
+        }
+      ]
+    },
+    "openai-compatible": {
+      "label": "任意 OpenAI 兼容端点（本地网关默认零配置；云端服务商填 base_url + MODEL_API_KEY）",
+      "authType": "api-key",
+      "configTarget": "~/aidog/web/settings.json",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        {
+          "id": "gpt-4o-mini",
+          "name": "GPT-4o mini",
+          "note": "fast",
+          "priceHint": "low"
         }
       ],
-      "notes": "Settings live in web/settings.json inside the checkout (mycore.base_url + mycore.model); default endpoint http://127.0.0.1:3460/v1 with model mimo-v2.6-flash. Any OpenAI-compatible provider works; MODEL_API_KEY in secrets.env is optional and only needed when the endpoint requires a key (docs/installation.md). Configured via `aidog setup` or the console — file path assumes the documented ~/aidog install dir; TODO real-machine confirmation."
+      "keyFormat": "^sk-[A-Za-z0-9_-]{20,}$"
+    },
+    "ollama": {
+      "label": "Ollama 本地模型（完全免费离线；提醒需 8GB+ 内存与模型下载耗时）",
+      "authType": "local",
+      "configTarget": "~/aidog/web/settings.json",
+      "getKeyUrl": "https://ollama.com/download",
+      "recommendedModels": [
+        {
+          "id": "qwen2.5:7b",
+          "name": "Qwen 2.5 7B",
+          "note": "local",
+          "priceHint": "free"
+        }
+      ]
     }
   },
   "deepLinks": {
