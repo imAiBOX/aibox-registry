@@ -1,6 +1,6 @@
 {
   "registryVersion": "2026.11.16.1",
-  "generatedAt": "2026-11-16T01:13:12Z",
+  "generatedAt": "2026-11-16T05:03:57Z",
   "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12/14 (see README).",
   "apps": [
     {
@@ -355,6 +355,40 @@
       "popularity": 5,
       "platforms": [
         "windows"
+      ],
+      "status": "stable"
+    },
+    {
+      "id": "stable-diffusion-webui",
+      "name": "Stable Diffusion WebUI",
+      "category": "media",
+      "tagline": {
+        "zh-CN": "经典 AI 绘图网页界面（A1111，生态最厚）",
+        "en": "The classic AI image web UI (A1111, biggest ecosystem)"
+      },
+      "icon": "icons/stable-diffusion-webui.png",
+      "difficulty": 5,
+      "popularity": 5,
+      "platforms": [
+        "windows",
+        "macos"
+      ],
+      "status": "stable"
+    },
+    {
+      "id": "fooocus",
+      "name": "Fooocus",
+      "category": "media",
+      "tagline": {
+        "zh-CN": "极简 AI 绘图（一键启动，比 A1111 更省心）",
+        "en": "Dead-simple AI image gen (one-click, fewer knobs than A1111)"
+      },
+      "icon": "icons/fooocus.png",
+      "difficulty": 4,
+      "popularity": 4,
+      "platforms": [
+        "windows",
+        "macos"
       ],
       "status": "stable"
     }
