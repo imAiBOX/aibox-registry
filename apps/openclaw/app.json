@@ -1,12 +1,12 @@
 {
   "id": "openclaw",
   "name": "OpenClaw",
-  "version": "2026.11.4",
+  "version": "2026.11.1",
   "description": {
     "zh-CN": "多渠道 AI 网关，把大模型接到你的聊天软件（Telegram/WhatsApp 等），支持 Anthropic/OpenAI/Google/OpenRouter/Claude 订阅/Ollama 六种接入。",
     "en": "Multi-channel AI gateway that connects LLMs to your messengers (Telegram/WhatsApp, etc.), with six provider paths: Anthropic / OpenAI / Google / OpenRouter / Claude subscription / Ollama."
   },
-  "updatedAt": "2026-11-11T21:45:00Z",
+  "updatedAt": "2026-11-16T05:41:42Z",
   "upstream": {
     "npm": {
       "name": "openclaw",
@@ -19,11 +19,11 @@
       },
       {
         "repo": "openclaw/openclaw-windows-node",
-        "tag": "v2026.11.4"
+        "tag": "v2026.11.1"
       },
       {
         "repo": "git-for-windows/git",
-        "tag": "v2026.11.4"
+        "tag": "v2.56.1.windows.1"
       }
     ]
   },
