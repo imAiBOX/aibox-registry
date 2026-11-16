@@ -1,7 +1,7 @@
 {
   "id": "openclaw",
   "name": "OpenClaw",
-  "version": "2026.11.3",
+  "version": "2026.11.4",
   "description": {
     "zh-CN": "多渠道 AI 网关，把大模型接到你的聊天软件（Telegram/WhatsApp 等），支持 Anthropic/OpenAI/Google/OpenRouter/Claude 订阅/Ollama 六种接入。",
     "en": "Multi-channel AI gateway that connects LLMs to your messengers (Telegram/WhatsApp, etc.), with six provider paths: Anthropic / OpenAI / Google / OpenRouter / Claude subscription / Ollama."
@@ -10,20 +10,20 @@
   "upstream": {
     "npm": {
       "name": "openclaw",
-      "version": "2026.11.3"
+      "version": "2026.11.4"
     },
     "github": [
       {
         "repo": "openclaw/openclaw",
-        "tag": "v2026.11.3"
+        "tag": "v2026.11.4"
       },
       {
         "repo": "openclaw/openclaw-windows-node",
-        "tag": "v2026.11.1"
+        "tag": "v2026.11.4"
       },
       {
         "repo": "git-for-windows/git",
-        "tag": "v2.56.1.windows.1"
+        "tag": "v2026.11.4"
       }
     ]
   },
@@ -171,13 +171,13 @@
         "macos"
       ],
       "arch": "any",
-      "sha256": "dae4c4f7549561db2fe5ac43af7ba0c9491f876380f070f7ffb87bf9721a10df",
-      "sizeBytes": 113171358,
+      "sha256": "e69e304227d7d2d76568afd44fca957a7c6588e407b1917aab8cb8dc61c68f4c",
+      "sizeBytes": 113408951,
       "hashSource": "本地实测（2026-11-11）：分别从 registry.npmjs.org 与 registry.npmmirror.com 全量下载 tarball 计算 sha256，两源一致且 sha1 匹配 npm dist.shasum (d7db24ae…)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.3.tgz",
+          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.4.tgz",
           "region": "global",
           "operator": "npm",
           "note": "npm 官方 registry（5.9.4 矩阵 openclaw CLI GLOBAL 主）"

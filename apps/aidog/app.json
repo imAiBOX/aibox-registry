@@ -1,7 +1,7 @@
 {
   "id": "aidog",
   "name": "AiDog",
-  "version": "0.5.89",
+  "version": "0.5.90",
   "description": {
     "zh-CN": "本地运行的私人具身 AI：一个命令装好，通过 Telegram、飞书、钉钉、网页控制台和你聊天，自带技能、定时任务与自我进化记忆，密钥只留在你自己电脑上。",
     "en": "A self-hosted personal embodied AI: one-command install, talks to you over Telegram, Feishu, DingTalk and a loopback web console, with skills, scheduling and self-evolution memory — credentials never leave your machine."
@@ -11,7 +11,7 @@
     "github": [
       {
         "repo": "AiDog-im/AiDog",
-        "tag": "v0.5.89"
+        "tag": "v0.5.90"
       }
     ]
   },
@@ -33,20 +33,20 @@
         "windows"
       ],
       "arch": "any",
-      "sha256": "ac26b727500f072e174d15f8eb9c4a9a6cc6c7871765341dce8dded440714c53",
-      "sizeBytes": 3707648,
+      "sha256": "d2d74f1c925a04521755c6bb97537f751f752f9eed044cf879df3e29da92b83e",
+      "sizeBytes": 3719914,
       "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-12); gh-proxy channel re-downloaded and matched",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.89.tar.gz",
+          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.90.tar.gz",
           "region": "global",
           "operator": "GitHub",
           "note": "Version-pinned tag source archive (docs: git is optional, archives can run). Daily probe re-downloads and re-hashes (package < 5 MB)."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.89.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.90.tar.gz",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, same size 3695753, sha256 identical to direct). ghfast.top answers HEAD without Content-Length for archive URLs → not used here."
@@ -58,7 +58,7 @@
           "wsl",
           "bash",
           "-lc",
-          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/v0.5.89.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.89/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/v0.5.90.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.90/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Windows route = WSL2 (official reference platform). The script locates the AiBOX-cached source archive from inside WSL, unpacks it to ~/aidog (official Quick Start path) and runs the official one-command installer `deploy/install.sh` (provision + boot + verify, idempotent). Prerequisites inside WSL: Python 3.10+, tmux (manual, admin), a free port 19167. Re-running merges the new version over an existing checkout. TODO real-machine verification (cmd.exe→wslpath quoting, first-boot UX).",
         "probe": {
@@ -76,20 +76,20 @@
         "macos"
       ],
       "arch": "any",
-      "sha256": "ac26b727500f072e174d15f8eb9c4a9a6cc6c7871765341dce8dded440714c53",
-      "sizeBytes": 3707648,
+      "sha256": "d2d74f1c925a04521755c6bb97537f751f752f9eed044cf879df3e29da92b83e",
+      "sizeBytes": 3719914,
       "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-12)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.89.tar.gz",
+          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.90.tar.gz",
           "region": "global",
           "operator": "GitHub",
           "note": "Version-pinned tag source archive (same artifact as the Windows package; shared package-level hash)."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.89.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.90.tar.gz",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, same size and sha256 as direct)."
@@ -100,7 +100,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/v0.5.89.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.89/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/v0.5.90.tar.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.90/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Unpack the cached, hash-verified source archive to ~/aidog and run the official installer (provision + boot + verify; idempotent, safe to re-run). Needs Python 3.10+ and tmux (brew install tmux) — installed manually beforehand, AiBOX never escalates. Upstream marks macOS expected-but-untested → whole macOS path is TODO real-machine verification.",
         "probe": {
