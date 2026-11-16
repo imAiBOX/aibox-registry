@@ -1,0 +1,258 @@
+{
+  "id": "moneyprinterturbo",
+  "name": "MoneyPrinterTurbo",
+  "version": "1.3.10",
+  "description": {
+    "zh-CN": "AI 短视频自动生成（中文热榜，输入主题出片）",
+    "en": "AI short-video generator from a topic (trending Chinese tool)"
+  },
+  "updatedAt": "2026-11-16T01:13:12Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "harry0703/MoneyPrinterTurbo",
+        "tag": "v1.3.10"
+      }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (portable bundle ships its own runtime)",
+      "supported": "not required (portable bundle ships its own runtime)"
+    },
+    "disallowed": [],
+    "note": "Portable 7z build ships its own runtime (Windows x64 only). No system Python required; extracts to a user folder."
+  },
+  "packages": [
+    {
+      "id": "mpt-win-portable",
+      "name": "MoneyPrinterTurbo portable (7z, win32-x64)",
+      "kind": "app",
+      "version": "1.3.10",
+      "arch": "x64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-15 measured, 555234896 bytes)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.10/MoneyPrinterTurbo-Portable-Windows-1.3.10.7z",
+          "region": "global",
+          "operator": "github",
+          "note": "Official release asset"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.10/MoneyPrinterTurbo-Portable-Windows-1.3.10.7z",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.10/MoneyPrinterTurbo-Portable-Windows-1.3.10.7z",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "364be23bb4ca3bd9cf72b52101dac1e3f145581602f5dd56f744d39e5138927c",
+      "sizeBytes": 555234896,
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-Command",
+          "Expand-7zOrFallback(); # see notes: extract MoneyPrinterTurbo-Portable-Windows-1.3.10.7z to %LOCALAPPDATA%\\MoneyPrinterTurbo and run MoneyPrinterTurbo.exe"
+        ],
+        "notes": "Extract the 7z into ~/AppData/Local/MoneyPrinterTurbo (user folder, zero admin) and run the bundled exe. TODO real-machine silent-extract verification.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\MoneyPrinterTurbo\\MoneyPrinterTurbo.exe\"",
+          "expect": "True"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Direct install",
+      "steps": [
+        "mpt-win-portable"
+      ]
+    },
+    "proxy-install": {
+      "label": "Proxy install (CN)",
+      "steps": [
+        "mpt-win-portable"
+      ]
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata — this app ships no GitHub assets, so its VSIX hash came from a full Open VSX download measured on 2026-11-14.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      }
+    ]
+  },
+  "modelProviders": {
+    "anthropic": {
+      "label": "Anthropic official API (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Local/MoneyPrinterTurbo/config.toml",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "Balanced everyday default",
+          "priceHint": "medium"
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "note": "Fast and cheap for small edits",
+          "priceHint": "low"
+        }
+      ],
+      "notes": "Continue keeps all configuration in ~/.continue/config.yaml (macOS/Linux) or %USERPROFILE%\\.continue\\config.yaml (Windows) — official docs, measured 2026-11-14. Continue's own best practice is to reference API keys through environment variables instead of hardcoding them in the YAML; AiBOX never writes keys to disk."
+    },
+    "openai": {
+      "label": "OpenAI official API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Local/MoneyPrinterTurbo/config.toml",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "Strong on complex tasks",
+          "priceHint": "medium"
+        }
+      ],
+      "notes": "Same config file as anthropic (local config.yaml, env-var reference recommended)."
+    },
+    "openrouter": {
+      "label": "OpenRouter (one key, every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/AppData/Local/MoneyPrinterTurbo/config.toml",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Smart and balanced",
+          "priceHint": "medium"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "Cheap and fast",
+          "priceHint": "low"
+        }
+      ],
+      "notes": "Same config file as anthropic."
+    },
+    "ollama": {
+      "label": "Local Ollama models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/AppData/Local/MoneyPrinterTurbo/config.toml",
+      "recommendedModels": [
+        {
+          "id": "qwen2.5-coder:7b",
+          "name": "Qwen2.5 Coder 7B",
+          "note": "Good free coding model, 8GB RAM",
+          "priceHint": "free"
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "note": "Low-spec starter",
+          "priceHint": "free"
+        }
+      ],
+      "notes": "Continue officially documents Ollama as a local backend (docs.continue.dev guides, measured 2026-11-14); the endpoint is added in config.yaml or the config dropdown. No key involved."
+    }
+  },
+  "deepLinks": {
+    "console": "https://github.com/harry0703/MoneyPrinterTurbo",
+    "docs": "https://github.com/harry0703/MoneyPrinterTurbo#readme",
+    "tutorial": "https://aibox.im/en/apps/moneyprinterturbo/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\MoneyPrinterTurbo\\MoneyPrinterTurbo.exe\"",
+        "expect": "True"
+      },
+      "notes": "Portable app: replace the extracted folder with the new release build."
+    },
+    "uninstall": {
+      "steps": [
+        "Delete the extracted folder %LOCALAPPDATA%/MoneyPrinterTurbo (close the app first)"
+      ],
+      "residualPaths": [
+        "~/AppData/Local/MoneyPrinterTurbo"
+      ],
+      "notes": "Portable app — folder removal is a full uninstall."
+    },
+    "dataPaths": [
+      "~/AppData/Local/MoneyPrinterTurbo"
+    ],
+    "risk": {
+      "onUninstall": "生成的视频草稿、项目与设置都在应用目录，删除即丢失，建议先备份",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  },
+  "category": "media",
+  "tagline": {
+    "zh-CN": "AI 短视频自动生成（中文热榜，输入主题出片）",
+    "en": "AI short-video generator from a topic (trending Chinese tool)"
+  },
+  "icon": "icons/moneyprinterturbo.png",
+  "dataPaths": [
+    "~/AppData/Local/MoneyPrinterTurbo"
+  ]
+}
