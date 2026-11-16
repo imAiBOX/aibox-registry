@@ -13,9 +13,9 @@ One line: **AiDog (aidog.im) is a personal AI companion that runs entirely on yo
 | Need | Notes |
 |---|---|
 | **Windows** | Requires **WSL2** (e.g. Ubuntu). The AiDog runtime officially lives inside WSL; the native Windows shell is attach-only |
-| **macOS** | Upstream marks it "expected-but-untested" — installable as an experiment, issues are possible (experimental support) |
+| **macOS** | **Verified end to end on macOS 26 (arm64), 2026-11-12** — Miniconda supplies Python 3.10+ and tmux (no sudo, no Homebrew) |
 | Python 3.10+ | Usually preinstalled in WSL/Ubuntu: check with `python3 --version` |
-| tmux | **Needs administrator rights**: run `sudo apt-get install tmux` inside WSL yourself — AiBOX never escalates privileges for you |
+| tmux | **Provisioned automatically by the installer** (user-space copy, no administrator rights) — fallback: `sudo apt-get install tmux` |
 | Model endpoint | Any OpenAI-compatible endpoint (there is also a zero-config local gateway for trying out) |
 | Telegram etc. | Optional: a bot token if you want messenger channels |
 
@@ -34,11 +34,9 @@ One line: **AiDog (aidog.im) is a personal AI companion that runs entirely on yo
 WSL / Linux (same on macOS):
 
 ```bash
-# Install tmux first (requires admin, do it manually)
-sudo apt-get install tmux          # Ubuntu/WSL; on macOS use brew install tmux
-
 git clone https://github.com/AiDog-im/AiDog.git aidog && cd aidog
 bash deploy/install.sh             # one command: provision + boot + verify
+                                   # (missing tmux? bootstrapped user-space, no sudo)
 aidog setup                        # guided wizard: fills only the missing slots
 ```
 
@@ -59,7 +57,7 @@ aidog setup                        # guided wizard: fills only the missing slots
 
 ## FAQ
 
-- **`tmux not found`**: install tmux manually (admin required, see above), then re-run `bash deploy/install.sh`
+- **`tmux not found`**: since v0.5.91 the installer bootstraps a user-space tmux automatically (no admin rights); if that fails (no network/apt), install it manually (`sudo apt-get install tmux` on Linux, `conda install -y -c conda-forge tmux` on macOS), then re-run `bash deploy/install.sh`
 - **`port 19167 is used`**: boot on another port: `AIDOG_WEB_PORT=19200 bash deploy/boot_services.sh start`
 - **Stays PENDING / model endpoint unreachable**: the brain isn't reachable yet. Make sure `mycore.base_url` in `web/settings.json` responds; exit code 2 with nothing configured is an honest "not configured yet", not a crash
 - **Telegram messages not arriving**: often blocked egress — the runtime routes bot traffic through a local proxy (`HTTPS_PROXY`); set it in the shell that starts the tmux sessions

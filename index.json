@@ -1,6 +1,6 @@
 {
-  "registryVersion": "2026.11.16.1",
-  "generatedAt": "2026-11-16T05:03:57Z",
+  "registryVersion": "2026.11.17.1",
+  "generatedAt": "2026-11-17T05:25:00Z",
   "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12/14 (see README).",
   "apps": [
     {
@@ -101,14 +101,14 @@
         "en": "Self-hosted personal AI companion — talks to you on Telegram, Feishu and DingTalk, managed from a local web console"
       },
       "icon": "icons/aidog.png",
-      "difficulty": 4,
+      "difficulty": 2,
       "popularity": 1,
       "platforms": [
         "windows",
         "macos"
       ],
       "status": "experimental",
-      "updatedAt": "2026-11-12T12:30:00Z"
+      "updatedAt": "2026-11-17T05:25:00Z"
     },
     {
       "id": "hermes-agent",

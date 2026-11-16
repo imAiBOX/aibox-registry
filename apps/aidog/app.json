@@ -1,17 +1,17 @@
 {
   "id": "aidog",
   "name": "AiDog",
-  "version": "0.5.90",
+  "version": "0.5.91",
   "description": {
     "zh-CN": "本地运行的私人具身 AI：一个命令装好，通过 Telegram、飞书、钉钉、网页控制台和你聊天，自带技能、定时任务与自我进化记忆，密钥只留在你自己电脑上。",
     "en": "A self-hosted personal embodied AI: one-command install, talks to you over Telegram, Feishu, DingTalk and a loopback web console, with skills, scheduling and self-evolution memory — credentials never leave your machine."
   },
-  "updatedAt": "2026-11-12T12:30:00Z",
+  "updatedAt": "2026-11-17T05:25:00Z",
   "upstream": {
     "github": [
       {
         "repo": "AiDog-im/AiDog",
-        "tag": "v0.5.90"
+        "tag": "v0.5.91"
       }
     ]
   },
@@ -21,21 +21,21 @@
       "supported": "not required (no Node dependency)"
     },
     "disallowed": [],
-    "note": "Python 3.10+ / bash / tmux 为官方前置条件（docs/installation.md）。Windows 的正式路线是 WSL2（控制台与服务跑在 WSL 内，原生 shell 仅 attach-only）；macOS 官方标注 expected-but-untested。tmux 在 WSL 内需 `sudo apt-get install tmux`（管理员权限）→ 已降级为安装前手动步骤，AiBOX 安装脚本不代装。"
+    "note": "Python 3.10+ / bash 为官方前置条件（docs/installation.md）。Windows 的正式路线是 WSL2（控制台与服务跑在 WSL 内，原生 shell 仅 attach-only）；macOS 已在 macOS 26 (arm64) 端到端实测（2026-11-12，Miniconda 提供 Python 3.10+ 与 tmux）。tmux 自 v0.5.91 起由 install.sh 自动配到用户态（apt-get download + dpkg -x，无需管理员权限）；AiBOX 安装脚本不提权，缺失时回退为安装前手动步骤。"
   },
   "packages": [
     {
       "id": "aidog-win",
       "name": "AiDog source archive (Windows via WSL2)",
       "kind": "app",
-      "version": "0.5.87",
+      "version": "0.5.91",
       "platforms": [
         "windows"
       ],
       "arch": "any",
-      "sha256": "d2d74f1c925a04521755c6bb97537f751f752f9eed044cf879df3e29da92b83e",
-      "sizeBytes": 3719914,
-      "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-12); gh-proxy channel re-downloaded and matched",
+      "sha256": "b03242b581be163a01baf39c1999cd6af5e008aba815b0b38f58a8522bc73fbf",
+      "sizeBytes": 3725648,
+      "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-17); gh-proxy channel expected identical (same artifact)",
       "channels": [
         {
           "type": "direct",
@@ -71,14 +71,14 @@
       "id": "aidog-mac",
       "name": "AiDog source archive (macOS)",
       "kind": "app",
-      "version": "0.5.87",
+      "version": "0.5.91",
       "platforms": [
         "macos"
       ],
       "arch": "any",
-      "sha256": "d2d74f1c925a04521755c6bb97537f751f752f9eed044cf879df3e29da92b83e",
-      "sizeBytes": 3719914,
-      "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-12)",
+      "sha256": "b03242b581be163a01baf39c1999cd6af5e008aba815b0b38f58a8522bc73fbf",
+      "sizeBytes": 3725648,
+      "hashSource": "GitHub tag source archive full download sha256 measured locally (2026-11-17); gh-proxy channel expected identical (same artifact)",
       "channels": [
         {
           "type": "direct",
