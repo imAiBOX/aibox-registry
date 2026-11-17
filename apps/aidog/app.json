@@ -33,9 +33,9 @@
         "windows"
       ],
       "arch": "any",
-      "sha256": "ffdd48c7e5c5e37de9843791e5208a5bb7ec2fcf3f3f86f0f37a69af532ea594",
-      "sizeBytes": 3778736,
-      "hashSource": "GitHub tag source archive measured locally (2026-11-18); source archives are NOT byte-stable across GitHub regenerations — probe re-measures and a sha drift means re-measure, not tampering",
+      "sha256": "e2aa5286a692e67831b305853aece8c94345727c9f377677dbdde68e88964c15",
+      "sizeBytes": 3778713,
+      "hashSource": "GitHub tag source archive measured locally (2026-11-17); source archives are NOT byte-stable across GitHub regenerations — probe re-measures, a sha drift means re-measure, not tampering",
       "channels": [
         {
           "type": "direct",
@@ -58,7 +58,7 @@
           "wsl",
           "bash",
           "-lc",
-          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/ffdd48c7e5c5e37de9843791e5208a5bb7ec2fcf3f3f86f0f37a69af532ea594.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.92/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/e2aa5286a692e67831b305853aece8c94345727c9f377677dbdde68e88964c15.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.92/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Windows route = WSL2 (official reference platform). The script locates the AiBOX-cached source archive from inside WSL, unpacks it to ~/aidog (official Quick Start path) and runs the official one-command installer `deploy/install.sh` (provision + boot + verify, idempotent). Prerequisites inside WSL: Python 3.10+, tmux (manual, admin), a free port 19167. Re-running merges the new version over an existing checkout. TODO real-machine verification (cmd.exe→wslpath quoting, first-boot UX).",
         "probe": {
@@ -76,9 +76,9 @@
         "macos"
       ],
       "arch": "any",
-      "sha256": "ffdd48c7e5c5e37de9843791e5208a5bb7ec2fcf3f3f86f0f37a69af532ea594",
-      "sizeBytes": 3778736,
-      "hashSource": "GitHub tag source archive measured locally (2026-11-18); source archives are NOT byte-stable across GitHub regenerations — probe re-measures and a sha drift means re-measure, not tampering",
+      "sha256": "e2aa5286a692e67831b305853aece8c94345727c9f377677dbdde68e88964c15",
+      "sizeBytes": 3778713,
+      "hashSource": "GitHub tag source archive measured locally (2026-11-17); source archives are NOT byte-stable across GitHub regenerations — probe re-measures, a sha drift means re-measure, not tampering",
       "channels": [
         {
           "type": "direct",
@@ -100,7 +100,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/ffdd48c7e5c5e37de9843791e5208a5bb7ec2fcf3f3f86f0f37a69af532ea594.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.92/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/e2aa5286a692e67831b305853aece8c94345727c9f377677dbdde68e88964c15.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.92/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Unpack the cached, hash-verified source archive to ~/aidog and run the official installer (provision + boot + verify; idempotent, safe to re-run). Needs Python 3.10+ and tmux (brew install tmux) — installed manually beforehand, AiBOX never escalates. Upstream marks macOS expected-but-untested → whole macOS path is TODO real-machine verification.",
         "probe": {
