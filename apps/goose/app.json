@@ -184,13 +184,15 @@
     "direct-install": {
       "label": "Direct install",
       "steps": [
-        "goose-win-x64"
+        "goose-win-x64",
+        "goose-mac-x64"
       ]
     },
     "proxy-install": {
       "label": "Proxy install (CN)",
       "steps": [
-        "goose-win-x64"
+        "goose-win-x64",
+        "goose-mac-x64"
       ]
     }
   },

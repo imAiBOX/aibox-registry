@@ -135,13 +135,15 @@
     "direct-install": {
       "label": "Direct install",
       "steps": [
-        "openhands-win-x64"
+        "openhands-win-x64",
+        "openhands-mac-universal"
       ]
     },
     "proxy-install": {
       "label": "Proxy install (CN)",
       "steps": [
-        "openhands-win-x64"
+        "openhands-win-x64",
+        "openhands-mac-universal"
       ]
     }
   },

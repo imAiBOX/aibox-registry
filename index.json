@@ -421,7 +421,8 @@
       "difficulty": 3,
       "popularity": 5,
       "platforms": [
-        "windows"
+        "windows",
+        "macos"
       ],
       "status": "stable"
     }

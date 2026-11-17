@@ -76,6 +76,104 @@
           "expect": "[cC]odex"
         }
       }
+    },
+    {
+      "id": "codex-mac-arm64",
+      "name": "Codex CLI (dmg, arm64)",
+      "kind": "app",
+      "version": "0.169.0",
+      "arch": "arm64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-aarch64-apple-darwin.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "Official dmg (flattened bin/codex + symlink, verified in upstream CI)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-aarch64-apple-darwin.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-aarch64-apple-darwin.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "039f43abc0c6ea65d0ec52514cb86a052b546e02ea71374c700f8af17a0d96bc",
+      "sizeBytes": 246688794,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -readonly -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/039f43abc0c6ea65d0ec52514cb86a052b546e02ea71374c700f8af17a0d96bc.dmg\"; D=\"/Applications/Codex\"; mkdir -p \"$D\"; ditto \"$M\" \"$D\"; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "Mount dmg and ditto its contents into /Applications/Codex (upstream layout: bin/codex + relative codex symlink + codex-resources). Run as /Applications/Codex/codex.",
+        "probe": {
+          "cmd": "bash -lc \"/Applications/Codex/codex --version\"",
+          "expect": "[cC]odex"
+        }
+      }
+    },
+    {
+      "id": "codex-mac-x64",
+      "name": "Codex CLI (dmg, x64)",
+      "kind": "app",
+      "version": "0.169.0",
+      "arch": "x64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-x86_64-apple-darwin.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "Official dmg (flattened bin/codex + symlink, verified in upstream CI)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-x86_64-apple-darwin.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-x86_64-apple-darwin.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "186c920a5d287b623458b8c35f531398b56c7dba419edd4fe5b944b867bd4876",
+      "sizeBytes": 269676337,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -readonly -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/186c920a5d287b623458b8c35f531398b56c7dba419edd4fe5b944b867bd4876.dmg\"; D=\"/Applications/Codex\"; mkdir -p \"$D\"; ditto \"$M\" \"$D\"; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "Mount dmg and ditto its contents into /Applications/Codex (upstream layout: bin/codex + relative codex symlink + codex-resources). Run as /Applications/Codex/codex.",
+        "probe": {
+          "cmd": "bash -lc \"/Applications/Codex/codex --version\"",
+          "expect": "[cC]odex"
+        }
+      }
     }
   ],
   "packageManagerOverrides": {},
@@ -91,13 +189,15 @@
     "direct-install": {
       "label": "Direct install",
       "steps": [
-        "codex-win-x64"
+        "codex-win-x64",
+        "codex-mac-x64"
       ]
     },
     "proxy-install": {
       "label": "Proxy install (CN)",
       "steps": [
-        "codex-win-x64"
+        "codex-win-x64",
+        "codex-mac-x64"
       ]
     }
   },
