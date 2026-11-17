@@ -1,0 +1,380 @@
+{
+  "id": "opencode",
+  "name": "OpenCode",
+  "version": "1.19.6",
+  "description": {
+    "zh-CN": "OpenCode 是 MIT 开源的 AI 开发工具：桌面应用与终端 TUI 二合一，接入 OpenRouter/Anthropic/Ollama 等任意模型，帮你写代码、改文件、跑命令。",
+    "en": "OpenCode is an MIT-licensed AI development tool (desktop app + terminal TUI). Plug in OpenRouter/Anthropic/Ollama and let it write code, edit files and run commands."
+  },
+  "updatedAt": "2026-11-17T20:10:01Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "sst/opencode",
+        "tag": "v1.19.6"
+      }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (Electron bundle ships its own runtime)",
+      "supported": "not required (Electron bundle ships its own runtime)"
+    },
+    "disallowed": [],
+    "note": "Electron desktop build (electron-builder); terminal TUI also ships in the bundle."
+  },
+  "packages": [
+    {
+      "id": "opencode-win-x64",
+      "name": "OpenCode Desktop (NSIS, win32-x64)",
+      "kind": "app",
+      "version": "1.19.6",
+      "arch": "x64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-win-x64.exe",
+          "region": "global",
+          "operator": "github",
+          "note": "Official electron-builder NSIS (oneClick, perMachine:false)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-win-x64.exe",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-win-x64.exe",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "13da6af6d1db8b067378b1183c5d2de1433915dd5124482d94e5e348ec667735",
+      "sizeBytes": 126419768,
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/S"
+        ],
+        "notes": "electron-builder oneClick + perMachine:false → per-user install under %LOCALAPPDATA%\\Programs\\OpenCode, no UAC.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\OpenCode\"",
+          "expect": "True"
+        }
+      }
+    },
+    {
+      "id": "opencode-win-arm64",
+      "name": "OpenCode Desktop (NSIS, win32-arm64)",
+      "kind": "app",
+      "version": "1.19.6",
+      "arch": "arm64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-win-arm64.exe",
+          "region": "global",
+          "operator": "github",
+          "note": "Official electron-builder NSIS (oneClick, perMachine:false)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-win-arm64.exe",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-win-arm64.exe",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "c63e539602960d0535aa2897417861da1094e5ee26c346a0a6c7173ad2127f1e",
+      "sizeBytes": 118940968,
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/S"
+        ],
+        "notes": "electron-builder oneClick + perMachine:false → per-user install under %LOCALAPPDATA%\\Programs\\OpenCode, no UAC.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\OpenCode\"",
+          "expect": "True"
+        }
+      }
+    },
+    {
+      "id": "opencode-mac-arm64",
+      "name": "OpenCode Desktop (dmg, arm64)",
+      "kind": "app",
+      "version": "1.19.6",
+      "arch": "arm64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-mac-arm64.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "electron-builder dmg (contains OpenCode.app)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-mac-arm64.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-mac-arm64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "c7fd0a1967be6d4520a75e404dd77b2fa54e7580c59b6ee890dcf1aa7d98cca3",
+      "sizeBytes": 151458609,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c7fd0a1967be6d4520a75e404dd77b2fa54e7580c59b6ee890dcf1aa7d98cca3.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "electron-builder dmg ships OpenCode.app (productName from upstream config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"ls -d /Applications/OpenCode.app >/dev/null 2>&1 && echo installed\"",
+          "expect": "installed"
+        }
+      }
+    },
+    {
+      "id": "opencode-mac-x64",
+      "name": "OpenCode Desktop (dmg, x64)",
+      "kind": "app",
+      "version": "1.19.6",
+      "arch": "x64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-mac-x64.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "electron-builder dmg (contains OpenCode.app)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-mac-x64.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/sst/opencode/releases/download/v1.19.6/opencode-desktop-mac-x64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "ebda6005febab9be52c732b7bf11ae40cd563de825a85f209ec6ff161d7169db",
+      "sizeBytes": 156337751,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/ebda6005febab9be52c732b7bf11ae40cd563de825a85f209ec6ff161d7169db.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "electron-builder dmg ships OpenCode.app (productName from upstream config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"ls -d /Applications/OpenCode.app >/dev/null 2>&1 && echo installed\"",
+          "expect": "installed"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Direct install",
+      "steps": [
+        "opencode-win-x64",
+        "opencode-mac-x64"
+      ]
+    },
+    "proxy-install": {
+      "label": "Proxy install (CN)",
+      "steps": [
+        "opencode-win-x64",
+        "opencode-mac-x64"
+      ]
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata — this app ships no GitHub assets, so its VSIX hash came from a full Open VSX download measured on 2026-11-14.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      }
+    ]
+  },
+  "modelProviders": {
+    "openrouter": {
+      "label": "OpenRouter (recommended)",
+      "note": "One key for every model; pick models inside OpenCode settings.",
+      "authType": "api-key",
+      "keyFormat": "sk-or-v1-...",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "configTarget": "~/.config/opencode/opencode.json",
+      "recommendedModels": [
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "聪明均衡，日常首选",
+          "priceHint": "中等"
+        }
+      ]
+    },
+    "anthropic": {
+      "label": "Anthropic API",
+      "note": "Claude models direct from the source.",
+      "authType": "api-key",
+      "keyFormat": "sk-ant-...",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "configTarget": "~/.config/opencode/opencode.json",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "编码主力",
+          "priceHint": "中等"
+        }
+      ]
+    },
+    "ollama": {
+      "label": "Ollama (local, free)",
+      "note": "Run models on your own machine — zero API cost.",
+      "authType": "local",
+      "getKeyUrl": "https://ollama.com/download",
+      "configTarget": "~/.config/opencode/opencode.json",
+      "recommendedModels": [
+        {
+          "id": "qwen3-coder:30b",
+          "name": "Qwen3 Coder 30B",
+          "note": "本地编码推荐（需 24GB+ 内存）",
+          "priceHint": "免费"
+        }
+      ]
+    }
+  },
+  "deepLinks": {
+    "console": "https://github.com/sst/opencode#readme",
+    "docs": "https://opencode.ai/docs",
+    "tutorial": "https://aibox.im/en/apps/opencode/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\OpenCode\"",
+        "expect": "True"
+      },
+      "notes": "Run the new release installer over the existing user-level install; config and sessions survive."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows: Settings → Apps → OpenCode (or the NSIS uninstaller)",
+        "macOS: delete /Applications/OpenCode.app",
+        "Delete data folders (see data paths)"
+      ],
+      "residualPaths": [
+        "~/.config/opencode",
+        "~/.local/share/opencode",
+        "~/AppData/Roaming/opencode",
+        "~/Library/Application Support/opencode"
+      ],
+      "notes": "Provider keys and session history live in the data folders — back up first."
+    },
+    "dataPaths": [
+      "~/.config/opencode",
+      "~/.local/share/opencode",
+      "~/AppData/Roaming/opencode",
+      "~/Library/Application Support/opencode"
+    ],
+    "risk": {
+      "onUninstall": "模型 key、会话历史与配置都在数据目录，删除即丢失，建议先备份",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  },
+  "category": "agent",
+  "tagline": {
+    "zh-CN": "开源 AI 编程工作台（227k★）：桌面版 +终端，接任意模型写代码",
+    "en": "Open-source AI coding workbench (227k★): desktop + terminal, bring any model"
+  },
+  "icon": "icons/opencode.png",
+  "dataPaths": [
+    "~/.config/opencode",
+    "~/.local/share/opencode",
+    "~/AppData/Roaming/opencode",
+    "~/Library/Application Support/opencode"
+  ]
+}
