@@ -1,6 +1,6 @@
 {
-  "registryVersion": "2026.11.17.1",
-  "generatedAt": "2026-11-17T15:43:09Z",
+  "registryVersion": "2026.11.17.2",
+  "generatedAt": "2026-11-17T18:49:37Z",
   "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12/14 (see README).",
   "apps": [
     {
@@ -384,6 +384,23 @@
         "en": "AI software developer agent — writes and runs code for you"
       },
       "icon": "icons/openhands.png",
+      "difficulty": 2,
+      "popularity": 5,
+      "platforms": [
+        "windows",
+        "macos"
+      ],
+      "status": "stable"
+    },
+    {
+      "id": "goose",
+      "name": "Goose",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "开源 AI 智能体：装依赖、跑命令、改代码，全交给它",
+        "en": "Open-source AI agent: installs, executes and edits for you"
+      },
+      "icon": "icons/goose.png",
       "difficulty": 2,
       "popularity": 5,
       "platforms": [
