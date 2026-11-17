@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-12T14:30:00Z",
   "upstream": {
     "github": [
-      { "repo": "cline/cline", "tag": "v4.1.26" }
+      {
+        "repo": "cline/cline",
+        "tag": "v4.1.26"
+      }
     ]
   },
   "runtime": {
@@ -26,7 +29,9 @@
       "name": "Cline VS Code extension (VSIX)",
       "kind": "app",
       "version": "4.1.26",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "any",
       "sha256": "d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d",
       "sizeBytes": 13908315,
@@ -76,7 +81,9 @@
       "name": "Cline VS Code extension (VSIX)",
       "kind": "app",
       "version": "4.1.26",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "any",
       "sha256": "d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d",
       "sizeBytes": 13908315,
@@ -109,7 +116,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/cline-4.1.26.vsix\" --force"
+          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d.vsix\" --force"
         ],
         "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin. TODO real-machine verification.",
         "probe": {
@@ -121,23 +128,37 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["proxy-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "Official direct install (GitHub release VSIX)",
-      "steps": ["cline-win", "cline-mac"],
+      "steps": [
+        "cline-win",
+        "cline-mac"
+      ],
       "note": "Downloads the official VSIX and installs it with `code --install-extension`; steps contain both platform packages and are filtered by machine arch."
     },
     "proxy-install": {
       "label": "CN accelerated install (ghfast/gh-proxy channels)",
-      "steps": ["cline-win", "cline-mac"],
+      "steps": [
+        "cline-win",
+        "cline-mac"
+      ],
       "note": "Same packages; the download layer prefers proxy channels in CN and falls back to direct automatically."
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
     "proxyGateways": [
       {
@@ -162,8 +183,18 @@
       "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
-        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced everyday default", "priceHint": "medium" },
-        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "Fast and cheap for small edits", "priceHint": "low" }
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "Balanced everyday default",
+          "priceHint": "medium"
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "note": "Fast and cheap for small edits",
+          "priceHint": "low"
+        }
       ],
       "notes": "Keys are stored by Cline inside VS Code's SecretStorage (encrypted, extension-owned) and are pasted in the Cline sidebar — AiBOX cannot write them to disk. configTarget points at the extension's globalStorage directory (official VS Code convention; macOS: ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev); exact file layout TODO real-machine verification."
     },
@@ -174,7 +205,12 @@
       "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
-        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong on complex tasks", "priceHint": "medium" }
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "Strong on complex tasks",
+          "priceHint": "medium"
+        }
       ],
       "notes": "Same storage model as anthropic (SecretStorage, UI entry only)."
     },
@@ -185,8 +221,18 @@
       "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
-        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
-        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Smart and balanced",
+          "priceHint": "medium"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "Cheap and fast",
+          "priceHint": "low"
+        }
       ],
       "notes": "Same storage model as anthropic (SecretStorage, UI entry only)."
     },
@@ -195,8 +241,18 @@
       "authType": "local",
       "configTarget": "~/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
       "recommendedModels": [
-        { "id": "qwen2.5-coder:7b", "name": "Qwen2.5 Coder 7B", "note": "Good free coding model, 8GB RAM", "priceHint": "free" },
-        { "id": "llama3.2:3b", "name": "Llama 3.2 3B", "note": "Low-spec starter", "priceHint": "free" }
+        {
+          "id": "qwen2.5-coder:7b",
+          "name": "Qwen2.5 Coder 7B",
+          "note": "Good free coding model, 8GB RAM",
+          "priceHint": "free"
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "note": "Low-spec starter",
+          "priceHint": "free"
+        }
       ],
       "notes": "Cline can point at a local Ollama endpoint (official docs list Ollama among supported backends); no key involved. Endpoint is configured in the Cline sidebar."
     }

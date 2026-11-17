@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-14T08:30:00Z",
   "upstream": {
     "github": [
-      { "repo": "Comfy-Org/ComfyUI", "tag": "v0.45.0" }
+      {
+        "repo": "Comfy-Org/ComfyUI",
+        "tag": "v0.45.0"
+      }
     ]
   },
   "runtime": {
@@ -26,7 +29,9 @@
       "name": "ComfyUI Windows portable (NVIDIA / CPU, 7z)",
       "kind": "app",
       "version": "0.45.0",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "x64",
       "sha256": "60c12e8c7af778047ad0413722dd3dc0f6ca773a41cbf5cb229ee9bc92c44a6f",
       "sizeBytes": 2071479423,
@@ -69,7 +74,9 @@
       "name": "ComfyUI source archive (macOS, venv install)",
       "kind": "app",
       "version": "0.45.0",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "any",
       "sha256": "408670ede5da641b30a2b3f1e39e5b84d75c12357e75695416a6e6cc5bcbc4bb",
       "sizeBytes": 12934320,
@@ -95,7 +102,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/v0.45.0.tar.gz\" -C \"$S\"; rm -rf \"$HOME/ComfyUI\"; mv \"$S/ComfyUI-0.45.0\" \"$HOME/ComfyUI\"; rmdir \"$S\"; cd \"$HOME/ComfyUI\"; python3 -m venv .venv; .venv/bin/pip install -r requirements.txt"
+          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/408670ede5da641b30a2b3f1e39e5b84d75c12357e75695416a6e6cc5bcbc4bb.gz\" -C \"$S\"; rm -rf \"$HOME/ComfyUI\"; mv \"$S/ComfyUI-0.45.0\" \"$HOME/ComfyUI\"; rmdir \"$S\"; cd \"$HOME/ComfyUI\"; python3 -m venv .venv; .venv/bin/pip install -r requirements.txt"
         ],
         "notes": "Unpacks the hash-verified source archive to ~/ComfyUI (official manual-install layout), creates a venv inside it and installs requirements — everything under the user home, zero admin. Prerequisites: Python 3.10–3.13 (`python3 --version`) and several GB of disk; the dependency pull includes PyTorch (~1–2 GB, PyPI default index — CN: PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple). First run: `cd ~/ComfyUI && .venv/bin/python main.py` → http://127.0.0.1:8188 (port measured in main.py). TODO real-machine verification.",
         "probe": {
@@ -107,23 +114,37 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["proxy-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "Official direct install (portable 7z / source archive)",
-      "steps": ["comfyui-win", "comfyui-mac"],
+      "steps": [
+        "comfyui-win",
+        "comfyui-mac"
+      ],
       "note": "Windows: extract the official portable with the built-in tar (no admin, no Python install). macOS: unpack the tag archive into ~/ComfyUI and install requirements into a local venv. Steps contain both platform packages and are filtered by machine arch."
     },
     "proxy-install": {
       "label": "CN accelerated install (gh-proxy channel)",
-      "steps": ["comfyui-win", "comfyui-mac"],
+      "steps": [
+        "comfyui-win",
+        "comfyui-mac"
+      ],
       "note": "Same packages; the download layer prefers the gh-proxy channel in CN and falls back to direct automatically (ghfast.top does not serve Comfy-Org assets — measured 403 on 2026-11-14)."
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata (asset digest field for the portable, full local download for the source archive).",
     "proxyGateways": [
       {
@@ -146,9 +167,24 @@
       "authType": "local",
       "configTarget": "~/ComfyUI",
       "recommendedModels": [
-        { "id": "sdxl", "name": "SDXL", "note": "General-purpose image model (README model list)", "priceHint": "free" },
-        { "id": "flux.1", "name": "Flux.1", "note": "High-quality image model (README model list)", "priceHint": "free" },
-        { "id": "wan2.1", "name": "Wan 2.1", "note": "Video generation (README model list)", "priceHint": "free" }
+        {
+          "id": "sdxl",
+          "name": "SDXL",
+          "note": "General-purpose image model (README model list)",
+          "priceHint": "free"
+        },
+        {
+          "id": "flux.1",
+          "name": "Flux.1",
+          "note": "High-quality image model (README model list)",
+          "priceHint": "free"
+        },
+        {
+          "id": "wan2.1",
+          "name": "Wan 2.1",
+          "note": "Video generation (README model list)",
+          "priceHint": "free"
+        }
       ],
       "notes": "ComfyUI's native mode: model checkpoints drop into ~/ComfyUI/models/<type> on macOS or ComfyUI_windows_portable\\ComfyUI\\models\\ on Windows (README, measured 2026-11-14); no key, fully local. extra_model_paths.yaml lets you point at model folders you already have."
     },
@@ -159,7 +195,12 @@
       "configTarget": "~/ComfyUI",
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
-        { "id": "gemini-image", "name": "Gemini image (Nano Banana)", "note": "Closed-source partner node (README partner list)", "priceHint": "paid" }
+        {
+          "id": "gemini-image",
+          "name": "Gemini image (Nano Banana)",
+          "note": "Closed-source partner node (README partner list)",
+          "priceHint": "paid"
+        }
       ],
       "notes": "ComfyUI ships official API nodes (comfy_api_nodes/nodes_gemini.py measured in the v0.45.0 tree) for closed-source partner models such as Nano Banana; the key is pasted into the API node inside the workflow, not written by AiBOX. configTarget points at the install directory where workflows and settings live."
     }

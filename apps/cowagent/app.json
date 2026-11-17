@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-12T12:30:00Z",
   "upstream": {
     "github": [
-      { "repo": "zhayujie/CowAgent", "tag": "2.2.2" }
+      {
+        "repo": "zhayujie/CowAgent",
+        "tag": "2.2.2"
+      }
     ]
   },
   "runtime": {
@@ -27,7 +30,9 @@
       "name": "CowAgent Windows installer (x64)",
       "kind": "app",
       "version": "2.2.2",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "x64",
       "sha256": "d856cdc10cf172cc84603754d26de8bbae6c374fdec16eeb9a4a945cc0bf408d",
       "sizeBytes": 189761792,
@@ -57,7 +62,9 @@
       ],
       "install": {
         "type": "nsis-silent",
-        "args": ["/S"],
+        "args": [
+          "/S"
+        ],
         "notes": "electron-builder NSIS (desktop/electron-builder.js: oneClick false, perMachine false, artifactName CowAgent-Setup-*) → standard NSIS silent flag /S; default install dir %LOCALAPPDATA%\\Programs\\CowAgent (per-user, no admin; directory is changeable in the interactive installer). Signed build. TODO real-machine verification of /S behavior and exact install path.",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\CowAgent\\CowAgent.exe\" --version",
@@ -70,7 +77,9 @@
       "name": "CowAgent macOS dmg (Apple Silicon)",
       "kind": "app",
       "version": "2.2.2",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "arm64",
       "sha256": "c3af5a167b18fe132cbd5f59919dba6c43120a353b10572fd1c8fc0aa95a75cf",
       "sizeBytes": 228228555,
@@ -103,7 +112,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/CowAgent-2.2.2-arm64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c3af5a167b18fe132cbd5f59919dba6c43120a353b10572fd1c8fc0aa95a75cf.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg mount + copy .app + unmount (same convention as other desktop apps). If /Applications is not writable for the current (non-admin) account, fall back to ~/Applications — manual route in the guide. Upstream builds are notarized Electron dmgs. TODO macOS real-machine verification (Gatekeeper/quarantine, mount cleanup).",
         "probe": {
@@ -117,7 +126,9 @@
       "name": "CowAgent macOS dmg (Intel)",
       "kind": "app",
       "version": "2.2.2",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "x64",
       "sha256": "12aa29e2ab35524f17c95f8cf50b8e7ef1c164ac86998ab62f34535e8eecb902",
       "sizeBytes": 239855555,
@@ -150,7 +161,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/CowAgent-2.2.2-x64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/12aa29e2ab35524f17c95f8cf50b8e7ef1c164ac86998ab62f34535e8eecb902.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "Intel build of the same release; identical dmg flow. Use ~/Applications manually if /Applications is not writable. TODO macOS real-machine verification.",
         "probe": {
@@ -162,23 +173,39 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["proxy-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "Official desktop installers (GitHub Releases)",
-      "steps": ["cowagent-win-x64", "cowagent-mac-arm64", "cowagent-mac-x64"],
+      "steps": [
+        "cowagent-win-x64",
+        "cowagent-mac-arm64",
+        "cowagent-mac-x64"
+      ],
       "note": "Three platform packages; PLAN filters steps by machine (Windows x64 / macOS Apple Silicon / macOS Intel). The one-line server installer is documented as the manual route in the guide."
     },
     "proxy-install": {
       "label": "China-accelerated install (gh-proxy / ghfast channels)",
-      "steps": ["cowagent-win-x64", "cowagent-mac-arm64", "cowagent-mac-x64"],
+      "steps": [
+        "cowagent-win-x64",
+        "cowagent-mac-arm64",
+        "cowagent-mac-x64"
+      ],
       "note": "Same packages; in the CN region the download layer prefers accelerator channels and falls back to direct automatically (both gateways measured 200 / identical size on 2026-11-12)."
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata (S2/S4).",
     "proxyGateways": [
       {
@@ -203,8 +230,18 @@
       "configTarget": "~/AppData/Roaming/CowAgent/config.json",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
-        { "id": "gpt-6.1-terra", "name": "GPT-6.1 Terra", "note": "OpenAI flagship per the official model table (chat + vision + tools)", "priceHint": "higher" },
-        { "id": "gpt-6.1-sol", "name": "GPT-6.1 Sol", "note": "Lighter OpenAI option", "priceHint": "medium" }
+        {
+          "id": "gpt-6.1-terra",
+          "name": "GPT-6.1 Terra",
+          "note": "OpenAI flagship per the official model table (chat + vision + tools)",
+          "priceHint": "higher"
+        },
+        {
+          "id": "gpt-6.1-sol",
+          "name": "GPT-6.1 Sol",
+          "note": "Lighter OpenAI option",
+          "priceHint": "medium"
+        }
       ],
       "notes": "Configured in the web console (Settings → Models) — no manual file editing. configTarget is the desktop client's Electron userData path (inferred; TODO real-machine confirmation). The one-line service route keeps config.json in its install folder instead."
     },
@@ -215,8 +252,18 @@
       "configTarget": "~/AppData/Roaming/CowAgent/config.json",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
-        { "id": "claude-opus-5-5", "name": "Claude Opus 5.5", "note": "Top Claude tier per the official model table", "priceHint": "higher" },
-        { "id": "claude-sonnet-5-5", "name": "Claude Sonnet 5.5", "note": "Balanced Claude tier", "priceHint": "medium" }
+        {
+          "id": "claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "note": "Top Claude tier per the official model table",
+          "priceHint": "higher"
+        },
+        {
+          "id": "claude-sonnet-5-5",
+          "name": "Claude Sonnet 5.5",
+          "note": "Balanced Claude tier",
+          "priceHint": "medium"
+        }
       ],
       "notes": "Same console-configured path as openai; model ids follow the official provider table in the README."
     },
@@ -227,7 +274,12 @@
       "configTarget": "~/AppData/Roaming/CowAgent/config.json",
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
-        { "id": "gemini-4-argon", "name": "Gemini 4 Argon", "note": "Google flagship per the official model table", "priceHint": "medium" }
+        {
+          "id": "gemini-4-argon",
+          "name": "Gemini 4 Argon",
+          "note": "Google flagship per the official model table",
+          "priceHint": "medium"
+        }
       ],
       "notes": "Same console-configured path; vision and chat routes can be split per feature in the console."
     },

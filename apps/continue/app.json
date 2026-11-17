@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-14T08:30:00Z",
   "upstream": {
     "github": [
-      { "repo": "continuedev/continue", "tag": "v2.0.0-vscode" }
+      {
+        "repo": "continuedev/continue",
+        "tag": "v2.0.0-vscode"
+      }
     ]
   },
   "runtime": {
@@ -26,7 +29,9 @@
       "name": "Continue VS Code extension (VSIX, win32-x64)",
       "kind": "app",
       "version": "2.1.0",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "x64",
       "sha256": "0aa7844bcd6b042517e1bd5d77d26a14c2d68914d832fbfc6a0d49d921ac8f88",
       "sizeBytes": 74469477,
@@ -62,7 +67,9 @@
       "name": "Continue VS Code extension (VSIX, darwin-arm64)",
       "kind": "app",
       "version": "2.1.0",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "arm64",
       "sha256": "739d26de25aa7f66a11d3eb85b8bbd16c48d8bd8a628cc477e686659a700ef1d",
       "sizeBytes": 77895110,
@@ -81,7 +88,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/Continue.continue-2.1.0@darwin-arm64.vsix\" --force"
+          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/739d26de25aa7f66a11d3eb85b8bbd16c48d8bd8a628cc477e686659a700ef1d.vsix\" --force"
         ],
         "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin. TODO real-machine verification.",
         "probe": {
@@ -95,7 +102,9 @@
       "name": "Continue VS Code extension (VSIX, darwin-x64)",
       "kind": "app",
       "version": "2.1.0",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "x64",
       "sha256": "1663c19546ff568f25a7c032347f6b3699dc052f2a046c9b4c4809d207d08b5c",
       "sizeBytes": 113239087,
@@ -114,7 +123,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/Continue.continue-2.1.0@darwin-x64.vsix\" --force"
+          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/1663c19546ff568f25a7c032347f6b3699dc052f2a046c9b4c4809d207d08b5c.vsix\" --force"
         ],
         "notes": "Same hash-verified VSIX via VS Code CLI (Intel Macs). macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once. Zero admin. TODO real-machine verification.",
         "probe": {
@@ -126,18 +135,30 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["direct-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "direct-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "Official Open VSX install (hash-verified VSIX via the VS Code CLI)",
-      "steps": ["continue-win", "continue-mac-arm64", "continue-mac-x64"],
+      "steps": [
+        "continue-win",
+        "continue-mac-arm64",
+        "continue-mac-x64"
+      ],
       "note": "Downloads the platform VSIX from Open VSX and installs it with `code --install-extension`; steps contain all platform packages and are filtered by machine arch. Open VSX is a Fastly-fronted CDN reachable from CN directly — no GitHub gateway applies (this app ships no GitHub assets), so the CN order uses the same plan."
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata — this app ships no GitHub assets, so its VSIX hash came from a full Open VSX download measured on 2026-11-14.",
     "proxyGateways": [
       {
@@ -162,8 +183,18 @@
       "configTarget": "~/.continue/config.yaml",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
-        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "Balanced everyday default", "priceHint": "medium" },
-        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "Fast and cheap for small edits", "priceHint": "low" }
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "Balanced everyday default",
+          "priceHint": "medium"
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "note": "Fast and cheap for small edits",
+          "priceHint": "low"
+        }
       ],
       "notes": "Continue keeps all configuration in ~/.continue/config.yaml (macOS/Linux) or %USERPROFILE%\\.continue\\config.yaml (Windows) — official docs, measured 2026-11-14. Continue's own best practice is to reference API keys through environment variables instead of hardcoding them in the YAML; AiBOX never writes keys to disk."
     },
@@ -174,7 +205,12 @@
       "configTarget": "~/.continue/config.yaml",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
-        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "Strong on complex tasks", "priceHint": "medium" }
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "Strong on complex tasks",
+          "priceHint": "medium"
+        }
       ],
       "notes": "Same config file as anthropic (local config.yaml, env-var reference recommended)."
     },
@@ -185,8 +221,18 @@
       "configTarget": "~/.continue/config.yaml",
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
-        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "Smart and balanced", "priceHint": "medium" },
-        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "Cheap and fast", "priceHint": "low" }
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Smart and balanced",
+          "priceHint": "medium"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "Cheap and fast",
+          "priceHint": "low"
+        }
       ],
       "notes": "Same config file as anthropic."
     },
@@ -195,8 +241,18 @@
       "authType": "local",
       "configTarget": "~/.continue/config.yaml",
       "recommendedModels": [
-        { "id": "qwen2.5-coder:7b", "name": "Qwen2.5 Coder 7B", "note": "Good free coding model, 8GB RAM", "priceHint": "free" },
-        { "id": "llama3.2:3b", "name": "Llama 3.2 3B", "note": "Low-spec starter", "priceHint": "free" }
+        {
+          "id": "qwen2.5-coder:7b",
+          "name": "Qwen2.5 Coder 7B",
+          "note": "Good free coding model, 8GB RAM",
+          "priceHint": "free"
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "note": "Low-spec starter",
+          "priceHint": "free"
+        }
       ],
       "notes": "Continue officially documents Ollama as a local backend (docs.continue.dev guides, measured 2026-11-14); the endpoint is added in config.yaml or the config dropdown. No key involved."
     }

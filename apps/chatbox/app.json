@@ -84,7 +84,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Chatbox-1.24.3-arm64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/09a48e314ec4d2988219db3e128a58fe6b32cd2da24a779f8068d98874a04d78.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg 挂载 + 拷贝 Chatbox.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
         "probe": {
@@ -119,7 +119,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Chatbox-1.24.3.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c2bc74141321e783394f2a1db9ca0984f93a90b42bf58659a3f76b29c9ad144f.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg 挂载 + 拷贝 Chatbox.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证。",
         "probe": {

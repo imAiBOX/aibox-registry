@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-11T11:45:00Z",
   "upstream": {
     "github": [
-      { "repo": "ollama/ollama", "tag": "v0.40.16" }
+      {
+        "repo": "ollama/ollama",
+        "tag": "v0.40.16"
+      }
     ]
   },
   "runtime": {
@@ -27,7 +30,9 @@
       "name": "Ollama Windows Installer (x64)",
       "kind": "app",
       "version": "0.40.16",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "x64",
       "sha256": "84db4f756ddc9e091142a85cdc0f7ae5db68bc9b3e075f114388b326f8ed912d",
       "sizeBytes": 1857663944,
@@ -50,7 +55,12 @@
       ],
       "install": {
         "type": "nsis-silent",
-        "args": ["/VERYSILENT", "/SILENT", "/NORESTART", "/SUPPRESSMSGBOXES"],
+        "args": [
+          "/VERYSILENT",
+          "/SILENT",
+          "/NORESTART",
+          "/SUPPRESSMSGBOXES"
+        ],
         "notes": "Inno Setup 安装器（官方 install.ps1 实测参数 /VERYSILENT /NORESTART /SUPPRESSMSGBOXES + Find-InnoSetupInstall + 注册表 UninstallString）；显式带官方 /SILENT 以满足执行层静默标记检测、避免追加 NSIS /S。默认安装目录 %LOCALAPPDATA%\\Programs\\Ollama（install.ps1 实证）。TODO Windows 实机验证。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe\" --version",
@@ -63,7 +73,9 @@
       "name": "Ollama macOS dmg (Universal)",
       "kind": "app",
       "version": "0.40.16",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "any",
       "sha256": "b48d74a2d8c6a0592c816a4f85643d8d8608ad592abafbe95c04128a73c398c6",
       "sizeBytes": 229996388,
@@ -89,7 +101,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Ollama.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/b48d74a2d8c6a0592c816a4f85643d8d8608ad592abafbe95c04128a73c398c6.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg 挂载 + 拷贝 .app + 卸载（hdiutil 惯例，destName=URL 末段）。单一 dmg 覆盖 Intel/Apple Silicon（上游 scripts/build_darwin.sh lipo universal 二进制）→ arch=any。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
         "probe": {
@@ -101,23 +113,37 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["proxy-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "官方直连安装（GitHub Releases）",
-      "steps": ["ollama-win-x64", "ollama-mac"],
+      "steps": [
+        "ollama-win-x64",
+        "ollama-mac"
+      ],
       "note": "单安装器路线：Windows 走 OllamaSetup.exe（Inno 静默），macOS 走 dmg 挂载拷贝；步骤含双平台包，按机型过滤。"
     },
     "proxy-install": {
       "label": "国内加速安装（gh-proxy 网关通道）",
-      "steps": ["ollama-win-x64", "ollama-mac"],
+      "steps": [
+        "ollama-win-x64",
+        "ollama-mac"
+      ],
       "note": "与 direct-install 同包；下载层按区域优先 proxy 通道（S3 网关），失败自动降级直连。ghfast.top 对 ollama/ollama 资产实测 403 → 本应用仅走 gh-proxy。Windows ARM64 上游仅提供便携 zip（无安装器）→ arm64 机型 plan 为空，TODO 上游提供。"
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据（S2/S4）。",
     "proxyGateways": [
       {
@@ -141,8 +167,18 @@
       "configTarget": "~/.config/ollama/ollama.json5",
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
-        { "id": "qwen2.5:7b", "name": "Qwen2.5 7B", "note": "中文好，8GB 内存可跑", "priceHint": "免费" },
-        { "id": "llama3.2:3b", "name": "Llama 3.2 3B", "note": "低配机入门", "priceHint": "免费" }
+        {
+          "id": "qwen2.5:7b",
+          "name": "Qwen2.5 7B",
+          "note": "中文好，8GB 内存可跑",
+          "priceHint": "免费"
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "note": "低配机入门",
+          "priceHint": "免费"
+        }
       ],
       "notes": "Ollama 本体无 key 配置（本地运行器，模型经 ollama pull 管理）；configTarget 为 AiBOX CONFIG 写入位（与 config.rs 缺省回退 ~/.config/<appId>/<appId>.json5 一致），TODO 实机取证。"
     }

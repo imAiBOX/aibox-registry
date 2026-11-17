@@ -112,7 +112,7 @@
         "args": [
           "bash",
           "-lc",
-          "unzip -qo <dmg> -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
+          "unzip -qo \"$HOME/.aibox/cache/downloads/08e5d5a96291df59e4e10f19b267e8794414c7549ef03bdd445284704fe506f6.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
         ],
         "notes": "Unzip and copy Goose.app into /Applications (user-writable). TODO real-machine verification (Phase 3).",
         "probe": {
@@ -161,7 +161,7 @@
         "args": [
           "bash",
           "-lc",
-          "unzip -qo <dmg> -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
+          "unzip -qo \"$HOME/.aibox/cache/downloads/fef3d1546a6999dee04480f00189ecc708bf28bf9871ad4d9f42b214c98d1bde.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
         ],
         "notes": "Same flow as arm64. TODO real-machine verification (Phase 3).",
         "probe": {

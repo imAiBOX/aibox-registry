@@ -88,7 +88,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; cat \"$HOME/.aibox/cache/downloads/install.sh\" | bash"
+          "set -e; cat \"$HOME/.aibox/cache/downloads/c73dad4dcf7c9ecadb98578e28cc763d23d7be3fa1b513545319038795493214.sh\" | bash"
         ],
         "notes": "Feeds the hash-verified official installer into bash exactly like `curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash`; installs into ~/.hermes (bundled toolchain, no admin). Interactive prompts possible. TODO real-machine verification.",
         "probe": {

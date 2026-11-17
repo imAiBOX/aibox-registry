@@ -116,7 +116,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/nanobot_ai-0.4.1-py3-none-macosx_13_0_arm64.whl\""
+          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/62c74a28467f6516099af8aa02f2b110356ee4deff78da36955cfefc1fd3b678.whl\""
         ],
         "notes": "Same layout as the official installer (~/.nanobot/venv) but installed from the hash-verified release wheel — user directory only, zero admin. Prerequisite: Python 3.11+ (`python3`) on the machine; otherwise use the official one-liner from the guide. TODO real-machine verification.",
         "probe": {
@@ -165,7 +165,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/nanobot_ai-0.4.1-py3-none-macosx_13_0_x86_64.whl\""
+          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/db7661aeae646a17374c5be1a422ec4eb4e5b802cabd1a229b3129dba5189267.whl\""
         ],
         "notes": "Intel build of the same release; identical flow to the arm64 package (venv at ~/.nanobot/venv, hash-verified wheel, zero admin). TODO real-machine verification.",
         "probe": {

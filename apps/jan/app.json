@@ -9,7 +9,10 @@
   "updatedAt": "2026-11-11T21:45:00Z",
   "upstream": {
     "github": [
-      { "repo": "janhq/jan", "tag": "v0.8.8" }
+      {
+        "repo": "janhq/jan",
+        "tag": "v0.8.8"
+      }
     ]
   },
   "runtime": {
@@ -27,7 +30,9 @@
       "name": "Jan Windows Installer (x64)",
       "kind": "app",
       "version": "0.8.8",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "x64",
       "sha256": "08aca371733b76200e44e95d677cdd15e96609f86f919de57b97a5358ca21e9b",
       "sizeBytes": 571697752,
@@ -57,7 +62,9 @@
       ],
       "install": {
         "type": "nsis-silent",
-        "args": ["/S"],
+        "args": [
+          "/S"
+        ],
         "notes": "Tauri NSIS 安装器（tauri.conf.json bundle.windows 无自定义项 → NSIS 默认 /S）；安装模式默认 CurrentUser，装到 %LOCALAPPDATA%\\Jan（tauri-bundler installer.nsi MULTIUSER_INSTALLMODE 实证），主程序 Jan-Desktop.exe（mainBinaryName 实证）。TODO Windows 实机验证静默参数与路径。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Jan\\Jan-Desktop.exe\" --version",
@@ -70,7 +77,9 @@
       "name": "Jan Windows Installer (ARM64)",
       "kind": "app",
       "version": "0.8.8",
-      "platforms": ["windows"],
+      "platforms": [
+        "windows"
+      ],
       "arch": "arm64",
       "sha256": "4df9072f7bc93907c2ae04448120a897a54c0e349cf482adbaecd2f98694c392",
       "sizeBytes": 335580368,
@@ -100,7 +109,9 @@
       ],
       "install": {
         "type": "nsis-silent",
-        "args": ["/S"],
+        "args": [
+          "/S"
+        ],
         "notes": "同 x64（Tauri NSIS 默认 CurrentUser + /S）。TODO Windows 实机验证。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Jan\\Jan-Desktop.exe\" --version",
@@ -113,7 +124,9 @@
       "name": "Jan macOS dmg (Universal)",
       "kind": "app",
       "version": "0.8.8",
-      "platforms": ["macos"],
+      "platforms": [
+        "macos"
+      ],
       "arch": "any",
       "sha256": "7467b2c06ab1d2e0812b36ca73aebcbe8377c2d89207edaba266a2a0e39f404b",
       "sizeBytes": 115908917,
@@ -146,7 +159,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Jan_0.8.8_universal.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/7467b2c06ab1d2e0812b36ca73aebcbe8377c2d89207edaba266a2a0e39f404b.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg 挂载 + 拷贝 Jan.app + 卸载（hdiutil 惯例，destName=URL 末段）。单一 universal dmg 覆盖 Intel/Apple Silicon → arch=any。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
         "probe": {
@@ -158,23 +171,37 @@
   ],
   "packageManagerOverrides": {},
   "routes": {
-    "global": ["direct-install"],
-    "cn": ["proxy-install"]
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
   },
   "routePlans": {
     "direct-install": {
       "label": "官方直连安装（GitHub Releases）",
-      "steps": ["jan-win-x64", "jan-mac"],
+      "steps": [
+        "jan-win-x64",
+        "jan-mac"
+      ],
       "note": "安装器路线：Windows 走 Tauri NSIS 静默安装，macOS 走 universal dmg 挂载拷贝；步骤含双平台包，按机型过滤，win arm64 机型自动换成 jan-win-arm64。"
     },
     "proxy-install": {
       "label": "国内加速安装（ghfast/gh-proxy 通道）",
-      "steps": ["jan-win-x64", "jan-mac"],
+      "steps": [
+        "jan-win-x64",
+        "jan-mac"
+      ],
       "note": "与 direct-install 同包；下载层按区域优先 proxy 通道（S3 网关），失败自动降级直连。"
     }
   },
   "netConfig": {
-    "registrySources": ["github-api", "raw", "jsdelivr"],
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
     "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据。",
     "proxyGateways": [
       {
@@ -199,9 +226,24 @@
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
-        { "id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "note": "聪明均衡，日常首选", "priceHint": "中等" },
-        { "id": "openai/gpt-5", "name": "GPT-5", "note": "复杂任务更强", "priceHint": "偏高" },
-        { "id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" }
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "聪明均衡，日常首选",
+          "priceHint": "中等"
+        },
+        {
+          "id": "openai/gpt-5",
+          "name": "GPT-5",
+          "note": "复杂任务更强",
+          "priceHint": "偏高"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "便宜快速",
+          "priceHint": "低"
+        }
       ],
       "notes": "configTarget 为 AiBOX CONFIG 写入位：上游 core/src/browser/settings.ts 实证设置存于 <jan_data>/settings.json，jan_data=%APPDATA%\\Jan，macOS 对应 ~/Library/Application Support/Jan/settings.json；TODO 实机校正。"
     },
@@ -212,8 +254,18 @@
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
-        { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "note": "性价比均衡", "priceHint": "中等" },
-        { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "note": "快而便宜", "priceHint": "低" }
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "性价比均衡",
+          "priceHint": "中等"
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "note": "快而便宜",
+          "priceHint": "低"
+        }
       ],
       "notes": "configTarget 同 openrouter（TODO 实机校正）。"
     },
@@ -224,8 +276,18 @@
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
-        { "id": "gpt-5.1", "name": "GPT-5.1", "note": "默认推荐", "priceHint": "中等" },
-        { "id": "gpt-5-mini", "name": "GPT-5 mini", "note": "省预算", "priceHint": "低" }
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "默认推荐",
+          "priceHint": "中等"
+        },
+        {
+          "id": "gpt-5-mini",
+          "name": "GPT-5 mini",
+          "note": "省预算",
+          "priceHint": "低"
+        }
       ],
       "notes": "configTarget 同 openrouter（TODO 实机校正）。"
     },
@@ -236,8 +298,18 @@
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
-        { "id": "gemini-2.5-flash", "name": "Gemini 2.5 Flash", "note": "便宜快速", "priceHint": "低" },
-        { "id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro", "note": "更聪明", "priceHint": "中等" }
+        {
+          "id": "gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "便宜快速",
+          "priceHint": "低"
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "name": "Gemini 2.5 Pro",
+          "note": "更聪明",
+          "priceHint": "中等"
+        }
       ],
       "notes": "configTarget 同 openrouter（TODO 实机校正）。"
     }

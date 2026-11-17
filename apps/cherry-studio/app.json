@@ -159,7 +159,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Cherry-Studio-2.2.0-mac-x64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/cfc96697326e2abaaf3627bf5487cda62a8162fa55d7c4161fecea7ef75fe06a.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
         "probe": {
@@ -208,7 +208,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/Cherry-Studio-2.2.0-mac-arm64.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/5de08748e4a62023e5b942722fc84623e5c466d51b403a3429a0f29dc31270cd.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证。",
         "probe": {

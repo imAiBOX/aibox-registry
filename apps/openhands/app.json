@@ -112,7 +112,7 @@
         "args": [
           "bash",
           "-lc",
-          "hdiutil attach -nobrowse -quiet <dmg> && cp -R \"/Volumes/OpenHands*/OpenHands.app\" /Applications/ && hdiutil detach -quiet \"/Volumes/OpenHands*\""
+          "hdiutil attach -nobrowse -quiet \"$HOME/.aibox/cache/downloads/765415ee1603c1fbdba61d83f05806f2a91b0b7dfe3f2dbff46118cd9aa89a96.dmg\" && cp -R \"/Volumes/OpenHands*/OpenHands.app\" /Applications/ && hdiutil detach -quiet \"/Volumes/OpenHands*\""
         ],
         "notes": "Mount dmg, copy .app to /Applications (user-writable). TODO real-machine verification (Phase 3).",
         "probe": {
