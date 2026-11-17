@@ -1,7 +1,7 @@
 {
   "id": "hermes-agent",
   "name": "Hermes Agent",
-  "version": "0.23.1",
+  "version": "0.23.2",
   "description": {
     "zh-CN": "Nous Research 出品的开源个人 Agent：一条命令装好，终端里聊天、连 Telegram/Discord 等消息渠道、装技能、跑定时任务；自带 Python/Node 工具链，装在你自己的用户目录，不用管理员权限。",
     "en": "Open-source personal agent from Nous Research — one-command install, chat in the terminal or wire it to Telegram/Discord and other channels, skills and scheduled tasks; bundles its own Python/Node toolchain into your user directory, no admin rights."
@@ -11,7 +11,7 @@
     "github": [
       {
         "repo": "NousResearch/hermes-agent",
-        "tag": "v0.23.1"
+        "tag": "v0.23.2"
       }
     ]
   },
@@ -35,7 +35,7 @@
       "arch": "x64",
       "sha256": "9bd2c1402427414a2ac9a3c3f33c66d78073ba81bb2d15634c13a52e9615d2d7",
       "sizeBytes": 94623,
-      "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.ps1 full download sha256 measured locally (2026-11-12)",
+      "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.ps1 full download sha256 measured locally (2026-11-12); installer script re-verified unchanged on 2026-11-17 (auto-tracks latest release)",
       "channels": [
         {
           "type": "direct",
@@ -73,7 +73,7 @@
       "arch": "any",
       "sha256": "c73dad4dcf7c9ecadb98578e28cc763d23d7be3fa1b513545319038795493214",
       "sizeBytes": 68015,
-      "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.sh full download sha256 measured locally (2026-11-12)",
+      "hashSource": "Official endpoint https://hermes-agent.nousresearch.com/install.sh full download sha256 measured locally (2026-11-12); installer script re-verified unchanged on 2026-11-17 (auto-tracks latest release)",
       "channels": [
         {
           "type": "direct",
