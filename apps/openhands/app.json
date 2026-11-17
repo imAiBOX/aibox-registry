@@ -38,21 +38,21 @@
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe",
+          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-Setup-1.41.0.exe",
           "region": "global",
           "operator": "github",
           "note": "Official NSIS installer"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe",
+          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-Setup-1.41.0.exe",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe",
+          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-Setup-1.41.0.exe",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
