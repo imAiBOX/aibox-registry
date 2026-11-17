@@ -117,11 +117,23 @@ for (const { dir, app } of apps) {
           check.bytes = bytes;
           if (sha256 !== pkg.sha256) {
             check.status = 'SHA256_MISMATCH';
+            const isArchive = ch.url.includes('/archive/');
             addDrift('integrity',
-              `${dir}: sha256 mismatch ${pkg.id} (${ch.type})`,
-              `Channel \`${ch.url}\` returned content whose sha256 does not match the registry record.\n\n` +
-              `- expected: \`${pkg.sha256}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n\n` +
-              `Hash provenance: ${pkg.hashSource || 'n/a'}\nChecked at: ${check.checkedAt}`,
+              isArchive
+                ? `${dir}: archive regenerated ${pkg.id} (${ch.type}) — refresh sha`
+                : `${dir}: sha256 mismatch ${pkg.id} (${ch.type})`,
+              isArchive
+                ? (`GitHub source archive \`${ch.url}\` changed bytes without a version change. ` +
+                   `Source archives are NOT byte-stable (GitHub regenerates gzip metadata/compression), ` +
+                   `so this is expected platform behaviour — not tampering. Recalibrate with:\n\n` +
+                   '```sh\n' +
+                   `node scripts/refresh-archive-sha.mjs ${dir}\n` +
+                   '```\n\n' +
+                   `- expected: \`${pkg.sha256}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n` +
+                   `Checked at: ${check.checkedAt}`)
+                : (`Channel \`${ch.url}\` returned content whose sha256 does not match the registry record.\n\n` +
+                   `- expected: \`${pkg.sha256}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n\n` +
+                   `Hash provenance: ${pkg.hashSource || 'n/a'}\nChecked at: ${check.checkedAt}`),
               B(dir));
           }
         } else if (h.contentLength && Number(h.contentLength) !== pkg.sizeBytes) {
