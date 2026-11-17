@@ -1,25 +1,25 @@
 {
   "id": "openclaw",
   "name": "OpenClaw",
-  "version": "2026.11.4",
+  "version": "2026.11.5",
   "description": {
     "zh-CN": "多渠道 AI 网关，把大模型接到你的聊天软件（Telegram/WhatsApp 等），支持 Anthropic/OpenAI/Google/OpenRouter/Claude 订阅/Ollama 六种接入。",
     "en": "Multi-channel AI gateway that connects LLMs to your messengers (Telegram/WhatsApp, etc.), with six provider paths: Anthropic / OpenAI / Google / OpenRouter / Claude subscription / Ollama."
   },
-  "updatedAt": "2026-11-11T21:45:00Z",
+  "updatedAt": "2026-11-17T17:10:44Z",
   "upstream": {
     "npm": {
       "name": "openclaw",
-      "version": "2026.11.4"
+      "version": "2026.11.5"
     },
     "github": [
       {
         "repo": "openclaw/openclaw",
-        "tag": "v2026.11.4"
+        "tag": "v2026.11.5"
       },
       {
         "repo": "openclaw/openclaw-windows-node",
-        "tag": "v2026.11.1"
+        "tag": "v2026.11.3"
       },
       {
         "repo": "git-for-windows/git",
@@ -165,26 +165,26 @@
       "id": "openclaw-cli",
       "name": "OpenClaw CLI (npm package)",
       "kind": "app",
-      "version": "2026.11.3",
+      "version": "2026.11.5",
       "platforms": [
         "windows",
         "macos"
       ],
       "arch": "any",
-      "sha256": "e69e304227d7d2d76568afd44fca957a7c6588e407b1917aab8cb8dc61c68f4c",
-      "sizeBytes": 113408951,
-      "hashSource": "本地实测（2026-11-11）：分别从 registry.npmjs.org 与 registry.npmmirror.com 全量下载 tarball 计算 sha256，两源一致且 sha1 匹配 npm dist.shasum (d7db24ae…)",
+      "sha256": "a57d1272b7d87bdbf2b0a0e18811dc1ca3ffc5de02229d1f9e2884bd38470794",
+      "sizeBytes": 117357557,
+      "hashSource": "Full download sha256 measured 2026-11-17 UTC by auto-bump CI (source registry.npmjs.org)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.4.tgz",
+          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.5.tgz",
           "region": "global",
           "operator": "npm",
           "note": "npm 官方 registry（5.9.4 矩阵 openclaw CLI GLOBAL 主）"
         },
         {
           "type": "mirror",
-          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.4.tgz",
+          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.5.tgz",
           "region": "cn",
           "operator": "alibaba",
           "note": "阿里 npmmirror（5.9.4 矩阵 CN 主；EXECUTE 经 packageManagerOverrides 注入 --registry，不改用户 npmrc）"
@@ -195,7 +195,7 @@
         "args": [
           "install",
           "-g",
-          "openclaw@2026.11.3"
+          "openclaw@2026.11.5"
         ],
         "notes": "CN 序时 EXECUTE 自动追加 --registry=https://registry.npmmirror.com 与本地 prefix（~/.aibox/prefix），退出即还原，不污染用户全局 npmrc。",
         "probe": {
@@ -208,32 +208,32 @@
       "id": "openclaw-hub-win-x64",
       "name": "OpenClaw Windows Hub (x64)",
       "kind": "app",
-      "version": "v2026.11.1",
+      "version": "v2026.11.3",
       "platforms": [
         "windows"
       ],
       "arch": "x64",
-      "sha256": "372b2adb72673d2b969e05766ccfca3e1b5783b0cb4018b43e3a0161e463d062",
-      "sizeBytes": 140845808,
-      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "sha256": "42d73eedf62dfe03228c0573f84ac353d21a08e6495e3f3485aaad60a9b123ef",
+      "sizeBytes": 167779288,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-17 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-x64.exe",
+          "url": "https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.3/OpenClawCompanion-Setup-x64.exe",
           "region": "global",
           "operator": "openclaw",
           "note": "GitHub Releases 直连（5.9.4 矩阵 NSIS/Hub GLOBAL 主）"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-x64.exe",
+          "url": "https://ghfast.top/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.3/OpenClawCompanion-Setup-x64.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关（S3：内容经哈希校验，可整体关闭；2026-11-09 实测 200/同大小）"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-x64.exe",
+          "url": "https://gh-proxy.com/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.3/OpenClawCompanion-Setup-x64.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关（2026-11-09 实测 200/同大小）"
@@ -255,32 +255,32 @@
       "id": "openclaw-hub-win-arm64",
       "name": "OpenClaw Windows Hub (ARM64)",
       "kind": "app",
-      "version": "v2026.11.1",
+      "version": "v2026.11.3",
       "platforms": [
         "windows"
       ],
       "arch": "arm64",
-      "sha256": "4324e29d953645652b7125175c8a82c0ebc10babddc189936e499cb2c694d6e5",
-      "sizeBytes": 127260824,
-      "hashSource": "GitHub API releases/latest 资产 digest 字段（2026-11-09 实测）",
+      "sha256": "7e780a84cf186ffd4e60ba9868ada9cde1ab3e5534898fd68ce25a7fe381f98a",
+      "sizeBytes": 151877664,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-17 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-arm64.exe",
+          "url": "https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.3/OpenClawCompanion-Setup-arm64.exe",
           "region": "global",
           "operator": "openclaw",
           "note": "GitHub Releases 直连"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-arm64.exe",
+          "url": "https://ghfast.top/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.3/OpenClawCompanion-Setup-arm64.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "社区 GitHub 加速网关"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.1/OpenClawCompanion-Setup-arm64.exe",
+          "url": "https://gh-proxy.com/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.3/OpenClawCompanion-Setup-arm64.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关"
