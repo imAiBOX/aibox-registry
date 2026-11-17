@@ -1,0 +1,203 @@
+{
+  "id": "codex",
+  "name": "Codex",
+  "version": "0.169.0",
+  "description": {
+    "zh-CN": "Codex 是 OpenAI 开源的编码智能体（Apache-2.0）。自包含单文件，下载即用：在终端里交给它任务，它会自己改代码、执行命令并汇报。需 ChatGPT 账号或 OpenAI API key。",
+    "en": "Codex is OpenAI’s open-source coding agent (Apache-2.0). One self-contained executable — download and run: hand it a task and it edits code, executes commands and reports back. Needs a ChatGPT account or OpenAI API key."
+  },
+  "updatedAt": "2026-11-17T19:21:56Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "openai/codex",
+        "tag": "rust-v0.169.0"
+      }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (self-contained executable)",
+      "supported": "not required (self-contained executable)"
+    },
+    "disallowed": [],
+    "note": "Rust static CLI. Terminal-first: launch from PowerShell / Windows Terminal. Upstream macOS builds exist but are not shipped here until their dmg layout is verified."
+  },
+  "packages": [
+    {
+      "id": "codex-win-x64",
+      "name": "Codex CLI (self-contained, win32-x64)",
+      "kind": "app",
+      "version": "0.169.0",
+      "arch": "x64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-x86_64-pc-windows-msvc.exe",
+          "region": "global",
+          "operator": "github",
+          "note": "Official standalone binary"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-x86_64-pc-windows-msvc.exe",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.169.0/codex-x86_64-pc-windows-msvc.exe",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "ce1945eb440b5481ed1233ebaf32b7056ee7e4e452fa62ffe1cbfb26103cdee0",
+      "sizeBytes": 382529840,
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "$d=\"$env:LOCALAPPDATA\\Programs\\Codex\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Copy-Item \"$env:USERPROFILE\\.aibox\\cache\\downloads\\ce1945eb440b5481ed1233ebaf32b7056ee7e4e452fa62ffe1cbfb26103cdee0.exe\" \"$d\\codex.exe\" -Force"
+        ],
+        "notes": "Copies the hash-verified binary into the user directory (same pattern as llamafile). No admin, no PATH mutation; launch from any terminal at %LOCALAPPDATA%\\Programs\\Codex\\codex.exe.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"& \\\"$env:LOCALAPPDATA\\Programs\\Codex\\codex.exe\\\" --version\"",
+          "expect": "[cC]odex"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Direct install",
+      "steps": [
+        "codex-win-x64"
+      ]
+    },
+    "proxy-install": {
+      "label": "Proxy install (CN)",
+      "steps": [
+        "codex-win-x64"
+      ]
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's asset (2026-11-12)"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's asset (2026-11-12)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "openai": {
+      "label": "OpenAI (ChatGPT account or API key)",
+      "note": "Codex signs in with a ChatGPT account (Plus/Pro/Team) or an OpenAI API key — run `codex login` after install.",
+      "keyFormat": "sk-... (API key) or ChatGPT OAuth login",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "configTarget": "~/.codex/auth.json",
+      "recommendedModels": [
+        {
+          "id": "gpt-5.1-codex",
+          "name": "GPT-5.1 Codex",
+          "note": "Codex 专属优化模型，日常首选",
+          "priceHint": "中等"
+        },
+        {
+          "id": "o4-mini",
+          "name": "o4-mini",
+          "note": "便宜够用，轻量任务",
+          "priceHint": "低"
+        }
+      ],
+      "authType": "api-key"
+    }
+  },
+  "deepLinks": {
+    "console": "https://github.com/openai/codex#readme",
+    "docs": "https://developers.openai.com/codex",
+    "tutorial": "https://aibox.im/en/apps/codex/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "powershell -NoProfile -Command \"& \\\"$env:LOCALAPPDATA\\Programs\\Codex\\codex.exe\\\" --version\"",
+        "expect": "[cC]odex"
+      },
+      "notes": "Re-copy the new release binary over %LOCALAPPDATA%\\Programs\\Codex\\codex.exe; ~/.codex config survives."
+    },
+    "uninstall": {
+      "steps": [
+        "Delete %LOCALAPPDATA%\\Programs\\Codex",
+        "Delete ~/.codex (login and config)"
+      ],
+      "residualPaths": [
+        "~/.codex"
+      ],
+      "notes": "~/.codex holds your login token — delete it if you want credentials gone."
+    },
+    "dataPaths": [
+      "~/.codex"
+    ],
+    "risk": {
+      "onUninstall": "登录凭据与历史在 ~/.codex，删除即丢失（也应删除：含 token）",
+      "backupFirst": false
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  },
+  "category": "agent",
+  "tagline": {
+    "zh-CN": "OpenAI 的编程智能体 CLI：在终端里替你写代码、跑命令、改仓库",
+    "en": "OpenAI’s coding agent CLI — writes code, runs commands and edits repos from your terminal"
+  },
+  "icon": "icons/codex.png",
+  "dataPaths": [
+    "~/.codex"
+  ]
+}

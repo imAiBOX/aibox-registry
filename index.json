@@ -1,6 +1,6 @@
 {
-  "registryVersion": "2026.11.17.2",
-  "generatedAt": "2026-11-17T18:49:37Z",
+  "registryVersion": "2026.11.17.3",
+  "generatedAt": "2026-11-17T19:21:56Z",
   "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12/14 (see README).",
   "apps": [
     {
@@ -406,6 +406,22 @@
       "platforms": [
         "windows",
         "macos"
+      ],
+      "status": "stable"
+    },
+    {
+      "id": "codex",
+      "name": "Codex",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "OpenAI 编程智能体：终端里替你写代码跑命令",
+        "en": "OpenAI coding agent: code and run commands from your terminal"
+      },
+      "icon": "icons/codex.png",
+      "difficulty": 3,
+      "popularity": 5,
+      "platforms": [
+        "windows"
       ],
       "status": "stable"
     }
