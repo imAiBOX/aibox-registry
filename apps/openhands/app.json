@@ -1,0 +1,308 @@
+{
+  "id": "openhands",
+  "name": "OpenHands",
+  "version": "1.41.0",
+  "description": {
+    "zh-CN": "OpenHands 桌面版：给它一个任务，它会自己写代码、跑命令、改文件，直到完成。需要你自己的模型 API key。",
+    "en": "OpenHands desktop: give it a task and it writes code, runs commands and edits files until done. Uses your own model API key."
+  },
+  "updatedAt": "2026-11-17T15:43:09Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "All-Hands-AI/OpenHands",
+        "tag": "v1.41.0"
+      }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (desktop bundle ships its own runtime)",
+      "supported": "not required (desktop bundle ships its own runtime)"
+    },
+    "disallowed": [],
+    "note": "Electron desktop build (Agent Canvas). Requires a model API key (OpenRouter/Anthropic/OpenAI or local) configured inside the app after install."
+  },
+  "packages": [
+    {
+      "id": "openhands-win-x64",
+      "name": "OpenHands Agent Canvas (NSIS, win32-x64)",
+      "kind": "app",
+      "version": "1.41.0",
+      "arch": "x64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-17 measured, 168520009 bytes)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe",
+          "region": "global",
+          "operator": "github",
+          "note": "Official NSIS installer"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "8590b817db4e70a860532e3ff805774f5a0d031de7838afc414b48ba5ebcf5f9",
+      "sizeBytes": 168520009,
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/S"
+        ],
+        "notes": "Per-user NSIS install (%LOCALAPPDATA%Programs/OpenHands); zero admin. TODO real-machine verification of silent flag.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\OpenHands\\OpenHands.exe\"",
+          "expect": "True"
+        }
+      }
+    },
+    {
+      "id": "openhands-mac-universal",
+      "name": "OpenHands Agent Canvas (dmg, universal)",
+      "kind": "app",
+      "version": "1.41.0",
+      "arch": "any",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-17 measured, 349545539 bytes)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-universal.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "Universal dmg"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-universal.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.41.0/OpenHands-Agent-Canvas-1.41.0-universal.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "765415ee1603c1fbdba61d83f05806f2a91b0b7dfe3f2dbff46118cd9aa89a96",
+      "sizeBytes": 349545539,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "hdiutil attach -nobrowse -quiet <dmg> && cp -R \"/Volumes/OpenHands*/OpenHands.app\" /Applications/ && hdiutil detach -quiet \"/Volumes/OpenHands*\""
+        ],
+        "notes": "Mount dmg, copy .app to /Applications (user-writable). TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"ls -d /Applications/OpenHands.app >/dev/null 2>&1 && echo installed\"",
+          "expect": "installed"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Direct install",
+      "steps": [
+        "openhands-win-x64"
+      ]
+    },
+    "proxy-install": {
+      "label": "Proxy install (CN)",
+      "steps": [
+        "openhands-win-x64"
+      ]
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata — this app ships no GitHub assets, so its VSIX hash came from a full Open VSX download measured on 2026-11-14.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-14T08:30:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL. This app's channels are on open-vsx.org and do not route through it."
+      }
+    ]
+  },
+  "modelProviders": {
+    "anthropic": {
+      "label": "Anthropic official API (Claude)",
+      "authType": "api-key",
+      "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
+      "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4-5",
+          "name": "Claude Sonnet 4.5",
+          "note": "Balanced everyday default",
+          "priceHint": "medium"
+        },
+        {
+          "id": "claude-haiku-4-5",
+          "name": "Claude Haiku 4.5",
+          "note": "Fast and cheap for small edits",
+          "priceHint": "low"
+        }
+      ],
+      "notes": "Continue keeps all configuration in ~/.continue/config.yaml (macOS/Linux) or %USERPROFILE%\\.continue\\config.yaml (Windows) — official docs, measured 2026-11-14. Continue's own best practice is to reference API keys through environment variables instead of hardcoding them in the YAML; AiBOX never writes keys to disk."
+    },
+    "openai": {
+      "label": "OpenAI official API",
+      "authType": "api-key",
+      "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
+      "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "recommendedModels": [
+        {
+          "id": "gpt-5.1",
+          "name": "GPT-5.1",
+          "note": "Strong on complex tasks",
+          "priceHint": "medium"
+        }
+      ],
+      "notes": "Same config file as anthropic (local config.yaml, env-var reference recommended)."
+    },
+    "openrouter": {
+      "label": "OpenRouter (one key, every model)",
+      "authType": "api-key",
+      "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
+      "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "recommendedModels": [
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "Smart and balanced",
+          "priceHint": "medium"
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "note": "Cheap and fast",
+          "priceHint": "low"
+        }
+      ],
+      "notes": "Same config file as anthropic."
+    },
+    "ollama": {
+      "label": "Local Ollama models (free, offline, no key)",
+      "authType": "local",
+      "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "recommendedModels": [
+        {
+          "id": "qwen2.5-coder:7b",
+          "name": "Qwen2.5 Coder 7B",
+          "note": "Good free coding model, 8GB RAM",
+          "priceHint": "free"
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "note": "Low-spec starter",
+          "priceHint": "free"
+        }
+      ],
+      "notes": "Continue officially documents Ollama as a local backend (docs.continue.dev guides, measured 2026-11-14); the endpoint is added in config.yaml or the config dropdown. No key involved."
+    }
+  },
+  "deepLinks": {
+    "console": "https://github.com/All-Hands-AI/OpenHands#readme",
+    "docs": "https://docs.all-hands.dev/",
+    "tutorial": "https://aibox.im/en/apps/openhands/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\OpenHands\\OpenHands.exe\"",
+        "expect": "True"
+      },
+      "notes": "Reinstall the new release build over the existing install; user data survives."
+    },
+    "uninstall": {
+      "steps": [
+        "Uninstall from Windows Apps settings (or run the NSIS uninstaller)",
+        "Delete remaining user data folder (see data paths)"
+      ],
+      "residualPaths": [
+        "~/AppData/Roaming/OpenHands",
+        "~/Library/Application Support/OpenHands"
+      ],
+      "notes": "Conversation history and workspace files live in the data folder — back up first."
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/OpenHands",
+      "~/Library/Application Support/OpenHands"
+    ],
+    "risk": {
+      "onUninstall": "对话历史与工作区文件都在数据目录里，删除即丢失，建议先备份",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  },
+  "category": "agent",
+  "tagline": {
+    "zh-CN": "AI 软件开发智能体（OpenHands 桌面版，写代码改代码一条龙）",
+    "en": "AI software developer agent (OpenHands desktop — code, run and iterate for you)"
+  },
+  "icon": "icons/openhands.png",
+  "dataPaths": [
+    "~/AppData/Roaming/OpenHands",
+    "~/Library/Application Support/OpenHands"
+  ]
+}

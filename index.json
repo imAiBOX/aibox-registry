@@ -1,6 +1,6 @@
 {
   "registryVersion": "2026.11.17.1",
-  "generatedAt": "2026-11-17T05:25:00Z",
+  "generatedAt": "2026-11-17T15:43:09Z",
   "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12/14 (see README).",
   "apps": [
     {
@@ -369,6 +369,23 @@
       "icon": "icons/fooocus.png",
       "difficulty": 4,
       "popularity": 4,
+      "platforms": [
+        "windows",
+        "macos"
+      ],
+      "status": "stable"
+    },
+    {
+      "id": "openhands",
+      "name": "OpenHands",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "AI 软件开发智能体：给它任务，它自己写代码跑命令",
+        "en": "AI software developer agent — writes and runs code for you"
+      },
+      "icon": "icons/openhands.png",
+      "difficulty": 2,
+      "popularity": 5,
       "platforms": [
         "windows",
         "macos"
