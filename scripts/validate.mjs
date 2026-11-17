@@ -11,6 +11,7 @@ import addFormats from 'ajv-formats';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { badScriptRefs } from './lib/cache-name.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const errors = [];
@@ -83,6 +84,11 @@ for (const dir of appDirs) {
     }
     if ((pkg.channels || []).length > 0 && !/^[a-f0-9]{64}$/.test(pkg.sha256 || '')) {
       fail(`${label}: package "${pkg.id}" has channels but no valid sha256 (V1)`);
+    }
+    // install scripts get args verbatim — every cache/downloads reference must
+    // already be the content-addressed name (raw names / <dmg> break at exec)
+    for (const { ref, expected } of badScriptRefs(pkg)) {
+      fail(`${label}: package "${pkg.id}" script references "${ref}" but the cache name is "${expected}" (no placeholder substitution at exec time)`);
     }
   }
 
