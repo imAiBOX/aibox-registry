@@ -12,7 +12,7 @@
 3. 完成后启动 OpenHands（开始菜单 / 应用程序）
 
 ## 手动安装
-- **Windows**：从 GitHub Releases 下载 `OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe`，双击安装（用户级，不弹管理员）
+- **Windows**：从 GitHub Releases 下载 `OpenHands-Agent-Canvas-Setup-1.42.0.exe`，双击安装（用户级，不弹管理员）
 - **macOS**：下载 universal dmg，把 OpenHands.app 拖进「应用程序」
 
 ## 配置（让它真正干活）

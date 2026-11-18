@@ -12,7 +12,7 @@
 3. Launch OpenHands from the Start menu / Applications
 
 ## Manual install
-- **Windows**: download `OpenHands-Agent-Canvas-1.41.0-Setup-1.41.0.exe` from GitHub Releases and run it (per-user, no UAC)
+- **Windows**: download `OpenHands-Agent-Canvas-Setup-1.42.0.exe` from GitHub Releases and run it (per-user, no UAC)
 - **macOS**: download the universal dmg and drag OpenHands.app into Applications
 
 ## Configure (make it actually work)
