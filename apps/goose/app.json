@@ -1,7 +1,7 @@
 {
   "id": "goose",
   "name": "Goose",
-  "version": "1.59.2",
+  "version": "1.60.1",
   "description": {
     "zh-CN": "Goose 是 Block 开源的可扩展 AI 智能体，桌面版 + 命令行。接入任意 LLM（OpenRouter/Anthropic/Ollama 等），它能自己动手完成开发任务。",
     "en": "Goose is Block’s extensible AI agent (desktop + CLI). Plug in any LLM (OpenRouter/Anthropic/Ollama…) and let it do the work for you."
@@ -11,7 +11,7 @@
     "github": [
       {
         "repo": "block/goose",
-        "tag": "v1.59.2"
+        "tag": "v1.60.1"
       }
     ]
   },
@@ -29,7 +29,7 @@
       "id": "goose-win-x64",
       "name": "Goose Desktop (NSIS, win32-x64)",
       "kind": "app",
-      "version": "1.59.2",
+      "version": "1.60.1",
       "arch": "x64",
       "platforms": [
         "windows"
@@ -38,28 +38,28 @@
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/block/goose/releases/download/v1.59.2/Goose-win32-x64-setup.exe",
+          "url": "https://github.com/block/goose/releases/download/v1.60.1/Goose-win32-x64-setup.exe",
           "region": "global",
           "operator": "github",
           "note": "Official NSIS installer"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/block/goose/releases/download/v1.59.2/Goose-win32-x64-setup.exe",
+          "url": "https://ghfast.top/https://github.com/block/goose/releases/download/v1.60.1/Goose-win32-x64-setup.exe",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/block/goose/releases/download/v1.59.2/Goose-win32-x64-setup.exe",
+          "url": "https://gh-proxy.com/https://github.com/block/goose/releases/download/v1.60.1/Goose-win32-x64-setup.exe",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "87e91a38f8680396375fe8afbec29929708446837ec289a281d3fdfb86b90442",
-      "sizeBytes": 137573552,
+      "sha256": "e0ea750d435a1e920dc25e28a0f9162818dada55a5b5d873f898672444dd8576",
+      "sizeBytes": 163223568,
       "install": {
         "type": "nsis-silent",
         "args": [
@@ -76,7 +76,7 @@
       "id": "goose-mac-arm64",
       "name": "Goose Desktop (zip, Apple silicon)",
       "kind": "app",
-      "version": "1.59.2",
+      "version": "1.60.1",
       "arch": "arm64",
       "platforms": [
         "macos"
@@ -85,34 +85,34 @@
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/block/goose/releases/download/v1.59.2/Goose-darwin-arm64.zip",
+          "url": "https://github.com/block/goose/releases/download/v1.60.1/Goose-darwin-arm64.zip",
           "region": "global",
           "operator": "github",
           "note": "Contains Goose.app (verified via zip central directory)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/block/goose/releases/download/v1.59.2/Goose-darwin-arm64.zip",
+          "url": "https://ghfast.top/https://github.com/block/goose/releases/download/v1.60.1/Goose-darwin-arm64.zip",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/block/goose/releases/download/v1.59.2/Goose-darwin-arm64.zip",
+          "url": "https://gh-proxy.com/https://github.com/block/goose/releases/download/v1.60.1/Goose-darwin-arm64.zip",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "08e5d5a96291df59e4e10f19b267e8794414c7549ef03bdd445284704fe506f6",
-      "sizeBytes": 182706421,
+      "sha256": "55c9080d37df7816735c16c08e716c2ec0807a0bff7f4326863dfc87651a0094",
+      "sizeBytes": 184226988,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "unzip -qo \"$HOME/.aibox/cache/downloads/08e5d5a96291df59e4e10f19b267e8794414c7549ef03bdd445284704fe506f6.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
+          "unzip -qo \"$HOME/.aibox/cache/downloads/55c9080d37df7816735c16c08e716c2ec0807a0bff7f4326863dfc87651a0094.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
         ],
         "notes": "Unzip and copy Goose.app into /Applications (user-writable). TODO real-machine verification (Phase 3).",
         "probe": {
@@ -125,7 +125,7 @@
       "id": "goose-mac-x64",
       "name": "Goose Desktop (zip, Intel)",
       "kind": "app",
-      "version": "1.59.2",
+      "version": "1.60.1",
       "arch": "x64",
       "platforms": [
         "macos"
@@ -134,34 +134,34 @@
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/block/goose/releases/download/v1.59.2/Goose-darwin-x64.zip",
+          "url": "https://github.com/block/goose/releases/download/v1.60.1/Goose-darwin-x64.zip",
           "region": "global",
           "operator": "github",
           "note": "Contains Goose.app"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/block/goose/releases/download/v1.59.2/Goose-darwin-x64.zip",
+          "url": "https://ghfast.top/https://github.com/block/goose/releases/download/v1.60.1/Goose-darwin-x64.zip",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/block/goose/releases/download/v1.59.2/Goose-darwin-x64.zip",
+          "url": "https://gh-proxy.com/https://github.com/block/goose/releases/download/v1.60.1/Goose-darwin-x64.zip",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "fef3d1546a6999dee04480f00189ecc708bf28bf9871ad4d9f42b214c98d1bde",
-      "sizeBytes": 192552516,
+      "sha256": "3c5c0575f61315c68afe704c575b12bc0c37552a2d7c0bb5554d8fdf1affac68",
+      "sizeBytes": 196366887,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "unzip -qo \"$HOME/.aibox/cache/downloads/fef3d1546a6999dee04480f00189ecc708bf28bf9871ad4d9f42b214c98d1bde.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
+          "unzip -qo \"$HOME/.aibox/cache/downloads/3c5c0575f61315c68afe704c575b12bc0c37552a2d7c0bb5554d8fdf1affac68.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
         ],
         "notes": "Same flow as arm64. TODO real-machine verification (Phase 3).",
         "probe": {
