@@ -1,0 +1,380 @@
+{
+  "id": "pi",
+  "name": "Pi",
+  "version": "1.5.2",
+  "description": {
+    "zh-CN": "Pi 是 MIT 开源的 AI 编码智能体工具箱：统一 LLM API、智能体循环、TUI 与编码 CLI 二合一。平台包自包含（无需 Node），接任意模型即装即用。",
+    "en": "Pi is an MIT-licensed AI agent toolkit: unified LLM API, agent loop, TUI and coding CLI in one. Platform bundles are self-contained (no Node needed) — bring any model and go."
+  },
+  "updatedAt": "2026-11-18T01:35:25Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "earendil-works/pi",
+        "tag": "v1.5.2"
+      }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (self-contained platform bundle)",
+      "supported": "not required (self-contained platform bundle; npm install path additionally needs Node 22.19+ but AiBOX ships the bundle)"
+    },
+    "disallowed": [],
+    "note": "Self-contained executable per platform (win: pi.exe; mac: pi/pi) plus native prebuilds. Terminal-first tool."
+  },
+  "packages": [
+    {
+      "id": "pi-win-x64",
+      "name": "Pi coding agent (zip, win32-x64)",
+      "kind": "app",
+      "version": "1.5.2",
+      "arch": "x64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256; mac archive also re-measured locally and matched)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-windows-x64.zip",
+          "region": "global",
+          "operator": "github",
+          "note": "Self-contained pi.exe (verified via zip central directory)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-windows-x64.zip",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-windows-x64.zip",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "e6adb8cb8c84eca14391ad24b363de9d2be98a89ca3ba3fdee1fa4de32b7f2e8",
+      "sizeBytes": 61940631,
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "$d=\"$env:LOCALAPPDATA\\Programs\\Pi\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Expand-Archive -Force \"$env:USERPROFILE\\.aibox\\cache\\downloads\\e6adb8cb8c84eca14391ad24b363de9d2be98a89ca3ba3fdee1fa4de32b7f2e8.zip\" \"$env:TEMP\\aibox-pi\"; Copy-Item \"$env:TEMP\\aibox-pi\\pi.exe\" \"$d\\pi.exe\" -Force; Remove-Item -Recurse -Force \"$env:TEMP\\aibox-pi\""
+        ],
+        "notes": "Expand the zip and copy the self-contained pi.exe into %LOCALAPPDATA%\\Programs\\Pi (no Node required). Launch from any terminal.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"& \\\"$env:LOCALAPPDATA\\Programs\\Pi\\pi.exe\\\" --version\"",
+          "expect": "[0-9]+\\.[0-9]+"
+        }
+      }
+    },
+    {
+      "id": "pi-win-arm64",
+      "name": "Pi coding agent (zip, win32-arm64)",
+      "kind": "app",
+      "version": "1.5.2",
+      "arch": "arm64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18, upstream published sha256; mac archive also re-measured locally and matched)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-windows-arm64.zip",
+          "region": "global",
+          "operator": "github",
+          "note": "Self-contained pi.exe (verified via zip central directory)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-windows-arm64.zip",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-windows-arm64.zip",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "e83404bc5a6003ac950683edd9b6cf499dac91ec890d8439a8c32528de534a77",
+      "sizeBytes": 56616843,
+      "install": {
+        "type": "script",
+        "args": [
+          "powershell",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "$d=\"$env:LOCALAPPDATA\\Programs\\Pi\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Expand-Archive -Force \"$env:USERPROFILE\\.aibox\\cache\\downloads\\e83404bc5a6003ac950683edd9b6cf499dac91ec890d8439a8c32528de534a77.zip\" \"$env:TEMP\\aibox-pi\"; Copy-Item \"$env:TEMP\\aibox-pi\\pi.exe\" \"$d\\pi.exe\" -Force; Remove-Item -Recurse -Force \"$env:TEMP\\aibox-pi\""
+        ],
+        "notes": "Expand the zip and copy the self-contained pi.exe into %LOCALAPPDATA%\\Programs\\Pi (no Node required). Launch from any terminal.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"& \\\"$env:LOCALAPPDATA\\Programs\\Pi\\pi.exe\\\" --version\"",
+          "expect": "[0-9]+\\.[0-9]+"
+        }
+      }
+    },
+    {
+      "id": "pi-mac-arm64",
+      "name": "Pi coding agent (tar.gz, arm64)",
+      "kind": "app",
+      "version": "1.5.2",
+      "arch": "arm64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18); full 48MB tarball downloaded locally — sha256 matched upstream digest exactly and layout verified (pi/pi executable + native prebuilds)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-darwin-arm64.tar.gz",
+          "region": "global",
+          "operator": "github",
+          "note": "pi/ directory with self-contained executable"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-darwin-arm64.tar.gz",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-darwin-arm64.tar.gz",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "56b5e194d485ced555667b8ba3276157a8272e9ecde9e001e428af80985bdd9b",
+      "sizeBytes": 48068183,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/56b5e194d485ced555667b8ba3276157a8272e9ecde9e001e428af80985bdd9b.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
+        ],
+        "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required). TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"/Applications/Pi/pi --version\"",
+          "expect": "[0-9]+\\.[0-9]+"
+        }
+      }
+    },
+    {
+      "id": "pi-mac-x64",
+      "name": "Pi coding agent (tar.gz, x64)",
+      "kind": "app",
+      "version": "1.5.2",
+      "arch": "x64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-18); full 48MB tarball downloaded locally — sha256 matched upstream digest exactly and layout verified (pi/pi executable + native prebuilds)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-darwin-x64.tar.gz",
+          "region": "global",
+          "operator": "github",
+          "note": "pi/ directory with self-contained executable"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-darwin-x64.tar.gz",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.5.2/pi-darwin-x64.tar.gz",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "f997a088613514ac97d913aeea7642094d84fe6d46854ff7e64e2c12e536dc50",
+      "sizeBytes": 50580945,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/f997a088613514ac97d913aeea7642094d84fe6d46854ff7e64e2c12e536dc50.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
+        ],
+        "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required). TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"/Applications/Pi/pi --version\"",
+          "expect": "[0-9]+\\.[0-9]+"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Direct install",
+      "steps": [
+        "pi-win-x64",
+        "pi-mac-x64"
+      ]
+    },
+    "proxy-install": {
+      "label": "Proxy install (CN)",
+      "steps": [
+        "pi-win-x64",
+        "pi-mac-x64"
+      ]
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's asset (2026-11-12)"
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-12T14:30:00Z",
+        "note": "Measured 200 / same size against this app's asset (2026-11-12)"
+      }
+    ]
+  },
+  "modelProviders": {
+    "openrouter": {
+      "label": "OpenRouter (recommended)",
+      "note": "One key for every model; configure in ~/.pi/config.json or per-session /model.",
+      "authType": "api-key",
+      "keyFormat": "sk-or-v1-...",
+      "getKeyUrl": "https://openrouter.ai/keys",
+      "configTarget": "~/.pi/config.json",
+      "recommendedModels": [
+        {
+          "id": "anthropic/claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "聪明均衡，日常首选",
+          "priceHint": "中等"
+        }
+      ]
+    },
+    "anthropic": {
+      "label": "Anthropic API",
+      "note": "Claude models direct from the source (pi default provider).",
+      "authType": "api-key",
+      "keyFormat": "sk-ant-...",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "configTarget": "~/.pi/config.json",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "编码主力",
+          "priceHint": "中等"
+        }
+      ]
+    },
+    "ollama": {
+      "label": "Ollama (local, free)",
+      "note": "Run models on your own machine — zero API cost.",
+      "authType": "local",
+      "getKeyUrl": "https://ollama.com/download",
+      "configTarget": "~/.pi/config.json",
+      "recommendedModels": [
+        {
+          "id": "qwen3-coder:30b",
+          "name": "Qwen3 Coder 30B",
+          "note": "本地编码推荐（需 24GB+ 内存）",
+          "priceHint": "免费"
+        }
+      ]
+    }
+  },
+  "deepLinks": {
+    "console": "https://github.com/earendil-works/pi#readme",
+    "docs": "https://pi.dev",
+    "tutorial": "https://aibox.im/en/apps/pi/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "powershell -NoProfile -Command \"& \\\"$env:LOCALAPPDATA\\Programs\\Pi\\pi.exe\\\" --version\"",
+        "expect": "[0-9]+\\.[0-9]+"
+      },
+      "notes": "Re-extract the new release over the install folder; ~/.pi (sessions, config) survives. Built-in updater: `pi update`."
+    },
+    "uninstall": {
+      "steps": [
+        "Delete %LOCALAPPDATA%\\Programs\\Pi (Windows) or /Applications/Pi (macOS)",
+        "Delete ~/.pi (sessions, config, keys)"
+      ],
+      "residualPaths": [
+        "~/.pi"
+      ],
+      "notes": "~/.pi holds sessions and provider configuration — back up first if you want history kept."
+    },
+    "dataPaths": [
+      "~/.pi"
+    ],
+    "risk": {
+      "onUninstall": "会话历史与模型配置都在 ~/.pi，删除即丢失，建议先备份",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  },
+  "category": "agent",
+  "tagline": {
+    "zh-CN": "开源 AI 编码智能体（122k★）：终端里会读写文件、跑命令、管会话的助手",
+    "en": "Open-source AI coding agent (122k★): reads, edits, runs and manages sessions in your terminal"
+  },
+  "icon": "icons/pi.png",
+  "dataPaths": [
+    "~/.pi"
+  ]
+}

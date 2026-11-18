@@ -1,6 +1,6 @@
 {
-  "registryVersion": "2026.11.17.4",
-  "generatedAt": "2026-11-17T20:10:01Z",
+  "registryVersion": "2026.11.18.5",
+  "generatedAt": "2026-11-18T01:35:25Z",
   "note": "SSOT for AiBOX.im (aibox-site + AiBOX installer both read this repo). Data baselines were live-verified on 2026-11-09/11/12/14 (see README).",
   "apps": [
     {
@@ -436,6 +436,23 @@
       },
       "icon": "icons/opencode.png",
       "difficulty": 2,
+      "popularity": 5,
+      "platforms": [
+        "windows",
+        "macos"
+      ],
+      "status": "stable"
+    },
+    {
+      "id": "pi",
+      "name": "Pi",
+      "category": "agent",
+      "tagline": {
+        "zh-CN": "AI 编码智能体：终端里读写文件、跑命令、管会话",
+        "en": "AI coding agent: edit files, run commands, manage sessions"
+      },
+      "icon": "icons/pi.png",
+      "difficulty": 3,
       "popularity": 5,
       "platforms": [
         "windows",
