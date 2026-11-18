@@ -1,0 +1,351 @@
+{
+  "id": "5ire",
+  "name": "5ire",
+  "version": "0.15.4",
+  "description": {
+    "zh-CN": "开源桌面 AI 助手兼 MCP 客户端：聊天、知识库、本地嵌入、18 家模型供应商，界面支持中英双语，数据全部留在本机。",
+    "en": "Open-source desktop AI assistant and MCP client: chat, knowledge base, local embeddings and 18 model providers, with a bilingual UI and everything stored on your machine."
+  },
+  "updatedAt": "2026-11-19T01:40:00Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "nanbingxyz/5ire",
+        "tag": "v0.15.4"
+      }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (Electron bundle ships its own runtime)",
+      "supported": "not required (Electron bundle ships its own runtime)"
+    },
+    "disallowed": [],
+    "note": "Electron desktop build via electron-builder (productName 5ire, appId app.5ire.desktop). macOS builds are separate x64 / arm64 packages; the Windows build is an NSIS installer that installs machine-wide (upstream config: oneClick false, perMachine true) and therefore needs administrator rights."
+  },
+  "packages": [
+    {
+      "id": "5ire-win-x64",
+      "name": "5ire Desktop (NSIS, win32-x64)",
+      "kind": "app",
+      "version": "0.15.4",
+      "arch": "x64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256; verified by direct download)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-Setup-0.15.4.exe",
+          "region": "global",
+          "operator": "github",
+          "note": "Official electron-builder NSIS installer (machine-wide install — upstream sets perMachine true, so an administrator prompt appears)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-Setup-0.15.4.exe",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-Setup-0.15.4.exe",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "13e0d247b5cacc43b8e29d5ee757da2bc75093c8aac4fe1a1abf81dd1144d73a",
+      "sizeBytes": 137986979,
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/S",
+          "/allusers"
+        ],
+        "notes": "electron-builder NSIS with oneClick false / perMachine true → installs to C:\\Program Files\\5ire and asks for administrator rights. Silent deploy needs /S plus /allusers (verified on a real Windows machine 2026-11-19: exit code 0, C:\\Program Files\\5ire\\5ire.exe present, app starts).",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"Test-Path 'C:\\Program Files\\5ire\\5ire.exe'\"",
+          "expect": "True"
+        }
+      }
+    },
+    {
+      "id": "5ire-mac-x64",
+      "name": "5ire Desktop (dmg, x64)",
+      "kind": "app",
+      "version": "0.15.4",
+      "arch": "x64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-0.15.4.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "Official electron-builder dmg (contains 5ire.app) — Intel Mac build"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-0.15.4.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-0.15.4.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "1902a51453d54ee49f7d63a9ff4c3b9bc7d270113b63cbc29c3ce0f2fba6cf55",
+      "sizeBytes": 159434490,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/1902a51453d54ee49f7d63a9ff4c3b9bc7d270113b63cbc29c3ce0f2fba6cf55.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "electron-builder dmg ships 5ire.app (productName from upstream build config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"ls -d /Applications/5ire.app >/dev/null 2>&1 && echo installed\"",
+          "expect": "installed"
+        }
+      }
+    },
+    {
+      "id": "5ire-mac-arm64",
+      "name": "5ire Desktop (dmg, arm64)",
+      "kind": "app",
+      "version": "0.15.4",
+      "arch": "arm64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-0.15.4-arm64.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "Official electron-builder dmg (contains 5ire.app) — Apple silicon build"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-0.15.4-arm64.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/nanbingxyz/5ire/releases/download/v0.15.4/5ire-0.15.4-arm64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "dc1a88012963a010458ded3d89c40c0260df07265add6aa73b29179ad00a0ee4",
+      "sizeBytes": 149558707,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/dc1a88012963a010458ded3d89c40c0260df07265add6aa73b29179ad00a0ee4.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "electron-builder dmg ships 5ire.app (productName from upstream build config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"ls -d /Applications/5ire.app >/dev/null 2>&1 && echo installed\"",
+          "expect": "installed"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Direct install",
+      "steps": [
+        "5ire-win-x64",
+        "5ire-mac-x64",
+        "5ire-mac-arm64"
+      ]
+    },
+    "proxy-install": {
+      "label": "Proxy install (CN)",
+      "steps": [
+        "5ire-win-x64",
+        "5ire-mac-x64",
+        "5ire-mac-arm64"
+      ]
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-19T01:40:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-19T01:40:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL."
+      }
+    ]
+  },
+  "modelProviders": {
+    "openai": {
+      "label": "OpenAI API",
+      "note": "Built-in provider in 5ire (chat + vision models).",
+      "authType": "api-key",
+      "keyFormat": "sk-...",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "configTarget": "~/.5ire/config.json",
+      "recommendedModels": [
+        {
+          "id": "gpt-5.2",
+          "name": "GPT-5.2",
+          "note": "通用旗舰，多模态",
+          "priceHint": "较高"
+        }
+      ]
+    },
+    "anthropic": {
+      "label": "Anthropic API",
+      "note": "Built-in provider in 5ire.",
+      "authType": "api-key",
+      "keyFormat": "sk-ant-...",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "configTarget": "~/.5ire/config.json",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "聪明均衡，日常首选",
+          "priceHint": "中等"
+        }
+      ]
+    },
+    "google": {
+      "label": "Google Gemini",
+      "note": "Built-in provider in 5ire.",
+      "authType": "api-key",
+      "keyFormat": "AIza...",
+      "getKeyUrl": "https://aistudio.google.com/app/apikey",
+      "configTarget": "~/.5ire/config.json",
+      "recommendedModels": [
+        {
+          "id": "gemini-2.0-flash",
+          "name": "Gemini 2.0 Flash",
+          "note": "长文档与多模态",
+          "priceHint": "低"
+        }
+      ]
+    },
+    "deepseek": {
+      "label": "DeepSeek",
+      "note": "Built-in provider in 5ire — inexpensive Chinese-first option.",
+      "authType": "api-key",
+      "keyFormat": "sk-...",
+      "getKeyUrl": "https://platform.deepseek.com/api_keys",
+      "configTarget": "~/.5ire/config.json",
+      "recommendedModels": [
+        {
+          "id": "deepseek-chat",
+          "name": "DeepSeek Chat",
+          "note": "中文性价比之选",
+          "priceHint": "低"
+        }
+      ]
+    },
+    "ollama": {
+      "label": "Ollama (local, free)",
+      "note": "Run models on your own machine — zero API cost.",
+      "authType": "local",
+      "getKeyUrl": "https://ollama.com/download",
+      "configTarget": "~/.5ire/config.json",
+      "recommendedModels": [
+        {
+          "id": "qwen3:8b",
+          "name": "Qwen3 8B",
+          "note": "本地中文模型（需 16GB+ 内存）",
+          "priceHint": "免费"
+        }
+      ]
+    }
+  },
+  "deepLinks": {
+    "console": "https://github.com/nanbingxyz/5ire#readme",
+    "docs": "https://5ire.app",
+    "tutorial": "https://aibox.im/en/apps/5ire/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "powershell -NoProfile -Command \"Test-Path 'C:\\Program Files\\5ire\\5ire.exe'\"",
+        "expect": "True"
+      },
+      "notes": "Run the new release installer over the existing machine-wide install (an administrator prompt appears); conversations, knowledge base and settings survive."
+    },
+    "uninstall": {
+      "steps": [
+        "Run the 5ire uninstaller (Start menu) or remove C:\\Program Files\\5ire",
+        "Delete user data folder (see data paths)"
+      ],
+      "residualPaths": [
+        "~/AppData/Roaming/5ire",
+        "~/Library/Application Support/5ire"
+      ],
+      "notes": "Provider keys, conversations and the local knowledge base live in the data folder — back up first."
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/5ire",
+      "~/Library/Application Support/5ire"
+    ],
+    "risk": {
+      "onUninstall": "模型 key、会话与本地知识库都在数据目录，删除即丢失，建议先备份",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}
