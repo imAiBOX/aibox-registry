@@ -29,6 +29,8 @@ const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '';
 const now = () => new Date().toISOString();
 
 const report = { startedAt: now(), checks: [], errors: [] };
+import { hasInstallableAsset } from './lib/release-drift.mjs';
+
 const drifts = [];
 
 function addDrift(kind, title, body, extra = {}) {
@@ -183,6 +185,14 @@ for (const { dir, app } of apps) {
         check.actual = data.tag_name;
         check.status = data.tag_name === ref.tag ? 'ok' : 'DRIFT';
         if (data.tag_name !== ref.tag) {
+          const pkgUrls = (app.packages || []).map((p) => p.channels?.[0]?.url || '');
+          if (!hasInstallableAsset(data.assets, pkgUrls)) {
+            // New tag without installable artifacts (metadata-only release,
+            // packaging moved to nightly, …) — nothing to bump; stay put.
+            check.status = 'DRIFT_NO_INSTALLABLE';
+            check.note = `${data.tag_name} has no installable assets for this app's package types`;
+            console.log(` [${dir}] ${data.tag_name}: no installable assets — staying on ${ref.tag}`);
+          } else {
           addDrift('version', `${dir}: upstream ${ref.repo} released ${data.tag_name} (registry has ${ref.tag})`,
             `New upstream release detected — auto-bump measures the new artifacts and opens a PR for review.\n\n` +
             `- repo: \`${ref.repo}\`\n- registry tag: \`${ref.tag}\`\n` +
@@ -190,6 +200,7 @@ for (const { dir, app } of apps) {
             `If no bump PR appears, update app.json manually (version / channels sha256 & sizeBytes / upstream tag), review, merge — effective ≤12h across site + installer.\nChecked at: ${check.checkedAt}`,
             { driftClass: 'A', app: dir, source: 'github', repo: ref.repo,
               currentTag: ref.tag, latestTag: data.tag_name, publishedAt: data.published_at });
+          }
         }
       }
     } catch (e) {
