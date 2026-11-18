@@ -1,0 +1,380 @@
+{
+  "id": "zed",
+  "name": "Zed",
+  "version": "1.29.1",
+  "description": {
+    "zh-CN": "高性能开源代码编辑器（Rust 原生）：毫秒级启动，内置 AI 智能体面板，也能直接接入 Claude Code、Codex、Gemini CLI、OpenCode 等外部智能体。",
+    "en": "A high-performance open-source code editor written in Rust: instant startup, a built-in AI agent panel, and direct integration with external agents like Claude Code, Codex, Gemini CLI and OpenCode."
+  },
+  "updatedAt": "2026-11-19T03:45:00Z",
+  "upstream": {
+    "github": [
+      {
+        "repo": "zed-industries/zed",
+        "tag": "v1.29.1"
+      }
+    ]
+  },
+  "runtime": {
+    "bundled": true,
+    "node": {
+      "recommended": "not required (native Rust binary; statically linked CRT)",
+      "supported": "not required (native Rust binary; statically linked CRT)"
+    },
+    "disallowed": [],
+    "note": "Native Rust build — no Node, Python, .NET or VC++ redistributable needed. Requires a DirectX 11 GPU. Ships its own ConPTY (no Windows Terminal needed). Extensions run on an embedded WASM runtime; language servers are downloaded by Zed itself."
+  },
+  "packages": [
+    {
+      "id": "zed-win-x64",
+      "name": "Zed (Inno Setup installer, win32-x64)",
+      "kind": "app",
+      "version": "1.29.1",
+      "arch": "x64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256; verified by direct download)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-x86_64.exe",
+          "region": "global",
+          "operator": "github",
+          "note": "Official Inno Setup installer — installs per-user into %LOCALAPPDATA%\\Programs\\Zed, no admin rights needed"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-x86_64.exe",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-x86_64.exe",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "cedc5a3a5e35fdea994a17071f273222c1eec88e995d9e19c9891c1d6c1e03aa",
+      "sizeBytes": 65419520,
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/VERYSILENT",
+          "/SUPPRESSMSGBOXES",
+          "/NORESTART",
+          "/TASKS=\"!associatewithfiles,!addcontextmenufiles,!addtopath\""
+        ],
+        "notes": "Inno Setup installer (upstream zed.iss: PrivilegesRequired=lowest → per-user, no admin). /VERYSILENT is the Inno silent switch; /TASKS with !prefix deselects the default file-associations / context-menu / PATH tasks so a fresh install does not modify the system (upstream defaults associatewithfiles + addcontextmenufiles + addtopath to ON). Verified on a real Windows machine 2026-11-19: exit code 0, %LOCALAPPDATA%\\Programs\\Zed\\Zed.exe present, app starts and the extension host loads.",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\Zed\\Zed.exe\"",
+          "expect": "True"
+        }
+      }
+    },
+    {
+      "id": "zed-win-arm64",
+      "name": "Zed (Inno Setup installer, win32-arm64)",
+      "kind": "app",
+      "version": "1.29.1",
+      "arch": "arm64",
+      "platforms": [
+        "windows"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-aarch64.exe",
+          "region": "global",
+          "operator": "github",
+          "note": "Official Inno Setup installer (ARM64 build — for Qualcomm/Windows on ARM)"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-aarch64.exe",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-aarch64.exe",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "4608b797abc7acb61d739928e64e01734501b2f75dcad2ceb98d2690eeb4ca8b",
+      "sizeBytes": 58263208,
+      "install": {
+        "type": "nsis-silent",
+        "args": [
+          "/VERYSILENT",
+          "/SUPPRESSMSGBOXES",
+          "/NORESTART",
+          "/TASKS=\"!associatewithfiles,!addcontextmenufiles,!addtopath\""
+        ],
+        "notes": "Inno Setup installer (per-user, no admin). Same silent switches as the x64 package; the ARM64 build also runs on x64 Windows (ArchitecturesAllowed=x64compatible).",
+        "probe": {
+          "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\Zed\\Zed.exe\"",
+          "expect": "True"
+        }
+      }
+    },
+    {
+      "id": "zed-mac-x64",
+      "name": "Zed (dmg, x64)",
+      "kind": "app",
+      "version": "1.29.1",
+      "arch": "x64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-x86_64.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "Official dmg (contains Zed.app) — Intel Mac build"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-x86_64.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-x86_64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "0bba5a103e091144fd1d4f5833b512defb12fcb734ccef92c127fc6b7a325c4f",
+      "sizeBytes": 97335672,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/0bba5a103e091144fd1d4f5833b512defb12fcb734ccef92c127fc6b7a325c4f.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"ls -d /Applications/Zed.app >/dev/null 2>&1 && echo installed\"",
+          "expect": "installed"
+        }
+      }
+    },
+    {
+      "id": "zed-mac-arm64",
+      "name": "Zed (dmg, arm64)",
+      "kind": "app",
+      "version": "1.29.1",
+      "arch": "arm64",
+      "platforms": [
+        "macos"
+      ],
+      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "channels": [
+        {
+          "type": "direct",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-aarch64.dmg",
+          "region": "global",
+          "operator": "github",
+          "note": "Official dmg (contains Zed.app) — Apple silicon build"
+        },
+        {
+          "type": "proxy",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-aarch64.dmg",
+          "region": "cn",
+          "operator": "ghfast",
+          "note": "CN gateway"
+        },
+        {
+          "type": "proxy",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.1/Zed-aarch64.dmg",
+          "region": "cn",
+          "operator": "gh-proxy",
+          "note": "CN gateway"
+        }
+      ],
+      "sha256": "860c60861efbe5bac3552c2ecc518bc9664db08844b6e656e0ced4fb6711dff8",
+      "sizeBytes": 88743404,
+      "install": {
+        "type": "script",
+        "args": [
+          "bash",
+          "-lc",
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/860c60861efbe5bac3552c2ecc518bc9664db08844b6e656e0ced4fb6711dff8.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+        ],
+        "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "probe": {
+          "cmd": "bash -lc \"ls -d /Applications/Zed.app >/dev/null 2>&1 && echo installed\"",
+          "expect": "installed"
+        }
+      }
+    }
+  ],
+  "packageManagerOverrides": {},
+  "routes": {
+    "global": [
+      "direct-install"
+    ],
+    "cn": [
+      "proxy-install"
+    ]
+  },
+  "routePlans": {
+    "direct-install": {
+      "label": "Direct install",
+      "steps": [
+        "zed-win-x64",
+        "zed-win-arm64",
+        "zed-mac-x64",
+        "zed-mac-arm64"
+      ]
+    },
+    "proxy-install": {
+      "label": "Proxy install (CN)",
+      "steps": [
+        "zed-win-x64",
+        "zed-win-arm64",
+        "zed-mac-x64",
+        "zed-mac-arm64"
+      ]
+    }
+  },
+  "netConfig": {
+    "registrySources": [
+      "github-api",
+      "raw",
+      "jsdelivr"
+    ],
+    "registrySourcesNote": "Registry JSON cross-check from multiple sources (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
+    "proxyGateways": [
+      {
+        "prefix": "https://ghfast.top/",
+        "status": "active",
+        "checkedAt": "2026-11-19T03:45:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL."
+      },
+      {
+        "prefix": "https://gh-proxy.com/",
+        "status": "active",
+        "checkedAt": "2026-11-19T03:45:00Z",
+        "note": "Repo-wide gateway list (S3), probed daily against a GitHub release-asset URL."
+      }
+    ]
+  },
+  "modelProviders": {
+    "anthropic": {
+      "label": "Anthropic API",
+      "note": "Used by Zed's built-in agent panel.",
+      "authType": "api-key",
+      "keyFormat": "sk-ant-...",
+      "getKeyUrl": "https://console.anthropic.com/settings/keys",
+      "configTarget": "~/.config/zed/settings.json",
+      "recommendedModels": [
+        {
+          "id": "claude-sonnet-4",
+          "name": "Claude Sonnet 4",
+          "note": "编码主力",
+          "priceHint": "中等"
+        }
+      ]
+    },
+    "openai": {
+      "label": "OpenAI API",
+      "note": "Used by Zed's built-in agent panel.",
+      "authType": "api-key",
+      "keyFormat": "sk-...",
+      "getKeyUrl": "https://platform.openai.com/api-keys",
+      "configTarget": "~/.config/zed/settings.json",
+      "recommendedModels": [
+        {
+          "id": "gpt-5.2",
+          "name": "GPT-5.2",
+          "note": "通用旗舰",
+          "priceHint": "较高"
+        }
+      ]
+    },
+    "ollama": {
+      "label": "Ollama (local, free)",
+      "note": "Point Zed at a local Ollama server for free, offline editing help.",
+      "authType": "local",
+      "getKeyUrl": "https://ollama.com/download",
+      "configTarget": "~/.config/zed/settings.json",
+      "recommendedModels": [
+        {
+          "id": "qwen2.5-coder:14b",
+          "name": "Qwen2.5 Coder 14B",
+          "note": "本地编码（需 24GB+ 内存）",
+          "priceHint": "免费"
+        }
+      ]
+    }
+  },
+  "deepLinks": {
+    "console": "https://github.com/zed-industries/zed#readme",
+    "docs": "https://zed.dev/docs",
+    "tutorial": "https://aibox.im/en/apps/zed/"
+  },
+  "maintenance": {
+    "upgrade": {
+      "type": "rerun-dag",
+      "probe": {
+        "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\Zed\\Zed.exe\"",
+        "expect": "True"
+      },
+      "notes": "Run the newer installer over the existing per-user install. Zed also updates itself in the background (tools\\auto_update_helper.exe), so the registry sha256 applies to the first install."
+    },
+    "uninstall": {
+      "steps": [
+        "Windows: Settings → Apps → Zed → Uninstall (or run %LOCALAPPDATA%\\Programs\\Zed\\unins000.exe)",
+        "macOS: drag Zed.app from Applications to the Trash",
+        "Delete user data folders (see data paths) if you want a clean slate"
+      ],
+      "residualPaths": [
+        "~/AppData/Roaming/Zed",
+        "~/AppData/Local/Zed",
+        "~/.config/zed",
+        "~/Library/Application Support/Zed",
+        "~/.local/state/Zed"
+      ],
+      "notes": "The uninstaller removes the file associations, PATH entry and context-menu package it added, but it keeps your settings, key bindings, themes and snippets — those live in the data folders."
+    },
+    "dataPaths": [
+      "~/AppData/Roaming/Zed",
+      "~/AppData/Local/Zed",
+      "~/.config/zed",
+      "~/Library/Application Support/Zed",
+      "~/.local/state/Zed"
+    ],
+    "risk": {
+      "onUninstall": "设置、快捷键、主题、代码片段和历史都在数据目录，删除即丢失，建议先备份",
+      "backupFirst": true
+    }
+  },
+  "locales": {
+    "base": "en",
+    "fallback": "en",
+    "packs": {
+      "en": "locales/en.json",
+      "zh-CN": "locales/zh-CN.json"
+    }
+  },
+  "guides": {
+    "en": "guides/en.md",
+    "zh-CN": "guides/zh-cn.md"
+  }
+}
