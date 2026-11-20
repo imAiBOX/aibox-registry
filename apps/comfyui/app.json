@@ -1,17 +1,17 @@
 {
   "id": "comfyui",
   "name": "ComfyUI",
-  "version": "0.45.0",
+  "version": "0.46.0",
   "description": {
     "zh-CN": "节点式 AI 图像 / 视频生成工作流：Windows 官方便携版解压即用（自带 Python 与 PyTorch），macOS 源码装进用户目录；海量官方工作流模板与模型随手可用。",
     "en": "Node-based AI image / video generation workflows: the official Windows portable build runs after extraction (bundled Python + PyTorch), macOS installs from source into your home directory; a huge library of official workflow templates and models is ready to use."
   },
-  "updatedAt": "2026-11-14T08:30:00Z",
+  "updatedAt": "2026-11-20T04:48:26Z",
   "upstream": {
     "github": [
       {
         "repo": "Comfy-Org/ComfyUI",
-        "tag": "v0.45.0"
+        "tag": "v0.46.0"
       }
     ]
   },
@@ -28,25 +28,25 @@
       "id": "comfyui-win",
       "name": "ComfyUI Windows portable (NVIDIA / CPU, 7z)",
       "kind": "app",
-      "version": "0.45.0",
+      "version": "0.46.0",
       "platforms": [
         "windows"
       ],
       "arch": "x64",
-      "sha256": "60c12e8c7af778047ad0413722dd3dc0f6ca773a41cbf5cb229ee9bc92c44a6f",
-      "sizeBytes": 2071479423,
-      "hashSource": "GitHub API release asset digest (zero-download; gh-proxy channel HEAD 200 with Content-Length = sizeBytes, 2026-11-14 measured)",
+      "sha256": "6a5255c7ec01fdc54bdbd8e4507073cf6acda2fbeea74ae1829a50681af5fac6",
+      "sizeBytes": 2085169944,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/Comfy-Org/ComfyUI/releases/download/v0.45.0/ComfyUI_windows_portable_nvidia.7z",
+          "url": "https://github.com/Comfy-Org/ComfyUI/releases/download/v0.46.0/ComfyUI_windows_portable_nvidia.7z",
           "region": "global",
           "operator": "comfyorg",
           "note": "GitHub Releases direct (daily CI HEAD; 2026-11-14 measured 302 → 200 / Content-Length = sizeBytes). ghfast.top answered 403 for every Comfy-Org asset (measured 2026-11-14, same behavior as the Ollama profile) — only the gh-proxy channel is shipped."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/Comfy-Org/ComfyUI/releases/download/v0.45.0/ComfyUI_windows_portable_nvidia.7z",
+          "url": "https://gh-proxy.com/https://github.com/Comfy-Org/ComfyUI/releases/download/v0.46.0/ComfyUI_windows_portable_nvidia.7z",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
@@ -73,25 +73,25 @@
       "id": "comfyui-mac",
       "name": "ComfyUI source archive (macOS, venv install)",
       "kind": "app",
-      "version": "0.45.0",
+      "version": "0.46.0",
       "platforms": [
         "macos"
       ],
       "arch": "any",
-      "sha256": "408670ede5da641b30a2b3f1e39e5b84d75c12357e75695416a6e6cc5bcbc4bb",
-      "sizeBytes": 12934320,
-      "hashSource": "Tag source archive fully downloaded and hashed locally; gh-proxy channel HEAD 200 (2026-11-14 measured)",
+      "sha256": "1281a61ab7b5f32b4d771c4f89633573eadcd820f5e1e93e92c261f54ac3890a",
+      "sizeBytes": 12979257,
+      "hashSource": "Full download sha256 measured 2026-11-20 UTC by auto-bump CI (source github.com)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/Comfy-Org/ComfyUI/archive/refs/tags/v0.45.0.tar.gz",
+          "url": "https://github.com/Comfy-Org/ComfyUI/archive/refs/tags/v0.46.0.tar.gz",
           "region": "global",
           "operator": "comfyorg",
           "note": "GitHub tag source archive (2026-11-14 measured: full download sha256 recorded; codeload answers HEAD without Content-Length, so the size check is digest-based). ghfast.top answered 403 for Comfy-Org archives (measured 2026-11-14) — only the gh-proxy channel is shipped."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/Comfy-Org/ComfyUI/archive/refs/tags/v0.45.0.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/Comfy-Org/ComfyUI/archive/refs/tags/v0.46.0.tar.gz",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200)"
@@ -102,7 +102,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/408670ede5da641b30a2b3f1e39e5b84d75c12357e75695416a6e6cc5bcbc4bb.gz\" -C \"$S\"; rm -rf \"$HOME/ComfyUI\"; mv \"$S/ComfyUI-0.45.0\" \"$HOME/ComfyUI\"; rmdir \"$S\"; cd \"$HOME/ComfyUI\"; python3 -m venv .venv; .venv/bin/pip install -r requirements.txt"
+          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/1281a61ab7b5f32b4d771c4f89633573eadcd820f5e1e93e92c261f54ac3890a.gz\" -C \"$S\"; rm -rf \"$HOME/ComfyUI\"; mv \"$S/ComfyUI-0.46.0\" \"$HOME/ComfyUI\"; rmdir \"$S\"; cd \"$HOME/ComfyUI\"; python3 -m venv .venv; .venv/bin/pip install -r requirements.txt"
         ],
         "notes": "Unpacks the hash-verified source archive to ~/ComfyUI (official manual-install layout), creates a venv inside it and installs requirements — everything under the user home, zero admin. Prerequisites: Python 3.10–3.13 (`python3 --version`) and several GB of disk; the dependency pull includes PyTorch (~1–2 GB, PyPI default index — CN: PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple). First run: `cd ~/ComfyUI && .venv/bin/python main.py` → http://127.0.0.1:8188 (port measured in main.py).",
         "probe": {
