@@ -1,16 +1,16 @@
 {
   "id": "openclaw",
   "name": "OpenClaw",
-  "version": "2026.11.5",
+  "version": "2026.11.6",
   "description": {
     "zh-CN": "多渠道 AI 网关，把大模型接到你的聊天软件（Telegram/WhatsApp 等），支持 Anthropic/OpenAI/Google/OpenRouter/Claude 订阅/Ollama 六种接入。",
     "en": "Multi-channel AI gateway that connects LLMs to your messengers (Telegram/WhatsApp, etc.), with six provider paths: Anthropic / OpenAI / Google / OpenRouter / Claude subscription / Ollama."
   },
-  "updatedAt": "2026-11-11T21:45:00Z",
+  "updatedAt": "2026-11-20T04:29:03Z",
   "upstream": {
     "npm": {
       "name": "openclaw",
-      "version": "2026.11.5"
+      "version": "2026.11.6"
     },
     "github": [
       {
@@ -165,26 +165,26 @@
       "id": "openclaw-cli",
       "name": "OpenClaw CLI (npm package)",
       "kind": "app",
-      "version": "2026.11.5",
+      "version": "2026.11.6",
       "platforms": [
         "windows",
         "macos"
       ],
       "arch": "any",
-      "sha256": "a57d1272b7d87bdbf2b0a0e18811dc1ca3ffc5de02229d1f9e2884bd38470794",
-      "sizeBytes": 117357557,
-      "hashSource": "npm tarball full download sha256 measured locally (2026-11-17)",
+      "sha256": "0ad54c943c7365ff78cdb0c317c2cd73fd6af9df404da02c7cde9787ea3322ad",
+      "sizeBytes": 118651532,
+      "hashSource": "Full download sha256 measured 2026-11-20 UTC by auto-bump CI (source registry.npmjs.org)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.5.tgz",
+          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.6.tgz",
           "region": "global",
           "operator": "npm",
           "note": "npm 官方 registry（5.9.4 矩阵 openclaw CLI GLOBAL 主）"
         },
         {
           "type": "mirror",
-          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.5.tgz",
+          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.6.tgz",
           "region": "cn",
           "operator": "alibaba",
           "note": "阿里 npmmirror（5.9.4 矩阵 CN 主；EXECUTE 经 packageManagerOverrides 注入 --registry，不改用户 npmrc）"
