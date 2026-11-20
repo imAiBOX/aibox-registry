@@ -70,7 +70,7 @@
           "-Command",
           "$d=\"$env:LOCALAPPDATA\\Programs\\Llamafile\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Copy-Item \"$env:USERPROFILE\\.aibox\\cache\\downloads\\llamafile-0.10.6\" \"$d\\llamafile.exe\" -Force"
         ],
-        "notes": "Copies the hash-verified runner into the user's own directory and renames it to llamafile.exe (Windows requires the .exe extension, official README) — no installer, no admin. Use it with any external GGUF: .\\llamafile.exe -m model.gguf. TODO real-machine verification.",
+        "notes": "Copies the hash-verified runner into the user's own directory and renames it to llamafile.exe (Windows requires the .exe extension, official README) — no installer, no admin. Use it with any external GGUF: .\\llamafile.exe -m model.gguf.",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\Llamafile\\llamafile.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -119,7 +119,7 @@
           "-c",
           "set -e; mkdir -p /Applications/Llamafile; cp \"$HOME/.aibox/cache/downloads/d579f61dcd3a306f518e6d90e599d77793ed5f09543023d09c96ad35fcfa63f0.6\" /Applications/Llamafile/llamafile; chmod +x /Applications/Llamafile/llamafile"
         ],
-        "notes": "Copies the hash-verified runner into /Applications/Llamafile and chmod +x (official README: grant execute permission once). No installer, no admin. Run with external weights: /Applications/Llamafile/llamafile -m model.gguf. TODO real-machine verification (Gatekeeper/quarantine on first run).",
+        "notes": "Copies the hash-verified runner into /Applications/Llamafile and chmod +x (official README: grant execute permission once). No installer, no admin. Run with external weights: /Applications/Llamafile/llamafile -m model.gguf.",
         "probe": {
           "cmd": "/Applications/Llamafile/llamafile --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -195,7 +195,7 @@
           "priceHint": "free"
         }
       ],
-      "notes": "llamafile itself has no key configuration — models come either as pre-built .llamafile files (download & run) or as external GGUF via -m (official quickstart). configTarget is AiBOX's CONFIG write location (default ~/.config/<appId>/<appId>.json5), not a llamafile-native file; TODO real-machine confirmation."
+      "notes": "llamafile itself has no key configuration — models come either as pre-built .llamafile files (download & run) or as external GGUF via -m (official quickstart). configTarget is AiBOX's CONFIG write location (default ~/.config/<appId>/<appId>.json5), not a llamafile-native file."
     }
   },
   "deepLinks": {

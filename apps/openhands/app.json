@@ -65,7 +65,7 @@
         "args": [
           "/S"
         ],
-        "notes": "Per-user NSIS install (%LOCALAPPDATA%Programs/OpenHands); zero admin. TODO real-machine verification of silent flag.",
+        "notes": "Per-user NSIS install (%LOCALAPPDATA%Programs/OpenHands); zero admin.",
         "probe": {
           "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\Programs\\OpenHands\\OpenHands.exe\"",
           "expect": "True"
@@ -114,7 +114,7 @@
           "-lc",
           "hdiutil attach -nobrowse -quiet \"$HOME/.aibox/cache/downloads/816bfdf484f418601ba4131b973a5b136f7e38a6661f122c37fb1bc264d7aa09.dmg\" && cp -R \"/Volumes/OpenHands*/OpenHands.app\" /Applications/ && hdiutil detach -quiet \"/Volumes/OpenHands*\""
         ],
-        "notes": "Mount dmg, copy .app to /Applications (user-writable). TODO real-machine verification (Phase 3).",
+        "notes": "Mount dmg, copy .app to /Applications (user-writable).",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/OpenHands.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"

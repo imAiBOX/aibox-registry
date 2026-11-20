@@ -161,7 +161,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c7fd0a1967be6d4520a75e404dd77b2fa54e7580c59b6ee890dcf1aa7d98cca3.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "electron-builder dmg ships OpenCode.app (productName from upstream config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "electron-builder dmg ships OpenCode.app (productName from upstream config); copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/OpenCode.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"
@@ -210,7 +210,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/ebda6005febab9be52c732b7bf11ae40cd563de825a85f209ec6ff161d7169db.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "electron-builder dmg ships OpenCode.app (productName from upstream config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "electron-builder dmg ships OpenCode.app (productName from upstream config); copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/OpenCode.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"

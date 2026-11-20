@@ -69,7 +69,7 @@
           "-Command",
           "code --install-extension \"$env:USERPROFILE\\.aibox\\cache\\downloads\\cline-4.1.26.vsix\" --force"
         ],
-        "notes": "Installs the hash-verified VSIX through VS Code's own CLI (`code --install-extension`), the same mechanism the Marketplace uses — per-user, zero admin. Prerequisites: VS Code installed and `code` on PATH (Windows default). TODO real-machine verification.",
+        "notes": "Installs the hash-verified VSIX through VS Code's own CLI (`code --install-extension`), the same mechanism the Marketplace uses — per-user, zero admin. Prerequisites: VS Code installed and `code` on PATH (Windows default).",
         "probe": {
           "cmd": "code --list-extensions --show-versions",
           "expect": "saoudrizwan\\.claude-dev@\\d+\\.\\d+\\.\\d+"
@@ -118,7 +118,7 @@
           "-c",
           "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d.vsix\" --force"
         ],
-        "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin. TODO real-machine verification.",
+        "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin.",
         "probe": {
           "cmd": "code --list-extensions --show-versions",
           "expect": "saoudrizwan\\.claude-dev@\\d+\\.\\d+\\.\\d+"
@@ -196,7 +196,7 @@
           "priceHint": "low"
         }
       ],
-      "notes": "Keys are stored by Cline inside VS Code's SecretStorage (encrypted, extension-owned) and are pasted in the Cline sidebar — AiBOX cannot write them to disk. configTarget points at the extension's globalStorage directory (official VS Code convention; macOS: ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev); exact file layout TODO real-machine verification."
+      "notes": "Keys are stored by Cline inside VS Code's SecretStorage (encrypted, extension-owned) and are pasted in the Cline sidebar — AiBOX cannot write them to disk. configTarget points at the extension's globalStorage directory (official VS Code convention; macOS: ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev)."
     },
     "openai": {
       "label": "OpenAI official API",

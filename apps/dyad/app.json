@@ -114,7 +114,7 @@
           "-lc",
           "set -e; T=$(mktemp -d); ditto -x -k \"$HOME/.aibox/cache/downloads/7bc14403480dcc765a02dbaa3aeb51dcc223524e55e17c5022c5973330b021ee.zip\" \"$T\"; cp -R \"$T\"/dyad.app /Applications/; rm -rf \"$T\""
         ],
-        "notes": "Electron Forge MakerZIP ships dyad.app at the archive root; unzip and copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "Electron Forge MakerZIP ships dyad.app at the archive root; unzip and copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/dyad.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"
@@ -163,7 +163,7 @@
           "-lc",
           "set -e; T=$(mktemp -d); ditto -x -k \"$HOME/.aibox/cache/downloads/50667b4acc859d936222703bddfc51b4729a311ea281ab95f274b216b6a2fe15.zip\" \"$T\"; cp -R \"$T\"/dyad.app /Applications/; rm -rf \"$T\""
         ],
-        "notes": "Electron Forge MakerZIP ships dyad.app at the archive root; unzip and copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "Electron Forge MakerZIP ships dyad.app at the archive root; unzip and copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/dyad.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"

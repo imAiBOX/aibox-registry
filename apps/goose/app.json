@@ -114,7 +114,7 @@
           "-lc",
           "unzip -qo \"$HOME/.aibox/cache/downloads/55c9080d37df7816735c16c08e716c2ec0807a0bff7f4326863dfc87651a0094.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
         ],
-        "notes": "Unzip and copy Goose.app into /Applications (user-writable). TODO real-machine verification (Phase 3).",
+        "notes": "Unzip and copy Goose.app into /Applications (user-writable).",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/Goose.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"
@@ -163,7 +163,7 @@
           "-lc",
           "unzip -qo \"$HOME/.aibox/cache/downloads/3c5c0575f61315c68afe704c575b12bc0c37552a2d7c0bb5554d8fdf1affac68.zip\" -d /tmp/aibox-goose && cp -R /tmp/aibox-goose/Goose.app /Applications/ && rm -rf /tmp/aibox-goose"
         ],
-        "notes": "Same flow as arm64. TODO real-machine verification (Phase 3).",
+        "notes": "Same flow as arm64.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/Goose.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"

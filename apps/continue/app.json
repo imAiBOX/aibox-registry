@@ -55,7 +55,7 @@
           "-Command",
           "code --install-extension \"$env:USERPROFILE\\.aibox\\cache\\downloads\\Continue.continue-2.1.0@win32-x64.vsix\" --force"
         ],
-        "notes": "Installs the hash-verified VSIX through VS Code's own CLI (`code --install-extension`), the same mechanism the Marketplace uses — per-user, zero admin. Prerequisites: VS Code installed and `code` on PATH (Windows default). TODO real-machine verification.",
+        "notes": "Installs the hash-verified VSIX through VS Code's own CLI (`code --install-extension`), the same mechanism the Marketplace uses — per-user, zero admin. Prerequisites: VS Code installed and `code` on PATH (Windows default).",
         "probe": {
           "cmd": "code --list-extensions --show-versions",
           "expect": "Continue\\.continue@\\d+\\.\\d+\\.\\d+"
@@ -90,7 +90,7 @@
           "-c",
           "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/739d26de25aa7f66a11d3eb85b8bbd16c48d8bd8a628cc477e686659a700ef1d.vsix\" --force"
         ],
-        "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin. TODO real-machine verification.",
+        "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin.",
         "probe": {
           "cmd": "code --list-extensions --show-versions",
           "expect": "Continue\\.continue@\\d+\\.\\d+\\.\\d+"
@@ -125,7 +125,7 @@
           "-c",
           "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/1663c19546ff568f25a7c032347f6b3699dc052f2a046c9b4c4809d207d08b5c.vsix\" --force"
         ],
-        "notes": "Same hash-verified VSIX via VS Code CLI (Intel Macs). macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once. Zero admin. TODO real-machine verification.",
+        "notes": "Same hash-verified VSIX via VS Code CLI (Intel Macs). macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once. Zero admin.",
         "probe": {
           "cmd": "code --list-extensions --show-versions",
           "expect": "Continue\\.continue@\\d+\\.\\d+\\.\\d+"

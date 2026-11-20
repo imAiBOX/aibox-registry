@@ -51,7 +51,7 @@
         "args": [
           "/S"
         ],
-        "notes": "electron-builder NSIS 辅助安装模式（electron-builder.yml 实证 oneClick:false、productName=Chatbox），默认安装到 %LOCALAPPDATA%\\Programs\\Chatbox。/S 为 electron-builder NSIS 官方静默参数。TODO Windows 实机验证静默参数与安装路径。",
+        "notes": "electron-builder NSIS 辅助安装模式（electron-builder.yml 实证 oneClick:false、productName=Chatbox），默认安装到 %LOCALAPPDATA%\\Programs\\Chatbox。/S 为 electron-builder NSIS 官方静默参数。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\Chatbox\\Chatbox.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -86,7 +86,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/09a48e314ec4d2988219db3e128a58fe6b32cd2da24a779f8068d98874a04d78.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg 挂载 + 拷贝 Chatbox.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
+        "notes": "dmg 挂载 + 拷贝 Chatbox.app + 卸载（hdiutil 惯例，destName=URL 末段）。",
         "probe": {
           "cmd": "/Applications/Chatbox.app/Contents/MacOS/Chatbox --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -121,7 +121,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c2bc74141321e783394f2a1db9ca0984f93a90b42bf58659a3f76b29c9ad144f.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg 挂载 + 拷贝 Chatbox.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证。",
+        "notes": "dmg 挂载 + 拷贝 Chatbox.app + 卸载（hdiutil 惯例，destName=URL 末段）。",
         "probe": {
           "cmd": "/Applications/Chatbox.app/Contents/MacOS/Chatbox --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -145,7 +145,7 @@
         "chatbox-win-x64",
         "chatbox-mac-x64"
       ],
-      "note": "安装器路线：Windows 走 NSIS 静默安装（仅 x64 资产），macOS 走 dmg 挂载拷贝（x64/arm64 各一份，按机型过滤，arm64 机型自动换成 -arm64 变体）。上游无 Windows ARM64 资产 → WoA 机型 plan 为空，TODO 上游提供；本应用资产不在 GitHub，国内同样走官方 CDN 直连（网关不代理非 GitHub 源）。"
+      "note": "安装器路线：Windows 走 NSIS 静默安装（仅 x64 资产），macOS 走 dmg 挂载拷贝（x64/arm64 各一份，按机型过滤，arm64 机型自动换成 -arm64 变体）。上游无 Windows ARM64 资产 → WoA 机型 plan 为空（待上游发布对应资产）；本应用资产不在 GitHub，国内同样走官方 CDN 直连（网关不代理非 GitHub 源）。"
     }
   },
   "netConfig": {
@@ -197,7 +197,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 为 AiBOX CONFIG 写入位：上游源码 src/main/store-node.ts 实证配置存于 userData/config.json，目录名按 electron-builder productName=Chatbox 推断，macOS 对应 ~/Library/Application Support/Chatbox/config.json；TODO 实机校正。"
+      "notes": "configTarget 为 AiBOX CONFIG 写入位：上游源码 src/main/store-node.ts 实证配置存于 userData/config.json，目录名按 electron-builder productName=Chatbox 推断，macOS 对应 ~/Library/Application Support/Chatbox/config.json。"
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
@@ -219,7 +219,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+      "notes": "configTarget 同 openrouter。"
     },
     "openai": {
       "label": "OpenAI 官方 API",
@@ -241,7 +241,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+      "notes": "configTarget 同 openrouter。"
     },
     "google": {
       "label": "Google AI Studio",
@@ -263,7 +263,7 @@
           "priceHint": "中等"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机校正）。上游另支持本地 Ollama（无 key，authType=local 位留待后续数据驱动补充）。"
+      "notes": "configTarget 同 openrouter。上游另支持本地 Ollama（无 key，authType=local）。"
     }
   },
   "deepLinks": {
@@ -290,7 +290,7 @@
         "~/AppData/Roaming/Chatbox",
         "~/Library/Application Support/Chatbox"
       ],
-      "notes": "config.json 每 10 分钟自动备份（config-backup-*.json，同目录）；macOS 卸载 app 不自动删数据。目录名按 productName=Chatbox 推断，TODO 实机校正。"
+      "notes": "config.json 每 10 分钟自动备份（config-backup-*.json，同目录）；macOS 卸载 app 不自动删数据。目录名按 productName=Chatbox 推断。"
     },
     "dataPaths": [
       "~/AppData/Roaming/Chatbox",

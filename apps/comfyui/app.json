@@ -62,7 +62,7 @@
           "-Command",
           "New-Item -ItemType Directory -Force -Path \"$env:LOCALAPPDATA\\Programs\" | Out-Null; tar -xf \"$env:USERPROFILE\\.aibox\\cache\\downloads\\ComfyUI_windows_portable_nvidia.7z\" -C \"$env:LOCALAPPDATA\\Programs\""
         ],
-        "notes": "Extracts the hash-verified official portable into %LOCALAPPDATA%\\Programs\\ComfyUI_windows_portable (per-user, zero admin, no Python install needed — the portable ships python_embeded). Uses Windows' built-in `tar`, which reads 7z on recent Windows (README: extract with 7-Zip or Explorer on recent Windows); if `tar` fails, install 7-Zip and extract manually. First run: double-click run_nvidia_gpu.bat (or run_cpu.bat under ComfyUI\\advanced for CPU-only). ~2 GB download. TODO real-machine verification.",
+        "notes": "Extracts the hash-verified official portable into %LOCALAPPDATA%\\Programs\\ComfyUI_windows_portable (per-user, zero admin, no Python install needed — the portable ships python_embeded). Uses Windows' built-in `tar`, which reads 7z on recent Windows (README: extract with 7-Zip or Explorer on recent Windows); if `tar` fails, install 7-Zip and extract manually. First run: double-click run_nvidia_gpu.bat (or run_cpu.bat under ComfyUI\\advanced for CPU-only). ~2 GB download.",
         "probe": {
           "cmd": "type \"%LOCALAPPDATA%\\Programs\\ComfyUI_windows_portable\\ComfyUI\\comfyui_version.py\"",
           "expect": "__version__\\s*=\\s*['\"]?\\d+\\.\\d+\\.\\d+"
@@ -104,7 +104,7 @@
           "-c",
           "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/408670ede5da641b30a2b3f1e39e5b84d75c12357e75695416a6e6cc5bcbc4bb.gz\" -C \"$S\"; rm -rf \"$HOME/ComfyUI\"; mv \"$S/ComfyUI-0.45.0\" \"$HOME/ComfyUI\"; rmdir \"$S\"; cd \"$HOME/ComfyUI\"; python3 -m venv .venv; .venv/bin/pip install -r requirements.txt"
         ],
-        "notes": "Unpacks the hash-verified source archive to ~/ComfyUI (official manual-install layout), creates a venv inside it and installs requirements — everything under the user home, zero admin. Prerequisites: Python 3.10–3.13 (`python3 --version`) and several GB of disk; the dependency pull includes PyTorch (~1–2 GB, PyPI default index — CN: PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple). First run: `cd ~/ComfyUI && .venv/bin/python main.py` → http://127.0.0.1:8188 (port measured in main.py). TODO real-machine verification.",
+        "notes": "Unpacks the hash-verified source archive to ~/ComfyUI (official manual-install layout), creates a venv inside it and installs requirements — everything under the user home, zero admin. Prerequisites: Python 3.10–3.13 (`python3 --version`) and several GB of disk; the dependency pull includes PyTorch (~1–2 GB, PyPI default index — CN: PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple). First run: `cd ~/ComfyUI && .venv/bin/python main.py` → http://127.0.0.1:8188 (port measured in main.py).",
         "probe": {
           "cmd": "cat ~/ComfyUI/comfyui_version.py",
           "expect": "__version__\\s*=\\s*['\"]?\\d+\\.\\d+\\.\\d+"

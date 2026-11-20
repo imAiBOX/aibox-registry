@@ -167,7 +167,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/0bba5a103e091144fd1d4f5833b512defb12fcb734ccef92c127fc6b7a325c4f.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/Zed.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"
@@ -216,7 +216,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/860c60861efbe5bac3552c2ecc518bc9664db08844b6e656e0ced4fb6711dff8.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/Zed.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"

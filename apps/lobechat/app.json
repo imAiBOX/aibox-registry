@@ -64,7 +64,7 @@
         "args": [
           "/S"
         ],
-        "notes": "electron-builder assisted NSIS (oneClick:false measured in apps/desktop/electron-builder.mjs) — `/S` is electron-builder's official silent flag; default per-user install dir %LOCALAPPDATA%\\Programs\\LobeHub, no admin. TODO real-machine verification of the silent flag and install path.",
+        "notes": "electron-builder assisted NSIS (oneClick:false measured in apps/desktop/electron-builder.mjs) — `/S` is electron-builder's official silent flag; default per-user install dir %LOCALAPPDATA%\\Programs\\LobeHub, no admin.",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\LobeHub\\LobeHub.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -113,7 +113,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/f36e2b7c34986b49d571e3d7b44824ee71cb5978efcd1c31c80a30e0b8d965c1.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg mount + copy LobeHub.app + detach (hdiutil convention, destName = URL basename; same shape as Chatbox/Jan). Signed & notarized build (desktop README). TODO macOS real-machine verification (Gatekeeper/quarantine, mount cleanup).",
+        "notes": "dmg mount + copy LobeHub.app + detach (hdiutil convention, destName = URL basename; same shape as Chatbox/Jan). Signed & notarized build (desktop README).",
         "probe": {
           "cmd": "/Applications/LobeHub.app/Contents/MacOS/LobeHub --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -162,7 +162,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/95348b5bb452ec4ca7cd540c36bc4f8775a0abf58ea9e907e6fab767bcbfe840.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "Same dmg flow as arm64 (Intel Macs). TODO macOS real-machine verification.",
+        "notes": "Same dmg flow as arm64 (Intel Macs).",
         "probe": {
           "cmd": "/Applications/LobeHub.app/Contents/MacOS/LobeHub --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"

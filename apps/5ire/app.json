@@ -115,7 +115,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/1902a51453d54ee49f7d63a9ff4c3b9bc7d270113b63cbc29c3ce0f2fba6cf55.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "electron-builder dmg ships 5ire.app (productName from upstream build config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "electron-builder dmg ships 5ire.app (productName from upstream build config); copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/5ire.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"
@@ -164,7 +164,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/dc1a88012963a010458ded3d89c40c0260df07265add6aa73b29179ad00a0ee4.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "electron-builder dmg ships 5ire.app (productName from upstream build config); copy into /Applications. TODO real-machine verification (Phase 3).",
+        "notes": "electron-builder dmg ships 5ire.app (productName from upstream build config); copy into /Applications.",
         "probe": {
           "cmd": "bash -lc \"ls -d /Applications/5ire.app >/dev/null 2>&1 && echo installed\"",
           "expect": "installed"

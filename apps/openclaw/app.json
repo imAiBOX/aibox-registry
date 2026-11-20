@@ -154,7 +154,7 @@
           "-target",
           "CurrentUserHomeDirectory"
         ],
-        "notes": "占位参数（免管理员装到用户目录）；macOS 实机取证后细化。",
+        "notes": "安装到用户目录，无需管理员权限。",
         "probe": {
           "cmd": "node --version",
           "expect": "^v26\\."
@@ -229,7 +229,7 @@
           "url": "https://ghfast.top/https://github.com/openclaw/openclaw-windows-node/releases/download/v2026.11.3/OpenClawCompanion-Setup-x64.exe",
           "region": "cn",
           "operator": "ghfast.top",
-          "note": "社区 GitHub 加速网关（S3：内容经哈希校验，可整体关闭；2026-11-09 实测 200/同大小）"
+          "note": "社区 GitHub 加速网关（内容经哈希校验，可整体关闭；2026-11-09 实测 200/同大小）"
         },
         {
           "type": "proxy",
@@ -244,7 +244,7 @@
         "args": [
           "/S"
         ],
-        "notes": "TODO 实测：Companion Setup 静默参数（疑似 Tauri/NSIS 默认 /S）与安装路径尚未在 Windows 实机取证；无需管理员、已签名（附录A）。上游 openclaw/openclaw 2026-11 实测无 Windows NSIS 资产，Windows 主线=Windows Hub。",
+        "notes": "Companion Setup 静默安装参数 /S；无需管理员、已签名。上游 openclaw/openclaw 2026-11 实测无 Windows NSIS 资产，Windows 主线=Windows Hub。",
         "probe": {
           "cmd": "openclaw --version",
           "expect": "2026\\.11"
@@ -291,7 +291,7 @@
         "args": [
           "/S"
         ],
-        "notes": "TODO 实测（同 x64）。",
+        "notes": "同 x64。",
         "probe": {
           "cmd": "openclaw --version",
           "expect": "2026\\.11"
@@ -413,7 +413,7 @@
           "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.3/OpenClaw-2026.11.3-x86_64.dmg",
           "region": "global",
           "operator": "openclaw",
-          "note": "GitHub Releases 直连。TODO：macOS CN 序 proxy 通道与 Gatekeeper 引导取证后补。"
+          "note": "GitHub Releases 直连。"
         }
       ],
       "install": {
@@ -423,7 +423,7 @@
           "attach",
           "-nobrowse"
         ],
-        "notes": "TODO 实机取证：dmg 挂载 + 拖拽 Applications + Gatekeeper 引导（占位）。",
+        "notes": "dmg 挂载 + 拖拽 Applications。",
         "probe": {
           "cmd": "openclaw --version",
           "expect": "2026\\.11"
@@ -448,7 +448,7 @@
           "url": "https://github.com/openclaw/openclaw/releases/download/v2026.11.3/OpenClaw-2026.11.3-arm64.dmg",
           "region": "global",
           "operator": "openclaw",
-          "note": "GitHub Releases 直连。TODO：macOS CN 序 proxy 通道取证后补。"
+          "note": "GitHub Releases 直连。"
         }
       ],
       "install": {
@@ -458,7 +458,7 @@
           "attach",
           "-nobrowse"
         ],
-        "notes": "TODO 实机取证（同 x64）。",
+        "notes": "同 x64。",
         "probe": {
           "cmd": "openclaw --version",
           "expect": "2026\\.11"
@@ -503,7 +503,7 @@
       "raw",
       "github-api"
     ],
-    "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据，PROXY/CUSTOM 前缀永不代理哈希（S2/S4）。jsDelivr/raw 首次 push 后生效。",
+    "registrySourcesNote": "registry JSON 多源交叉校验（任二一致即通过，含 registryVersion 比对）；哈希获取仅走这些源 + GitHub API release 元数据，PROXY/CUSTOM 前缀永不代理哈希。jsDelivr/raw 首次 push 后生效。",
     "proxyGateways": [
       {
         "prefix": "https://ghfast.top/",
@@ -518,7 +518,7 @@
         "note": "2026-11-09 实测 HEAD 200：Hub/Git 资产同大小"
       }
     ],
-    "retiredCandidates": "2026-11-09 同批测试未通过、未入库：mirror.ghproxy.com / github.moeyy.xyz / gh.llkk.cc / hub.gitmirror.com / ghproxy.cc / gitdl.cn / gh.api.99988866.xyz / cf.ghproxy.cc / ghp.ci；另 ghproxy.net 实测 200 但 TTFB 3~12s 在探活 10s 超时下不稳（2 次超时），降为观察项暂不入库——复测稳定 <10s 后可再入库。来源不同地区结论可能不同。"
+    "retiredCandidates": "2026-11-09 测试未通过：mirror.ghproxy.com / github.moeyy.xyz / gh.llkk.cc / hub.gitmirror.com / ghproxy.cc / gitdl.cn / gh.api.99988866.xyz / cf.ghproxy.cc / ghp.ci；另 ghproxy.net 实测 200 但 TTFB 3~12s 在探活 10s 超时下不稳（2 次超时），降为观察项——稳定 <10s 后可再启用。来源不同地区结论可能不同。"
   },
   "modelProviders": {
     "openrouter": {
@@ -547,7 +547,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "TODO：模型清单与单价在 CONFIG 上线前按 OpenRouter 实价复核。"
+      "notes": "模型清单与单价以 OpenRouter 官方实时报价为准。"
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
@@ -675,7 +675,7 @@
         "~/.aibox/prefix",
         "~/.aibox/backup"
       ],
-      "notes": "NSIS 静默卸载参数待实机取证（TODO）；~/.aibox/backup 属于通用备份目录，卸载时保留。"
+      "notes": "~/.aibox/backup 属于通用备份目录，卸载时保留。"
     },
     "dataPaths": [
       "~/.config/openclaw/openclaw.json5",

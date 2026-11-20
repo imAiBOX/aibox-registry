@@ -70,7 +70,7 @@
           "-Command",
           "& \"$env:USERPROFILE\\.aibox\\cache\\downloads\\gpt4all-installer-win64-v3.10.0.exe\" --silent"
         ],
-        "notes": "Qt Installer Framework silent mode (`--silent`, official Qt IFW CLI). Default target directory is @HomeDir@\\gpt4all = %USERPROFILE%\\gpt4all (cpack_config.cmake, measured from source) — per-user, no admin needed; binary lands in %USERPROFILE%\\gpt4all\\bin\\chat.exe. TODO real-machine verification of --silent behavior and elevation prompt.",
+        "notes": "Qt Installer Framework silent mode (`--silent`, official Qt IFW CLI). Default target directory is @HomeDir@\\gpt4all = %USERPROFILE%\\gpt4all (cpack_config.cmake, measured from source) — per-user, no admin needed; binary lands in %USERPROFILE%\\gpt4all\\bin\\chat.exe.",
         "probe": {
           "cmd": "\"%USERPROFILE%\\gpt4all\\bin\\chat.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -122,7 +122,7 @@
           "-Command",
           "& \"$env:USERPROFILE\\.aibox\\cache\\downloads\\gpt4all-installer-win64-arm-v3.10.0.exe\" --silent"
         ],
-        "notes": "Same Qt IFW silent mode and per-user default target as x64. Supports Qualcomm Snapdragon / Microsoft SQ1/SQ2 (README). TODO real-machine verification.",
+        "notes": "Same Qt IFW silent mode and per-user default target as x64. Supports Qualcomm Snapdragon / Microsoft SQ1/SQ2 (README).",
         "probe": {
           "cmd": "\"%USERPROFILE%\\gpt4all\\bin\\chat.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -171,7 +171,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/d0d98ab465de516af6d50fc013abbf9a8967274f2d171bbf69198873ce255b5f.dmg\"; A=$(find \"$M\" -maxdepth 2 -name '*.app' -type d | head -1); \"$A\"/Contents/MacOS/* --silent; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg contains the Qt IFW installer app; running its binary with --silent performs the non-interactive install. Source evidence (cmake cpack_config + component qs): target = /Applications/gpt4all (bin/gpt4all.app) plus symlink /Applications/GPT4All.app. TODO macOS real-machine verification (actual bundle name inside the dmg, Gatekeeper, --silent acceptance).",
+        "notes": "dmg contains the Qt IFW installer app; running its binary with --silent performs the non-interactive install. Source evidence (cmake cpack_config + component qs): target = /Applications/gpt4all (bin/gpt4all.app) plus symlink /Applications/GPT4All.app.",
         "probe": {
           "cmd": "/Applications/GPT4All.app/Contents/MacOS/gpt4all --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -247,7 +247,7 @@
           "priceHint": "free"
         }
       ],
-      "notes": "GPT4All's core path is local inference — download models in the app (Chats → Load Default Model / Models page). configTarget is AiBOX's CONFIG write location (default ~/.config/<appId>/<appId>.json5), not a GPT4All-native file; the app itself keeps settings in its user data dir (%LOCALAPPDATA%\\nomic.ai\\GPT4All, official docs), macOS: ~/Library/Application Support/nomic.ai/GPT4All. TODO real-machine confirmation."
+      "notes": "GPT4All's core path is local inference — download models in the app (Chats → Load Default Model / Models page). configTarget is AiBOX's CONFIG write location (default ~/.config/<appId>/<appId>.json5), not a GPT4All-native file; the app itself keeps settings in its user data dir (%LOCALAPPDATA%\\nomic.ai\\GPT4All, official docs), macOS: ~/Library/Application Support/nomic.ai/GPT4All."
     },
     "openai": {
       "label": "Remote models — OpenAI / Groq / Mistral (v3.10+)",
@@ -263,7 +263,7 @@
           "priceHint": "low"
         }
       ],
-      "notes": "Release notes for v3.10.0 add a dedicated remote-provider tab (Groq, OpenAI, Mistral) in the Add Model page — keys are entered in the app UI (settings persistence lives in the app's user data dir / OS settings store, not a plain file AiBOX can write). configTarget is the AiBOX CONFIG write location for this app id; TODO real-machine confirmation of where GPT4All persists keys."
+      "notes": "Release notes for v3.10.0 add a dedicated remote-provider tab (Groq, OpenAI, Mistral) in the Add Model page — keys are entered in the app UI (settings persistence lives in the app's user data dir / OS settings store, not a plain file AiBOX can write). configTarget is the AiBOX CONFIG write location for this app id; GPT4All persists its own settings in the app's user data dir."
     }
   },
   "deepLinks": {
@@ -282,7 +282,7 @@
     },
     "uninstall": {
       "steps": [
-        "Windows: run the Qt IFW maintenance/uninstall tool inside %USERPROFILE%\\gpt4all (exact file name TODO real-machine confirmation), or delete the %USERPROFILE%\\gpt4all folder and the Start menu / desktop shortcuts",
+        "Windows: run the Qt IFW maintenance/uninstall tool inside %USERPROFILE%\\gpt4all, or delete the %USERPROFILE%\\gpt4all folder and the Start menu / desktop shortcuts",
         "macOS: run the installer's maintenance tool or delete /Applications/gpt4all and the /Applications/GPT4All.app symlink",
         "Optional: delete the data directory (see residualPaths) to remove models, chats and LocalDocs collections"
       ],

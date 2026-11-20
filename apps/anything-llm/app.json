@@ -65,7 +65,7 @@
         "args": [
           "/S"
         ],
-        "notes": "Official silent mode (docs.anythingllm.com installation-desktop/windows, available v1.16.1+): `AnythingLLMDesktop.exe /S` — always installs for the current user into %LOCALAPPDATA%\\Programs\\AnythingLLM (the only supported location), skips the ~2GB Meeting Assistant model. Add /DOWNLOAD_MODEL=yes only if you want that model. Engine/GPU support files are still fetched from the vendor CDN during install. TODO real-machine verification.",
+        "notes": "Official silent mode (docs.anythingllm.com installation-desktop/windows, available v1.16.1+): `AnythingLLMDesktop.exe /S` — always installs for the current user into %LOCALAPPDATA%\\Programs\\AnythingLLM (the only supported location), skips the ~2GB Meeting Assistant model. Add /DOWNLOAD_MODEL=yes only if you want that model. Engine/GPU support files are still fetched from the vendor CDN during install.",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\AnythingLLM\\AnythingLLMDesktop.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -112,7 +112,7 @@
         "args": [
           "/S"
         ],
-        "notes": "Same official silent mode as x64 (`/S`, current user, %LOCALAPPDATA%\\Programs\\AnythingLLM). TODO real-machine verification.",
+        "notes": "Same official silent mode as x64 (`/S`, current user, %LOCALAPPDATA%\\Programs\\AnythingLLM).",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\AnythingLLM\\AnythingLLMDesktop.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -161,7 +161,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/eb5d0702d86ba7452660efcb6482141e8da863e397e802498a3884f21404aade.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg mount + copy AnythingLLM.app into /Applications + detach (official docs: drag the AnythingLLM logo into Applications; brew: install --cask anythingllm). TODO macOS real-machine verification (Gatekeeper/quarantine, mount cleanup).",
+        "notes": "dmg mount + copy AnythingLLM.app into /Applications + detach (official docs: drag the AnythingLLM logo into Applications; brew: install --cask anythingllm).",
         "probe": {
           "cmd": "/Applications/AnythingLLM.app/Contents/MacOS/AnythingLLM --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -210,7 +210,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/5255b43221f56dbde3ec745636743910a3adebafc0f67e86aa573462fabf68a9.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "Same dmg mount + copy as arm64. TODO macOS real-machine verification.",
+        "notes": "Same dmg mount + copy as arm64.",
         "probe": {
           "cmd": "/Applications/AnythingLLM.app/Contents/MacOS/AnythingLLM --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"

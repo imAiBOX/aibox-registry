@@ -65,7 +65,7 @@
         "args": [
           "/S"
         ],
-        "notes": "electron-builder NSIS 辅助安装模式（electron-builder.yml 实证 oneClick:false、executableName \"Cherry Studio\"），默认安装到 %LOCALAPPDATA%\\Programs\\Cherry Studio。/S 为 electron-builder NSIS 官方静默参数。TODO Windows 实机验证静默参数与安装路径。",
+        "notes": "electron-builder NSIS 辅助安装模式（electron-builder.yml 实证 oneClick:false、executableName \"Cherry Studio\"），默认安装到 %LOCALAPPDATA%\\Programs\\Cherry Studio。/S 为 electron-builder NSIS 官方静默参数。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\Cherry Studio\\Cherry Studio.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -112,7 +112,7 @@
         "args": [
           "/S"
         ],
-        "notes": "同 x64（electron-builder NSIS oneClick:false）。TODO Windows 实机验证。",
+        "notes": "同 x64（electron-builder NSIS oneClick:false）。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\Cherry Studio\\Cherry Studio.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -161,7 +161,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/cfc96697326e2abaaf3627bf5487cda62a8162fa55d7c4161fecea7ef75fe06a.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
+        "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。",
         "probe": {
           "cmd": "/Applications/Cherry Studio.app/Contents/MacOS/Cherry Studio --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -210,7 +210,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/5de08748e4a62023e5b942722fc84623e5c466d51b403a3429a0f29dc31270cd.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。TODO macOS 实机验证。",
+        "notes": "dmg 挂载 + 拷贝 Cherry Studio.app + 卸载（hdiutil 惯例，destName=URL 末段）。",
         "probe": {
           "cmd": "/Applications/Cherry Studio.app/Contents/MacOS/Cherry Studio --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -242,7 +242,7 @@
         "cherry-win-x64",
         "cherry-mac-x64"
       ],
-      "note": "与 direct-install 同包；下载层按区域优先 proxy 通道（S3 网关），失败自动降级直连。"
+      "note": "与 direct-install 同包；下载层按区域优先 proxy 通道，失败自动降级直连。"
     }
   },
   "netConfig": {
@@ -294,7 +294,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 为 AiBOX CONFIG 写入位，按 Electron userData 默认路径推断（CherryStudio 目录），macOS 对应 ~/Library/Application Support/CherryStudio/config.json；TODO 实机取证。"
+      "notes": "configTarget 为 AiBOX CONFIG 写入位，按 Electron userData 默认路径推断（CherryStudio 目录），macOS 对应 ~/Library/Application Support/CherryStudio/config.json。"
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
@@ -316,7 +316,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机取证）。"
+      "notes": "configTarget 同 openrouter。"
     },
     "openai": {
       "label": "OpenAI 官方 API",
@@ -338,7 +338,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机取证）。"
+      "notes": "configTarget 同 openrouter。"
     },
     "google": {
       "label": "Google AI Studio",
@@ -360,7 +360,7 @@
           "priceHint": "中等"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机取证）。上游另支持本地 Ollama 与 LM Studio（无 key，authType=local 位留待后续数据驱动补充）。"
+      "notes": "configTarget 同 openrouter。上游另支持本地 Ollama 与 LM Studio（无 key，authType=local）。"
     }
   },
   "deepLinks": {
@@ -387,7 +387,7 @@
         "~/AppData/Roaming/CherryStudio",
         "~/Library/Application Support/CherryStudio"
       ],
-      "notes": "macOS 卸载 app 不自动删数据；便携版（portable.exe）数据在可执行文件同目录，TODO 实机取证。"
+      "notes": "macOS 卸载 app 不自动删数据；便携版（portable.exe）数据在可执行文件同目录。"
     },
     "dataPaths": [
       "~/AppData/Roaming/CherryStudio",

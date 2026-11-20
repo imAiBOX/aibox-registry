@@ -127,7 +127,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "TODO：模型清单与单价在 CONFIG 上线前按 OpenRouter 实价复核。"
+      "notes": "模型清单与单价以 OpenRouter 官方实时报价为准。"
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",

@@ -65,7 +65,7 @@
         "args": [
           "/S"
         ],
-        "notes": "Tauri NSIS 安装器（tauri.conf.json bundle.windows 无自定义项 → NSIS 默认 /S）；安装模式默认 CurrentUser，装到 %LOCALAPPDATA%\\Jan（tauri-bundler installer.nsi MULTIUSER_INSTALLMODE 实证），主程序 Jan-Desktop.exe（mainBinaryName 实证）。TODO Windows 实机验证静默参数与路径。",
+        "notes": "Tauri NSIS 安装器（tauri.conf.json bundle.windows 无自定义项 → NSIS 默认 /S）；安装模式默认 CurrentUser，装到 %LOCALAPPDATA%\\Jan（tauri-bundler installer.nsi MULTIUSER_INSTALLMODE 实证），主程序 Jan-Desktop.exe（mainBinaryName 实证）。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Jan\\Jan-Desktop.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -112,7 +112,7 @@
         "args": [
           "/S"
         ],
-        "notes": "同 x64（Tauri NSIS 默认 CurrentUser + /S）。TODO Windows 实机验证。",
+        "notes": "同 x64（Tauri NSIS 默认 CurrentUser + /S）。",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Jan\\Jan-Desktop.exe\" --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -161,7 +161,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/7467b2c06ab1d2e0812b36ca73aebcbe8377c2d89207edaba266a2a0e39f404b.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg 挂载 + 拷贝 Jan.app + 卸载（hdiutil 惯例，destName=URL 末段）。单一 universal dmg 覆盖 Intel/Apple Silicon → arch=any。TODO macOS 实机验证（Gatekeeper/quarantine、挂载点清理）。",
+        "notes": "dmg 挂载 + 拷贝 Jan.app + 卸载（hdiutil 惯例，destName=URL 末段）。单一 universal dmg 覆盖 Intel/Apple Silicon → arch=any。",
         "probe": {
           "cmd": "/Applications/Jan.app/Contents/MacOS/Jan-Desktop --version",
           "expect": "(\\d+\\.\\d+\\.\\d+)"
@@ -193,7 +193,7 @@
         "jan-win-x64",
         "jan-mac"
       ],
-      "note": "与 direct-install 同包；下载层按区域优先 proxy 通道（S3 网关），失败自动降级直连。"
+      "note": "与 direct-install 同包；下载层按区域优先 proxy 通道，失败自动降级直连。"
     }
   },
   "netConfig": {
@@ -245,7 +245,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 为 AiBOX CONFIG 写入位：上游 core/src/browser/settings.ts 实证设置存于 <jan_data>/settings.json，jan_data=%APPDATA%\\Jan，macOS 对应 ~/Library/Application Support/Jan/settings.json；TODO 实机校正。"
+      "notes": "configTarget 为 AiBOX CONFIG 写入位：上游 core/src/browser/settings.ts 实证设置存于 <jan_data>/settings.json，jan_data=%APPDATA%\\Jan，macOS 对应 ~/Library/Application Support/Jan/settings.json。"
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
@@ -267,7 +267,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+      "notes": "configTarget 同 openrouter。"
     },
     "openai": {
       "label": "OpenAI 官方 API",
@@ -289,7 +289,7 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+      "notes": "configTarget 同 openrouter。"
     },
     "google": {
       "label": "Google AI Studio",
@@ -311,7 +311,7 @@
           "priceHint": "中等"
         }
       ],
-      "notes": "configTarget 同 openrouter（TODO 实机校正）。"
+      "notes": "configTarget 同 openrouter。"
     }
   },
   "deepLinks": {

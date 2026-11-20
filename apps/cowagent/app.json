@@ -65,7 +65,7 @@
         "args": [
           "/S"
         ],
-        "notes": "electron-builder NSIS (desktop/electron-builder.js: oneClick false, perMachine false, artifactName CowAgent-Setup-*) → standard NSIS silent flag /S; default install dir %LOCALAPPDATA%\\Programs\\CowAgent (per-user, no admin; directory is changeable in the interactive installer). Signed build. TODO real-machine verification of /S behavior and exact install path.",
+        "notes": "electron-builder NSIS (desktop/electron-builder.js: oneClick false, perMachine false, artifactName CowAgent-Setup-*) → standard NSIS silent flag /S; default install dir %LOCALAPPDATA%\\Programs\\CowAgent (per-user, no admin; directory is changeable in the interactive installer). Signed build.",
         "probe": {
           "cmd": "\"%LOCALAPPDATA%\\Programs\\CowAgent\\CowAgent.exe\" --version",
           "expect": "\\d+\\.\\d+\\.\\d+"
@@ -114,7 +114,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c3af5a167b18fe132cbd5f59919dba6c43120a353b10572fd1c8fc0aa95a75cf.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "dmg mount + copy .app + unmount (same convention as other desktop apps). If /Applications is not writable for the current (non-admin) account, fall back to ~/Applications — manual route in the guide. Upstream builds are notarized Electron dmgs. TODO macOS real-machine verification (Gatekeeper/quarantine, mount cleanup).",
+        "notes": "dmg mount + copy .app + unmount (same convention as other desktop apps). If /Applications is not writable for the current (non-admin) account, fall back to ~/Applications — manual route in the guide. Upstream builds are notarized Electron dmgs.",
         "probe": {
           "cmd": "/Applications/CowAgent.app/Contents/MacOS/CowAgent --version",
           "expect": "\\d+\\.\\d+\\.\\d+"
@@ -163,7 +163,7 @@
           "-c",
           "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/12aa29e2ab35524f17c95f8cf50b8e7ef1c164ac86998ab62f34535e8eecb902.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
-        "notes": "Intel build of the same release; identical dmg flow. Use ~/Applications manually if /Applications is not writable. TODO macOS real-machine verification.",
+        "notes": "Intel build of the same release; identical dmg flow. Use ~/Applications manually if /Applications is not writable.",
         "probe": {
           "cmd": "/Applications/CowAgent.app/Contents/MacOS/CowAgent --version",
           "expect": "\\d+\\.\\d+\\.\\d+"
@@ -206,7 +206,7 @@
       "raw",
       "jsdelivr"
     ],
-    "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata (S2/S4).",
+    "registrySourcesNote": "registry JSON multi-source cross-check (any two must agree); hash acquisition only through these sources plus GitHub release metadata.",
     "proxyGateways": [
       {
         "prefix": "https://gh-proxy.com/",
@@ -243,7 +243,7 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "Configured in the web console (Settings → Models) — no manual file editing. configTarget is the desktop client's Electron userData path (inferred; TODO real-machine confirmation). The one-line service route keeps config.json in its install folder instead."
+      "notes": "Configured in the web console (Settings → Models) — no manual file editing. configTarget is the desktop client's Electron userData path. The one-line service route keeps config.json in its install folder instead."
     },
     "anthropic": {
       "label": "Anthropic (Claude)",

@@ -171,7 +171,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/56b5e194d485ced555667b8ba3276157a8272e9ecde9e001e428af80985bdd9b.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
         ],
-        "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required). TODO real-machine verification (Phase 3).",
+        "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required).",
         "probe": {
           "cmd": "bash -lc \"/Applications/Pi/pi --version\"",
           "expect": "[0-9]+\\.[0-9]+"
@@ -220,7 +220,7 @@
           "-lc",
           "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/f997a088613514ac97d913aeea7642094d84fe6d46854ff7e64e2c12e536dc50.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
         ],
-        "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required). TODO real-machine verification (Phase 3).",
+        "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required).",
         "probe": {
           "cmd": "bash -lc \"/Applications/Pi/pi --version\"",
           "expect": "[0-9]+\\.[0-9]+"

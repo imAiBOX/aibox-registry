@@ -68,7 +68,7 @@
           "-Command",
           "Expand-7zOrFallback(); # see notes: extract MoneyPrinterTurbo-Portable-Windows-1.3.10.7z to %LOCALAPPDATA%\\MoneyPrinterTurbo and run MoneyPrinterTurbo.exe"
         ],
-        "notes": "Extract the 7z into ~/AppData/Local/MoneyPrinterTurbo (user folder, zero admin) and run the bundled exe. TODO real-machine silent-extract verification.",
+        "notes": "Extract the 7z into ~/AppData/Local/MoneyPrinterTurbo (user folder, zero admin) and run the bundled exe.",
         "probe": {
           "cmd": "powershell -NoProfile -Command \"Test-Path $env:LOCALAPPDATA\\MoneyPrinterTurbo\\MoneyPrinterTurbo.exe\"",
           "expect": "True"
