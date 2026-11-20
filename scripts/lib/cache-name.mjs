@@ -22,11 +22,17 @@ export function cacheFileName(destName, sha256) {
   return `${sha}${ext}`;
 }
 
-/** Expected cache file name for a package (first channel URL + package sha). */
+/**
+ * Expected cache file name for a package (first channel URL + package sha).
+ *
+ * `hashMode === "content"`（源码归档）：缓存名用 **内容摘要**（contentSha256）——
+ * 因为安装器在 content 模式下也按内容摘要去校验，缓存名必须与校验用的一致。
+ */
 export function expectedCacheName(pkg) {
   const url = pkg?.channels?.[0]?.url;
-  if (!url || !pkg?.sha256) return null;
-  return cacheFileName(destNameOf(url), pkg.sha256);
+  const sha = pkg?.hashMode === 'content' ? pkg?.contentSha256 || pkg?.sha256 : pkg?.sha256;
+  if (!url || !sha) return null;
+  return cacheFileName(destNameOf(url), sha);
 }
 
 /**
