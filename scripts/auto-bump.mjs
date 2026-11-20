@@ -189,6 +189,14 @@ export function applyBump(app, plan, evidence, stamp) {
       pkg.sha256 = ev.sha256;
       pkg.sizeBytes = ev.sizeBytes;
       pkg.hashSource = ev.hashSource;
+      // 同步 install script 里的内容寻址缓存名（`<sha256><ext>`）：
+      // 下载产物落盘用的是**新** sha，但脚本里写死的仍是旧 sha → 执行阶段找不到文件。
+      // exec 时没有占位符替换（args 原样执行），所以必须在这里一并改。
+      const oldSha = ev.old?.sha256;
+      if (oldSha && oldSha !== ev.sha256 && Array.isArray(pkg.install?.args)) {
+        pkg.install.args = pkg.install.args.map((a) =>
+          typeof a === 'string' ? a.split(oldSha).join(ev.sha256) : a);
+      }
     }
   }
   return out;
