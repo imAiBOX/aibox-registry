@@ -221,8 +221,27 @@ test('applyBump updates only version-related fields', () => {
   }
 });
 
-test('applyBump: stale package version and stale install args are rewritten to the new version', () => {
-  const app = staleArgsApp();
+// 回归（2026-11-20）：bump 后 install script 里的**内容寻址缓存名**必须跟着换。
+// 下载产物落盘用新 sha，但脚本里写死的旧 sha 不会被任何占位符替换 → 执行阶段找不到文件，
+// validate 会报 “script references <旧sha> but the cache name is <新sha>”。
+test('applyBump: content-addressed cache name inside install script is rewritten to the new sha', () => {
+  const oldSha = 'a'.repeat(64);
+  const newSha = '9'.repeat(64);
+  const app = githubApp();
+  // 模拟 mac script 型安装：args 里写死了内容寻址缓存名 `<sha256><ext>`
+  app.packages[0].install = {
+    type: 'script',
+    args: ['bash', '-lc', `hdiutil attach "$HOME/.aibox/cache/downloads/${oldSha}.dmg"`],
+  };
+  const plan = planBump(app, [ghDrift()]);
+  const ev = evidenceFor(plan.affected, { sha256: newSha, old: { sha256: oldSha, sizeBytes: 100 } });
+  const out = applyBump(app, plan, ev, '2026-11-20T00:00:00Z');
+  const args = out.packages[0].install.args.join(' ');
+  assert.ok(args.includes(`${newSha}.dmg`), 'install script 应指向新 sha 的缓存名');
+  assert.ok(!args.includes(oldSha), 'install script 不应残留旧 sha');
+});
+
+test('applyBump: stale package version and stale install args are rewritten to the new version', () => {  const app = staleArgsApp();
   const drift = ghDrift({ app: 'aidog', repo: 'AiDog-im/AiDog', currentTag: 'v0.5.88', latestTag: 'v0.5.89' });
   const plan = planBump(app, [drift]);
   const out = applyBump(app, plan, evidenceFor(plan.affected), '2026-11-13T10:00:00Z');
