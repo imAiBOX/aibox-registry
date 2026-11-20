@@ -145,6 +145,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/.hermes/config.yaml",
+      "configFormat": "yaml",
+      "configWritable": false,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -173,6 +175,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/.hermes/config.yaml",
+      "configFormat": "yaml",
+      "configWritable": false,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -189,6 +193,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/.hermes/config.yaml",
+      "configFormat": "yaml",
+      "configWritable": false,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -204,6 +210,8 @@
       "label": "Nous Portal (one subscription: models + tools, OAuth)",
       "authType": "oauth",
       "configTarget": "~/.hermes/config.yaml",
+      "configFormat": "yaml",
+      "configWritable": false,
       "getKeyUrl": "https://portal.nousresearch.com",
       "notes": "`hermes setup --portal` logs in via OAuth, sets Nous as provider and enables the Tool Gateway (web search, image gen, TTS, cloud browser) — no separate keys to collect (README). Inspect anytime with `hermes portal info`."
     }

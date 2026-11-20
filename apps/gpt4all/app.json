@@ -233,6 +233,8 @@
       "label": "Local models (free, offline, no key)",
       "authType": "local",
       "configTarget": "~/.config/gpt4all/gpt4all.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "llama-3.1-8b-instruct",
@@ -254,6 +256,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/.config/gpt4all/gpt4all.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {

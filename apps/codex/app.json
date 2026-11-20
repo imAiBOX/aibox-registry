@@ -230,6 +230,8 @@
       "keyFormat": "sk-... (API key) or ChatGPT OAuth login",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "configTarget": "~/.codex/auth.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "gpt-5.1-codex",

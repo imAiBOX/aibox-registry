@@ -224,6 +224,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -252,6 +254,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -274,6 +278,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -296,6 +302,8 @@
       "authType": "api-key",
       "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
       "configTarget": "~/AppData/Roaming/Jan/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
         {

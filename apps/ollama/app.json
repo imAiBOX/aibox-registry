@@ -165,6 +165,8 @@
       "label": "本地 Ollama 模型（免费离线，无需 Key）",
       "authType": "local",
       "configTarget": "~/.config/ollama/ollama.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
         {

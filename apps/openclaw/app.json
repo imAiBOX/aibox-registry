@@ -526,6 +526,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/.config/openclaw/openclaw.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -554,6 +556,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/.config/openclaw/openclaw.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -575,6 +579,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/.config/openclaw/openclaw.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -596,6 +602,8 @@
       "authType": "api-key",
       "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
       "configTarget": "~/.config/openclaw/openclaw.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
         {
@@ -616,6 +624,8 @@
       "label": "Claude 订阅复用（OAuth 登录，zero-key 路线）",
       "authType": "oauth",
       "configTarget": "~/.config/openclaw/openclaw.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://claude.ai/",
       "recommendedModels": [
         {
@@ -631,6 +641,8 @@
       "label": "本地 Ollama（完全免费离线，需 8GB+ 内存）",
       "authType": "local",
       "configTarget": "~/.config/openclaw/openclaw.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
         {

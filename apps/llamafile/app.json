@@ -181,6 +181,8 @@
       "label": "Local GGUF models (free, offline, no key)",
       "authType": "local",
       "configTarget": "~/.config/llamafile/llamafile.json5",
+      "configFormat": "json5",
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "Qwen3.5-0.8B-Q8_0",

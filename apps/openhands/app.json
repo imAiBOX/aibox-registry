@@ -175,6 +175,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -197,6 +199,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -213,6 +217,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -234,6 +240,8 @@
       "label": "Local Ollama models (free, offline, no key)",
       "authType": "local",
       "configTarget": "~/AppData/Roaming/OpenHands/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "qwen2.5-coder:7b",

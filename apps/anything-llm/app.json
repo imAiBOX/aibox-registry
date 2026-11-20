@@ -273,6 +273,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "configFormat": "db",
+      "configWritable": false,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -295,6 +297,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "configFormat": "db",
+      "configWritable": false,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -311,6 +315,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "configFormat": "db",
+      "configWritable": false,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -326,6 +332,8 @@
       "label": "Local models — built-in engine or Ollama (free, offline)",
       "authType": "local",
       "configTarget": "~/AppData/Roaming/anythingllm-desktop/anythingllm.db",
+      "configFormat": "db",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "built-in-llama",

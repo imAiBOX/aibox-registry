@@ -229,6 +229,8 @@
       "keyFormat": "sk-...",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "configTarget": "~/.5ire/config.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "gpt-5.2",
@@ -245,6 +247,8 @@
       "keyFormat": "sk-ant-...",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "configTarget": "~/.5ire/config.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "claude-sonnet-4",
@@ -261,6 +265,8 @@
       "keyFormat": "AIza...",
       "getKeyUrl": "https://aistudio.google.com/app/apikey",
       "configTarget": "~/.5ire/config.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "gemini-2.0-flash",
@@ -277,6 +283,8 @@
       "keyFormat": "sk-...",
       "getKeyUrl": "https://platform.deepseek.com/api_keys",
       "configTarget": "~/.5ire/config.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "deepseek-chat",
@@ -292,6 +300,8 @@
       "authType": "local",
       "getKeyUrl": "https://ollama.com/download",
       "configTarget": "~/.5ire/config.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "qwen3:8b",

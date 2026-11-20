@@ -273,6 +273,8 @@
       "keyFormat": "sk-or-v1-...",
       "getKeyUrl": "https://openrouter.ai/keys",
       "configTarget": "~/.config/opencode/opencode.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "anthropic/claude-sonnet-4",
@@ -289,6 +291,8 @@
       "keyFormat": "sk-ant-...",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "configTarget": "~/.config/opencode/opencode.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "claude-sonnet-4",
@@ -304,6 +308,8 @@
       "authType": "local",
       "getKeyUrl": "https://ollama.com/download",
       "configTarget": "~/.config/opencode/opencode.json",
+      "configFormat": "json",
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "qwen3-coder:30b",

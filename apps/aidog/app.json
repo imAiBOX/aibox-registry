@@ -165,6 +165,8 @@
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/aidog/web/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -185,6 +187,8 @@
       "label": "任意 OpenAI 兼容端点（本地网关默认零配置；云端服务商填 base_url + MODEL_API_KEY）",
       "authType": "api-key",
       "configTarget": "~/aidog/web/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -200,6 +204,8 @@
       "label": "Ollama 本地模型（完全免费离线；提醒需 8GB+ 内存与模型下载耗时）",
       "authType": "local",
       "configTarget": "~/aidog/web/settings.json",
+      "configFormat": "json",
+      "configWritable": false,
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
         {
