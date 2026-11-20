@@ -95,7 +95,11 @@ jobs:
       - name: Open bump PRs for new upstream versions (A-class drifts)
         if: always()
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 用本项目 PAT（secrets.AIBOX_BUMP_TOKEN）而不是 GITHUB_TOKEN：
+          # 仓库设置里「Allow GitHub Actions to create and approve pull requests」是关的，
+          # GITHUB_TOKEN 建 PR 会被拒（GraphQL: not permitted to createPullRequest）
+          # → 每个上游新版本都只能人工处理。PAT 有 pull_requests: write → 自动开 PR。
+          GH_TOKEN: ${{ secrets.AIBOX_BUMP_TOKEN || secrets.GITHUB_TOKEN }}
         run: node scripts/auto-bump.mjs
       - name: Upload probe report
         if: always()
