@@ -9,35 +9,50 @@
 //
 //   node scripts/refresh-archive-sha.mjs <app-dir>   (e.g. aidog)
 //
-// It re-downloads each archive channel of each affected package, updates
-// sha256 + sizeBytes + the script's cache-path reference, then runs validate.
+// It re-downloads the first archive channel of each affected package. In
+// content mode, it refreshes byte metadata only if the pinned gzip content
+// digest still matches. Byte-mode refreshes also update the script cache path.
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { expectedCacheName, destNameOf, cacheFileName } from './lib/cache-name.mjs';
+import { expectedCacheName } from './lib/cache-name.mjs';
+import { digestPolicy, downloadFullPackage, MAX_GZIP_BYTES, packageDigest } from './lib/package-digest.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 /**
- * Pure patcher: given a package and freshly measured values, return the
- * updated package (new sha/size + script cache references rewritten).
- * Exported for tests.
+ * Measure a downloaded archive and return a refreshed package, or throw
+ * before editing if its pinned content cannot be verified.
  */
-export function applyArchiveSha(pkg, newSha, newBytes) {
-  const oldSha = (pkg.sha256 || '').toLowerCase();
+export function applyArchiveSha(pkg, buf) {
+  let measured;
+  try {
+    measured = packageDigest(buf, pkg);
+  } catch (e) {
+    throw new Error(`${pkg.id}: archive verification failed: ${e.message}; manual review required`, { cause: e });
+  }
+  const { mode, matches, expected, sha256: digest, bytes } = measured;
+  if (mode === 'content' && !matches) {
+    throw new Error(`${pkg.id}: contentSha256 mismatch (expected ${expected}, got ${digest}); manual review required`);
+  }
+  const sha = mode === 'bytes' ? digest : createHash('sha256').update(buf).digest('hex');
+  if (sha === pkg.sha256 && bytes === pkg.sizeBytes) return pkg;
+
   const next = JSON.parse(JSON.stringify(pkg));
-  next.sha256 = newSha.toLowerCase();
-  next.sizeBytes = newBytes;
-  next.hashSource =
-    `GitHub tag source archive measured locally (${new Date().toISOString().slice(0, 10)}); ` +
-    'source archives are NOT byte-stable across GitHub regenerations — probe re-measures, ' +
-    'a sha drift means re-measure, not tampering';
-  const dest = destNameOf(pkg.channels?.[0]?.url || '');
-  const ext = dest.includes('.') ? dest.slice(dest.lastIndexOf('.')) : '';
-  const oldRef = oldSha + ext;
-  const newRef = next.sha256 + ext;
+  next.sha256 = sha;
+  next.sizeBytes = bytes;
+  const source = `GitHub tag source archive measured locally (${new Date().toISOString().slice(0, 10)})`;
+  if (mode === 'content') {
+    next.hashSource = `${source}; decompressed gzip content verified against pinned contentSha256`;
+    return next;
+  }
+
+  next.hashSource = `${source}; source archives are NOT byte-stable across GitHub regenerations`;
+  const oldRef = expectedCacheName(pkg);
+  const newRef = expectedCacheName(next);
   const args = next.install?.args;
-  if (Array.isArray(args)) {
+  if (oldRef && newRef && oldRef !== newRef && Array.isArray(args)) {
     for (let i = 0; i < args.length; i++) {
       if (typeof args[i] === 'string' && args[i].includes(`cache/downloads/${oldRef}`)) {
         args[i] = args[i].split(`cache/downloads/${oldRef}`).join(`cache/downloads/${newRef}`);
@@ -47,21 +62,25 @@ export function applyArchiveSha(pkg, newSha, newBytes) {
   return next;
 }
 
-async function fetchSha(url, tries = 3) {
-  let lastErr;
-  for (let i = 0; i < tries; i++) {
+async function fetchArchive(url, mode, tries) {
+  for (let attempt = 1; ; attempt++) {
     try {
-      const r = await fetch(url, { signal: AbortSignal.timeout(120000), headers: { 'user-agent': 'aibox-probe' } });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const buf = Buffer.from(await r.arrayBuffer());
-      const { createHash } = await import('node:crypto');
-      return { sha: createHash('sha256').update(buf).digest('hex'), bytes: buf.length };
+      return await downloadFullPackage(url, {
+        timeoutMs: 120_000,
+        maxInput: mode === 'content' ? MAX_GZIP_BYTES : Infinity,
+        userAgent: 'aibox-probe',
+      });
     } catch (e) {
-      lastErr = e;
-      await new Promise((r) => setTimeout(r, 3000));
+      if (attempt >= tries) throw e;
     }
+    await new Promise((r) => setTimeout(r, 3000));
   }
-  throw lastErr;
+}
+
+export async function refreshArchive(pkg, url, { tries = 3 } = {}) {
+  const { mode } = digestPolicy(pkg);
+  const buf = await fetchArchive(url, mode, tries);
+  return applyArchiveSha(pkg, buf);
 }
 
 async function main() {
@@ -76,16 +95,14 @@ async function main() {
   for (const pkg of app.packages || []) {
     const archiveCh = (pkg.channels || []).find((c) => c.url.includes('/archive/'));
     if (!archiveCh) continue;
-    const { sha, bytes } = await fetchSha(archiveCh.url);
-    if (sha === (pkg.sha256 || '').toLowerCase() && bytes === pkg.sizeBytes) {
-      console.log(`= ${pkg.id}: already current (${sha.slice(0, 12)}…)`);
+    const next = await refreshArchive(pkg, archiveCh.url);
+    if (next === pkg) {
+      console.log(`= ${pkg.id}: already current (${pkg.sha256.slice(0, 12)}…)`);
       continue;
     }
-    const before = expectedCacheName(pkg);
-    const next = applyArchiveSha(pkg, sha, bytes);
     const idx = app.packages.indexOf(pkg);
     app.packages[idx] = next;
-    console.log(`~ ${pkg.id}: ${before?.slice(0, 12)}… -> ${sha.slice(0, 12)}… (${bytes} bytes)`);
+    console.log(`~ ${pkg.id}: byte sha ${pkg.sha256.slice(0, 12)}… -> ${next.sha256.slice(0, 12)}… (${next.sizeBytes} bytes)`);
     changed++;
   }
   if (changed === 0) {

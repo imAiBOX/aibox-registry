@@ -185,6 +185,28 @@ test('planBump: stale drift (already current) yields stale plan', () => {
   assert.equal(planBump(app, [ghDrift({ repo: 'other/repo' })]).stale, true);
 });
 
+test('auto-bump refuses affected content-mode packages and leaves the app untouched', () => {
+  const app = staleArgsApp();
+  const drift = ghDrift({ app: 'aidog', repo: 'AiDog-im/AiDog', latestTag: 'v0.5.89' });
+  const bytePlan = planBump(app, [drift]);
+  Object.assign(app.packages[0], { hashMode: 'content', contentSha256: 'b'.repeat(64) });
+  const original = structuredClone(app);
+  const manualReview = /aidog-win: content-mode package requires manual review.*contentSha256/;
+  assert.throws(() => planBump(app, [drift]), manualReview);
+  assert.throws(() => applyBump(app, bytePlan, evidenceFor(bytePlan.affected), '2026-11-13T10:00:00Z'), manualReview);
+  assert.deepEqual(app, original);
+});
+
+test('auto-bump permits byte-mode bumps when content-mode packages are unaffected', () => {
+  const app = openclawLike();
+  const unmodified = app.packages[2];
+  Object.assign(unmodified, { hashMode: 'content', contentSha256: 'f'.repeat(64) });
+  const plan = planBump(app, [ghDrift({ repo: 'openclaw/openclaw', latestTag: 'v2026.11.4' })]);
+  assert.deepEqual(plan.affected, ['openclaw-mac-arm64']);
+  const out = applyBump(app, plan, evidenceFor(plan.affected), '2026-11-13T10:00:00Z');
+  assert.deepEqual(out.packages[2], unmodified);
+});
+
 test('applyBump updates only version-related fields', () => {
   const app = githubApp();
   const plan = planBump(app, [ghDrift()]);

@@ -18,7 +18,7 @@
 // Exit code is always 0 on completed runs; the workflow turns drifts into issues + red run.
 import fs from 'node:fs';
 import path from 'node:path';
-import crypto from 'node:crypto';
+import { digestPolicy, probePackage } from './lib/package-digest.mjs';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -75,13 +75,6 @@ async function head(url) {
   return { status: res.status, contentLength: res.headers.get('content-length') };
 }
 
-async function sha256Of(url) {
-  const res = await withRetry(() => timedFetch(url, { method: 'GET' }));
-  if (!res.ok) throw Object.assign(new Error(`GET ${res.status}`), { status: res.status });
-  const buf = Buffer.from(await res.arrayBuffer());
-  return { sha256: crypto.createHash('sha256').update(buf).digest('hex'), bytes: buf.length };
-}
-
 function ghHeaders() {
   return {
     Accept: 'application/vnd.github+json',
@@ -104,22 +97,27 @@ if (apps.length === 0) {
 // ------------------------------------------------- 1+2: channel liveness / integrity
 for (const { dir, app } of apps) {
   for (const pkg of app.packages || []) {
-    const wantDownload = Number.isInteger(pkg.sizeBytes) && pkg.sizeBytes < SMALL_FILE_BYTES;
+    const wantDownload = pkg.hashMode === 'content' || (Number.isInteger(pkg.sizeBytes) && pkg.sizeBytes < SMALL_FILE_BYTES);
     for (const ch of pkg.channels || []) {
       const check = {
         type: 'channel', app: dir, package: pkg.id, channel: ch.type,
         url: ch.url, checkedAt: now(), sha256Checked: false,
       };
+      let phase = 'metadata';
       try {
+        const policy = digestPolicy(pkg);
+        check.hashMode = policy.mode;
+        phase = 'HEAD';
         const h = await head(ch.url);
         check.status = h.status;
         if (wantDownload) {
-          const { sha256, bytes } = await sha256Of(ch.url);
+          phase = 'GET/digest';
+          const { sha256, bytes } = await probePackage(ch.url, pkg);
           check.sha256Checked = true;
           check.bytes = bytes;
-          if (sha256 !== pkg.sha256) {
+          if (sha256 !== policy.expected) {
             check.status = 'SHA256_MISMATCH';
-            const isArchive = ch.url.includes('/archive/');
+            const isArchive = policy.mode === 'bytes' && ch.url.includes('/archive/');
             addDrift('integrity',
               isArchive
                 ? `${dir}: archive regenerated ${pkg.id} (${ch.type}) — refresh sha`
@@ -131,14 +129,14 @@ for (const { dir, app } of apps) {
                    '```sh\n' +
                    `node scripts/refresh-archive-sha.mjs ${dir}\n` +
                    '```\n\n' +
-                   `- expected: \`${pkg.sha256}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n` +
+                   `- expected: \`${policy.expected}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n` +
                    `Checked at: ${check.checkedAt}`)
                 : (`Channel \`${ch.url}\` returned content whose sha256 does not match the registry record.\n\n` +
-                   `- expected: \`${pkg.sha256}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n\n` +
+                   `- mode: ${policy.mode}\n- expected: \`${policy.expected}\`\n- actual:   \`${sha256}\`\n- bytes: ${bytes} / ${pkg.sizeBytes}\n\n` +
                    `Hash provenance: ${pkg.hashSource || 'n/a'}\nChecked at: ${check.checkedAt}`),
               B(dir));
           }
-        } else if (h.contentLength && Number(h.contentLength) !== pkg.sizeBytes) {
+        } else if (policy.mode === 'bytes' && h.contentLength && Number(h.contentLength) !== pkg.sizeBytes) {
           check.status = 'SIZE_MISMATCH';
           addDrift('integrity',
             `${dir}: size mismatch ${pkg.id} (${ch.type})`,
@@ -147,11 +145,11 @@ for (const { dir, app } of apps) {
             B(dir));
         }
       } catch (e) {
-        check.status = e.status ? `HTTP_${e.status}` : 'UNREACHABLE';
+        check.status = e.status ? `HTTP_${e.status}` : (phase === 'HEAD' ? 'UNREACHABLE' : 'INTEGRITY_ERROR');
         check.error = String(e.message || e).slice(0, 200);
-        addDrift('liveness',
-          `${dir}: channel down — ${pkg.id} (${ch.type})`,
-          `HEAD failed after ${RETRIES} retries.\n\n- package: \`${pkg.id}\`\n- channel: \`${ch.type}\`\n` +
+        addDrift(phase === 'HEAD' ? 'liveness' : 'integrity',
+          `${dir}: ${phase} failed — ${pkg.id} (${ch.type})`,
+          `${phase} failed (no unverified content accepted).\n\n- package: \`${pkg.id}\`\n- channel: \`${ch.type}\`\n` +
           `- url: ${ch.url}\n- error: \`${check.error}\`\n- recorded sha256: \`${pkg.sha256}\`\n\n` +
           `Checked at: ${check.checkedAt}\nIf this endpoint is permanently gone, update app.json (or retire the channel) in a PR.`,
           B(dir));

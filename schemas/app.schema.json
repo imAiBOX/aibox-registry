@@ -238,6 +238,13 @@
             ]
           },
           "description": "V1: a package exposing any channel URL must carry sha256 (+sizeBytes for the CI <5MB re-download rule). No hashless URLs may merge."
+        },
+        {
+          "if": {
+            "properties": { "hashMode": { "const": "content" } },
+            "required": ["hashMode"]
+          },
+          "then": { "required": ["contentSha256"] }
         }
       ]
     },

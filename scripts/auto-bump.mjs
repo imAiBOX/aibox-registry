@@ -6,6 +6,7 @@
 //      This script measures the new artifacts, updates apps/<id>/app.json,
 //      validates + re-HEADs every channel (0 failures), then pushes branch
 //      chore/upstream-<app>-<version> and opens a PR for human review.
+//      Content-mode packages require a manual bump with verified content digests.
 //   B (everything else) — same-version content mismatch, dead channel, dead
 //      gateway. Never edited here: a same-version content change is a possible
 //      tampering signal and always stays an issue for a human.
@@ -26,6 +27,7 @@ import crypto from 'node:crypto';
 import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { digestPolicy } from './lib/package-digest.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TIMEOUT_MS = 10_000;
@@ -117,6 +119,21 @@ export function selectAffectedPackages(app, drift, pairs) {
   return affected;
 }
 
+function requireByteMode(app, affected) {
+  for (const pkg of app.packages || []) {
+    if (!affected.includes(pkg.id)) continue;
+    let mode;
+    try {
+      ({ mode } = digestPolicy(pkg));
+    } catch (e) {
+      throw new Error(`${pkg.id}: ${e.message}; manual review required`);
+    }
+    if (mode === 'content') {
+      throw new Error(`${pkg.id}: content-mode package requires manual review and verified contentSha256 for the new version`);
+    }
+  }
+}
+
 /**
  * Build the edit plan for one app's A-class drifts.
  * Returns { stale: true } when every drift is already reflected in app.json.
@@ -142,6 +159,7 @@ export function planBump(app, drifts) {
   if (entries.length === 0) return { stale: true, entries: [] };
   const pairs = dedupePairs(entries.flatMap((e) => e.pairs));
   const affected = [...new Set(entries.flatMap((e) => e.affected))];
+  requireByteMode(app, affected);
   const primary = (entries.find((e) => e.drift.source === 'github') || entries[0]).drift;
   return {
     stale: false,
@@ -159,6 +177,7 @@ export function branchName(appId, rawVersion) {
 
 /** Apply a plan to an app object. Pure: clones, never mutates the input. */
 export function applyBump(app, plan, evidence, stamp) {
+  requireByteMode(app, plan.affected);
   const out = JSON.parse(JSON.stringify(app));
   for (const e of plan.entries) {
     if (e.drift.source === 'github') {
@@ -398,7 +417,9 @@ async function downloadSha(url) {
   for (let i = 0; i <= RETRIES; i++) {
     try {
       const res = await timedFetch(url, {}, DOWNLOAD_TIMEOUT_MS);
-      if (!res.ok) throw Object.assign(new Error(`GET ${res.status}`), { status: res.status });
+      if (res.status !== 200 || res.headers.has('content-range')) {
+        throw Object.assign(new Error(`Expected complete GET 200, got ${res.status}`), { status: res.status });
+      }
       if (!res.body) throw new Error('empty response body');
       const hash = crypto.createHash('sha256');
       let bytes = 0;
