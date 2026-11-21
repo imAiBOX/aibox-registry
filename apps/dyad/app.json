@@ -223,12 +223,12 @@
   "modelProviders": {
     "openai": {
       "label": "OpenAI API",
-      "note": "Built-in provider in Dyad — the default path for building apps.",
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file).",
       "authType": "api-key",
       "keyFormat": "sk-...",
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "configTarget": "~/AppData/Roaming/dyad",
-      "configFormat": "other",
+      "configFormat": "dir",
       "configWritable": false,
       "recommendedModels": [
         {
@@ -241,12 +241,12 @@
     },
     "anthropic": {
       "label": "Anthropic API",
-      "note": "Built-in provider in Dyad.",
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file).",
       "authType": "api-key",
       "keyFormat": "sk-ant-...",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "configTarget": "~/AppData/Roaming/dyad",
-      "configFormat": "other",
+      "configFormat": "dir",
       "configWritable": false,
       "recommendedModels": [
         {
@@ -259,11 +259,11 @@
     },
     "ollama": {
       "label": "Ollama (local, free)",
-      "note": "Run models on your own machine — zero API cost, nothing leaves the box.",
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file).",
       "authType": "local",
       "getKeyUrl": "https://ollama.com/download",
       "configTarget": "~/AppData/Roaming/dyad",
-      "configFormat": "other",
+      "configFormat": "dir",
       "configWritable": false,
       "recommendedModels": [
         {

@@ -104,8 +104,8 @@
       "label": "OpenRouter（推荐，一个 key 通吃所有模型；联盟位请明示返佣）",
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
-      "configTarget": "~/SillyTavern/data/default-user/settings.json",
-      "configFormat": "json",
+      "configTarget": "~/Fooocus",
+      "configFormat": "dir",
       "configWritable": false,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
@@ -128,14 +128,15 @@
           "priceHint": "低"
         }
       ],
-      "notes": "模型清单与单价以 OpenRouter 官方实时报价为准。"
+      "notes": "模型清单与单价以 OpenRouter 官方实时报价为准。",
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file)."
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
       "authType": "api-key",
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
-      "configTarget": "~/SillyTavern/data/default-user/settings.json",
-      "configFormat": "json",
+      "configTarget": "~/Fooocus",
+      "configFormat": "dir",
       "configWritable": false,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
@@ -151,14 +152,15 @@
           "note": "快而便宜",
           "priceHint": "低"
         }
-      ]
+      ],
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file)."
     },
     "openai": {
       "label": "OpenAI 官方 API",
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
-      "configTarget": "~/SillyTavern/data/default-user/settings.json",
-      "configFormat": "json",
+      "configTarget": "~/Fooocus",
+      "configFormat": "dir",
       "configWritable": false,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
@@ -174,14 +176,15 @@
           "note": "省预算",
           "priceHint": "低"
         }
-      ]
+      ],
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file)."
     },
     "google": {
       "label": "Google AI Studio",
       "authType": "api-key",
       "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
-      "configTarget": "~/SillyTavern/data/default-user/settings.json",
-      "configFormat": "json",
+      "configTarget": "~/Fooocus",
+      "configFormat": "dir",
       "configWritable": false,
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
@@ -197,13 +200,14 @@
           "note": "更聪明",
           "priceHint": "中等"
         }
-      ]
+      ],
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file)."
     },
     "claude-oauth": {
       "label": "Claude 订阅复用（OAuth 登录，zero-key 路线）",
       "authType": "oauth",
-      "configTarget": "~/SillyTavern/data/default-user/settings.json",
-      "configFormat": "json",
+      "configTarget": "~/Fooocus",
+      "configFormat": "dir",
       "configWritable": false,
       "getKeyUrl": "https://claude.ai/",
       "recommendedModels": [
@@ -214,13 +218,14 @@
           "priceHint": "已含订阅"
         }
       ],
-      "notes": "keyFormat 不适用（OAuth token 由 openclaw 自管）；C3 屏改为「登录」按钮而非粘贴 key。"
+      "notes": "keyFormat 不适用（OAuth token 由 openclaw 自管）；C3 屏改为「登录」按钮而非粘贴 key。",
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file)."
     },
     "ollama": {
       "label": "本地 Ollama（完全免费离线，需 8GB+ 内存）",
       "authType": "local",
-      "configTarget": "~/SillyTavern/data/default-user/settings.json",
-      "configFormat": "json",
+      "configTarget": "~/Fooocus",
+      "configFormat": "dir",
       "configWritable": false,
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
@@ -237,7 +242,8 @@
           "priceHint": "免费"
         }
       ],
-      "notes": "本地 baseUrl http://127.0.0.1:11434；无 key（authType=local），C3 屏提示模型下载耗时。"
+      "notes": "本地 baseUrl http://127.0.0.1:11434；无 key（authType=local），C3 屏提示模型下载耗时。",
+      "note": "Config target is a directory; AiBOX does not auto-write this app (the key may live in OS keyring or a separate secrets file)."
     }
   },
   "dataPaths": [

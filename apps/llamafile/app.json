@@ -182,7 +182,7 @@
       "authType": "local",
       "configTarget": "~/.config/llamafile/llamafile.json5",
       "configFormat": "json5",
-      "configWritable": true,
+      "configWritable": false,
       "recommendedModels": [
         {
           "id": "Qwen3.5-0.8B-Q8_0",

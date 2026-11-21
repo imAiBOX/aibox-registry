@@ -525,8 +525,8 @@
       "label": "OpenRouter（推荐，一个 key 通吃所有模型；联盟位请明示返佣）",
       "authType": "api-key",
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
-      "configTarget": "~/.config/openclaw/openclaw.json5",
-      "configFormat": "json5",
+      "configTarget": "~/.openclaw/openclaw.json",
+      "configFormat": "json",
       "configWritable": true,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
@@ -549,14 +549,15 @@
           "priceHint": "低"
         }
       ],
-      "notes": "模型清单与单价以 OpenRouter 官方实时报价为准。"
+      "notes": "模型清单与单价以 OpenRouter 官方实时报价为准。",
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
       "authType": "api-key",
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
-      "configTarget": "~/.config/openclaw/openclaw.json5",
-      "configFormat": "json5",
+      "configTarget": "~/.openclaw/openclaw.json",
+      "configFormat": "json",
       "configWritable": true,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
@@ -572,14 +573,15 @@
           "note": "快而便宜",
           "priceHint": "低"
         }
-      ]
+      ],
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
     },
     "openai": {
       "label": "OpenAI 官方 API",
       "authType": "api-key",
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
-      "configTarget": "~/.config/openclaw/openclaw.json5",
-      "configFormat": "json5",
+      "configTarget": "~/.openclaw/openclaw.json",
+      "configFormat": "json",
       "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
@@ -595,14 +597,15 @@
           "note": "省预算",
           "priceHint": "低"
         }
-      ]
+      ],
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
     },
     "google": {
       "label": "Google AI Studio",
       "authType": "api-key",
       "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
-      "configTarget": "~/.config/openclaw/openclaw.json5",
-      "configFormat": "json5",
+      "configTarget": "~/.openclaw/openclaw.json",
+      "configFormat": "json",
       "configWritable": true,
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
@@ -618,14 +621,15 @@
           "note": "更聪明",
           "priceHint": "中等"
         }
-      ]
+      ],
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
     },
     "claude-oauth": {
       "label": "Claude 订阅复用（OAuth 登录，zero-key 路线）",
       "authType": "oauth",
       "configTarget": "~/.config/openclaw/openclaw.json5",
       "configFormat": "json5",
-      "configWritable": true,
+      "configWritable": false,
       "getKeyUrl": "https://claude.ai/",
       "recommendedModels": [
         {
@@ -640,8 +644,8 @@
     "ollama": {
       "label": "本地 Ollama（完全免费离线，需 8GB+ 内存）",
       "authType": "local",
-      "configTarget": "~/.config/openclaw/openclaw.json5",
-      "configFormat": "json5",
+      "configTarget": "~/.openclaw/openclaw.json",
+      "configFormat": "json",
       "configWritable": true,
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
@@ -658,7 +662,8 @@
           "priceHint": "免费"
         }
       ],
-      "notes": "本地 baseUrl http://127.0.0.1:11434；无 key（authType=local），C3 屏提示模型下载耗时。"
+      "notes": "本地 baseUrl http://127.0.0.1:11434；无 key（authType=local），C3 屏提示模型下载耗时。",
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
     }
   },
   "deepLinks": {

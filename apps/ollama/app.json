@@ -166,7 +166,7 @@
       "authType": "local",
       "configTarget": "~/.config/ollama/ollama.json5",
       "configFormat": "json5",
-      "configWritable": true,
+      "configWritable": false,
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
         {
