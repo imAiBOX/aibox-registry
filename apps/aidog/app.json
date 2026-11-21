@@ -33,25 +33,25 @@
         "windows"
       ],
       "arch": "any",
-      "sha256": "c2261a344da28bc3c9334a18720710c5a7e5329a5d020133122b742ca457810c",
-      "sizeBytes": 3778703,
-      "hashSource": "GitHub tag source archive measured locally (2026-11-20); source archives are NOT byte-stable across GitHub regenerations — probe re-measures, a sha drift means re-measure, not tampering",
+      "sha256": "1c9aa62d3c0f3334b782180d129083ff8f5d7a68acb3f5803778a6f2821076be",
+      "sizeBytes": 3780828,
+      "hashSource": "GitHub source archive pinned to commit 7f1864f4da5689484f8ea647e74b4b508ebe7984. The decompressed tar SHA-256 is required for installation.",
       "hashMode": "content",
-      "contentSha256": "d76b6551b2d8b8fb0f8940f2f58360897ef61f85ed8f5765fe5999e5aa0a6297",
+      "contentSha256": "40c24ba7e2781589a8942f37dc5d1e5a037956794341c94955bfa9a18c026e80",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.92.tar.gz",
+          "url": "https://github.com/AiDog-im/AiDog/archive/7f1864f4da5689484f8ea647e74b4b508ebe7984.tar.gz",
           "region": "global",
           "operator": "GitHub",
-          "note": "Version-pinned tag source archive (docs: git is optional, archives can run). Daily probe re-downloads and re-hashes (package < 5 MB)."
+          "note": "Official source archive pinned to a Git commit."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.92.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/7f1864f4da5689484f8ea647e74b4b508ebe7984.tar.gz",
           "region": "cn",
           "operator": "gh-proxy.com",
-          "note": "Community GitHub accelerator (2026-11-12 measured 200, same size 3695753, sha256 identical to direct). ghfast.top answers HEAD without Content-Length for archive URLs → not used here."
+          "note": "Community accelerator for the same commit-pinned archive."
         }
       ],
       "install": {
@@ -60,7 +60,7 @@
           "wsl",
           "bash",
           "-lc",
-          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/d76b6551b2d8b8fb0f8940f2f58360897ef61f85ed8f5765fe5999e5aa0a6297.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.92/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; W=$(wslpath \"$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\\r')\"); S=$(mktemp -d); tar -xzf \"$W/.aibox/cache/downloads/40c24ba7e2781589a8942f37dc5d1e5a037956794341c94955bfa9a18c026e80.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-7f1864f4da5689484f8ea647e74b4b508ebe7984/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Windows route = WSL2 (official reference platform). The script locates the AiBOX-cached source archive from inside WSL, unpacks it to ~/aidog (official Quick Start path) and runs the official one-command installer `deploy/install.sh` (provision + boot + verify, idempotent). Prerequisites inside WSL: Python 3.10+, tmux (manual, admin), a free port 19167. Re-running merges the new version over an existing checkout.",
         "probe": {
@@ -78,25 +78,25 @@
         "macos"
       ],
       "arch": "any",
-      "sha256": "c2261a344da28bc3c9334a18720710c5a7e5329a5d020133122b742ca457810c",
-      "sizeBytes": 3778703,
-      "hashSource": "GitHub tag source archive measured locally (2026-11-20); source archives are NOT byte-stable across GitHub regenerations — probe re-measures, a sha drift means re-measure, not tampering",
+      "sha256": "1c9aa62d3c0f3334b782180d129083ff8f5d7a68acb3f5803778a6f2821076be",
+      "sizeBytes": 3780828,
+      "hashSource": "GitHub source archive pinned to commit 7f1864f4da5689484f8ea647e74b4b508ebe7984. The decompressed tar SHA-256 is required for installation.",
       "hashMode": "content",
-      "contentSha256": "d76b6551b2d8b8fb0f8940f2f58360897ef61f85ed8f5765fe5999e5aa0a6297",
+      "contentSha256": "40c24ba7e2781589a8942f37dc5d1e5a037956794341c94955bfa9a18c026e80",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.92.tar.gz",
+          "url": "https://github.com/AiDog-im/AiDog/archive/7f1864f4da5689484f8ea647e74b4b508ebe7984.tar.gz",
           "region": "global",
           "operator": "GitHub",
-          "note": "Version-pinned tag source archive (same artifact as the Windows package; shared package-level hash)."
+          "note": "Official source archive pinned to a Git commit."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/refs/tags/v0.5.92.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/AiDog-im/AiDog/archive/7f1864f4da5689484f8ea647e74b4b508ebe7984.tar.gz",
           "region": "cn",
           "operator": "gh-proxy.com",
-          "note": "Community GitHub accelerator (2026-11-12 measured 200, same size and sha256 as direct)."
+          "note": "Community accelerator for the same commit-pinned archive."
         }
       ],
       "install": {
@@ -104,7 +104,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/d76b6551b2d8b8fb0f8940f2f58360897ef61f85ed8f5765fe5999e5aa0a6297.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-0.5.92/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
+          "set -e; S=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/40c24ba7e2781589a8942f37dc5d1e5a037956794341c94955bfa9a18c026e80.gz\" -C \"$S\"; mkdir -p \"$HOME/aidog\"; cp -a \"$S\"/AiDog-7f1864f4da5689484f8ea647e74b4b508ebe7984/. \"$HOME/aidog/\"; rm -rf \"$S\"; bash \"$HOME/aidog/deploy/install.sh\""
         ],
         "notes": "Unpack the cached, hash-verified source archive to ~/aidog and run the official installer (provision + boot + verify; idempotent, safe to re-run). Needs Python 3.10+ and tmux (brew install tmux) — installed manually beforehand, AiBOX never escalates. Upstream marks macOS as expected-but-untested.",
         "probe": {
@@ -125,12 +125,12 @@
   },
   "routePlans": {
     "direct-install": {
-      "label": "Official source install (GitHub tag archive + deploy/install.sh)",
+      "label": "Official source install (commit-pinned archive)",
       "steps": [
         "aidog-win",
         "aidog-mac"
       ],
-      "note": "Both platform steps share one version-pinned source archive; steps are filtered by machine. Windows runs inside WSL2."
+      "note": "Both platforms share the same commit-pinned archive. Windows runs inside WSL2."
     },
     "proxy-install": {
       "label": "China-accelerated install (gh-proxy channel)",
@@ -153,7 +153,7 @@
         "prefix": "https://gh-proxy.com/",
         "status": "active",
         "checkedAt": "2026-11-12T12:30:00Z",
-        "note": "2026-11-12 measured 200 with identical size (3695753) and identical sha256 for this app's archive; this app's CN channel uses it."
+        "note": "Serves the same verified commit-pinned archive as the official channel."
       },
       {
         "prefix": "https://ghfast.top/",
