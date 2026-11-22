@@ -282,9 +282,9 @@
       "authType": "api-key",
       "keyFormat": "sk-or-v1-...",
       "getKeyUrl": "https://openrouter.ai/keys",
-      "configTarget": "~/.pi/config.json",
+      "configTarget": "~/.pi/agent/models.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "anthropic/claude-sonnet-4",
@@ -292,7 +292,16 @@
           "note": "聪明均衡，日常首选",
           "priceHint": "中等"
         }
-      ]
+      ],
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "providers.openrouter.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "anthropic": {
       "label": "Anthropic API",
@@ -300,9 +309,9 @@
       "authType": "api-key",
       "keyFormat": "sk-ant-...",
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
-      "configTarget": "~/.pi/config.json",
+      "configTarget": "~/.pi/agent/models.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "claude-sonnet-4",
@@ -310,16 +319,25 @@
           "note": "编码主力",
           "priceHint": "中等"
         }
-      ]
+      ],
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "providers.anthropic.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "ollama": {
       "label": "Ollama (local, free)",
       "note": "Run models on your own machine — zero API cost.",
       "authType": "local",
       "getKeyUrl": "https://ollama.com/download",
-      "configTarget": "~/.pi/config.json",
+      "configTarget": "~/.pi/agent/models.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "qwen3-coder:30b",
@@ -327,7 +345,17 @@
           "note": "本地编码推荐（需 24GB+ 内存）",
           "priceHint": "免费"
         }
-      ]
+      ],
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "providers.ollama.apiKey",
+            "value": "<apiKey>",
+            "optional": true
+          }
+        ]
+      }
     }
   },
   "deepLinks": {

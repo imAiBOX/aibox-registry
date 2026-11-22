@@ -177,7 +177,7 @@
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -199,7 +199,16 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 为 AiBOX CONFIG 写入位：上游源码 src/main/store-node.ts 实证配置存于 userData/config.json，目录名按 electron-builder productName=Chatbox 推断，macOS 对应 ~/Library/Application Support/Chatbox/config.json。"
+      "notes": "configTarget 为 AiBOX CONFIG 写入位：上游源码 src/main/store-node.ts 实证配置存于 userData/config.json，目录名按 electron-builder productName=Chatbox 推断，macOS 对应 ~/Library/Application Support/Chatbox/config.json。",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "settings.providers.openrouter.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
@@ -207,7 +216,7 @@
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -223,7 +232,16 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter。"
+      "notes": "configTarget 同 openrouter。",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "settings.providers.claude.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "openai": {
       "label": "OpenAI 官方 API",
@@ -231,7 +249,7 @@
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -247,7 +265,16 @@
           "priceHint": "低"
         }
       ],
-      "notes": "configTarget 同 openrouter。"
+      "notes": "configTarget 同 openrouter。",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "settings.providers.openai.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "google": {
       "label": "Google AI Studio",
@@ -255,7 +282,7 @@
       "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
       "configTarget": "~/AppData/Roaming/Chatbox/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
         {
@@ -271,7 +298,16 @@
           "priceHint": "中等"
         }
       ],
-      "notes": "configTarget 同 openrouter。上游另支持本地 Ollama（无 key，authType=local）。"
+      "notes": "configTarget 同 openrouter。上游另支持本地 Ollama（无 key，authType=local）。",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "settings.providers.gemini.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     }
   },
   "deepLinks": {

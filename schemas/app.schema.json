@@ -241,10 +241,20 @@
         },
         {
           "if": {
-            "properties": { "hashMode": { "const": "content" } },
-            "required": ["hashMode"]
+            "properties": {
+              "hashMode": {
+                "const": "content"
+              }
+            },
+            "required": [
+              "hashMode"
+            ]
           },
-          "then": { "required": ["contentSha256"] }
+          "then": {
+            "required": [
+              "contentSha256"
+            ]
+          }
         }
       ]
     },
@@ -310,6 +320,92 @@
         },
         "notes": {
           "type": "string"
+        },
+        "configWritable": {
+          "type": "boolean",
+          "description": "Whether AiBOX may write this provider's API key into the app config automatically. Only true when the write layout was verified against upstream source."
+        },
+        "configFormat": {
+          "type": "string",
+          "enum": [
+            "json",
+            "json5",
+            "yaml",
+            "yml",
+            "toml",
+            "dir",
+            "db",
+            "none",
+            "other",
+            "unknown"
+          ],
+          "description": "Real config format of the target."
+        },
+        "configWrite": {
+          "type": "object",
+          "description": "Verified write template (how AiBOX writes the key into this app's real config).",
+          "required": [
+            "format",
+            "fields"
+          ],
+          "properties": {
+            "format": {
+              "type": "string",
+              "enum": [
+                "json",
+                "json5",
+                "yaml",
+                "toml"
+              ]
+            },
+            "file": {
+              "type": "string",
+              "description": "Config file path override (absolute path; ~ expanded)."
+            },
+            "fields": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "path"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Dotted path: JSON/YAML nested path, TOML table.key."
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "Value with optional <apiKey>/<model>/<baseUrl>/<provider> placeholders."
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "scalar",
+                      "list",
+                      "arrayItem"
+                    ],
+                    "default": "scalar"
+                  },
+                  "match": {
+                    "type": "object",
+                    "description": "arrayItem: condition that selects the array element."
+                  },
+                  "set": {
+                    "type": "object",
+                    "description": "arrayItem: fields written into the matched element."
+                  },
+                  "optional": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Skip the field when the placeholder value is missing."
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "allOf": [

@@ -128,7 +128,7 @@
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/AppData/Local/MoneyPrinterTurbo/config.toml",
       "configFormat": "toml",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -144,7 +144,20 @@
           "priceHint": "low"
         }
       ],
-      "notes": "Continue keeps all configuration in ~/.continue/config.yaml (macOS/Linux) or %USERPROFILE%\\.continue\\config.yaml (Windows) — official docs, measured 2026-11-14. Continue's own best practice is to reference API keys through environment variables instead of hardcoding them in the YAML; AiBOX never writes keys to disk."
+      "notes": "Continue keeps all configuration in ~/.continue/config.yaml (macOS/Linux) or %USERPROFILE%\\.continue\\config.yaml (Windows) — official docs, measured 2026-11-14. Continue's own best practice is to reference API keys through environment variables instead of hardcoding them in the YAML; AiBOX never writes keys to disk.",
+      "configWrite": {
+        "format": "toml",
+        "fields": [
+          {
+            "path": "app.llm_provider",
+            "value": "anthropic"
+          },
+          {
+            "path": "app.anthropic_api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "openai": {
       "label": "OpenAI official API",
@@ -152,7 +165,7 @@
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/AppData/Local/MoneyPrinterTurbo/config.toml",
       "configFormat": "toml",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -162,7 +175,20 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "Same config file as anthropic (local config.yaml, env-var reference recommended)."
+      "notes": "Same config file as anthropic (local config.yaml, env-var reference recommended).",
+      "configWrite": {
+        "format": "toml",
+        "fields": [
+          {
+            "path": "app.llm_provider",
+            "value": "openai"
+          },
+          {
+            "path": "app.openai_api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "openrouter": {
       "label": "OpenRouter (one key, every model)",
@@ -170,7 +196,7 @@
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/AppData/Local/MoneyPrinterTurbo/config.toml",
       "configFormat": "toml",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -186,7 +212,20 @@
           "priceHint": "low"
         }
       ],
-      "notes": "Same config file as anthropic."
+      "notes": "Same config file as anthropic.",
+      "configWrite": {
+        "format": "toml",
+        "fields": [
+          {
+            "path": "app.llm_provider",
+            "value": "openrouter"
+          },
+          {
+            "path": "app.openrouter_api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "ollama": {
       "label": "Local Ollama models (free, offline, no key)",

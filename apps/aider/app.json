@@ -146,7 +146,7 @@
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/.aider.conf.yml",
       "configFormat": "yml",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -156,7 +156,16 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "Aider reads OPENAI_API_KEY from the environment (official \"Connecting to LLMs\" docs, measured 2026-11-14); options can also be set in ~/.aider.conf.yml (searched in git root, cwd or home — official config docs). AiBOX never writes keys to disk."
+      "notes": "Aider reads OPENAI_API_KEY from the environment (official \"Connecting to LLMs\" docs, measured 2026-11-14); options can also be set in ~/.aider.conf.yml (searched in git root, cwd or home — official config docs). AiBOX never writes keys to disk.",
+      "configWrite": {
+        "format": "yaml",
+        "fields": [
+          {
+            "path": "openai-api-key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "anthropic": {
       "label": "Anthropic official API (Claude)",
@@ -164,7 +173,7 @@
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/.aider.conf.yml",
       "configFormat": "yml",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -174,7 +183,16 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "ANTHROPIC_API_KEY via environment variable; same config file as openai."
+      "notes": "ANTHROPIC_API_KEY via environment variable; same config file as openai.",
+      "configWrite": {
+        "format": "yaml",
+        "fields": [
+          {
+            "path": "anthropic-api-key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "openrouter": {
       "label": "OpenRouter (one key, every model)",
@@ -182,7 +200,7 @@
       "keyFormat": "^sk-or-v1-[A-Za-z0-9]{64}$",
       "configTarget": "~/.aider.conf.yml",
       "configFormat": "yml",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://openrouter.ai/keys",
       "recommendedModels": [
         {
@@ -198,7 +216,17 @@
           "priceHint": "low"
         }
       ],
-      "notes": "OPENROUTER_API_KEY via environment variable; aider documents OpenRouter among its supported LLMs."
+      "notes": "OPENROUTER_API_KEY via environment variable; aider documents OpenRouter among its supported LLMs.",
+      "configWrite": {
+        "format": "yaml",
+        "fields": [
+          {
+            "path": "api-key",
+            "kind": "list",
+            "value": "<provider>=<apiKey>"
+          }
+        ]
+      }
     },
     "ollama": {
       "label": "Local Ollama models (free, offline, no key)",

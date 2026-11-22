@@ -229,7 +229,7 @@
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/AppData/Roaming/CowAgent/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -245,7 +245,16 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "Configured in the web console (Settings → Models) — no manual file editing. configTarget is the desktop client's Electron userData path. The one-line service route keeps config.json in its install folder instead."
+      "notes": "Configured in the web console (Settings → Models) — no manual file editing. configTarget is the desktop client's Electron userData path. The one-line service route keeps config.json in its install folder instead.",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "open_ai_api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "anthropic": {
       "label": "Anthropic (Claude)",
@@ -253,7 +262,7 @@
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/AppData/Roaming/CowAgent/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -269,7 +278,16 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "Same console-configured path as openai; model ids follow the official provider table in the README."
+      "notes": "Same console-configured path as openai; model ids follow the official provider table in the README.",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "claude_api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "google": {
       "label": "Google (Gemini)",
@@ -277,7 +295,7 @@
       "keyFormat": "^AIza[0-9A-Za-z_-]{35}$",
       "configTarget": "~/AppData/Roaming/CowAgent/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://aistudio.google.com/apikey",
       "recommendedModels": [
         {
@@ -287,7 +305,16 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "Same console-configured path; vision and chat routes can be split per feature in the console."
+      "notes": "Same console-configured path; vision and chat routes can be split per feature in the console.",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "gemini_api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "custom": {
       "label": "Custom / local OpenAI-compatible endpoint",

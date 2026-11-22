@@ -233,7 +233,7 @@
       "keyFormat": "^sk-(proj-)?[A-Za-z0-9_-]{20,}$",
       "configTarget": "~/.nanobot/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://platform.openai.com/api-keys",
       "recommendedModels": [
         {
@@ -243,7 +243,16 @@
           "priceHint": "higher"
         }
       ],
-      "notes": "Configure in WebUI Settings → Models (writes ~/.nanobot/config.json, docs/configuration.md). Any OpenAI-compatible endpoint works via the custom provider."
+      "notes": "Configure in WebUI Settings → Models (writes ~/.nanobot/config.json, docs/configuration.md). Any OpenAI-compatible endpoint works via the custom provider.",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "providers.openai.api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "anthropic": {
       "label": "Anthropic (Claude)",
@@ -251,7 +260,7 @@
       "keyFormat": "^sk-ant-[A-Za-z0-9_-]{40,}$",
       "configTarget": "~/.nanobot/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "recommendedModels": [
         {
@@ -261,14 +270,23 @@
           "priceHint": "medium"
         }
       ],
-      "notes": "nanobot reads ANTHROPIC_API_KEY or stores the preset in ~/.nanobot/config.json (docs reference ANTHROPIC_API_KEY for deployments)."
+      "notes": "nanobot reads ANTHROPIC_API_KEY or stores the preset in ~/.nanobot/config.json (docs reference ANTHROPIC_API_KEY for deployments).",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "providers.anthropic.api_key",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "ollama": {
       "label": "Local Ollama models (free, offline, no key)",
       "authType": "local",
       "configTarget": "~/.nanobot/config.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "getKeyUrl": "https://ollama.com/download",
       "recommendedModels": [
         {
@@ -284,7 +302,17 @@
           "priceHint": "free"
         }
       ],
-      "notes": "Docs ship a dedicated Ollama provider recipe (docs/providers.md#ollama) plus any OpenAI-compatible local server (vLLM etc.)."
+      "notes": "Docs ship a dedicated Ollama provider recipe (docs/providers.md#ollama) plus any OpenAI-compatible local server (vLLM etc.).",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "providers.ollama.api_key",
+            "value": "<apiKey>",
+            "optional": true
+          }
+        ]
+      }
     }
   },
   "deepLinks": {

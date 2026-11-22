@@ -550,7 +550,26 @@
         }
       ],
       "notes": "模型清单与单价以 OpenRouter 官方实时报价为准。",
-      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "models.providers.openrouter.apiKey",
+            "value": "<apiKey>"
+          },
+          {
+            "path": "models.providers.openrouter.baseUrl",
+            "value": "<baseUrl>",
+            "optional": true
+          },
+          {
+            "path": "models.providers.openrouter.model",
+            "value": "<model>",
+            "optional": true
+          }
+        ]
+      }
     },
     "anthropic": {
       "label": "Anthropic 官方 API（Claude）",
@@ -574,7 +593,26 @@
           "priceHint": "低"
         }
       ],
-      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "models.providers.anthropic.apiKey",
+            "value": "<apiKey>"
+          },
+          {
+            "path": "models.providers.anthropic.baseUrl",
+            "value": "<baseUrl>",
+            "optional": true
+          },
+          {
+            "path": "models.providers.anthropic.model",
+            "value": "<model>",
+            "optional": true
+          }
+        ]
+      }
     },
     "openai": {
       "label": "OpenAI 官方 API",
@@ -598,7 +636,26 @@
           "priceHint": "低"
         }
       ],
-      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "models.providers.openai.apiKey",
+            "value": "<apiKey>"
+          },
+          {
+            "path": "models.providers.openai.baseUrl",
+            "value": "<baseUrl>",
+            "optional": true
+          },
+          {
+            "path": "models.providers.openai.model",
+            "value": "<model>",
+            "optional": true
+          }
+        ]
+      }
     },
     "google": {
       "label": "Google AI Studio",
@@ -622,7 +679,26 @@
           "priceHint": "中等"
         }
       ],
-      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "models.providers.google.apiKey",
+            "value": "<apiKey>"
+          },
+          {
+            "path": "models.providers.google.baseUrl",
+            "value": "<baseUrl>",
+            "optional": true
+          },
+          {
+            "path": "models.providers.google.model",
+            "value": "<model>",
+            "optional": true
+          }
+        ]
+      }
     },
     "claude-oauth": {
       "label": "Claude 订阅复用（OAuth 登录，zero-key 路线）",
@@ -663,7 +739,22 @@
         }
       ],
       "notes": "本地 baseUrl http://127.0.0.1:11434；无 key（authType=local），C3 屏提示模型下载耗时。",
-      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey"
+      "hashSource": "Upstream config path (src/config/paths.ts:211-245); key path models.providers.<id>.apiKey",
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "models.providers.ollama.baseUrl",
+            "value": "<baseUrl>",
+            "optional": true
+          },
+          {
+            "path": "models.providers.ollama.model",
+            "value": "<model>",
+            "optional": true
+          }
+        ]
+      }
     }
   },
   "deepLinks": {

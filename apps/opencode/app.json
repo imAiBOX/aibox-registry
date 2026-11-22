@@ -274,7 +274,7 @@
       "getKeyUrl": "https://openrouter.ai/keys",
       "configTarget": "~/.config/opencode/opencode.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "anthropic/claude-sonnet-4",
@@ -282,7 +282,16 @@
           "note": "聪明均衡，日常首选",
           "priceHint": "中等"
         }
-      ]
+      ],
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "provider.openrouter.options.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "anthropic": {
       "label": "Anthropic API",
@@ -292,7 +301,7 @@
       "getKeyUrl": "https://console.anthropic.com/settings/keys",
       "configTarget": "~/.config/opencode/opencode.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "claude-sonnet-4",
@@ -300,7 +309,16 @@
           "note": "编码主力",
           "priceHint": "中等"
         }
-      ]
+      ],
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "provider.anthropic.options.apiKey",
+            "value": "<apiKey>"
+          }
+        ]
+      }
     },
     "ollama": {
       "label": "Ollama (local, free)",
@@ -309,7 +327,7 @@
       "getKeyUrl": "https://ollama.com/download",
       "configTarget": "~/.config/opencode/opencode.json",
       "configFormat": "json",
-      "configWritable": false,
+      "configWritable": true,
       "recommendedModels": [
         {
           "id": "qwen3-coder:30b",
@@ -317,7 +335,17 @@
           "note": "本地编码推荐（需 24GB+ 内存）",
           "priceHint": "免费"
         }
-      ]
+      ],
+      "configWrite": {
+        "format": "json",
+        "fields": [
+          {
+            "path": "provider.ollama.options.apiKey",
+            "value": "<apiKey>",
+            "optional": true
+          }
+        ]
+      }
     }
   },
   "deepLinks": {
