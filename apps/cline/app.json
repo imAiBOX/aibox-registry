@@ -1,17 +1,17 @@
 {
   "id": "cline",
   "name": "Cline",
-  "version": "4.1.26",
+  "version": "4.1.27",
   "description": {
     "zh-CN": "开源的 IDE 编码代理：在 VS Code 里改文件、跑命令、开浏览器，每一步都要你点头；支持自带 Key、Cline 云端模型或本地开源模型。",
     "en": "Open-source coding agent for your IDE — edits files, runs commands and browses the web in VS Code, with human approval at every step; bring your own API key, use Cline's cloud models, or point it at local open-weight models."
   },
-  "updatedAt": "2026-11-12T14:30:00Z",
+  "updatedAt": "2026-11-22T16:58:19Z",
   "upstream": {
     "github": [
       {
         "repo": "cline/cline",
-        "tag": "v4.1.26"
+        "tag": "v4.1.27"
       }
     ]
   },
@@ -28,32 +28,32 @@
       "id": "cline-win",
       "name": "Cline VS Code extension (VSIX)",
       "kind": "app",
-      "version": "4.1.26",
+      "version": "4.1.27",
       "platforms": [
         "windows"
       ],
       "arch": "any",
-      "sha256": "d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d",
-      "sizeBytes": 13908315,
-      "hashSource": "GitHub API releases/latest asset digest + local full download sha256 (identical, 2026-11-12 measured)",
+      "sha256": "62437813fc43e09b3c532e0bd50d924ad8625153db05b74d71a73ce87fe3754d",
+      "sizeBytes": 14420212,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-22 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "url": "https://github.com/cline/cline/releases/download/v4.1.27/cline-4.1.27.vsix",
           "region": "global",
           "operator": "cline",
           "note": "GitHub Releases direct (daily CI HEAD). Official release asset published with each version."
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "url": "https://ghfast.top/https://github.com/cline/cline/releases/download/v4.1.27/cline-4.1.27.vsix",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "url": "https://gh-proxy.com/https://github.com/cline/cline/releases/download/v4.1.27/cline-4.1.27.vsix",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
@@ -67,7 +67,7 @@
           "-ExecutionPolicy",
           "Bypass",
           "-Command",
-          "code --install-extension \"$env:USERPROFILE\\.aibox\\cache\\downloads\\cline-4.1.26.vsix\" --force"
+          "code --install-extension \"$env:USERPROFILE\\.aibox\\cache\\downloads\\cline-4.1.27.vsix\" --force"
         ],
         "notes": "Installs the hash-verified VSIX through VS Code's own CLI (`code --install-extension`), the same mechanism the Marketplace uses — per-user, zero admin. Prerequisites: VS Code installed and `code` on PATH (Windows default).",
         "probe": {
@@ -80,32 +80,32 @@
       "id": "cline-mac",
       "name": "Cline VS Code extension (VSIX)",
       "kind": "app",
-      "version": "4.1.26",
+      "version": "4.1.27",
       "platforms": [
         "macos"
       ],
       "arch": "any",
-      "sha256": "d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d",
-      "sizeBytes": 13908315,
-      "hashSource": "GitHub API releases/latest asset digest + local full download sha256 (identical, 2026-11-12 measured)",
+      "sha256": "62437813fc43e09b3c532e0bd50d924ad8625153db05b74d71a73ce87fe3754d",
+      "sizeBytes": 14420212,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-22 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "url": "https://github.com/cline/cline/releases/download/v4.1.27/cline-4.1.27.vsix",
           "region": "global",
           "operator": "cline",
           "note": "GitHub Releases direct (daily CI HEAD)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "url": "https://ghfast.top/https://github.com/cline/cline/releases/download/v4.1.27/cline-4.1.27.vsix",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/cline/cline/releases/download/v4.1.26/cline-4.1.26.vsix",
+          "url": "https://gh-proxy.com/https://github.com/cline/cline/releases/download/v4.1.27/cline-4.1.27.vsix",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub acceleration gateway (2026-11-12 measured 200 / same size)"
@@ -116,7 +116,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/d8ea4c3505052c48e7c7a5558e7213a53827b6ba1da7e56513c87d896df51c4d.vsix\" --force"
+          "set -e; code --install-extension \"$HOME/.aibox/cache/downloads/62437813fc43e09b3c532e0bd50d924ad8625153db05b74d71a73ce87fe3754d.vsix\" --force"
         ],
         "notes": "Same hash-verified VSIX via VS Code CLI. macOS prerequisite: run VS Code's Command Palette → \"Shell Command: Install 'code' command in PATH\" once, otherwise the `code` binary is not found. Zero admin.",
         "probe": {
