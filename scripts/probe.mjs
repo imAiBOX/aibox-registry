@@ -23,6 +23,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TIMEOUT_MS = 10_000;
+/** 网关探活超时（国内加速网关冷启动慢；境外 runner 探活需更宽） */
+const GATEWAY_TIMEOUT_MS = 30_000;
 const RETRIES = 3;
 const SMALL_FILE_BYTES = 5 * 1024 * 1024;
 const GH_TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '';
@@ -40,9 +42,9 @@ function addDrift(kind, title, body, extra = {}) {
 // B-class = same-version content/liveness problem (stays an issue, never auto-fixed)
 const B = (app) => ({ driftClass: 'B', ...(app ? { app } : {}) });
 
-async function timedFetch(url, opts = {}) {
+async function timedFetch(url, opts = {}, timeoutMs = TIMEOUT_MS) {
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
     return await fetch(url, { ...opts, signal: ctrl.signal, redirect: 'follow' });
   } finally {
@@ -69,8 +71,8 @@ async function withRetry(fn) {
   throw lastErr;
 }
 
-async function head(url) {
-  const res = await withRetry(() => timedFetch(url, { method: 'HEAD' }));
+async function head(url, timeoutMs = TIMEOUT_MS) {
+  const res = await withRetry(() => timedFetch(url, { method: 'HEAD' }, timeoutMs));
   if (!res.ok) throw Object.assign(new Error(`HEAD ${res.status}`), { status: res.status });
   return { status: res.status, contentLength: res.headers.get('content-length') };
 }
@@ -259,12 +261,22 @@ for (const { app } of apps) {
   }
   if (gatewayTarget) break;
 }
+// 同一网关通常被多个 app 声明 → **按 prefix 去重，只探一次**。
+// （不去重：N 个 app → N 条同名 drift → N 个重复 issue，实测一次跑出 8 个）
+const seenGateways = new Map();
 for (const { dir, app } of apps) {
   for (const gw of app.netConfig?.proxyGateways || []) {
+    if (!seenGateways.has(gw.prefix)) seenGateways.set(gw.prefix, gw);
+  }
+}
+for (const gw of seenGateways.values()) {
+  {
     const check = { type: 'proxy-gateway', prefix: gw.prefix, target: gatewayTarget, checkedAt: now() };
     try {
       if (!gatewayTarget) throw new Error('no GitHub direct URL available as probe target');
-      const h = await head(gw.prefix + gatewayTarget);
+      // 网关探活用更宽的超时：国内加速网关从境外 runner 冷启动常 >10s，
+      // 超时会被误判成「网关挂了」（实测 2026-11-22 误报 8 次）
+      const h = await head(gw.prefix + gatewayTarget, GATEWAY_TIMEOUT_MS);
       check.status = h.status === 200 && h.contentLength ? 'active' : 'degraded';
       if (check.status !== 'active') {
         addDrift('gateway', `netConfig gateway ${gw.prefix} returned HTTP ${h.status}`,
