@@ -110,7 +110,8 @@ for (const { dir, app } of apps) {
         const policy = digestPolicy(pkg);
         check.hashMode = policy.mode;
         phase = 'HEAD';
-        const h = await head(ch.url);
+        // proxy 通道走国内加速网关（冷启动慢）→ 用更宽的超时，避免误判「通道挂了」
+        const h = await head(ch.url, ch.type === 'proxy' ? GATEWAY_TIMEOUT_MS : TIMEOUT_MS);
         check.status = h.status;
         if (wantDownload) {
           phase = 'GET/digest';
