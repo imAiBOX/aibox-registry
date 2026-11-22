@@ -814,6 +814,28 @@
               "type": "boolean"
             }
           }
+        },
+        "restore": {
+          "type": "object",
+          "description": "Data restore capability. Absent = the app does not offer restore. When present, the client only restores backups it created itself on this machine, within maxAgeHours.",
+          "required": [
+            "supported"
+          ],
+          "properties": {
+            "supported": {
+              "type": "boolean",
+              "description": "True = the client may offer data restore for this app."
+            },
+            "maxAgeHours": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 168,
+              "description": "Maximum age (hours) of a backup that may still be restored. Defaults to 24."
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
         }
       }
     },

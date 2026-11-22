@@ -792,6 +792,11 @@
     "risk": {
       "onUninstall": "配置与对话历史将被删除，建议先备份",
       "backupFirst": true
+    },
+    "restore": {
+      "supported": true,
+      "maxAgeHours": 24,
+      "notes": "只允许还原本机 24 小时内、由 AiBOX 自己为该应用创建的备份；不开放跨设备还原。"
     }
   },
   "locales": {
