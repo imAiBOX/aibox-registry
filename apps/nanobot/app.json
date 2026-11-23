@@ -335,11 +335,7 @@
         "Delete the install + data directory ~/.nanobot (venv, config.json, session history)",
         "Optional: clear the pip download cache if you need the disk space"
       ],
-      "residualPaths": [
-        "~/AppData/Local/pip/cache",
-        "~/.cache/pip",
-        "~/Library/Caches/pip"
-      ],
+      "residualPaths": [],
       "notes": "Everything the product owns lives under ~/.nanobot; only generic pip caches can remain outside it."
     },
     "dataPaths": [

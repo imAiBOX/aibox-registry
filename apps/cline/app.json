@@ -285,10 +285,7 @@
         "Delete only the extension's own folder under ~/.vscode/extensions (name starts with saoudrizwan.claude-dev-) — other extensions live there too",
         "API keys live in VS Code's credential store and are released when the extension is removed"
       ],
-      "residualPaths": [
-        "~/.vscode/extensions",
-        "~/.vscode-oss/extensions"
-      ],
+      "residualPaths": [],
       "notes": "Only the saoudrizwan.claude-dev-* subdirectory belongs to Cline; never delete the whole extensions directory. VSCodium uses ~/.vscode-oss. Project-side files (.clinerules, .cline/) are inside your repositories and untouched."
     },
     "dataPaths": [

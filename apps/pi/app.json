@@ -377,9 +377,7 @@
         "Delete %LOCALAPPDATA%\\Programs\\Pi (Windows) or /Applications/Pi (macOS)",
         "Delete ~/.pi (sessions, config, keys)"
       ],
-      "residualPaths": [
-        "~/.pi"
-      ],
+      "residualPaths": [],
       "notes": "~/.pi holds sessions and provider configuration — back up first if you want history kept."
     },
     "dataPaths": [

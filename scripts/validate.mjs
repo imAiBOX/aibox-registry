@@ -139,7 +139,11 @@ for (const dir of appDirs) {
     // Compare path components, including Windows case and separator aliases.
     const normalized = p.toLowerCase().split(/[/\\]+/).filter(part => part && part !== '.').join('/');
     const overlaps = (a, b) => a === b || a.startsWith(`${b}/`) || b.startsWith(`${a}/`);
-    if (['~/.aibox/backup', '~/.aibox/prefix'].some(shared => overlaps(normalized, shared))) {
+    const sharedRoots = [
+      '~/.aibox/backup', '~/.aibox/prefix', '~/.pi', '~/.vscode/extensions',
+      '~/.vscode-oss/extensions', '~/appdata/local/pip/cache', '~/.cache/pip', '~/library/caches/pip',
+    ];
+    if (sharedRoots.some(shared => overlaps(normalized, shared))) {
       fail(`${label}: uninstall residual path overlaps shared AiBOX data: "${p}"`);
     }
   }

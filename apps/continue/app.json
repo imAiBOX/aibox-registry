@@ -330,10 +330,7 @@
         "Delete only Continue's own folder under ~/.vscode/extensions (name starts with Continue.continue-) — other extensions live there too",
         "Optionally keep or delete ~/.continue/config.yaml — it holds your model configuration, not secrets (keys are referenced from environment variables)"
       ],
-      "residualPaths": [
-        "~/.vscode/extensions",
-        "~/.vscode-oss/extensions"
-      ],
+      "residualPaths": [],
       "notes": "Only the Continue.continue-* subdirectory belongs to Continue; never delete the whole extensions directory. VSCodium uses ~/.vscode-oss. Project-side files (.continue/) inside your repositories are untouched."
     },
     "risk": {
