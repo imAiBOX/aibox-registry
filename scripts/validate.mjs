@@ -136,6 +136,12 @@ for (const dir of appDirs) {
     if (!/^~[/\\]/.test(p) || p.includes('..')) {
       fail(`${label}: maintenance.uninstall.residualPaths "${p}" is not a user-home path (V3)`);
     }
+    // Compare path components, including Windows case and separator aliases.
+    const normalized = p.toLowerCase().split(/[/\\]+/).filter(part => part && part !== '.').join('/');
+    const overlaps = (a, b) => a === b || a.startsWith(`${b}/`) || b.startsWith(`${a}/`);
+    if (['~/.aibox/backup', '~/.aibox/prefix'].some(shared => overlaps(normalized, shared))) {
+      fail(`${label}: uninstall residual path overlaps shared AiBOX data: "${p}"`);
+    }
   }
 }
 

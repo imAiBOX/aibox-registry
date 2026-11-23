@@ -779,11 +779,9 @@
       ],
       "residualPaths": [
         "~/.config/openclaw",
-        "~/.aibox/apps/openclaw/data",
-        "~/.aibox/prefix",
-        "~/.aibox/backup"
+        "~/.aibox/apps/openclaw/data"
       ],
-      "notes": "~/.aibox/backup 属于通用备份目录，卸载时保留。"
+      "notes": "共享运行环境与备份库不属于此应用，卸载时保留。使用 AiBOX v0.1.20 的用户请先更新，再通过 AiBOX 卸载或重装 OpenClaw。"
     },
     "dataPaths": [
       "~/.config/openclaw/openclaw.json5",
@@ -794,9 +792,8 @@
       "backupFirst": true
     },
     "restore": {
-      "supported": true,
-      "maxAgeHours": 24,
-      "notes": "只允许还原本机 24 小时内、由 AiBOX 自己为该应用创建的备份；不开放跨设备还原。"
+      "supported": false,
+      "notes": "自动还原暂时停用。已有备份可以在 AiBOX 中打开并手动查看。"
     }
   },
   "locales": {
