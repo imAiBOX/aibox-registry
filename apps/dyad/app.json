@@ -1,17 +1,17 @@
 {
   "id": "dyad",
   "name": "Dyad",
-  "version": "1.23.0",
+  "version": "1.24.0",
   "description": {
     "zh-CN": "开源本地 AI 应用生成器：像搭积木一样用自然语言做出可运行的 Web 应用，数据与代码都在你自己电脑上，可自由切换云端或本地模型。",
     "en": "Open-source local AI app builder: describe what you want in plain language and get a working web app you own — code and data stay on your machine, with cloud or local models."
   },
-  "updatedAt": "2026-11-19T01:40:00Z",
+  "updatedAt": "2026-11-24T05:01:17Z",
   "upstream": {
     "github": [
       {
         "repo": "dyad-sh/dyad",
-        "tag": "v1.23.0"
+        "tag": "v1.24.0"
       }
     ]
   },
@@ -29,37 +29,37 @@
       "id": "dyad-win-x64",
       "name": "Dyad Desktop (Squirrel setup, win32-x64)",
       "kind": "app",
-      "version": "1.23.0",
+      "version": "1.24.0",
       "arch": "x64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-24 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-1.23.0.Setup.exe",
+          "url": "https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-1.24.0.Setup.exe",
           "region": "global",
           "operator": "github",
           "note": "Official Electron Forge MakerSquirrel setup (per-user install)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-1.23.0.Setup.exe",
+          "url": "https://ghfast.top/https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-1.24.0.Setup.exe",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-1.23.0.Setup.exe",
+          "url": "https://gh-proxy.com/https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-1.24.0.Setup.exe",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "23960f2df6ff7d2e5494a82a5dc24279d7bdbb801465a2512d900cd77180f678",
-      "sizeBytes": 178051360,
+      "sha256": "05d10498bd487c36b46c47ca137974d7af909b04d1a90f905da7d5720dae0c43",
+      "sizeBytes": 177969440,
       "install": {
         "type": "nsis-silent",
         "args": [
@@ -76,43 +76,43 @@
       "id": "dyad-mac-x64",
       "name": "Dyad Desktop (zip, x64)",
       "kind": "app",
-      "version": "1.23.0",
+      "version": "1.24.0",
       "arch": "x64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-24 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-darwin-x64-1.23.0.zip",
+          "url": "https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-darwin-x64-1.24.0.zip",
           "region": "global",
           "operator": "github",
           "note": "Official Electron Forge MakerZIP (contains dyad.app) — Intel Mac build"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-darwin-x64-1.23.0.zip",
+          "url": "https://ghfast.top/https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-darwin-x64-1.24.0.zip",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-darwin-x64-1.23.0.zip",
+          "url": "https://gh-proxy.com/https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-darwin-x64-1.24.0.zip",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "7bc14403480dcc765a02dbaa3aeb51dcc223524e55e17c5022c5973330b021ee",
-      "sizeBytes": 140284060,
+      "sha256": "4087c2a23a370297a8c2606f54e0658319c80c8510e87ff5110b99ff4c839575",
+      "sizeBytes": 140173409,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; T=$(mktemp -d); ditto -x -k \"$HOME/.aibox/cache/downloads/7bc14403480dcc765a02dbaa3aeb51dcc223524e55e17c5022c5973330b021ee.zip\" \"$T\"; cp -R \"$T\"/dyad.app /Applications/; rm -rf \"$T\""
+          "set -e; T=$(mktemp -d); ditto -x -k \"$HOME/.aibox/cache/downloads/4087c2a23a370297a8c2606f54e0658319c80c8510e87ff5110b99ff4c839575.zip\" \"$T\"; cp -R \"$T\"/dyad.app /Applications/; rm -rf \"$T\""
         ],
         "notes": "Electron Forge MakerZIP ships dyad.app at the archive root; unzip and copy into /Applications.",
         "probe": {
@@ -125,43 +125,43 @@
       "id": "dyad-mac-arm64",
       "name": "Dyad Desktop (zip, arm64)",
       "kind": "app",
-      "version": "1.23.0",
+      "version": "1.24.0",
       "arch": "arm64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub release asset digest (2026-11-19, upstream published sha256)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-24 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-darwin-arm64-1.23.0.zip",
+          "url": "https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-darwin-arm64-1.24.0.zip",
           "region": "global",
           "operator": "github",
           "note": "Official Electron Forge MakerZIP (contains dyad.app) — Apple silicon build"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-darwin-arm64-1.23.0.zip",
+          "url": "https://ghfast.top/https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-darwin-arm64-1.24.0.zip",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/dyad-sh/dyad/releases/download/v1.23.0/dyad-darwin-arm64-1.23.0.zip",
+          "url": "https://gh-proxy.com/https://github.com/dyad-sh/dyad/releases/download/v1.24.0/dyad-darwin-arm64-1.24.0.zip",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "50667b4acc859d936222703bddfc51b4729a311ea281ab95f274b216b6a2fe15",
-      "sizeBytes": 130606146,
+      "sha256": "edd4dd227fd00d33350f5a25b8c1ca7ff7d67c2b44f637d03e8eef1e8785dbcb",
+      "sizeBytes": 130496464,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; T=$(mktemp -d); ditto -x -k \"$HOME/.aibox/cache/downloads/50667b4acc859d936222703bddfc51b4729a311ea281ab95f274b216b6a2fe15.zip\" \"$T\"; cp -R \"$T\"/dyad.app /Applications/; rm -rf \"$T\""
+          "set -e; T=$(mktemp -d); ditto -x -k \"$HOME/.aibox/cache/downloads/edd4dd227fd00d33350f5a25b8c1ca7ff7d67c2b44f637d03e8eef1e8785dbcb.zip\" \"$T\"; cp -R \"$T\"/dyad.app /Applications/; rm -rf \"$T\""
         ],
         "notes": "Electron Forge MakerZIP ships dyad.app at the archive root; unzip and copy into /Applications.",
         "probe": {
