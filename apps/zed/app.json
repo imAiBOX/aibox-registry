@@ -1,17 +1,17 @@
 {
   "id": "zed",
   "name": "Zed",
-  "version": "1.29.3",
+  "version": "1.30.2",
   "description": {
     "zh-CN": "高性能开源代码编辑器（Rust 原生）：毫秒级启动，内置 AI 智能体面板，也能直接接入 Claude Code、Codex、Gemini CLI、OpenCode 等外部智能体。",
     "en": "A high-performance open-source code editor written in Rust: instant startup, a built-in AI agent panel, and direct integration with external agents like Claude Code, Codex, Gemini CLI and OpenCode."
   },
-  "updatedAt": "2026-11-20T18:16:07Z",
+  "updatedAt": "2026-11-27T05:37:31Z",
   "upstream": {
     "github": [
       {
         "repo": "zed-industries/zed",
-        "tag": "v1.29.3"
+        "tag": "v1.30.2"
       }
     ]
   },
@@ -29,37 +29,37 @@
       "id": "zed-win-x64",
       "name": "Zed (Inno Setup installer, win32-x64)",
       "kind": "app",
-      "version": "1.29.3",
+      "version": "1.30.2",
       "arch": "x64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-x86_64.exe",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-x86_64.exe",
           "region": "global",
           "operator": "github",
           "note": "Official Inno Setup installer — installs per-user into %LOCALAPPDATA%\\Programs\\Zed, no admin rights needed"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-x86_64.exe",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-x86_64.exe",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-x86_64.exe",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-x86_64.exe",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "f857495c6cdc4d74fb9bcda9ff5a23aebe1cc88e7aa10af13cfde5f45232b554",
-      "sizeBytes": 65418432,
+      "sha256": "ecb48bff3d11716a3c4f708913db274f27173926c0a511b1901934665fa83418",
+      "sizeBytes": 64806744,
       "install": {
         "type": "nsis-silent",
         "args": [
@@ -79,37 +79,37 @@
       "id": "zed-win-arm64",
       "name": "Zed (Inno Setup installer, win32-arm64)",
       "kind": "app",
-      "version": "1.29.3",
+      "version": "1.30.2",
       "arch": "arm64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-aarch64.exe",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-aarch64.exe",
           "region": "global",
           "operator": "github",
           "note": "Official Inno Setup installer (ARM64 build — for Qualcomm/Windows on ARM)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-aarch64.exe",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-aarch64.exe",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-aarch64.exe",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-aarch64.exe",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "6b1d9953d73743562260e68127e154e1c77ad71d2f64bc8b3f883ff00309d67e",
-      "sizeBytes": 58278984,
+      "sha256": "42e9a1dd8b86533360e58eb2230f3ef5abb7af068ef82bd2e6050bea8fd42220",
+      "sizeBytes": 57688384,
       "install": {
         "type": "nsis-silent",
         "args": [
@@ -129,43 +129,43 @@
       "id": "zed-mac-x64",
       "name": "Zed (dmg, x64)",
       "kind": "app",
-      "version": "1.29.3",
+      "version": "1.30.2",
       "arch": "x64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-x86_64.dmg",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-x86_64.dmg",
           "region": "global",
           "operator": "github",
           "note": "Official dmg (contains Zed.app) — Intel Mac build"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-x86_64.dmg",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-x86_64.dmg",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-x86_64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-x86_64.dmg",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "b4779577003b79cb05ab6be18205babdebf81b45d96acdf21fce43dd4a6d6083",
-      "sizeBytes": 97366853,
+      "sha256": "64cbedeea2feedb4eda9b2139c91ea87016061b57cb14966fbbf00d582e914e0",
+      "sizeBytes": 97254200,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/b4779577003b79cb05ab6be18205babdebf81b45d96acdf21fce43dd4a6d6083.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/64cbedeea2feedb4eda9b2139c91ea87016061b57cb14966fbbf00d582e914e0.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications.",
         "probe": {
@@ -178,43 +178,43 @@
       "id": "zed-mac-arm64",
       "name": "Zed (dmg, arm64)",
       "kind": "app",
-      "version": "1.29.3",
+      "version": "1.30.2",
       "arch": "arm64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-aarch64.dmg",
+          "url": "https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-aarch64.dmg",
           "region": "global",
           "operator": "github",
           "note": "Official dmg (contains Zed.app) — Apple silicon build"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-aarch64.dmg",
+          "url": "https://ghfast.top/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-aarch64.dmg",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.29.3/Zed-aarch64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/zed-industries/zed/releases/download/v1.30.2/Zed-aarch64.dmg",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "b692c9effdfcec874c47f56c3b27df069a63c6b3d23ecd070ffec9238a708bb8",
-      "sizeBytes": 88779557,
+      "sha256": "36ab60379627730fc3ac6ab79bc57dba7a1cf6d6df8117b8e22190d9b639fff5",
+      "sizeBytes": 88057394,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/b692c9effdfcec874c47f56c3b27df069a63c6b3d23ecd070ffec9238a708bb8.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/36ab60379627730fc3ac6ab79bc57dba7a1cf6d6df8117b8e22190d9b639fff5.dmg\"; cp -R \"$M\"/Zed.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "Official dmg ships Zed.app at the root (upstream bundle-mac moves Zed.app into the dmg); copy into /Applications.",
         "probe": {
