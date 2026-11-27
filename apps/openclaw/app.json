@@ -1,21 +1,21 @@
 {
   "id": "openclaw",
   "name": "OpenClaw",
-  "version": "2026.11.6",
+  "version": "2026.11.10",
   "description": {
     "zh-CN": "多渠道 AI 网关，把大模型接到你的聊天软件（Telegram/WhatsApp 等），支持 Anthropic/OpenAI/Google/OpenRouter/Claude 订阅/Ollama 六种接入。",
     "en": "Multi-channel AI gateway that connects LLMs to your messengers (Telegram/WhatsApp, etc.), with six provider paths: Anthropic / OpenAI / Google / OpenRouter / Claude subscription / Ollama."
   },
-  "updatedAt": "2026-11-21T11:20:17Z",
+  "updatedAt": "2026-11-27T05:37:10Z",
   "upstream": {
     "npm": {
       "name": "openclaw",
-      "version": "2026.11.6"
+      "version": "2026.11.10"
     },
     "github": [
       {
         "repo": "openclaw/openclaw",
-        "tag": "v2026.11.6"
+        "tag": "v2026.11.10"
       },
       {
         "repo": "openclaw/openclaw-windows-node",
@@ -165,26 +165,26 @@
       "id": "openclaw-cli",
       "name": "OpenClaw CLI (npm package)",
       "kind": "app",
-      "version": "2026.11.6",
+      "version": "2026.11.10",
       "platforms": [
         "windows",
         "macos"
       ],
       "arch": "any",
-      "sha256": "0ad54c943c7365ff78cdb0c317c2cd73fd6af9df404da02c7cde9787ea3322ad",
-      "sizeBytes": 118651532,
-      "hashSource": "Full download sha256 measured 2026-11-20 UTC by auto-bump CI (source registry.npmjs.org)",
+      "sha256": "19c923bc781ea06de56888b2a4690967aaa641a4832d1f2112b3f779870cfc30",
+      "sizeBytes": 110913913,
+      "hashSource": "Full download sha256 measured 2026-11-27 UTC by auto-bump CI (source registry.npmjs.org)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.6.tgz",
+          "url": "https://registry.npmjs.org/openclaw/-/openclaw-2026.11.10.tgz",
           "region": "global",
           "operator": "npm",
           "note": "npm 官方 registry（5.9.4 矩阵 openclaw CLI GLOBAL 主）"
         },
         {
           "type": "mirror",
-          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.6.tgz",
+          "url": "https://registry.npmmirror.com/openclaw/-/openclaw-2026.11.10.tgz",
           "region": "cn",
           "operator": "alibaba",
           "note": "阿里 npmmirror（5.9.4 矩阵 CN 主；EXECUTE 经 packageManagerOverrides 注入 --registry，不改用户 npmrc）"
