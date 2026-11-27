@@ -1,17 +1,17 @@
 {
   "id": "moneyprinterturbo",
   "name": "MoneyPrinterTurbo",
-  "version": "1.3.11",
+  "version": "1.3.10",
   "description": {
     "zh-CN": "AI 短视频自动生成（中文热榜，输入主题出片）",
     "en": "AI short-video generator from a topic (trending Chinese tool)"
   },
-  "updatedAt": "2026-11-23T16:25:12Z",
+  "updatedAt": "2026-11-16T01:13:12Z",
   "upstream": {
     "github": [
       {
         "repo": "harry0703/MoneyPrinterTurbo",
-        "tag": "v1.3.11"
+        "tag": "v1.3.10"
       }
     ]
   },
@@ -29,44 +29,44 @@
       "id": "mpt-win-portable",
       "name": "MoneyPrinterTurbo portable (7z, win32-x64)",
       "kind": "app",
-      "version": "1.3.11",
+      "version": "1.3.10",
       "arch": "x64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-23 UTC by auto-bump CI)",
+      "hashSource": "GitHub release asset digest (2026-11-15 measured, 555234896 bytes)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.11/MoneyPrinterTurbo-Portable-Windows-1.3.11.7z",
+          "url": "https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.10/MoneyPrinterTurbo-Portable-Windows-1.3.10.7z",
           "region": "global",
           "operator": "github",
           "note": "Official release asset"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.11/MoneyPrinterTurbo-Portable-Windows-1.3.11.7z",
+          "url": "https://ghfast.top/https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.10/MoneyPrinterTurbo-Portable-Windows-1.3.10.7z",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.11/MoneyPrinterTurbo-Portable-Windows-1.3.11.7z",
+          "url": "https://gh-proxy.com/https://github.com/harry0703/MoneyPrinterTurbo/releases/download/v1.3.10/MoneyPrinterTurbo-Portable-Windows-1.3.10.7z",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "4cd0976b61a5bfcc37635fbf5e550ddf84357777eba70d72894377221cc5c73e",
-      "sizeBytes": 555122878,
+      "sha256": "364be23bb4ca3bd9cf72b52101dac1e3f145581602f5dd56f744d39e5138927c",
+      "sizeBytes": 555234896,
       "install": {
         "type": "script",
         "args": [
           "powershell",
           "-NoProfile",
           "-Command",
-          "Expand-7zOrFallback(); # see notes: extract MoneyPrinterTurbo-Portable-Windows-1.3.11.7z to %LOCALAPPDATA%\\MoneyPrinterTurbo and run MoneyPrinterTurbo.exe"
+          "Expand-7zOrFallback(); # see notes: extract MoneyPrinterTurbo-Portable-Windows-1.3.10.7z to %LOCALAPPDATA%\\MoneyPrinterTurbo and run MoneyPrinterTurbo.exe"
         ],
         "notes": "Extract the 7z into ~/AppData/Local/MoneyPrinterTurbo (user folder, zero admin) and run the bundled exe.",
         "probe": {

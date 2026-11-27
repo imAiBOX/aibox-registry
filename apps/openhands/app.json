@@ -1,17 +1,17 @@
 {
   "id": "openhands",
   "name": "OpenHands",
-  "version": "1.43.0",
+  "version": "1.46.0",
   "description": {
     "zh-CN": "OpenHands 桌面版：给它一个任务，它会自己写代码、跑命令、改文件，直到完成。需要你自己的模型 API key。",
     "en": "OpenHands desktop: give it a task and it writes code, runs commands and edits files until done. Uses your own model API key."
   },
-  "updatedAt": "2026-11-21T04:52:10Z",
+  "updatedAt": "2026-11-27T05:37:21Z",
   "upstream": {
     "github": [
       {
         "repo": "All-Hands-AI/OpenHands",
-        "tag": "v1.43.0"
+        "tag": "v1.46.0"
       }
     ]
   },
@@ -29,37 +29,37 @@
       "id": "openhands-win-x64",
       "name": "OpenHands Agent Canvas (NSIS, win32-x64)",
       "kind": "app",
-      "version": "1.43.0",
+      "version": "1.46.0",
       "arch": "x64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-21 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.43.0/OpenHands-Agent-Canvas-Setup-1.43.0.exe",
+          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.46.0/OpenHands-Agent-Canvas-Setup-1.46.0.exe",
           "region": "global",
           "operator": "github",
           "note": "Official NSIS installer"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.43.0/OpenHands-Agent-Canvas-Setup-1.43.0.exe",
+          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.46.0/OpenHands-Agent-Canvas-Setup-1.46.0.exe",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.43.0/OpenHands-Agent-Canvas-Setup-1.43.0.exe",
+          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.46.0/OpenHands-Agent-Canvas-Setup-1.46.0.exe",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "97f765bb92bfd33d84348715b94102a07566c575b5bc37243bf1921a6f463098",
-      "sizeBytes": 168416050,
+      "sha256": "1287952a1bc477521f6a47dd7c5772f56fddff8bc636ed0032baebe9d349e3b2",
+      "sizeBytes": 168809070,
       "install": {
         "type": "nsis-silent",
         "args": [
@@ -76,43 +76,43 @@
       "id": "openhands-mac-universal",
       "name": "OpenHands Agent Canvas (dmg, universal)",
       "kind": "app",
-      "version": "1.43.0",
+      "version": "1.46.0",
       "arch": "any",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-21 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.43.0/OpenHands-Agent-Canvas-1.43.0-universal.dmg",
+          "url": "https://github.com/All-Hands-AI/OpenHands/releases/download/v1.46.0/OpenHands-Agent-Canvas-1.46.0-universal.dmg",
           "region": "global",
           "operator": "github",
           "note": "Universal dmg"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.43.0/OpenHands-Agent-Canvas-1.43.0-universal.dmg",
+          "url": "https://ghfast.top/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.46.0/OpenHands-Agent-Canvas-1.46.0-universal.dmg",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.43.0/OpenHands-Agent-Canvas-1.43.0-universal.dmg",
+          "url": "https://gh-proxy.com/https://github.com/All-Hands-AI/OpenHands/releases/download/v1.46.0/OpenHands-Agent-Canvas-1.46.0-universal.dmg",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "8c5597bea138018e0b8474faa90693225c260d8d42da5a6e4453410aa0937660",
-      "sizeBytes": 349634061,
+      "sha256": "3285d4c3e2728583849eedff4504ae7ceffea2cde197c34bdd672e5cbaec8b62",
+      "sizeBytes": 350126746,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "hdiutil attach -nobrowse -quiet \"$HOME/.aibox/cache/downloads/8c5597bea138018e0b8474faa90693225c260d8d42da5a6e4453410aa0937660.dmg\" && cp -R \"/Volumes/OpenHands*/OpenHands.app\" /Applications/ && hdiutil detach -quiet \"/Volumes/OpenHands*\""
+          "hdiutil attach -nobrowse -quiet \"$HOME/.aibox/cache/downloads/3285d4c3e2728583849eedff4504ae7ceffea2cde197c34bdd672e5cbaec8b62.dmg\" && cp -R \"/Volumes/OpenHands*/OpenHands.app\" /Applications/ && hdiutil detach -quiet \"/Volumes/OpenHands*\""
         ],
         "notes": "Mount dmg, copy .app to /Applications (user-writable).",
         "probe": {
