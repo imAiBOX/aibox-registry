@@ -1,17 +1,17 @@
 {
   "id": "lobechat",
   "name": "LobeHub",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": {
     "zh-CN": "开源 AI 聊天工作台的官方桌面版：一个客户端接入 OpenAI / Anthropic / Google / OpenRouter 等多家模型和本地 Ollama，多 Agent、记忆、MCP 连接器都在本地应用里，凭据加密存储。",
     "en": "Official desktop app of the open-source AI chat workspace — one client for OpenAI / Anthropic / Google / OpenRouter and local Ollama, with multi-agent chats, memory and MCP connectors; credentials are stored encrypted on your machine."
   },
-  "updatedAt": "2026-11-23T16:25:05Z",
+  "updatedAt": "2026-11-27T05:37:01Z",
   "upstream": {
     "github": [
       {
         "repo": "lobehub/lobehub",
-        "tag": "v2.3.5"
+        "tag": "v2.3.6"
       }
     ]
   },
@@ -28,32 +28,32 @@
       "id": "lobechat-win-x64",
       "name": "LobeHub desktop installer (Windows x64, NSIS)",
       "kind": "app",
-      "version": "2.3.5",
+      "version": "2.3.6",
       "platforms": [
         "windows"
       ],
       "arch": "x64",
-      "sha256": "6d0c4fa202c762188e782ac9d34c2813d191a1b22c529718ad86ea006f57a598",
-      "sizeBytes": 157373236,
-      "hashSource": "GitHub API release asset digest (measured 2026-11-23 UTC by auto-bump CI)",
+      "sha256": "b75c16ac8098bed653340ee52e7f9e0cc41e7ab7d08fc4c75ca06961d870175a",
+      "sizeBytes": 157654378,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-setup.exe",
+          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-setup.exe",
           "region": "global",
           "operator": "lobehub",
           "note": "GitHub Releases direct (daily CI HEAD; 2026-11-14 measured 200 / Content-Length = sizeBytes)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-setup.exe",
+          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-setup.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-setup.exe",
+          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-setup.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
@@ -75,32 +75,32 @@
       "id": "lobechat-mac-arm64",
       "name": "LobeHub desktop (macOS Apple Silicon, DMG)",
       "kind": "app",
-      "version": "2.3.5",
+      "version": "2.3.6",
       "platforms": [
         "macos"
       ],
       "arch": "arm64",
-      "sha256": "021ecc6a192b245d67eb5cabfbc1f6890637c81bf432e9e9ef4d5ead06c8120e",
-      "sizeBytes": 169147940,
-      "hashSource": "GitHub API release asset digest (measured 2026-11-23 UTC by auto-bump CI)",
+      "sha256": "79dab4f31d17ecf3a380369792c6d41ab72fafc7e5caa572e38ebb8906ef4e94",
+      "sizeBytes": 169422712,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-arm64.dmg",
+          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-arm64.dmg",
           "region": "global",
           "operator": "lobehub",
           "note": "GitHub Releases direct (daily CI HEAD; asset digest from the GitHub API)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-arm64.dmg",
+          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-arm64.dmg",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-arm64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-arm64.dmg",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
@@ -111,7 +111,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/021ecc6a192b245d67eb5cabfbc1f6890637c81bf432e9e9ef4d5ead06c8120e.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/79dab4f31d17ecf3a380369792c6d41ab72fafc7e5caa572e38ebb8906ef4e94.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg mount + copy LobeHub.app + detach (hdiutil convention, destName = URL basename; same shape as Chatbox/Jan). Signed & notarized build (desktop README).",
         "probe": {
@@ -124,32 +124,32 @@
       "id": "lobechat-mac-x64",
       "name": "LobeHub desktop (macOS Intel, DMG)",
       "kind": "app",
-      "version": "2.3.5",
+      "version": "2.3.6",
       "platforms": [
         "macos"
       ],
       "arch": "x64",
-      "sha256": "be624a41b051a527891ebc070d7e26c79719c866bd516208d6683acb2bdb76cb",
-      "sizeBytes": 174434408,
-      "hashSource": "GitHub API release asset digest (measured 2026-11-23 UTC by auto-bump CI)",
+      "sha256": "3281d8916f02b77adf540d62be539ad6cc3ee7472f937186dd1e3dde640f23b3",
+      "sizeBytes": 174612799,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-x64.dmg",
+          "url": "https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-x64.dmg",
           "region": "global",
           "operator": "lobehub",
           "note": "GitHub Releases direct (daily CI HEAD; asset digest from the GitHub API)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-x64.dmg",
+          "url": "https://ghfast.top/https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-x64.dmg",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.5/LobeHub-2.3.5-x64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/lobehub/lobehub/releases/download/v2.3.6/LobeHub-2.3.6-x64.dmg",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub acceleration gateway (2026-11-14 measured 200 / same size)"
@@ -160,7 +160,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/be624a41b051a527891ebc070d7e26c79719c866bd516208d6683acb2bdb76cb.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/3281d8916f02b77adf540d62be539ad6cc3ee7472f937186dd1e3dde640f23b3.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "Same dmg flow as arm64 (Intel Macs).",
         "probe": {
