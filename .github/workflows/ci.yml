@@ -6,6 +6,8 @@ on:
   schedule:
     # daily upstream probe: 04:00 UTC
     - cron: '0 4 * * *'
+  # manual probe runs (e.g. right after merging bump PRs, or to verify a fix)
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -70,7 +72,11 @@ jobs:
 
   probe:
     name: Upstream liveness probe
-    if: github.event_name == 'push' || github.event_name == 'schedule'
+    # Schedule/dispatch only. Running this on every push caused 8 parallel
+    # probes (one per merged PR) to race each other into duplicate drift
+    # issues while main was in a transient mid-merge state (2026-11-27).
+    # Merges are instead verified by the daily probe + manual dispatch.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     # auto-bump pushes chore/upstream-* branches and opens same-repo PRs with
     # the default GITHUB_TOKEN (no PAT); issues: write keeps the fallback flow
@@ -143,8 +149,15 @@ jobs:
                 || echo "issue create failed (continuing)"
             done < <(jq -c '.[]' drifts.json)
           fi
-          # stay red while anything drifts or a bump PR awaits review
-          if [ "$drift_count" -gt 0 ] || [ "$bump_count" -gt 0 ]; then
+          # Red only when automation cannot self-heal: a drift item with no
+          # auto-fix (B-class liveness/integrity, or an A-class bump that failed
+          # to open a PR). Bump PRs awaiting review are the normal rolling-
+          # upgrade queue — report them as a notice instead of failing, so a
+          # permanently queued PR cannot mask real failures with alert fatigue.
+          if [ "$drift_count" -gt 0 ]; then
             exit 1
+          fi
+          if [ "$bump_count" -gt 0 ]; then
+            echo "::notice::$bump_count bump PR(s) awaiting review — verify each package's direct URL returns 200 before merging"
           fi
           exit 0
