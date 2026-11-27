@@ -1,17 +1,17 @@
 {
   "id": "cowagent",
   "name": "CowAgent",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": {
     "zh-CN": "中文圈开源个人 AI 助手与 Agent 底座（前 chatgpt-on-wechat）：桌面客户端开箱即用，网页控制台一站式聊天、连接微信/Telegram/Discord 等渠道、一键安装技能；模型随便换（OpenAI、Claude、Gemini、DeepSeek、通义……）。",
     "en": "Open-source personal AI assistant and agent harness from the Chinese dev community (formerly chatgpt-on-wechat): a ready-to-run desktop client plus a one-stop web console for chatting, connecting channels (WeChat, Telegram, Discord…) and one-click skills; swap models freely (OpenAI, Claude, Gemini, DeepSeek, Qwen…)."
   },
-  "updatedAt": "2026-11-12T12:30:00Z",
+  "updatedAt": "2026-11-27T05:36:39Z",
   "upstream": {
     "github": [
       {
         "repo": "zhayujie/CowAgent",
-        "tag": "2.2.2"
+        "tag": "2.3.0"
       }
     ]
   },
@@ -29,32 +29,32 @@
       "id": "cowagent-win-x64",
       "name": "CowAgent Windows installer (x64)",
       "kind": "app",
-      "version": "2.2.2",
+      "version": "2.3.0",
       "platforms": [
         "windows"
       ],
       "arch": "x64",
-      "sha256": "d856cdc10cf172cc84603754d26de8bbae6c374fdec16eeb9a4a945cc0bf408d",
-      "sizeBytes": 189761792,
-      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "sha256": "0ab0eac800eacb36c6956732405d15ad29bfef972f4ce0c8db625b37e97744c7",
+      "sizeBytes": 190287152,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-Setup-2.2.2-x64.exe",
+          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-Setup-2.3.0-x64.exe",
           "region": "global",
           "operator": "zhayujie",
           "note": "Official GitHub Releases installer (daily probe HEAD + Content-Length). A separate CowAgent-Setup-2.2.2-win7-x64.exe exists for Windows 7 and is intentionally not routed."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-Setup-2.2.2-x64.exe",
+          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-Setup-2.3.0-x64.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, size 189761792 identical)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-Setup-2.2.2-x64.exe",
+          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-Setup-2.3.0-x64.exe",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, size 189761792 identical)"
@@ -76,32 +76,32 @@
       "id": "cowagent-mac-arm64",
       "name": "CowAgent macOS dmg (Apple Silicon)",
       "kind": "app",
-      "version": "2.2.2",
+      "version": "2.3.0",
       "platforms": [
         "macos"
       ],
       "arch": "arm64",
-      "sha256": "c3af5a167b18fe132cbd5f59919dba6c43120a353b10572fd1c8fc0aa95a75cf",
-      "sizeBytes": 228228555,
-      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "sha256": "de5b8b2010af9683aaca36f495e1ba93c15c422b483b61ac10a2b26d63efa3e5",
+      "sizeBytes": 228653707,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-arm64.dmg",
+          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-2.3.0-arm64.dmg",
           "region": "global",
           "operator": "zhayujie",
           "note": "Official per-arch dmg (daily probe HEAD + Content-Length)."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-arm64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-2.3.0-arm64.dmg",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, size 228228555 identical)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-arm64.dmg",
+          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-2.3.0-arm64.dmg",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, size 228228555 identical)"
@@ -112,7 +112,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c3af5a167b18fe132cbd5f59919dba6c43120a353b10572fd1c8fc0aa95a75cf.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/de5b8b2010af9683aaca36f495e1ba93c15c422b483b61ac10a2b26d63efa3e5.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg mount + copy .app + unmount (same convention as other desktop apps). If /Applications is not writable for the current (non-admin) account, fall back to ~/Applications — manual route in the guide. Upstream builds are notarized Electron dmgs.",
         "probe": {
@@ -125,32 +125,32 @@
       "id": "cowagent-mac-x64",
       "name": "CowAgent macOS dmg (Intel)",
       "kind": "app",
-      "version": "2.2.2",
+      "version": "2.3.0",
       "platforms": [
         "macos"
       ],
       "arch": "x64",
-      "sha256": "12aa29e2ab35524f17c95f8cf50b8e7ef1c164ac86998ab62f34535e8eecb902",
-      "sizeBytes": 239855555,
-      "hashSource": "GitHub API releases/latest asset digest field (2026-11-12 measured)",
+      "sha256": "ddbe78d108739f8c279ad5d62ef85f4f8aa6d333abcb0db4bcf92feace09abb6",
+      "sizeBytes": 240523238,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-x64.dmg",
+          "url": "https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-2.3.0-x64.dmg",
           "region": "global",
           "operator": "zhayujie",
           "note": "Official per-arch dmg (daily probe HEAD + Content-Length)."
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-x64.dmg",
+          "url": "https://gh-proxy.com/https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-2.3.0-x64.dmg",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, size 239855555 identical)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.2.2/CowAgent-2.2.2-x64.dmg",
+          "url": "https://ghfast.top/https://github.com/zhayujie/CowAgent/releases/download/2.3.0/CowAgent-2.3.0-x64.dmg",
           "region": "cn",
           "operator": "ghfast.top",
           "note": "Community GitHub accelerator (2026-11-12 measured 200, size 239855555 identical)"
@@ -161,7 +161,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/12aa29e2ab35524f17c95f8cf50b8e7ef1c164ac86998ab62f34535e8eecb902.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/ddbe78d108739f8c279ad5d62ef85f4f8aa6d333abcb0db4bcf92feace09abb6.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "Intel build of the same release; identical dmg flow. Use ~/Applications manually if /Applications is not writable.",
         "probe": {
