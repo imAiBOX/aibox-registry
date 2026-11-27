@@ -1,17 +1,17 @@
 {
   "id": "pi",
   "name": "Pi",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": {
     "zh-CN": "Pi 是 MIT 开源的 AI 编码智能体工具箱：统一 LLM API、智能体循环、TUI 与编码 CLI 二合一。平台包自包含（无需 Node），接任意模型即装即用。",
     "en": "Pi is an MIT-licensed AI agent toolkit: unified LLM API, agent loop, TUI and coding CLI in one. Platform bundles are self-contained (no Node needed) — bring any model and go."
   },
-  "updatedAt": "2026-11-20T15:06:26Z",
+  "updatedAt": "2026-11-27T05:37:24Z",
   "upstream": {
     "github": [
       {
         "repo": "earendil-works/pi",
-        "tag": "v1.6.0"
+        "tag": "v1.6.1"
       }
     ]
   },
@@ -29,37 +29,37 @@
       "id": "pi-win-x64",
       "name": "Pi coding agent (zip, win32-x64)",
       "kind": "app",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "arch": "x64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-windows-x64.zip",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-windows-x64.zip",
           "region": "global",
           "operator": "github",
           "note": "Self-contained pi.exe (verified via zip central directory)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-windows-x64.zip",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-windows-x64.zip",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-windows-x64.zip",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-windows-x64.zip",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "f5defb6c403ee698f5b3f8886db473e55b78aac670a8ce03620a47f5f0aec57c",
-      "sizeBytes": 61995847,
+      "sha256": "dbb007c8c50782de1642382fed777c60252aab080f36eef7823324c574c1f3e4",
+      "sizeBytes": 62017479,
       "install": {
         "type": "script",
         "args": [
@@ -68,7 +68,7 @@
           "-ExecutionPolicy",
           "Bypass",
           "-Command",
-          "$d=\"$env:LOCALAPPDATA\\Programs\\Pi\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Expand-Archive -Force \"$env:USERPROFILE\\.aibox\\cache\\downloads\\f5defb6c403ee698f5b3f8886db473e55b78aac670a8ce03620a47f5f0aec57c.zip\" \"$env:TEMP\\aibox-pi\"; Copy-Item \"$env:TEMP\\aibox-pi\\pi.exe\" \"$d\\pi.exe\" -Force; Remove-Item -Recurse -Force \"$env:TEMP\\aibox-pi\""
+          "$d=\"$env:LOCALAPPDATA\\Programs\\Pi\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Expand-Archive -Force \"$env:USERPROFILE\\.aibox\\cache\\downloads\\dbb007c8c50782de1642382fed777c60252aab080f36eef7823324c574c1f3e4.zip\" \"$env:TEMP\\aibox-pi\"; Copy-Item \"$env:TEMP\\aibox-pi\\pi.exe\" \"$d\\pi.exe\" -Force; Remove-Item -Recurse -Force \"$env:TEMP\\aibox-pi\""
         ],
         "notes": "Expand the zip and copy the self-contained pi.exe into %LOCALAPPDATA%\\Programs\\Pi (no Node required). Launch from any terminal.",
         "probe": {
@@ -81,37 +81,37 @@
       "id": "pi-win-arm64",
       "name": "Pi coding agent (zip, win32-arm64)",
       "kind": "app",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "arch": "arm64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-windows-arm64.zip",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-windows-arm64.zip",
           "region": "global",
           "operator": "github",
           "note": "Self-contained pi.exe (verified via zip central directory)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-windows-arm64.zip",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-windows-arm64.zip",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-windows-arm64.zip",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-windows-arm64.zip",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "56433d392e1baecf9f1692785a3bf171c125b415a29dd36097d02baca98bc9eb",
-      "sizeBytes": 56672454,
+      "sha256": "1d573e8b02f92d3cc3d386481710144f9091a93775d211663919da9ed4c9d31d",
+      "sizeBytes": 56693926,
       "install": {
         "type": "script",
         "args": [
@@ -120,7 +120,7 @@
           "-ExecutionPolicy",
           "Bypass",
           "-Command",
-          "$d=\"$env:LOCALAPPDATA\\Programs\\Pi\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Expand-Archive -Force \"$env:USERPROFILE\\.aibox\\cache\\downloads\\56433d392e1baecf9f1692785a3bf171c125b415a29dd36097d02baca98bc9eb.zip\" \"$env:TEMP\\aibox-pi\"; Copy-Item \"$env:TEMP\\aibox-pi\\pi.exe\" \"$d\\pi.exe\" -Force; Remove-Item -Recurse -Force \"$env:TEMP\\aibox-pi\""
+          "$d=\"$env:LOCALAPPDATA\\Programs\\Pi\"; New-Item -ItemType Directory -Force -Path $d | Out-Null; Expand-Archive -Force \"$env:USERPROFILE\\.aibox\\cache\\downloads\\1d573e8b02f92d3cc3d386481710144f9091a93775d211663919da9ed4c9d31d.zip\" \"$env:TEMP\\aibox-pi\"; Copy-Item \"$env:TEMP\\aibox-pi\\pi.exe\" \"$d\\pi.exe\" -Force; Remove-Item -Recurse -Force \"$env:TEMP\\aibox-pi\""
         ],
         "notes": "Expand the zip and copy the self-contained pi.exe into %LOCALAPPDATA%\\Programs\\Pi (no Node required). Launch from any terminal.",
         "probe": {
@@ -133,43 +133,43 @@
       "id": "pi-mac-arm64",
       "name": "Pi coding agent (tar.gz, arm64)",
       "kind": "app",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "arch": "arm64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-darwin-arm64.tar.gz",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-darwin-arm64.tar.gz",
           "region": "global",
           "operator": "github",
           "note": "pi/ directory with self-contained executable"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-darwin-arm64.tar.gz",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-darwin-arm64.tar.gz",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-darwin-arm64.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-darwin-arm64.tar.gz",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "6429287b7ae98d726ec577815d14fd680e7c587e89ecc5153b4a145dc4adba33",
-      "sizeBytes": 48128107,
+      "sha256": "d8fd8e24c2a5054ae383d83b26f6eb6f950edf613917e434a52394f44cd4d933",
+      "sizeBytes": 48153395,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/6429287b7ae98d726ec577815d14fd680e7c587e89ecc5153b4a145dc4adba33.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
+          "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/d8fd8e24c2a5054ae383d83b26f6eb6f950edf613917e434a52394f44cd4d933.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
         ],
         "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required).",
         "probe": {
@@ -182,43 +182,43 @@
       "id": "pi-mac-x64",
       "name": "Pi coding agent (tar.gz, x64)",
       "kind": "app",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "arch": "x64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-darwin-x64.tar.gz",
+          "url": "https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-darwin-x64.tar.gz",
           "region": "global",
           "operator": "github",
           "note": "pi/ directory with self-contained executable"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-darwin-x64.tar.gz",
+          "url": "https://ghfast.top/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-darwin-x64.tar.gz",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.0/pi-darwin-x64.tar.gz",
+          "url": "https://gh-proxy.com/https://github.com/earendil-works/pi/releases/download/v1.6.1/pi-darwin-x64.tar.gz",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "5b69cd87c3b00e74cce2d1499df3b7a1ec73632f11abf64696d110f0f4dc4192",
-      "sizeBytes": 50640053,
+      "sha256": "5c2df5744c7828cc8b78c5665a3a785cc073130005c711d35017c6a5c419169a",
+      "sizeBytes": 50662371,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/5b69cd87c3b00e74cce2d1499df3b7a1ec73632f11abf64696d110f0f4dc4192.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
+          "set -e; M=$(mktemp -d); tar -xzf \"$HOME/.aibox/cache/downloads/5c2df5744c7828cc8b78c5665a3a785cc073130005c711d35017c6a5c419169a.gz\" -C \"$M\"; rm -rf /Applications/Pi; mkdir -p /Applications/Pi; cp -R \"$M/pi/.\" /Applications/Pi/; chmod +x /Applications/Pi/pi; rm -rf \"$M\""
         ],
         "notes": "Extract pi/ and copy into /Applications/Pi (executable at Pi/pi; no Node required).",
         "probe": {
