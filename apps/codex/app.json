@@ -6,12 +6,12 @@
     "zh-CN": "Codex 是 OpenAI 开源的编码智能体（Apache-2.0）。自包含单文件，下载即用：在终端里交给它任务，它会自己改代码、执行命令并汇报。需 ChatGPT 账号或 OpenAI API key。",
     "en": "Codex is OpenAI’s open-source coding agent (Apache-2.0). One self-contained executable — download and run: hand it a task and it edits code, executes commands and reports back. Needs a ChatGPT account or OpenAI API key."
   },
-  "updatedAt": "2026-11-20T04:38:08Z",
+  "updatedAt": "2026-11-27T05:36:33Z",
   "upstream": {
     "github": [
       {
         "repo": "openai/codex",
-        "tag": "rust-v0.171.0"
+        "tag": "rust-v0.172.0"
       }
     ]
   },
@@ -29,37 +29,37 @@
       "id": "codex-win-x64",
       "name": "Codex CLI (self-contained, win32-x64)",
       "kind": "app",
-      "version": "rust-v0.171.0",
+      "version": "rust-v0.172.0",
       "arch": "x64",
       "platforms": [
         "windows"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-x86_64-pc-windows-msvc.exe",
+          "url": "https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe",
           "region": "global",
           "operator": "github",
           "note": "Official standalone binary"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-x86_64-pc-windows-msvc.exe",
+          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-x86_64-pc-windows-msvc.exe",
+          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-pc-windows-msvc.exe",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "cefea4ffee1fff04983a99c0dda99944d8b380e891e740a28b32f4b815a6e0b7",
-      "sizeBytes": 407421232,
+      "sha256": "3f42b12274b353ecb3ec555e6c8d0a43f6c6cb29c3a546179bc12dee4855deb6",
+      "sizeBytes": 416707888,
       "install": {
         "type": "script",
         "args": [
@@ -81,43 +81,43 @@
       "id": "codex-mac-arm64",
       "name": "Codex CLI (dmg, arm64)",
       "kind": "app",
-      "version": "rust-v0.171.0",
+      "version": "rust-v0.172.0",
       "arch": "arm64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-aarch64-apple-darwin.dmg",
+          "url": "https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-aarch64-apple-darwin.dmg",
           "region": "global",
           "operator": "github",
           "note": "Official dmg (flattened bin/codex + symlink, verified in upstream CI)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-aarch64-apple-darwin.dmg",
+          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-aarch64-apple-darwin.dmg",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-aarch64-apple-darwin.dmg",
+          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-aarch64-apple-darwin.dmg",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "a045e08133c1d29a388443e2dc672768ad34a0b4fb31cdeebfd9de110bdfb02a",
-      "sizeBytes": 250609096,
+      "sha256": "0dfd81c38e37d6d00b13fc5d851c0a9387fe31caf6a4687d0c1dba807fdde856",
+      "sizeBytes": 254072871,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -readonly -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/a045e08133c1d29a388443e2dc672768ad34a0b4fb31cdeebfd9de110bdfb02a.dmg\"; D=\"/Applications/Codex\"; mkdir -p \"$D\"; ditto \"$M\" \"$D\"; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -readonly -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/0dfd81c38e37d6d00b13fc5d851c0a9387fe31caf6a4687d0c1dba807fdde856.dmg\"; D=\"/Applications/Codex\"; mkdir -p \"$D\"; ditto \"$M\" \"$D\"; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "Mount dmg and ditto its contents into /Applications/Codex (upstream layout: bin/codex + relative codex symlink + codex-resources). Run as /Applications/Codex/codex.",
         "probe": {
@@ -130,43 +130,43 @@
       "id": "codex-mac-x64",
       "name": "Codex CLI (dmg, x64)",
       "kind": "app",
-      "version": "rust-v0.171.0",
+      "version": "rust-v0.172.0",
       "arch": "x64",
       "platforms": [
         "macos"
       ],
-      "hashSource": "GitHub API release asset digest (measured 2026-11-20 UTC by auto-bump CI)",
+      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-x86_64-apple-darwin.dmg",
+          "url": "https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-apple-darwin.dmg",
           "region": "global",
           "operator": "github",
           "note": "Official dmg (flattened bin/codex + symlink, verified in upstream CI)"
         },
         {
           "type": "proxy",
-          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-x86_64-apple-darwin.dmg",
+          "url": "https://ghfast.top/https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-apple-darwin.dmg",
           "region": "cn",
           "operator": "ghfast",
           "note": "CN gateway"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.171.0/codex-x86_64-apple-darwin.dmg",
+          "url": "https://gh-proxy.com/https://github.com/openai/codex/releases/download/rust-v0.172.0/codex-x86_64-apple-darwin.dmg",
           "region": "cn",
           "operator": "gh-proxy",
           "note": "CN gateway"
         }
       ],
-      "sha256": "cfda30e0c8a65f4b9fad82055cabc45e189bbc12e7dacc325115ce29ff0a7923",
-      "sizeBytes": 274669679,
+      "sha256": "08e09853d72bd0ea8704aa13388682bdf3301e5531a30df044ae8a7842ff9f7a",
+      "sizeBytes": 278538988,
       "install": {
         "type": "script",
         "args": [
           "bash",
           "-lc",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -readonly -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/cfda30e0c8a65f4b9fad82055cabc45e189bbc12e7dacc325115ce29ff0a7923.dmg\"; D=\"/Applications/Codex\"; mkdir -p \"$D\"; ditto \"$M\" \"$D\"; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -readonly -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/08e09853d72bd0ea8704aa13388682bdf3301e5531a30df044ae8a7842ff9f7a.dmg\"; D=\"/Applications/Codex\"; mkdir -p \"$D\"; ditto \"$M\" \"$D\"; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "Mount dmg and ditto its contents into /Applications/Codex (upstream layout: bin/codex + relative codex symlink + codex-resources). Run as /Applications/Codex/codex.",
         "probe": {
