@@ -1,17 +1,17 @@
 {
   "id": "ollama",
   "name": "Ollama",
-  "version": "0.40.18",
+  "version": "0.40.19",
   "description": {
     "zh-CN": "本地大模型运行器：一条命令下载并运行上千个开源模型（Llama、Qwen、Gemma 等），完全离线免费，聊天/编程工具都能直连它。",
     "en": "Local LLM runner: download and run thousands of open models (Llama, Qwen, Gemma…) with one command — fully offline and free; any chat or coding tool can connect to it."
   },
-  "updatedAt": "2026-11-27T05:37:06Z",
+  "updatedAt": "2026-11-28T04:56:08Z",
   "upstream": {
     "github": [
       {
         "repo": "ollama/ollama",
-        "tag": "v0.40.18"
+        "tag": "v0.40.19"
       }
     ]
   },
@@ -29,25 +29,25 @@
       "id": "ollama-win-x64",
       "name": "Ollama Windows Installer (x64)",
       "kind": "app",
-      "version": "0.40.18",
+      "version": "0.40.19",
       "platforms": [
         "windows"
       ],
       "arch": "x64",
-      "sha256": "ad2bb47aa969b21cf8dd81b2d9f9a6d5030270ed242ef55087118c37c510acc2",
-      "sizeBytes": 1953587080,
-      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
+      "sha256": "8b5714e2516809bd8b95d136d42846df2d98b87df514cd5508eb69b5e5f43143",
+      "sizeBytes": 1953925384,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-28 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/ollama/ollama/releases/download/v0.40.18/OllamaSetup.exe",
+          "url": "https://github.com/ollama/ollama/releases/download/v0.40.19/OllamaSetup.exe",
           "region": "global",
           "operator": "ollama",
           "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/ollama/ollama/releases/download/v0.40.18/OllamaSetup.exe",
+          "url": "https://gh-proxy.com/https://github.com/ollama/ollama/releases/download/v0.40.19/OllamaSetup.exe",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关（网关清单热更，每日探活复核）。注：ghfast.top 对 ollama/ollama 仓库全部资产实测 403（2026-11-11），本应用通道未走 ghfast。"
@@ -72,25 +72,25 @@
       "id": "ollama-mac",
       "name": "Ollama macOS dmg (Universal)",
       "kind": "app",
-      "version": "0.40.18",
+      "version": "0.40.19",
       "platforms": [
         "macos"
       ],
       "arch": "any",
-      "sha256": "78880366c6ecc18891bf32eb6dd7d132938aaf55fa8bc9007503701ad6d7d1ed",
-      "sizeBytes": 232758599,
-      "hashSource": "GitHub API release asset digest (measured 2026-11-27 UTC by auto-bump CI)",
+      "sha256": "c938989f515977d56e8b4000573c9643b02aa0e8961f7c76c9c82e6aa7213bbf",
+      "sizeBytes": 233223838,
+      "hashSource": "GitHub API release asset digest (measured 2026-11-28 UTC by auto-bump CI)",
       "channels": [
         {
           "type": "direct",
-          "url": "https://github.com/ollama/ollama/releases/download/v0.40.18/Ollama.dmg",
+          "url": "https://github.com/ollama/ollama/releases/download/v0.40.19/Ollama.dmg",
           "region": "global",
           "operator": "ollama",
           "note": "GitHub Releases 直连（探活 CI 每日 HEAD）"
         },
         {
           "type": "proxy",
-          "url": "https://gh-proxy.com/https://github.com/ollama/ollama/releases/download/v0.40.18/Ollama.dmg",
+          "url": "https://gh-proxy.com/https://github.com/ollama/ollama/releases/download/v0.40.19/Ollama.dmg",
           "region": "cn",
           "operator": "gh-proxy.com",
           "note": "社区 GitHub 加速网关（网关清单热更，每日探活复核）。注：ghfast.top 对 ollama/ollama 仓库全部资产实测 403（2026-11-11），本应用通道未走 ghfast。"
@@ -101,7 +101,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/78880366c6ecc18891bf32eb6dd7d132938aaf55fa8bc9007503701ad6d7d1ed.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
+          "set -e; M=$(mktemp -d); hdiutil attach -nobrowse -mountpoint \"$M\" \"$HOME/.aibox/cache/downloads/c938989f515977d56e8b4000573c9643b02aa0e8961f7c76c9c82e6aa7213bbf.dmg\"; cp -R \"$M\"/*.app /Applications/; hdiutil detach \"$M\"; rmdir \"$M\""
         ],
         "notes": "dmg 挂载 + 拷贝 .app + 卸载（hdiutil 惯例，destName=URL 末段）。单一 dmg 覆盖 Intel/Apple Silicon（上游 scripts/build_darwin.sh lipo universal 二进制）→ arch=any。",
         "probe": {
