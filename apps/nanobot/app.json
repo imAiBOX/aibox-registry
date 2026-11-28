@@ -67,7 +67,7 @@
           "-ExecutionPolicy",
           "Bypass",
           "-Command",
-          "$v=\"$env:USERPROFILE\\.nanobot\\venv\"; if (!(Test-Path $v)) { py -3 -m venv $v }; & \"$v\\Scripts\\python\" -m pip install -q --upgrade pip; & \"$v\\Scripts\\python\" -m pip install -q \"$env:USERPROFILE\\.aibox\\cache\\downloads\\nanobot_ai-0.4.2-py3-none-win_amd64.whl\""
+          "$v=\"$env:USERPROFILE\\.nanobot\\venv\"; if (!(Test-Path $v)) { py -3 -m venv $v }; & \"$v\\Scripts\\python\" -m pip install -q --upgrade pip; $c=\"$env:USERPROFILE\\.aibox\\cache\\downloads\\bfe9488ec0703ea624cbcba9a916e09bdc63b98831e19a912c94a2be652dd3f0.whl\"; $t=Join-Path $env:TEMP \"nanobot_ai-0.4.2-py3-none-win_amd64.whl\"; Copy-Item $c $t -Force; & \"$v\\Scripts\\python\" -m pip install -q $t"
         ],
         "notes": "Mirrors the official installer's layout: dedicated virtualenv at ~/.nanobot/venv, installed from the hash-verified release wheel — no admin, no system pip (avoids PEP 668 issues). Prerequisite: Python 3.11+ (`py -3`) installed manually first; if absent, use the official one-liner route from the guide. Dependencies resolve from PyPI (pip); on CN networks a pip mirror can be set manually.",
         "probe": {
@@ -116,7 +116,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/e41ce2bb607485ee37c57716576929f15cf04d455d34b9480be8a30cd347bff9.whl\""
+          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; CACHE=\"$HOME/.aibox/cache/downloads/e41ce2bb607485ee37c57716576929f15cf04d455d34b9480be8a30cd347bff9.whl\"; T=\"$(mktemp -d)/nanobot_ai-0.4.2-py3-none-macosx_13_0_arm64.whl\"; cp \"$CACHE\" \"$T\"; \"$V/bin/python\" -m pip install -q \"$T\""
         ],
         "notes": "Same layout as the official installer (~/.nanobot/venv) but installed from the hash-verified release wheel — user directory only, zero admin. Prerequisite: Python 3.11+ (`python3`) on the machine; otherwise use the official one-liner from the guide.",
         "probe": {
@@ -165,7 +165,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; \"$V/bin/python\" -m pip install -q \"$HOME/.aibox/cache/downloads/2e96e13662c835481387a2521824d53f12c94aded9d5460ea8a0cef7232a34f8.whl\""
+          "set -e; V=\"$HOME/.nanobot/venv\"; python3 -m venv \"$V\"; \"$V/bin/python\" -m pip install -q --upgrade pip; CACHE=\"$HOME/.aibox/cache/downloads/2e96e13662c835481387a2521824d53f12c94aded9d5460ea8a0cef7232a34f8.whl\"; T=\"$(mktemp -d)/nanobot_ai-0.4.2-py3-none-macosx_13_0_x86_64.whl\"; cp \"$CACHE\" \"$T\"; \"$V/bin/python\" -m pip install -q \"$T\""
         ],
         "notes": "Intel build of the same release; identical flow to the arm64 package (venv at ~/.nanobot/venv, hash-verified wheel, zero admin).",
         "probe": {

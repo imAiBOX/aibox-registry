@@ -53,7 +53,7 @@
           "-ExecutionPolicy",
           "Bypass",
           "-Command",
-          "python -m pip install --user \"$env:USERPROFILE\\.aibox\\cache\\downloads\\aider_chat-0.86.2-py3-none-any.whl\""
+          "$c=\"$env:USERPROFILE\\.aibox\\cache\\downloads\\64f6a0c66c9f4633ad9f479bca3e64ebcba02b9da03c6b604b74a44736b2416e.whl\"; $t=Join-Path $env:TEMP \"aider_chat-0.86.2-py3-none-any.whl\"; Copy-Item $c $t -Force; python -m pip install --user $t"
         ],
         "notes": "Installs the hash-verified wheel into the per-user site-packages (`--user`, zero admin). Dependencies (litellm, etc.) are resolved from PyPI at install time — in CN, prefix with `PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple` if the default index is slow. The `aider` console script lands in the user Scripts directory; if it is not on PATH, run `python -m aider`.",
         "probe": {
@@ -88,7 +88,7 @@
         "args": [
           "sh",
           "-c",
-          "set -e; python3 -m pip install --user \"$HOME/.aibox/cache/downloads/64f6a0c66c9f4633ad9f479bca3e64ebcba02b9da03c6b604b74a44736b2416e.whl\""
+          "set -e; D=\"$HOME/.aibox/cache/downloads\"; T=\"$(mktemp -d)/aider_chat-0.86.2-py3-none-any.whl\"; cp \"$D/64f6a0c66c9f4633ad9f479bca3e64ebcba02b9da03c6b604b74a44736b2416e.whl\" \"$T\"; python3 -m pip install --user \"$T\""
         ],
         "notes": "Same hash-verified wheel via `pip3 --user` (zero admin; lands in ~/Library/Python/<ver>/lib/python/site-packages). Requires Python 3.10–3.12 (`python3 --version`); deps resolve from PyPI (TUNA: export PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple). If `aider` is not on PATH, run `python3 -m aider`.",
         "probe": {
